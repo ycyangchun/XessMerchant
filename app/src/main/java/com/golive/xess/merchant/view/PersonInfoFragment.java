@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.base.BaseFragment;
@@ -24,6 +25,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
 
 /**
  * Created by YangChun .
@@ -70,7 +72,6 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 .personalModule(new PersonalModule(this))
                 .build().inject(this);
         presenter.submitEdit();
-
     }
 
     @OnClick(R.id.edit_per_bt)
@@ -81,24 +82,51 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
             editBt.setText(activity.getString(R.string.editor_info_s));
         }
         isEdit = !isEdit;
+        //控件是否可以 编辑
         nicknameEt.setEnabled(isEdit);
+        imageView.setFocusable(isEdit);
+        imageView.setFocusableInTouchMode(isEdit);
+        addressTv.setFocusable(isEdit);
+        addressTv.setFocusableInTouchMode(isEdit);
 
     }
 
     @OnClick(R.id.imageView)
     void onClickImg(){
         if(isEdit){
-            Logger.d("图片"+isEdit);
+            openPhotoAlbum();
         }
+    }
+
+    @OnFocusChange(R.id.imageView)
+    void onFocusImg(boolean b){
+        if(isEdit && b){
+            openPhotoAlbum();
+        }
+    }
+
+    // 打开相册
+    void openPhotoAlbum(){
+        Toast.makeText(activity," picture ",Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.address_tv)
     void onClickAddress(){
         if(isEdit){
-            Logger.d("地址"+isEdit);
+            editAddress();
         }
     }
 
+    @OnFocusChange(R.id.address_tv)
+    void onFocusAddress(boolean b){
+        if(isEdit && b){
+            editAddress();
+        }
+    }
+    // 编辑地址
+    void editAddress(){
+        Toast.makeText(activity," editAddress ",Toast.LENGTH_SHORT).show();
+    }
 
 
     ////////////////////PersonalContract.View//////////////////////////
