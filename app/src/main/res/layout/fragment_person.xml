@@ -51,7 +51,7 @@
         app:layout_marginTopPercent="4.6%">
 
         <TextView
-            android:layout_width="60dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:gravity="right"
             android:maxLines="1"
@@ -60,11 +60,13 @@
         <EditText
             android:maxLines="1"
             android:id="@+id/nickname_et"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@null"
             android:enabled="false"
             android:paddingLeft="3dp"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             android:text="momo" />
     </LinearLayout>
 
