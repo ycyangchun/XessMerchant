@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<om.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <!--  width 150/580 = 0.258-->
+    <!-- textSize 18/40 = 0.45-->
+    <!-- marginLeft 80/580 = 0.137-->
+    <TextView
+        android:id="@+id/item_option_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        app:layout_marginLeftPercent="13.7%"
+        app:layout_widthPercent="25.8%"
+        app:layout_textSizePercent="45%"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/item_money_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_widthPercent="25.8%"
+        app:layout_textSizePercent="45%"
+        android:text="TextView" />
+    <!--  width 200/580 = 0.345-->
+    <TextView
+        android:id="@+id/item_date_tv"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_widthPercent="34.5%"
+        app:layout_textSizePercent="45%"
+        android:text="TextView" />
+</om.zhy.android.percent.support.PercentLinearLayout>

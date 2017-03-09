@@ -12,4 +12,15 @@
     <string name="change_user_s">更换用户</string>
     <string name="cut_personal_s">切换到个人版</string>
     <string name="cut_merchant_s">切换到商家版</string>
+    <string name="currently_kidney_s">现有彩豆：</string>
+    <string name="win_kidney_s">中奖彩豆：</string>
+    <string name="top_award_s">最高奖金：</string>
+    <string name="win_count_s">中奖次数：</string>
+    <string name="commission_kidney_s">佣金彩豆：</string>
+    <string name="recharge_s">充值</string>
+    <string name="withdraw_s">提现</string>
+    <string name="option_s">操作</string>
+    <string name="money_s">金额</string>
+    <string name="date_s">日期</string>
+
 </resources>
