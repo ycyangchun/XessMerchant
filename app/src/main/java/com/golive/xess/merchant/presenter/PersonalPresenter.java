@@ -1,4 +1,4 @@
-package com.golive.xess.merchant.personter;
+package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.ApiService;
 import com.orhanobut.logger.Logger;

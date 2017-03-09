@@ -11,8 +11,8 @@ import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerSplashComponent;
 import com.golive.xess.merchant.di.modules.SplashModule;
 import com.golive.xess.merchant.model.api.NoNetworkException;
-import com.golive.xess.merchant.personter.SplashContract;
-import com.golive.xess.merchant.personter.SplashPresenter;
+import com.golive.xess.merchant.presenter.SplashContract;
+import com.golive.xess.merchant.presenter.SplashPresenter;
 
 import javax.inject.Inject;
 

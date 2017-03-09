@@ -1,7 +1,5 @@
-package com.golive.xess.merchant.personter;
+package com.golive.xess.merchant.presenter;
 
-
-import java.util.List;
 
 /**
  * Created by Mr.Yangxiufeng

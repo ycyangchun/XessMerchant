@@ -1,7 +1,7 @@
 package com.golive.xess.merchant.di.modules;
 
 
-import com.golive.xess.merchant.personter.SplashContract;
+import com.golive.xess.merchant.presenter.SplashContract;
 
 import dagger.Module;
 import dagger.Provides;

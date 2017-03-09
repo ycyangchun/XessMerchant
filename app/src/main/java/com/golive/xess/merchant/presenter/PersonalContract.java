@@ -1,4 +1,4 @@
-package com.golive.xess.merchant.personter;
+package com.golive.xess.merchant.presenter;
 
 /**
  * Created by YangChun .

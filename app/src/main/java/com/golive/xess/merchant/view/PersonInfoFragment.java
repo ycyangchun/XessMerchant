@@ -16,9 +16,8 @@ import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerPersonalComponent;
 import com.golive.xess.merchant.di.modules.PersonalModule;
-import com.golive.xess.merchant.personter.PersonalContract;
-import com.golive.xess.merchant.personter.PersonalPresenter;
-import com.orhanobut.logger.Logger;
+import com.golive.xess.merchant.presenter.PersonalContract;
+import com.golive.xess.merchant.presenter.PersonalPresenter;
 
 import javax.inject.Inject;
 

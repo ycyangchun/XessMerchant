@@ -1,6 +1,6 @@
 package com.golive.xess.merchant.di.modules;
 
-import com.golive.xess.merchant.personter.PersonalContract;
+import com.golive.xess.merchant.presenter.PersonalContract;
 
 import dagger.Module;
 import dagger.Provides;

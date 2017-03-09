@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
@@ -39,6 +40,8 @@ public class WalletFragment extends BaseFragment {
     Button rechargeBt;
     @BindView(R.id.withdraw_bt)
     Button withdrawBt;
+    @BindView(R.id.wallet_sv)
+    ScrollView walletSv;
 
     @Nullable
     @Override
