@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_arr">
+        <item>个人信息</item>
+        <item>投注记录</item>
+        <item>钱包</item>
+        <item>设置</item>
+    </string-array>
+</resources>

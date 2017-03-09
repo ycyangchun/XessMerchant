@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+//dagger2
+apply plugin: 'com.neenbedankt.android-apt'
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
+    defaultConfig {
+        applicationId "com.golive.xess.merchant"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:support-annotations:$rootProject.ext.supportLibraryVersion"
+    //butterknife
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+    apt "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+    //glide
+    compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    // RxBus
+    compile "com.hwangjr.rxbus:rxbus:$rootProject.ext.rxbus"
+    // Retrofit
+    compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    //dagger2
+    compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
+    apt "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
+    //logger
+    compile "com.orhanobut:logger:$rootProject.ext.loggerVersion"
+    //okhttp3
+    compile "com.squareup.okhttp3:okhttp:$rootProject.ext.okhttpVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttpVersion"
+    //joda
+    compile "net.danlew:android.joda:$rootProject.ext.jodaVersion"
+    //permissions
+    compile "pub.devrel:easypermissions:$rootProject.ext.easypermissionsVersion"
+    //百分比布局
+    compile 'com.zhy:percent-support-extends:1.1.1'
+    //flycoTab
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+}

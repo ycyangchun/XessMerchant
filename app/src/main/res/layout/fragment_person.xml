@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher"
+        app:layout_marginTopPercent="6.5%" />
+
+    <LinearLayout
+        android:id="@+id/id_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_heightPercent="8.9%"
+        app:layout_marginTopPercent="4.6%">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/id_s" />
+
+        <TextView
+            android:id="@+id/id_tv"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="1452369" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/nick_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_ll"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_marginTopPercent="4.6%">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:maxLines="1"
+            android:text="@string/nickname_s" />
+
+        <EditText
+            android:id="@+id/nickname_et"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:enabled="false"
+            android:paddingLeft="3dp"
+            android:text="momo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/address_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_below="@+id/nick_ll"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_heightPercent="8.9%"
+        app:layout_marginTopPercent="4.6%">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/address_s" />
+
+        <TextView
+            android:id="@+id/address_tv"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="1452369" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/edit_per_bt"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/address_ll"
+        android:layout_centerHorizontal="true"
+        android:text="@string/editor_info_s"
+        app:layout_marginTopPercent="4.6%" />
+
+
+</com.zhy.android.percent.support.PercentRelativeLayout>
