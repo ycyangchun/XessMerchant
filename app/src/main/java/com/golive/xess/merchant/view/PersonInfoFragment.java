@@ -1,5 +1,7 @@
 package com.golive.xess.merchant.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import com.golive.xess.merchant.di.components.DaggerPersonalComponent;
 import com.golive.xess.merchant.di.modules.PersonalModule;
 import com.golive.xess.merchant.presenter.PersonalContract;
 import com.golive.xess.merchant.presenter.PersonalPresenter;
+import com.golive.xess.merchant.view.widget.ChangeAddressDialog;
 
 import javax.inject.Inject;
 
@@ -106,7 +109,15 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
 
     // 打开相册
     void openPhotoAlbum(){
-        Toast.makeText(activity," picture ",Toast.LENGTH_SHORT).show();
+        new AlertDialog.Builder(activity)
+                .setItems(new String[]{"拍照", "从相册获取"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(activity," picture ",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     @OnClick(R.id.address_tv)
@@ -124,7 +135,22 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     }
     // 编辑地址
     void editAddress(){
-        Toast.makeText(activity," editAddress ",Toast.LENGTH_SHORT).show();
+        ChangeAddressDialog mChangeAddressDialog = new ChangeAddressDialog(
+                activity);
+        mChangeAddressDialog.setAddress("北京", "朝阳区");
+        mChangeAddressDialog.show();
+        mChangeAddressDialog
+                .setAddresskListener(new ChangeAddressDialog.OnAddressCListener() {
+
+                    @Override
+                    public void onClick(String province, String city) {
+                        // TODO Auto-generated method stub
+                        Toast.makeText(activity,
+                                province + "-" + city,
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+
     }
 
 
