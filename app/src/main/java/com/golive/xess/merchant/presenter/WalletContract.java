@@ -8,9 +8,10 @@ package com.golive.xess.merchant.presenter;
 
 public interface WalletContract {
     interface Persenter{
-
+        void getWalletData();
     }
     interface View{
-
+        void dataFailed(Throwable throwable);
+        void dataSuccess();
     }
 }

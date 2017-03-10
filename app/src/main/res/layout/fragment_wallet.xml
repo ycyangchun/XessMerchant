@@ -129,10 +129,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_toRightOf="@+id/w_left_rl"
+        android:orientation="horizontal"
         app:layout_heightPercent="9.8%"
         app:layout_marginTopPercent="7.4%"
-        app:layout_widthPercent="69.9%"
-        android:orientation="horizontal">
+        app:layout_widthPercent="69.9%">
         <!--  width 150/580 = 0.258-->
         <!-- textSize 18/40 = 0.45-->
         <!-- marginLeft 80/580 = 0.137-->
@@ -141,44 +141,45 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:gravity="left|center_vertical"
+            android:text="@string/option_s"
             app:layout_marginLeftPercent="13.7%"
-            app:layout_widthPercent="25.8%"
             app:layout_textSizePercent="45%"
-            android:text="@string/option_s" />
+            app:layout_widthPercent="25.8%" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            app:layout_widthPercent="25.8%"
+            android:text="@string/money_s"
             app:layout_textSizePercent="45%"
-            android:text="@string/money_s" />
+            app:layout_widthPercent="25.8%" />
         <!--  width 200/580 = 0.345-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            app:layout_widthPercent="34.5%"
+            android:text="@string/date_s"
             app:layout_textSizePercent="45%"
-            android:text="@string/date_s" />
+            app:layout_widthPercent="34.5%" />
     </com.zhy.android.percent.support.PercentLinearLayout>
     <!-- w_top_ll height 335/405 = 0.827-->
     <!-- w_top_ll width 580/830 = 0.699-->
-    <ScrollView
-        android:id="@+id/wallet_sv"
-        android:layout_width="580dp"
-        android:layout_height="335dp"
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/w_top_ll"
         android:layout_toEndOf="@+id/w_left_rl"
         android:layout_toRightOf="@+id/w_left_rl"
+        android:paddingBottom="5dp"
         app:layout_heightPercent="82.7%"
         app:layout_widthPercent="69.9%">
 
-        <LinearLayout
+        <ListView
+            android:id="@+id/wallet_lv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:divider="@null"
+            android:layout_height="match_parent" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
 </com.zhy.android.percent.support.PercentRelativeLayout>

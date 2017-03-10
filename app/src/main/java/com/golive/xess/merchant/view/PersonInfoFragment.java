@@ -136,7 +136,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
 
     @Override
     public void successEdit() {
-
+        System.out.println("=======successEdit=======>");
     }
     ////////////////////PersonalContract.View//////////////////////////
 }

@@ -1,27 +1,26 @@
 package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.ApiService;
-import com.orhanobut.logger.Logger;
 
 import javax.inject.Inject;
 
 /**
  * Created by YangChun .
- * on 2017/3/8.
+ * on 2017/3/9.
  */
 
-public class PersonalPresenter implements PersonalContract.Persenter {
-    private PersonalContract.View view;
+public class WalletPresenter implements WalletContract.Persenter {
+    private WalletContract.View view;
     private ApiService apiService;
 
     @Inject
-    public PersonalPresenter(PersonalContract.View view, ApiService apiService) {
+    public WalletPresenter(WalletContract.View view, ApiService apiService) {
         this.view = view;
         this.apiService = apiService;
     }
 
     @Override
-    public void submitEdit() {
-        view.successEdit();
+    public void getWalletData() {
+        view.dataSuccess();
     }
 }
