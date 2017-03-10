@@ -26,7 +26,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             tl:tl_iconVisible="false"
-            tl:tl_indicator_color="#666666"
+            tl:tl_indicator_color="@color/selector"
             tl:tl_indicator_margin_left="2dp"
             tl:tl_indicator_margin_right="2dp"
             tl:tl_indicator_style="BLOCK"

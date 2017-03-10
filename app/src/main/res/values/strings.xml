@@ -12,15 +12,31 @@
     <string name="change_user_s">更换用户</string>
     <string name="cut_personal_s">切换到个人版</string>
     <string name="cut_merchant_s">切换到商家版</string>
-    <string name="currently_kidney_s">现有彩豆：</string>
-    <string name="win_kidney_s">中奖彩豆：</string>
-    <string name="top_award_s">最高奖金：</string>
-    <string name="win_count_s">中奖次数：</string>
-    <string name="commission_kidney_s">佣金彩豆：</string>
+    <string name="currently_kidney_s">现有彩豆：{0}个</string>
+    <string name="win_kidney_s">中奖彩豆：{0}个</string>
+    <string name="top_award_s">最高奖金：{0}元</string>
+    <string name="win_count_s">中奖次数：{0}次</string>
+    <string name="commission_kidney_s">佣金彩豆：{0}个</string>
     <string name="recharge_s">充值</string>
     <string name="withdraw_s">提现</string>
     <string name="option_s">操作</string>
     <string name="money_s">金额</string>
     <string name="date_s">日期</string>
+    <string name="time_s">时间：</string>
+    <string name="mobile_s">手机号：</string>
+    <string name="lottery_s">彩种：</string>
+    <string name="query_s">查询</string>
+    <string name="statement_s">生成对账单</string>
+    <string name="all_select_s">全选</string>
+    <string name="bet_orders_s">投注单数：{0}单</string>
+    <string name="note_s">注数：{0}注</string>
+    <string name="bet_money_s">投注金额：{0}元</string>
+    <string name="order_time_s">下单时间</string>
+    <string name="mobile_num_s">手机号</string>
+    <string name="lottery_type_s">彩种</string>
+    <string name="issue_s">期号</string>
+    <string name="num_s">数量</string>
+    <string name="bet_kidney_s">投注彩豆</string>
+    <string name="bet_status_s">投注状态</string>
 
 </resources>

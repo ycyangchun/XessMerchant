@@ -1,16 +1,12 @@
 package com.golive.xess.merchant.view;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +17,7 @@ import com.golive.xess.merchant.di.components.DaggerWalletComponent;
 import com.golive.xess.merchant.di.modules.WalletModule;
 import com.golive.xess.merchant.presenter.WalletContract;
 import com.golive.xess.merchant.presenter.WalletPresenter;
+import com.golive.xess.merchant.view.adapter.ItemWalletAdapter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,8 +26,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.R.id.list;
 
 /**
  * Created by YangChun .
@@ -87,7 +82,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
                 .walletModule(new WalletModule(this)).build().inject(this);
         presenter.getWalletData();
         list = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
-        walletLv.setAdapter(new MyAdapter());
+        walletLv.setAdapter(new ItemWalletAdapter(mInflater,list));
     }
 
     ///////////////////WalletContract.View////////////////////////
@@ -102,48 +97,4 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
     }
     ///////////////////WalletContract.View////////////////////////
 
-    class MyAdapter extends BaseAdapter{
-
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return list.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder;
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.item_wallet, parent, false);
-                viewHolder = new ViewHolder(convertView);
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (ViewHolder) convertView.getTag();
-            }
-            viewHolder.item_option_tv.setText(position+" 同步院线-消费");
-            viewHolder.item_money_tv.setText(position+" 彩豆");
-            viewHolder.item_date_tv.setText(position+" 2017-03-10 16:02:01");
-            return convertView;
-        }
-
-        public class ViewHolder{
-            TextView item_option_tv ;
-            TextView item_money_tv;
-            TextView item_date_tv ;
-            public ViewHolder(View convertView){
-                item_option_tv = (TextView) convertView.findViewById(R.id.item_option_tv);
-                item_money_tv = (TextView) convertView.findViewById(R.id.item_money_tv);
-                item_date_tv = (TextView) convertView.findViewById(R.id.item_date_tv);
-            }
-        }
-    }
 }

@@ -11,7 +11,7 @@
 
     <!--  width 150/580 = 0.258-->
     <!--  height 25/30 = 0.833-->
-    <!-- textSize 15/30 = 0.50-->
+    <!-- textSize 18/30 = 0.60-->
     <!-- marginLeft 80/580 = 0.137-->
     <TextView
         android:id="@+id/item_option_tv"
@@ -20,7 +20,7 @@
         android:gravity="left|center_vertical"
         app:layout_marginLeftPercent="13.7%"
         app:layout_heightPercent="83.3%"
-        app:layout_textSizePercent="50%"
+        app:layout_textSizePercent="60%"
         app:layout_widthPercent="25.8%" />
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         app:layout_heightPercent="83.3%"
-        app:layout_textSizePercent="50%"
+        app:layout_textSizePercent="60%"
         app:layout_widthPercent="25.8%" />
     <!--  width 200/580 = 0.345-->
     <TextView
@@ -38,6 +38,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         app:layout_heightPercent="83.3%"
-        app:layout_textSizePercent="50%"
+        app:layout_textSizePercent="60%"
         app:layout_widthPercent="34.5%" />
 </com.zhy.android.percent.support.PercentLinearLayout>
