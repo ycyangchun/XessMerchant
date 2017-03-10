@@ -47,7 +47,7 @@ public class ItemBetAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.item_bet, null);
+            convertView = layoutInflater.inflate(R.layout.item_bet, parent ,false);
             convertView.setTag(new ViewHolder(convertView));
         }
         initializeViews(getItem(position), (ViewHolder) convertView.getTag());
