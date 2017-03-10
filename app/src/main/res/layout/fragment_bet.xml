@@ -28,6 +28,7 @@
         android:id="@+id/bet_top_rl"
         android:layout_width="710dp"
         android:layout_height="85dp"
+        android:paddingLeft="5dp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/bet_left_rl"
         android:layout_toRightOf="@+id/bet_left_rl"
@@ -107,6 +108,7 @@
             android:orientation="horizontal">
 
             <CheckBox
+                android:visibility="gone"
                 android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,7 +118,6 @@
                 android:id="@+id/bet_orders_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="@string/bet_orders_s" />
 
             <TextView
