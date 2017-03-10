@@ -134,6 +134,8 @@ public class MainActivity extends BaseActivity {
         public boolean isViewFromObject(View view, Object object) {
             return super.isViewFromObject(view, object);
         }
+
+
     }
 
     class TabEntity implements CustomTabEntity {

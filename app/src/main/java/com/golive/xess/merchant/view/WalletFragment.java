@@ -1,5 +1,6 @@
 package com.golive.xess.merchant.view;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by YangChun .
@@ -83,6 +85,21 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
         presenter.getWalletData();
         list = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
         walletLv.setAdapter(new ItemWalletAdapter(mInflater,list));
+    }
+
+    @OnClick(R.id.recharge_bt)
+    void onClickRecharge(){
+
+    }
+
+    @OnClick(R.id.withdraw_bt)
+    void onClickWithdraw(){
+        new AlertDialog.Builder(activity)
+                .setTitle("确认")
+                .setMessage("确认提现5000彩豆？")
+                .setPositiveButton("提现至余额",null)
+                .setNegativeButton("提现至银行卡",null)
+                .show();
     }
 
     ///////////////////WalletContract.View////////////////////////
