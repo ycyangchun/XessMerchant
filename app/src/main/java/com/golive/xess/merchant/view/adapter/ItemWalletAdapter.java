@@ -59,13 +59,15 @@ public class ItemWalletAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
+        @BindView(R.id.item_option_tv)
         TextView itemOptionTv;
+        @BindView(R.id.item_money_tv)
         TextView itemMoneyTv;
+        @BindView(R.id.item_date_tv)
         TextView itemDateTv;
-        public ViewHolder(View convertView){
-            itemOptionTv = (TextView) convertView.findViewById(R.id.item_option_tv);
-            itemMoneyTv = (TextView) convertView.findViewById(R.id.item_money_tv);
-            itemDateTv = (TextView) convertView.findViewById(R.id.item_date_tv);
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
         }
     }
 }
