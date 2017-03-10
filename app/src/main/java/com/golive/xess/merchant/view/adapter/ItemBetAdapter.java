@@ -20,12 +20,10 @@ public class ItemBetAdapter extends BaseAdapter {
 
     private List<Integer> objects ;
 
-    private Context context;
     private LayoutInflater layoutInflater;
 
-    public ItemBetAdapter(Context context,List<Integer> obj) {
-        this.context = context;
-        this.layoutInflater = LayoutInflater.from(context);
+    public ItemBetAdapter(LayoutInflater mInflater ,List<Integer> obj) {
+        this.layoutInflater = mInflater;
         this.objects =obj;
     }
 

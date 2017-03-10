@@ -41,12 +41,15 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     @BindView(R.id.bet_lv)
     ListView bet_lv;
 
+    LayoutInflater mInflater;
+
     @Inject
     BetPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bet, container, false);
+        mInflater = inflater;
         ButterKnife.bind(this, view);
         return view;
     }
@@ -83,7 +86,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     @Override
     public void successQuery() {
         List list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
-        bet_lv.setAdapter(new ItemBetAdapter(activity, list));
+        bet_lv.setAdapter(new ItemBetAdapter(mInflater, list));
     }
     /////////////////BetContract.View////////////////
 }
