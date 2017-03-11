@@ -1,16 +1,13 @@
 package com.golive.xess.merchant.view.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

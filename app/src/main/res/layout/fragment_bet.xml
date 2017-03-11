@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--               width  height-->
     <!--percent         830 X 405 -->
+
     <!--leftModule      110 X 300 -->
+    <!--bet_left_rl width 110/830 = 0.132-->
+    <!--bet_left_rl height 300/405 = 0.74-->
+    <!--bet_left_rl top 50/405 = 0.123-->
+
     <RelativeLayout
         android:id="@+id/bet_left_rl"
         android:layout_width="110dp"
@@ -13,6 +18,9 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="50dp"
+        app:layout_marginTopPercent="12.3%"
+        app:layout_widthPercent="13.2%"
+        app:layout_heightPercent="74%"
         android:background="@drawable/bg_bet_border">
 
         <ListView
@@ -24,32 +32,49 @@
             android:listSelector="@drawable/bet_listview_item_selector" />
     </RelativeLayout>
     <!--topModule      710 X 85 -->
-    <LinearLayout
+    <!--bet_top_rl width 710/830 = 0.855-->
+    <!--bet_top_rl height 85/405 = 0.21-->
+    <!--bet_top_rl left 5/830 = 0.01-->
+    <!-- height 2/85= 0.023-->
+    <com.zhy.android.percent.support.PercentLinearLayout
         android:id="@+id/bet_top_rl"
         android:layout_width="710dp"
         android:layout_height="85dp"
         android:paddingLeft="5dp"
+        android:layout_marginTop="2dp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/bet_left_rl"
         android:layout_toRightOf="@+id/bet_left_rl"
+        app:layout_widthPercent="85.5%"
+        app:layout_heightPercent="21%"
+        app:layout_marginLeftPercent="1%"
+        app:layout_marginTopPercent="2.3%"
         android:orientation="vertical">
 
-        <LinearLayout
+        <!-- height 40/85= 0.47-->
+
+        <com.zhy.android.percent.support.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_heightPercent="47%"
             android:orientation="horizontal">
 
+            <!--textSize 18/40 = 0.45-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_textSizePercent="45%"
                 android:text="@string/time_s" />
 
+            <!--width 72/710 = 0.101-->
             <EditText
                 android:id="@+id/bet_time_start_et"
-                android:layout_width="wrap_content"
+                android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_bet_border"
-                android:text="TextView" />
+                app:layout_textSizePercent="45%"
+                app:layout_widthPercent="10.1%"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -58,53 +83,74 @@
 
             <EditText
                 android:id="@+id/bet_time_end_et"
-                android:layout_width="wrap_content"
+                android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_bet_border"
-                android:text="TextView" />
+                app:layout_textSizePercent="45%"
+                app:layout_widthPercent="10.1%"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                app:layout_textSizePercent="45%"
                 android:text="@string/mobile_s" />
 
             <EditText
                 android:id="@+id/bet_mobile_et"
-                android:layout_width="wrap_content"
+                android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_bet_border"
-                android:text="TextView" />
+                app:layout_textSizePercent="45%"
+                app:layout_widthPercent="10.1%" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                app:layout_textSizePercent="45%"
                 android:text="@string/lottery_s" />
 
             <EditText
                 android:id="@+id/bet_lottery_et"
-                android:layout_width="wrap_content"
+                android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_bet_border"
-                android:text="TextView" />
+                app:layout_textSizePercent="45%"
+                app:layout_widthPercent="10.1%"/>
 
+            <!-- bet_query_bt left 10/710 = 0.014-->
+            <!-- bet_query_bt height 28/40 = 0.70-->
+            <!-- bet_query_bt width 80/710 = 0.112-->
             <Button
+                android:layout_marginLeft="10dp"
                 android:id="@+id/bet_query_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="28dp"
+                app:layout_textSizePercent="45%"
+                app:layout_heightPercent="70%"
+                app:layout_marginLeftPercent="1.4%"
+                app:layout_widthPercent="11.2%"
+                android:background="@drawable/bg_border"
                 android:text="@string/query_s" />
-
+            <!-- bet_query_bt width 100/710 = 0.14-->
             <Button
+                android:layout_marginLeft="10dp"
                 android:id="@+id/bet_statement_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="28dp"
+                app:layout_textSizePercent="45%"
+                app:layout_heightPercent="70%"
+                app:layout_marginLeftPercent="1.4%"
+                app:layout_widthPercent="14%"
+                android:background="@drawable/bg_border"
                 android:text="@string/statement_s" />
-        </LinearLayout>
+        </com.zhy.android.percent.support.PercentLinearLayout>
 
-        <LinearLayout
+        <com.zhy.android.percent.support.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_heightPercent="47%"
             android:orientation="horizontal">
 
             <CheckBox
@@ -118,6 +164,7 @@
                 android:id="@+id/bet_orders_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_textSizePercent="45%"
                 android:text="@string/bet_orders_s" />
 
             <TextView
@@ -125,6 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                app:layout_textSizePercent="45%"
                 android:text="@string/note_s" />
 
             <TextView
@@ -132,24 +180,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                app:layout_textSizePercent="45%"
                 android:text="@string/bet_money_s" />
 
-        </LinearLayout>
+        </com.zhy.android.percent.support.PercentLinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/selector" />
-    </LinearLayout>
+    </com.zhy.android.percent.support.PercentLinearLayout>
     <!--bottomModule      710 X 320 -->
+    <!--bottomModule width 710/830 = 0.855-->
+    <!--bottomModule height 320/405 = 0.79-->
     <RelativeLayout
         android:layout_width="710dp"
         android:layout_height="320dp"
         android:layout_below="@+id/bet_top_rl"
         android:layout_toEndOf="@+id/bet_left_rl"
-        android:layout_toRightOf="@+id/bet_left_rl">
-
-        <LinearLayout
+        android:layout_toRightOf="@+id/bet_left_rl"
+        app:layout_widthPercent="85.5%"
+        app:layout_heightPercent="79%"
+        >
+        <!-- textSize 20/40 = 0.50-->
+        <!-- marginLeft 10/710 = 0.014-->
+        <com.zhy.android.percent.support.PercentLinearLayout
             android:id="@+id/bottom_ll"
             android:layout_width="match_parent"
             android:layout_height="38dp"
@@ -161,6 +216,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center"
+                app:layout_marginLeftPercent="1.2%"
+                app:layout_textSizePercent="50%"
                 android:text="@string/order_time_s" />
 
             <TextView
@@ -169,6 +226,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center"
+                app:layout_marginLeftPercent="1.4%"
+                app:layout_textSizePercent="50%"
                 android:text="@string/mobile_num_s" />
 
             <TextView
@@ -177,6 +236,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="center"
+                app:layout_marginLeftPercent="1.4%"
+                app:layout_textSizePercent="50%"
                 android:text="@string/lottery_type_s" />
 
             <TextView
@@ -185,15 +246,9 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center"
+                app:layout_marginLeftPercent="1.4%"
+                app:layout_textSizePercent="50%"
                 android:text="@string/issue_s" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/num_s" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -201,6 +256,18 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center"
+                app:layout_marginLeftPercent="1.4%"
+                app:layout_textSizePercent="50%"
+                android:text="@string/num_s" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                app:layout_marginLeftPercent="1.4%"
+                app:layout_textSizePercent="50%"
                 android:text="@string/bet_kidney_s" />
 
             <TextView
@@ -209,6 +276,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center"
+                app:layout_marginLeftPercent="1.4%"
+                app:layout_textSizePercent="50%"
                 android:text="@string/bet_status_s" />
 
             <TextView
@@ -217,9 +286,11 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:layout_weight="2"
+                app:layout_marginLeftPercent="1.4%"
+                app:layout_textSizePercent="50%"
                 android:text="@string/option_s" />
 
-        </LinearLayout>
+        </com.zhy.android.percent.support.PercentLinearLayout>
 
         <ListView
             android:layout_below="@+id/bottom_ll"
@@ -230,4 +301,4 @@
              />
     </RelativeLayout>
 
-</RelativeLayout>
+</com.zhy.android.percent.support.PercentRelativeLayout>

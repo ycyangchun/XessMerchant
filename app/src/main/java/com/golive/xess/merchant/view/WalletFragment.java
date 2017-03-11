@@ -83,7 +83,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
                 .netComponent(XessApp.get(activity).getNetComponent())
                 .walletModule(new WalletModule(this)).build().inject(this);
         presenter.getWalletData();
-        list = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+        list = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18);
         walletLv.setAdapter(new ItemWalletAdapter(mInflater,list));
     }
 

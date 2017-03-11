@@ -18,6 +18,7 @@ import com.golive.xess.merchant.di.modules.BetModule;
 import com.golive.xess.merchant.presenter.BetContract;
 import com.golive.xess.merchant.presenter.BetPresenter;
 import com.golive.xess.merchant.view.adapter.ItemBetAdapter;
+import com.golive.xess.merchant.view.adapter.ItemLeftBetTvAdapter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -71,8 +72,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     }
 
     private void initView() {
-        String arr[] = new String[]{"全部订单", "中奖订单", "未开奖订单"};
-        betLeftLv.setAdapter(new ArrayAdapter(activity, android.R.layout.simple_list_item_1, arr));
+        List arr = Arrays.asList("全部订单", "中奖订单", "未开奖订单");
+        betLeftLv.setAdapter(new ItemLeftBetTvAdapter(mInflater,arr));
         betLeftLv.setSelection(0);
 
     }
