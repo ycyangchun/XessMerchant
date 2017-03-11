@@ -77,9 +77,9 @@ public class ItemBetAdapter extends BaseAdapter {
         TextView betKidneyTv;
         @BindView(R.id.bet_status_tv)
         TextView betStatusTv;
-        @BindView(R.id.option_tv)
+        @BindView(R.id.option_bt)
         TextView optionTv;
-        @BindView(R.id.detail_tv)
+        @BindView(R.id.detail_bt)
         TextView detail_tv;
 
         ViewHolder(View view) {
