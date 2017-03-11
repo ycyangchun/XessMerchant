@@ -38,5 +38,19 @@
     <string name="num_s">数量</string>
     <string name="bet_kidney_s">投注彩豆</string>
     <string name="bet_status_s">投注状态</string>
-
+    <string name="win_reminder_s">温馨提示：如中奖，万元以上奖金专人通知，万元以下奖金汇入彩豆钱包</string>
+    <string name="bet_detail_s">投注详情</string>
+    <string name="bet_issue_s">期号：{0}</string>
+    <string name="bet_lottery_s">彩种：{0}</string>
+    <string name="bet_order_s">订单号：{0}</string>
+    <string name="bet_time_s">投注时间：{0}</string>
+    <string name="bet_win_money_s">中奖金额：{0}</string>
+    <string name="bet_mobile_s">手机号：{0}</string>
+    <string name="bet_play_s">玩法：{0}</string>
+    <string name="bet_detail_kidney_s">彩豆：{0}</string>
+    <string name="bet_times_s">倍数：{0}</string>
+    <string name="bet_kai_status_s">开奖状态：{0}</string>
+    <string name="bet_note_s">注数：{0}</string>
+    <string name="bet_win_status_s">中奖状态：{0}</string>
+    <string name="bet_lottery_num_s">彩票号码：{0}</string>
 </resources>

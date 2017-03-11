@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2">
+
+    <TextView
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/detail_rl"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/detail_rl"
+        android:layout_marginBottom="35dp"
+        android:text="@string/win_reminder_s" />
+
+    <RelativeLayout
+        android:id="@+id/detail_rl"
+        android:layout_width="830dp"
+        android:layout_height="405dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="#d7d7d7">
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_detail_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:text="@string/bet_detail_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_issue_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bet_detail_tv"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="90dp"
+            android:text="@string/bet_issue_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bet_issue_tv"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/bet_issue_tv"
+            android:text="@string/bet_lottery_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_orders_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bet_issue_tv"
+            android:layout_marginLeft="50dp"
+            android:layout_toEndOf="@+id/bet_detail_tv"
+            android:layout_toRightOf="@+id/bet_detail_tv"
+            android:text="@string/bet_order_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/bet_issue_tv"
+            android:layout_alignStart="@+id/bet_issue_tv"
+            android:layout_below="@+id/bet_issue_tv"
+            android:layout_marginTop="35dp"
+            android:text="@string/bet_time_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_win_money_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bet_time_tv"
+            android:layout_below="@+id/bet_orders_tv"
+            android:layout_toEndOf="@+id/bet_detail_tv"
+            android:layout_toRightOf="@+id/bet_detail_tv"
+            android:text="@string/bet_win_money_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_mobile_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/bet_issue_tv"
+            android:layout_alignStart="@+id/bet_issue_tv"
+            android:layout_below="@+id/bet_time_tv"
+            android:layout_marginTop="35dp"
+            android:text="@string/bet_mobile_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_play_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bet_mobile_tv"
+            android:layout_toEndOf="@+id/bet_detail_tv"
+            android:layout_toRightOf="@+id/bet_detail_tv"
+            android:text="@string/bet_play_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_detail_kidney_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/bet_issue_tv"
+            android:layout_alignStart="@+id/bet_issue_tv"
+            android:layout_below="@+id/bet_mobile_tv"
+            android:layout_marginTop="35dp"
+            android:text="@string/bet_detail_kidney_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_times_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bet_detail_kidney_tv"
+            android:layout_toEndOf="@+id/bet_detail_tv"
+            android:layout_toRightOf="@+id/bet_detail_tv"
+            android:text="@string/bet_times_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_kai_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/bet_issue_tv"
+            android:layout_alignStart="@+id/bet_issue_tv"
+            android:layout_below="@+id/bet_detail_kidney_tv"
+            android:layout_marginTop="35dp"
+            android:text="@string/bet_kai_status_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_note_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bet_kai_status_tv"
+            android:layout_toEndOf="@+id/bet_detail_tv"
+            android:layout_toRightOf="@+id/bet_detail_tv"
+            android:text="@string/bet_note_s" />
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_win_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/bet_issue_tv"
+            android:layout_alignStart="@+id/bet_issue_tv"
+            android:layout_below="@+id/bet_kai_status_tv"
+            android:layout_marginTop="35dp"
+            android:text="@string/bet_win_status_s" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bet_lottery_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bet_win_status_tv"
+            android:layout_toEndOf="@+id/bet_detail_tv"
+            android:layout_toRightOf="@+id/bet_detail_tv"
+            android:text="@string/bet_lottery_num_s" />
+    </RelativeLayout>
+
+</RelativeLayout>

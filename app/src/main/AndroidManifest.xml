@@ -3,10 +3,11 @@
     <!-- 访问外部存储权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name="com.golive.xess.merchant.base.XessApp"
         android:allowBackup="true"
@@ -25,9 +26,12 @@
             </intent-filter>
 
         </activity>
-    <activity android:name=".view.MainActivity"
-        android:configChanges="keyboardHidden|screenSize"
-        android:windowSoftInputMode="adjustPan|stateAlwaysHidden"/>
+        <activity
+            android:name=".view.MainActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity android:name=".view.DialogBetDetailActivity"
+            android:theme="@style/ShareDialog"/>
     </application>
 
 </manifest>
