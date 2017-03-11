@@ -110,7 +110,6 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
 
     @Override
     public void dataSuccess() {
-        System.out.println("===================");
     }
     ///////////////////WalletContract.View////////////////////////
 

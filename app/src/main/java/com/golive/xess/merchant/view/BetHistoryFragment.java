@@ -6,9 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.base.BaseFragment;
@@ -34,7 +32,7 @@ import butterknife.ButterKnife;
  * 投注记录
  */
 
-public class BetHistoryFragment extends BaseFragment implements BetContract.View {
+public class BetHistoryFragment extends BaseFragment implements BetContract.View , ItemBetAdapter.BetItemClickListener {
 
 
     @BindView(R.id.bet_left_lv)
@@ -43,7 +41,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     ListView bet_lv;
 
     LayoutInflater mInflater;
-
+    ItemBetAdapter adapter;
     @Inject
     BetPresenter presenter;
 
@@ -84,10 +82,37 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
     }
 
+    int focusPosition = -1;//Selected焦点在哪个position
     @Override
     public void successQuery() {
         List list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
-        bet_lv.setAdapter(new ItemBetAdapter(mInflater, list));
+        adapter = new ItemBetAdapter(mInflater, list, this);
+        bet_lv.setAdapter(adapter);
+
+        bet_lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //设置焦点
+                if(focusPosition != position) {
+                    focusPosition = position;
+                    adapter.setItemFocus(parent, view, position);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
     /////////////////BetContract.View////////////////
+    //////////////ItemBetAdapter.BetItemClickListener //////////////
+
+    @Override
+    public void betItemClick(View v, int position, String type) {
+        System.out.println(type+" position "+position);
+    }
+
+    //////////////ItemBetAdapter.BetItemClickListener //////////////
+
 }
