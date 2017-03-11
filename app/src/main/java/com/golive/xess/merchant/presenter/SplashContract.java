@@ -1,6 +1,8 @@
 package com.golive.xess.merchant.presenter;
 
 
+import okhttp3.RequestBody;
+
 /**
  * Created by Mr.Yangxiufeng
  * DATE 2016/7/22
@@ -9,6 +11,7 @@ package com.golive.xess.merchant.presenter;
 public interface SplashContract {
     interface Presenter {
         void getSplash(String deviceId);
+        void deviceAuth(RequestBody data);
     }
     interface View {
         void showOnFailure(Throwable throwable);

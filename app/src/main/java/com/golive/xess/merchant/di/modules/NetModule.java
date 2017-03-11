@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.JsonConverterFactory;
 import com.golive.xess.merchant.model.api.NoNetworkException;
 import com.golive.xess.merchant.model.api.StringConverterFactory;
 import com.golive.xess.merchant.model.entity.LiveNetworkMonitor;
@@ -80,9 +81,9 @@ public class NetModule {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okhttpClient)
                 .baseUrl(XessConfig.getServerUrl())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(StringConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(EntityUtils.gson))//
+//                .addConverterFactory(StringConverterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create(EntityUtils.gson))
+                .addConverterFactory(JsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         return retrofit;

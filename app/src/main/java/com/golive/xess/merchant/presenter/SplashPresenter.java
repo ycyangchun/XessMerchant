@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.SplashEntity;
 import com.golive.xess.merchant.utils.TimeUtil;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import okhttp3.RequestBody;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -26,6 +28,24 @@ public class SplashPresenter implements SplashContract.Presenter{
     public SplashPresenter(SplashContract.View view, ApiService apiService) {
         this.view = view;
         this.apiService = apiService;
+    }
+
+    @Override
+    public void deviceAuth(RequestBody data) {
+        apiService.getDeviceAuth(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<DeviceEntity>() {
+                    @Override
+                    public void call(DeviceEntity deviceEntity) {
+                        System.out.println(deviceEntity.toString());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        view.showOnFailure(throwable);
+                    }
+                });
     }
 
     @Override

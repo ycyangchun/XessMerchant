@@ -13,11 +13,17 @@ import com.golive.xess.merchant.di.modules.SplashModule;
 import com.golive.xess.merchant.model.api.NoNetworkException;
 import com.golive.xess.merchant.presenter.SplashContract;
 import com.golive.xess.merchant.presenter.SplashPresenter;
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
@@ -38,6 +44,12 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .splashModule(new SplashModule(this))
                 .build().inject(this);
 //        presenter.getSplash("");
+        Map<String,String> map = new HashMap<>();
+        map.put("deviceNo","95A32E080CB74C638C5E7471D6C21EE3");
+        RequestBody requestBody =
+                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
+                        new Gson().toJson(map));
+        presenter.deviceAuth(requestBody);
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

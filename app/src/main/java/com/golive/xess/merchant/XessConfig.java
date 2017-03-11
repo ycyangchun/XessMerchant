@@ -30,12 +30,12 @@ public class XessConfig {
     /**
      * 通过修改该常量改变测试|生产环境
      */
-    public static int RELEASE_TYPE = PRODUCT_TYPE;
+    public static int RELEASE_TYPE = TEST_TYPE;
 
     /**
      * 测试环境根路径
      */
-    public static final String SERVER_ROOT_TEST = "http://static.owspace.com/";
+    public static final String SERVER_ROOT_TEST = "http://61.182.134.3:8809/";
     /**
      * 生产版本根路径
      */
