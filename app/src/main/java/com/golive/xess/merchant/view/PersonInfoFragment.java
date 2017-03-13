@@ -14,13 +14,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.golive.xess.merchant.R;
+import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerPersonalComponent;
 import com.golive.xess.merchant.di.modules.PersonalModule;
+import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.entity.UserInfo;
 import com.golive.xess.merchant.presenter.PersonalContract;
 import com.golive.xess.merchant.presenter.PersonalPresenter;
+import com.golive.xess.merchant.utils.Base64Util;
+import com.golive.xess.merchant.utils.Des3Util;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.widget.ChangeAddressDialog;
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -28,6 +38,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * Created by YangChun .
@@ -73,7 +85,23 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 .netComponent(XessApp.get(activity).getNetComponent())
                 .personalModule(new PersonalModule(this))
                 .build().inject(this);
-        presenter.submitEdit();
+//        presenter.submitEdit();
+
+        Map<String,String> map = new HashMap<>();
+        map.put("deviceNo", SharedPreferencesUtils.getString("deviceNo"));
+        map.put("mobile","18515966636");
+        String ss = new Gson().toJson(map);
+        String data  = null;
+        try {
+            data = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody =
+                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
+                        data);
+        presenter.initViewData(requestBody);
     }
 
     @OnClick(R.id.edit_per_bt)
@@ -164,5 +192,26 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     public void successEdit() {
         System.out.println("=======successEdit=======>");
     }
+
+    @Override
+    public void showOnFailure(Throwable throwable) {
+
+    }
+
+    @Override
+    public void successLoad(UserInfo userInfo) {
+        if(userInfo != null){
+            if(XessConfig.APP_VERSION == 1) {
+                idTv.setText(userInfo.getUid());
+                nicknameEt.setText(userInfo.getName());
+                addressTv.setText(userInfo.getClientIp());
+            } else {
+                idTv.setText(userInfo.getStoreNo());
+                nicknameEt.setText(userInfo.getStoreName());
+                addressTv.setText("");
+            }
+        }
+    }
+
     ////////////////////PersonalContract.View//////////////////////////
 }
