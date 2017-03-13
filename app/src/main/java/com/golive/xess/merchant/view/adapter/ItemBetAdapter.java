@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
 
@@ -18,12 +19,12 @@ import butterknife.ButterKnife;
 
 public class ItemBetAdapter extends BaseAdapter {
 
-    private List<OrdersEntity> objects ;
+    private List<LinkedTreeMap> objects ;
 
     private LayoutInflater layoutInflater;
     private BetItemClickListener betItemClickListener;
 
-    public ItemBetAdapter(LayoutInflater mInflater ,List<OrdersEntity> obj , BetItemClickListener listener) {
+    public ItemBetAdapter(LayoutInflater mInflater ,List<LinkedTreeMap> obj , BetItemClickListener listener) {
         this.betItemClickListener = listener;
         this.layoutInflater = mInflater;
         this.objects =obj;
@@ -35,7 +36,7 @@ public class ItemBetAdapter extends BaseAdapter {
     }
 
     @Override
-    public OrdersEntity getItem(int position) {
+    public LinkedTreeMap getItem(int position) {
         return objects.get(position);
     }
 
@@ -54,14 +55,22 @@ public class ItemBetAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void initializeViews(OrdersEntity order, ViewHolder holder, final int position) {
-        holder.orderTimeTv.setText(order.getCreateTime());
+    private void initializeViews(LinkedTreeMap order, ViewHolder holder, final int position) {
+        /*holder.orderTimeTv.setText(order.getCreateTime());
         holder.mobileNumTv.setText(order.getMobile());
         holder.lotteryTypeTv.setText(order.getLid());
         holder.issueTv.setText("第?期");
         holder.numTv.setText(order.getInvestNum()+"注");
         holder.betKidneyTv.setText(order.getAmount()+"彩豆");
-        holder.betStatusTv.setText(order.getOrderStateDesc());
+        holder.betStatusTv.setText(order.getOrderStateDesc());*/
+        holder.orderTimeTv.setText((String)order.get("createTime"));
+        holder.mobileNumTv.setText((String)order.get("mobile"));
+        holder.lotteryTypeTv.setText((String)order.get("lid"));
+        holder.issueTv.setText("第?期");
+        holder.numTv.setText((String)order.get("investNum")+"注");
+        holder.betKidneyTv.setText((Double)order.get("amount")+"彩豆");
+        holder.betStatusTv.setText((String)order.get("orderStateDesc"));
+
         holder.detail_tv.setText("详情");
         holder.optionTv.setText("代付");
         holder.detail_tv.setTag(R.id.details_id,position);

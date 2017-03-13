@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.entity.OrdersEntity;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
 
@@ -24,6 +25,6 @@ public interface BetContract {
     }
     interface  View{
         void showOnFailure(Throwable throwable, int type);
-        void successQuery(List<OrdersEntity> ordersEntityList);
+        void successQuery(List<LinkedTreeMap> ordersEntityList);
     }
 }

@@ -26,6 +26,7 @@ import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.adapter.ItemBetAdapter;
 import com.golive.xess.merchant.view.adapter.ItemLeftBetTvAdapter;
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -123,12 +124,13 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     /////////////////BetContract.View////////////////
     @Override
     public void showOnFailure(Throwable throwable,int type) {
+        System.out.println(throwable.getMessage());
         Toast.makeText(activity,throwable.getMessage(),Toast.LENGTH_SHORT).show();
     }
 
     int focusPosition = -1;//Selected焦点在哪个position
     @Override
-    public void successQuery(List<OrdersEntity> ordersEntityList) {
+    public void successQuery(List<LinkedTreeMap> ordersEntityList) {
         adapter = new ItemBetAdapter(mInflater, ordersEntityList, this);
         bet_lv.setAdapter(adapter);
 

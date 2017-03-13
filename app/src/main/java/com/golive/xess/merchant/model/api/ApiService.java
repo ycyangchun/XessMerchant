@@ -4,8 +4,11 @@ package com.golive.xess.merchant.model.api;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
+import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.model.entity.SplashEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
+import com.golive.xess.merchant.model.entity.WalletEntity;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
 
@@ -72,7 +75,38 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/orders")
-    Observable<CommonEntity<List<OrdersEntity>>> getOrders(@Body RequestBody data);
+    Observable<PageEntity<List<LinkedTreeMap>>> getOrders(@Body RequestBody data);
+
+    /**
+     * 7.14订单详情(POST)
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/order")
+    Observable<CommonEntity<OrdersEntity>> getOrderDetail(@Body RequestBody data);
+
+    /**
+     * 7.15我的钱包(POST)
+     *  1．个人：设备编号+用户编号   deviceNo  userNo
+     *  2．商家：设备编号+商家编号   deviceNo  storeNo
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/myWallet")
+    Observable<CommonEntity<WalletEntity>> getWallet(@Body RequestBody data);
+
+    /**
+     * 7.17钱包记录
+     *  1．个人：设备编号+用户编号   deviceNo  userNo
+     *  2．商家：设备编号+商家编号   deviceNo  storeNo
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/store/getWalletLogs ")
+    Observable<CommonEntity<WalletEntity>> getWalletStoreLogs(@Body RequestBody data);
 
 
 

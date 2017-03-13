@@ -4,7 +4,9 @@ import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
+import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
 
@@ -42,19 +44,10 @@ public class BetPresenter implements BetContract.Presenter {
     public void query(RequestBody data) {
         apiService.getOrders(data).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .filter(new Func1<CommonEntity<List<OrdersEntity>>, Boolean>() {
+               /* .flatMap(new Func1<PageEntity<List<OrdersEntity>>, Observable<List<OrdersEntity>>>() {
                     @Override
-                    public Boolean call(CommonEntity<List<OrdersEntity>> listCommonEntity) {
-                        String code = listCommonEntity.getCode();
-                        String msg = listCommonEntity.getMsg();
-                        view.showOnFailure(new Exception(msg), BetContract.TYPEORDER);
-                        return Integer.parseInt(code) == 0;
-                    }
-                })
-                .flatMap(new Func1<CommonEntity<List<OrdersEntity>>, Observable<List<OrdersEntity>>>() {
-                    @Override
-                    public Observable<List<OrdersEntity>> call(CommonEntity<List<OrdersEntity>> deviceEntityCommonEntity) {
-                        return Observable.just(deviceEntityCommonEntity.getData());
+                    public Observable<List<OrdersEntity>> call(PageEntity<List<OrdersEntity>> pageEntity) {
+                        return Observable.just((List<OrdersEntity>)pageEntity.getData().getOrders());
                     }
                 }, new Func1<Throwable, Observable<? extends List<OrdersEntity>>>() {
                     @Override
@@ -67,11 +60,16 @@ public class BetPresenter implements BetContract.Presenter {
                     public Observable<? extends List<OrdersEntity>> call() {
                         return null;
                     }
-                })
-                .subscribe(new Action1<List<OrdersEntity>>() {
+                })*/
+                .subscribe(new Action1<PageEntity<List<LinkedTreeMap>>>() {
                     @Override
-                    public void call(List<OrdersEntity> list) {
-                        view.successQuery(list);
+                    public void call(PageEntity<List<LinkedTreeMap>> list) {
+                        view.successQuery((List<LinkedTreeMap>)list.getData().getOrders());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        view.showOnFailure(throwable, BetContract.TYPEORDER);
                     }
                 });
     }

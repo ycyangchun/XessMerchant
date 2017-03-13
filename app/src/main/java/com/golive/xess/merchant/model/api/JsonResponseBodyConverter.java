@@ -5,11 +5,15 @@ import android.util.Log;
 import com.golive.xess.merchant.utils.Base64Util;
 import com.golive.xess.merchant.utils.Des3Util;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
@@ -41,7 +45,6 @@ public class JsonResponseBodyConverter<T> implements Converter<ResponseBody, T> 
      */
     @Override
     public T convert(ResponseBody responseBody) throws IOException {
-
         String response = responseBody.string();
         String result = null;//解密
         try {
@@ -56,6 +59,5 @@ public class JsonResponseBodyConverter<T> implements Converter<ResponseBody, T> 
         } finally {
             responseBody.close();
         }
-
     }
 }
