@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
+import com.golive.xess.merchant.model.entity.OrdersEntity;
 
 import java.util.List;
 
@@ -17,12 +18,12 @@ import butterknife.ButterKnife;
 
 public class ItemBetAdapter extends BaseAdapter {
 
-    private List<Integer> objects ;
+    private List<OrdersEntity> objects ;
 
     private LayoutInflater layoutInflater;
     private BetItemClickListener betItemClickListener;
 
-    public ItemBetAdapter(LayoutInflater mInflater ,List<Integer> obj , BetItemClickListener listener) {
+    public ItemBetAdapter(LayoutInflater mInflater ,List<OrdersEntity> obj , BetItemClickListener listener) {
         this.betItemClickListener = listener;
         this.layoutInflater = mInflater;
         this.objects =obj;
@@ -34,7 +35,7 @@ public class ItemBetAdapter extends BaseAdapter {
     }
 
     @Override
-    public Integer getItem(int position) {
+    public OrdersEntity getItem(int position) {
         return objects.get(position);
     }
 
@@ -53,14 +54,14 @@ public class ItemBetAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void initializeViews(Integer object, ViewHolder holder, final int position) {
-        holder.orderTimeTv.setText("2017-12-12 11:11:11");
-        holder.mobileNumTv.setText("1234567897");
-        holder.lotteryTypeTv.setText("双色球");
-        holder.issueTv.setText("第123456期");
-        holder.numTv.setText("1000注");
-        holder.betKidneyTv.setText("2000彩豆");
-        holder.betStatusTv.setText("中200彩豆");
+    private void initializeViews(OrdersEntity order, ViewHolder holder, final int position) {
+        holder.orderTimeTv.setText(order.getCreateTime());
+        holder.mobileNumTv.setText(order.getMobile());
+        holder.lotteryTypeTv.setText(order.getLid());
+        holder.issueTv.setText("第?期");
+        holder.numTv.setText(order.getInvestNum()+"注");
+        holder.betKidneyTv.setText(order.getAmount()+"彩豆");
+        holder.betStatusTv.setText(order.getOrderStateDesc());
         holder.detail_tv.setText("详情");
         holder.optionTv.setText("代付");
         holder.detail_tv.setTag(R.id.details_id,position);

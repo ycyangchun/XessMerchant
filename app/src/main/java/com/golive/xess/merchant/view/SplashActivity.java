@@ -84,6 +84,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         if(device != null){
             Logger.d(device.getDeviceNo());
             SharedPreferencesUtils.put("deviceNo",device.getDeviceNo());
+            SharedPreferencesUtils.put("storeNo",device);
+
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }

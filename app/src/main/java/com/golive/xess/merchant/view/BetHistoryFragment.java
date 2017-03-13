@@ -8,24 +8,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.golive.xess.merchant.R;
+import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerBetComponent;
 import com.golive.xess.merchant.di.modules.BetModule;
+import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.presenter.BetContract;
 import com.golive.xess.merchant.presenter.BetPresenter;
+import com.golive.xess.merchant.utils.Base64Util;
+import com.golive.xess.merchant.utils.Des3Util;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.adapter.ItemBetAdapter;
 import com.golive.xess.merchant.view.adapter.ItemLeftBetTvAdapter;
+import com.google.gson.Gson;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * Created by YangChun .
@@ -67,7 +79,38 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         DaggerBetComponent.builder()
                 .netComponent(XessApp.get(activity).getNetComponent())
                 .betModule(new BetModule(this)).build().inject(this);
-        presenter.query(null);
+
+        Map<String,String> map = new HashMap<>();
+        map.put("deviceNo",SharedPreferencesUtils.getString("deviceNo"));
+        map.put("lid","");
+        map.put("issue","");
+        map.put("userNo","");
+        map.put("mobile","");
+        map.put("channelNo","");
+        map.put("winState","");
+        map.put("startTime","");
+        map.put("endTime","");
+        map.put("pageNo","0");
+        map.put("pageSize","10");
+
+        if(XessConfig.APP_VERSION == 1)
+            map.put("userNo","");
+        else
+            map.put("storeNo",SharedPreferencesUtils.getString("storeNo"));
+
+        String ss = new Gson().toJson(map);
+        System.out.println("==================>"+ss);
+        String data  = null;
+        try {
+            data = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody =
+                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
+                        data);
+        presenter.query(requestBody);
     }
 
     private void initView() {
@@ -79,15 +122,14 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
     /////////////////BetContract.View////////////////
     @Override
-    public void showOnFailure(Throwable throwable, int type) {
-
+    public void showOnFailure(Throwable throwable,int type) {
+        Toast.makeText(activity,throwable.getMessage(),Toast.LENGTH_SHORT).show();
     }
 
     int focusPosition = -1;//Selected焦点在哪个position
     @Override
-    public void successQuery() {
-        List list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
-        adapter = new ItemBetAdapter(mInflater, list, this);
+    public void successQuery(List<OrdersEntity> ordersEntityList) {
+        adapter = new ItemBetAdapter(mInflater, ordersEntityList, this);
         bet_lv.setAdapter(adapter);
 
         bet_lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

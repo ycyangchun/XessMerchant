@@ -1,5 +1,11 @@
 package com.golive.xess.merchant.presenter;
 
+import com.golive.xess.merchant.model.entity.OrdersEntity;
+
+import java.util.List;
+
+import okhttp3.RequestBody;
+
 /**
  * Created by YangChun .
  * on 2017/3/10.
@@ -7,14 +13,17 @@ package com.golive.xess.merchant.presenter;
  */
 
 public interface BetContract {
+    int TYPEORDER = 0;
+    int TYPEDETAIL = 1;
+    int TYPEPAY = 2;
     interface  Presenter{
-        void query(String arr[]);
+        void query(RequestBody data);
         void statement();
         void batchPay();
         void detail();
     }
     interface  View{
-        void showOnFailure(Throwable throwable,int type);
-        void successQuery();
+        void showOnFailure(Throwable throwable, int type);
+        void successQuery(List<OrdersEntity> ordersEntityList);
     }
 }

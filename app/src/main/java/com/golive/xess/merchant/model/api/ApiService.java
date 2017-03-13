@@ -3,8 +3,11 @@ package com.golive.xess.merchant.model.api;
 
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
+import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.model.entity.SplashEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
+
+import java.util.List;
 
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -53,10 +56,25 @@ public interface ApiService {
 
     /**
      * 7.8获取商家信息(POST)
+     * 1．个人订单列表：设备编号+用户编号   deviceNo  userNo
+     * 2．商家订单列表：设备编号+商家编号   deviceNo  storeNo
      * @param data
      * @return
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/getStoreInfo")
     Observable<CommonEntity<UserInfo>> getStoreInfo(@Body RequestBody data);
+
+     /**
+     * 7.13订单列表(POST)
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/orders")
+    Observable<CommonEntity<List<OrdersEntity>>> getOrders(@Body RequestBody data);
+
+
+
+
 }
