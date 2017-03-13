@@ -1,5 +1,6 @@
 package com.golive.xess.merchant.base;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -8,6 +9,8 @@ import android.view.WindowManager;
 
 import com.golive.xess.merchant.utils.DisplayUtils;
 import com.orhanobut.logger.Logger;
+
+import java.text.MessageFormat;
 
 /**
  * Created by YangChun .
@@ -29,5 +32,17 @@ public abstract class BaseActivity extends FragmentActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
+    }
+
+    /**
+     * 获取资源文件字符串
+     *
+     * @param context
+     * @param stringId
+     * @param arguments
+     * @return
+     */
+    public String getMessageFormatString(Context context, int stringId ,Object ... arguments ) {
+        return MessageFormat.format(context.getResources().getString(stringId),arguments);
     }
 }

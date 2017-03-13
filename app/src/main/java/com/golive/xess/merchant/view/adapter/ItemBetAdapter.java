@@ -1,5 +1,6 @@
 package com.golive.xess.merchant.view.adapter;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
+import com.golive.xess.merchant.utils.EnumUtils;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
@@ -65,8 +67,8 @@ public class ItemBetAdapter extends BaseAdapter {
         holder.betStatusTv.setText(order.getOrderStateDesc());*/
         holder.orderTimeTv.setText((String)order.get("createTime"));
         holder.mobileNumTv.setText((String)order.get("mobile"));
-        holder.lotteryTypeTv.setText((String)order.get("lid"));
-        holder.issueTv.setText("第?期");
+        holder.lotteryTypeTv.setText(EnumUtils.getName((String)order.get("lid")));
+        holder.issueTv.setText("");
         holder.numTv.setText((String)order.get("investNum")+"注");
         holder.betKidneyTv.setText((Double)order.get("amount")+"彩豆");
         holder.betStatusTv.setText((String)order.get("orderStateDesc"));
@@ -75,22 +77,23 @@ public class ItemBetAdapter extends BaseAdapter {
         holder.optionTv.setText("代付");
         holder.detail_tv.setTag(R.id.details_id,position);
         holder.optionTv.setTag(R.id.option_id,position);
+        final String orderNo = (String)order.get("orderNo");
         holder.detail_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                betItemClickListener.betItemClick(v,position,"detail");
+                betItemClickListener.betItemClick(v,position,orderNo ,"detail");
             }
         });
         holder.optionTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                betItemClickListener.betItemClick(v,position,"option");
+                betItemClickListener.betItemClick(v,position,orderNo,"option");
             }
         });
     }
 
     public interface  BetItemClickListener{
-        void betItemClick(View v,int position, String type);
+        void betItemClick(View v,int position,String orderNo, String type);
     }
     Button bt;
     public void setItemFocus(AdapterView<?> parent, View view, final int position){

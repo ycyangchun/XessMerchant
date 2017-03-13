@@ -56,6 +56,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
     LayoutInflater mInflater;
     ItemBetAdapter adapter;
+    List<LinkedTreeMap> linkedTreeMaps;//加分页的时候在处理
     @Inject
     BetPresenter presenter;
 
@@ -154,10 +155,13 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     //////////////ItemBetAdapter.BetItemClickListener //////////////
 
     @Override
-    public void betItemClick(View v, int position, String type) {
-        System.out.println(type+" position "+position);
+    public void betItemClick(View v, int position,String orderNo,String type) {
+        System.out.println(type+" position "+position+" orderNo "+orderNo);
+        Intent intent = new Intent();
         if("detail".equals(type)){
-            activity.startActivity(new Intent(activity,DialogBetDetailActivity.class));
+            intent.setClass(activity,DialogBetDetailActivity.class);
+            intent.putExtra("orderNo",orderNo);
+            activity.startActivity(intent);
         }
     }
 

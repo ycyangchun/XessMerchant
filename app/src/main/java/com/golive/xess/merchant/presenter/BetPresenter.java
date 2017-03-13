@@ -44,23 +44,6 @@ public class BetPresenter implements BetContract.Presenter {
     public void query(RequestBody data) {
         apiService.getOrders(data).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-               /* .flatMap(new Func1<PageEntity<List<OrdersEntity>>, Observable<List<OrdersEntity>>>() {
-                    @Override
-                    public Observable<List<OrdersEntity>> call(PageEntity<List<OrdersEntity>> pageEntity) {
-                        return Observable.just((List<OrdersEntity>)pageEntity.getData().getOrders());
-                    }
-                }, new Func1<Throwable, Observable<? extends List<OrdersEntity>>>() {
-                    @Override
-                    public Observable<? extends List<OrdersEntity>> call(Throwable throwable) {
-                        view.showOnFailure(throwable, BetContract.TYPEORDER);
-                        return null;
-                    }
-                }, new Func0<Observable<? extends List<OrdersEntity>>>() {
-                    @Override
-                    public Observable<? extends List<OrdersEntity>> call() {
-                        return null;
-                    }
-                })*/
                 .subscribe(new Action1<PageEntity<List<LinkedTreeMap>>>() {
                     @Override
                     public void call(PageEntity<List<LinkedTreeMap>> list) {
