@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.model.api;
 
 
+import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.SplashEntity;
 
@@ -32,6 +33,6 @@ public interface ApiService {
 
     @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
     @POST("lottery/doDeviceAuth")
-    Observable<DeviceEntity> getDeviceAuth(@Body RequestBody data);
+    Observable<CommonEntity<DeviceEntity>> getDeviceAuth(@Body RequestBody data);
 
 }

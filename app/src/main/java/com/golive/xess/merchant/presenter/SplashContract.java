@@ -1,6 +1,8 @@
 package com.golive.xess.merchant.presenter;
 
 
+import com.golive.xess.merchant.model.entity.DeviceEntity;
+
 import okhttp3.RequestBody;
 
 /**
@@ -15,6 +17,6 @@ public interface SplashContract {
     }
     interface View {
         void showOnFailure(Throwable throwable);
-        void successLoad();
+        void successLoad(DeviceEntity deviceEntity);
     }
 }

@@ -12,11 +12,15 @@ import com.golive.xess.merchant.di.components.DaggerSplashComponent;
 import com.golive.xess.merchant.di.modules.SplashModule;
 import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.NoNetworkException;
+import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.presenter.SplashContract;
 import com.golive.xess.merchant.presenter.SplashPresenter;
 import com.golive.xess.merchant.utils.Base64Util;
 import com.golive.xess.merchant.utils.Des3Util;
+import com.golive.xess.merchant.utils.DisplayUtils;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,8 +65,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
                         data);
         presenter.deviceAuth(requestBody);
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+
     }
 
 
@@ -77,6 +80,12 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     @Override
-    public void successLoad() {
+    public void successLoad(DeviceEntity device) {
+        if(device != null){
+            Logger.d(device.getDeviceNo());
+            SharedPreferencesUtils.put("deviceNo",device.getDeviceNo());
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
     }
 }

@@ -185,7 +185,7 @@ public class PathUtils implements Serializable {
      * initialization this folder and initialization path
      */
     private void initSelf() {
-        SharedPreferencesUtils.init(ctx);
+//        SharedPreferencesUtils.init(ctx);
         PackageManager pm = ctx.getPackageManager();
         PackageInfo pi = null;
         try {

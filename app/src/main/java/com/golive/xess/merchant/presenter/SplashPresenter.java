@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.SplashEntity;
 import com.golive.xess.merchant.utils.TimeUtil;
@@ -35,19 +36,32 @@ public class SplashPresenter implements SplashContract.Presenter{
         apiService.getDeviceAuth(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new Func1<CommonEntity<DeviceEntity>, Observable<DeviceEntity>>() {
+                    @Override
+                    public Observable<DeviceEntity> call(CommonEntity<DeviceEntity> deviceEntityCommonEntity) {
+                        return Observable.just(deviceEntityCommonEntity.getData());
+                    }
+                }, new Func1<Throwable, Observable<? extends DeviceEntity>>() {
+                    @Override
+                    public Observable<? extends DeviceEntity> call(Throwable throwable) {
+                        view.showOnFailure(throwable);
+                        return null;
+                    }
+                }, new Func0<Observable<? extends DeviceEntity>>() {
+                    @Override
+                    public Observable<? extends DeviceEntity> call() {
+                        return null;
+                    }
+                })
                 .subscribe(new Action1<DeviceEntity>() {
                     @Override
                     public void call(DeviceEntity deviceEntity) {
-                        System.out.println(deviceEntity.toString());
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        view.showOnFailure(throwable);
+                       view.successLoad(deviceEntity);
                     }
                 });
     }
 
+    //////////////测试用 retrofit //////////////
     @Override
     public void getSplash(String deviceId) {
         String client = "android";
@@ -79,7 +93,7 @@ public class SplashPresenter implements SplashContract.Presenter{
                     @Override
                     public void call(String s) {
                         System.out.println(s);
-                        view.successLoad();
+
                     }
                 });
 

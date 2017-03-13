@@ -9,6 +9,7 @@ import com.golive.xess.merchant.di.components.DaggerNetComponent;
 import com.golive.xess.merchant.di.components.NetComponent;
 import com.golive.xess.merchant.di.modules.NetModule;
 import com.golive.xess.merchant.utils.PathUtils;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.utils.ToastUtil;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
@@ -43,6 +44,7 @@ public class XessApp extends Application {
 
 
     private void initPath() {
+        SharedPreferencesUtils.init(this);
         PathUtils.getInstance(this, "xess");
     }
 

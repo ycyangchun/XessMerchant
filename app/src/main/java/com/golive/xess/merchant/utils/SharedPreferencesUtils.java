@@ -49,7 +49,7 @@ public class SharedPreferencesUtils {
      *
      * @return
      */
-    private static SharedPreferences getSharedPreferences() {
+    public static SharedPreferences getSharedPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
@@ -59,7 +59,7 @@ public class SharedPreferencesUtils {
      * @param name
      * @return
      */
-    private static SharedPreferences getSharedPreferences(String name) {
+    public static SharedPreferences getSharedPreferences(String name) {
         if (null == mContext) {
             throw new IllegalStateException("Please invoke init method first.");
         }
