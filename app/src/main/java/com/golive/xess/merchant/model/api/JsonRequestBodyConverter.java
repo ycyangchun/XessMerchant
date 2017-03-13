@@ -57,7 +57,7 @@ public class JsonRequestBodyConverter<T> implements Converter<T , RequestBody> {
         Log.i("加密", "转化后的数据：" + data);
         adapter.write(jsonWriter, (T) data);
         jsonWriter.close();
-        return RequestBody.create(MEDIA_TYPE, data);
+        return RequestBody.create(MEDIA_TYPE, buffer.readByteString());
     }
 
 }

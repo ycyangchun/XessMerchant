@@ -10,9 +10,12 @@ import com.golive.xess.merchant.base.BaseActivity;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerSplashComponent;
 import com.golive.xess.merchant.di.modules.SplashModule;
+import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.NoNetworkException;
 import com.golive.xess.merchant.presenter.SplashContract;
 import com.golive.xess.merchant.presenter.SplashPresenter;
+import com.golive.xess.merchant.utils.Base64Util;
+import com.golive.xess.merchant.utils.Des3Util;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -46,9 +49,17 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 //        presenter.getSplash("");
         Map<String,String> map = new HashMap<>();
         map.put("deviceNo","95A32E080CB74C638C5E7471D6C21EE3");
+        String ss = new Gson().toJson(map);
+        String data  = null;
+        try {
+            data = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         RequestBody requestBody =
                 RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
-                        new Gson().toJson(map));
+                        data);
         presenter.deviceAuth(requestBody);
         startActivity(new Intent(this, MainActivity.class));
         finish();
