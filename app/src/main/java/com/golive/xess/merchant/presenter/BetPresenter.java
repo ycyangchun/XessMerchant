@@ -2,6 +2,7 @@ package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
@@ -41,7 +42,7 @@ public class BetPresenter implements BetContract.Presenter {
     }
 
     @Override
-    public void query(RequestBody data) {
+    public void query(BetBody data) {
         apiService.getOrders(data).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<PageEntity<List<LinkedTreeMap>>>() {

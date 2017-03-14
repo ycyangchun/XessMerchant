@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.golive.xess.merchant.utils.DisplayUtils;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.orhanobut.logger.Logger;
 
 import java.text.MessageFormat;
@@ -20,11 +21,14 @@ import java.text.MessageFormat;
 public abstract class BaseActivity extends FragmentActivity {
     private int height;
     private int width;
+    public String deviceNo ,storeNo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         height = DisplayUtils.getScreenHeight(this);
         width = DisplayUtils.getScreenWidth(this);
+        deviceNo = SharedPreferencesUtils.getString("deviceNo");
+        storeNo = SharedPreferencesUtils.getString("storeNo");
         Logger.d("height "+height+" width "+width +" 是否竖屏 "+DisplayUtils.isPortrait(this));
         if( height > width && DisplayUtils.isPortrait(this)){
             requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题

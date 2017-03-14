@@ -51,7 +51,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .netComponent(XessApp.get(this).getNetComponent())
                 .splashModule(new SplashModule(this))
                 .build().inject(this);
-        presenter.getSplash("");
+//        presenter.getSplash("");
         presenter.deviceAuth(new DeviceBody("95A32E080CB74C638C5E7471D6C21EE3"));
 
     }

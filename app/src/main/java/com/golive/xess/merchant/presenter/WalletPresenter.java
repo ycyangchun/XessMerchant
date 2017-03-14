@@ -2,6 +2,8 @@ package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.WalletBody;
+import com.golive.xess.merchant.model.api.body.WalletLogsBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.model.entity.WalletEntity;
@@ -33,7 +35,7 @@ public class WalletPresenter implements WalletContract.Persenter {
     }
 
     @Override
-    public void getWalletInfo(RequestBody data) {
+    public void getWalletInfo(WalletBody data) {
         Observable observable ;
         if (XessConfig._VERSION == XessConfig._PERSONAL)
             observable = apiService.getWallet(data);
@@ -55,7 +57,7 @@ public class WalletPresenter implements WalletContract.Persenter {
     }
 
     @Override
-    public void getWalletLogs(RequestBody data) {
+    public void getWalletLogs(WalletLogsBody data) {
         Observable observable ;
         if (XessConfig._VERSION == XessConfig._PERSONAL)
             observable = apiService.getWalletLogs(data);

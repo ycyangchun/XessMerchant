@@ -55,7 +55,7 @@ public class ItemWalletAdapter extends BaseAdapter {
 
     private void initializeViews(LinkedTreeMap map, ViewHolder holder) {
         holder.itemOptionTv.setText((String) map.get("actionTypeDesc"));
-        holder.itemMoneyTv.setText((Double)map.get("peaConsume")+"");
+        holder.itemMoneyTv.setText(map.get("peaConsume")+"");
         holder.itemDateTv.setText((String)map.get("createTime"));
     }
 

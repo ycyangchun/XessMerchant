@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.BetDetailBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
 
@@ -27,7 +28,7 @@ public class BetDetailPresenter implements BetDetailContract.Presenter {
     }
 
     @Override
-    public void getDetail(RequestBody data) {
+    public void getDetail(BetDetailBody data) {
         apiService.getOrderDetail(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

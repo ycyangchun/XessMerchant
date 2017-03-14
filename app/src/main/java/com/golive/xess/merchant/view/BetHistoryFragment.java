@@ -17,6 +17,7 @@ import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerBetComponent;
 import com.golive.xess.merchant.di.modules.BetModule;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.presenter.BetContract;
 import com.golive.xess.merchant.presenter.BetPresenter;
 import com.golive.xess.merchant.utils.Base64Util;
@@ -81,37 +82,12 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                 .netComponent(XessApp.get(activity).getNetComponent())
                 .betModule(new BetModule(this)).build().inject(this);
 
-        Map<String,String> map = new HashMap<>();
-        map.put("deviceNo",SharedPreferencesUtils.getString("deviceNo"));
-        map.put("lid","");
-        map.put("issue","");
-        map.put("userNo","");
-        map.put("mobile","");
-        map.put("channelNo","");
-        map.put("winState","");
-        map.put("startTime","");
-        map.put("endTime","");
-        map.put("pageNo","0");
-        map.put("pageSize","10");
-
+        BetBody body;
         if(XessConfig._VERSION == XessConfig._PERSONAL)
-            map.put("userNo","");
+            body = new BetBody("",deviceNo,"userNo","0","10");
         else
-            map.put("storeNo",SharedPreferencesUtils.getString("storeNo"));
-
-        String ss = new Gson().toJson(map);
-        System.out.println("==================>"+ss);
-        String data  = null;
-        try {
-            data = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        RequestBody requestBody =
-                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
-                        data);
-        presenter.query(requestBody);
+            body = new BetBody(storeNo,deviceNo,"","0","10");
+        presenter.query(body);
     }
 
     private void initView() {

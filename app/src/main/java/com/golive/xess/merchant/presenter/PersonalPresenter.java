@@ -2,6 +2,7 @@ package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
@@ -33,7 +34,7 @@ public class PersonalPresenter implements PersonalContract.Persenter {
     }
 
     @Override
-    public void initViewData(RequestBody data) {
+    public void initViewData(UserBody data) {
         Observable<CommonEntity<UserInfo>> observable ;
         if (XessConfig._VERSION == XessConfig._PERSONAL)
             observable = apiService.getUserInfo(data);

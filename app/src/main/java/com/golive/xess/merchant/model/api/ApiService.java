@@ -1,7 +1,12 @@
 package com.golive.xess.merchant.model.api;
 
 
+import com.golive.xess.merchant.model.api.body.BetBody;
+import com.golive.xess.merchant.model.api.body.BetDetailBody;
 import com.golive.xess.merchant.model.api.body.DeviceBody;
+import com.golive.xess.merchant.model.api.body.UserBody;
+import com.golive.xess.merchant.model.api.body.WalletBody;
+import com.golive.xess.merchant.model.api.body.WalletLogsBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
@@ -9,7 +14,6 @@ import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.model.entity.SplashEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
 import com.golive.xess.merchant.model.entity.WalletEntity;
-import com.golive.xess.merchant.model.entity.WalletLogEntity;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
@@ -20,7 +24,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -57,19 +60,17 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/getUserInfo")
-    Observable<CommonEntity<UserInfo>> getUserInfo(@Body RequestBody data);
+    Observable<CommonEntity<UserInfo>> getUserInfo(@Body UserBody data);
 
 
     /**
      * 7.8获取商家信息(POST)
-     * 1．个人订单列表：设备编号+用户编号   deviceNo  userNo
-     * 2．商家订单列表：设备编号+商家编号   deviceNo  storeNo
      * @param data
      * @return
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/getStoreInfo")
-    Observable<CommonEntity<UserInfo>> getStoreInfo(@Body RequestBody data);
+    Observable<CommonEntity<UserInfo>> getStoreInfo(@Body UserBody data);
 
      /**
      * 7.13订单列表(POST)
@@ -78,7 +79,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/orders")
-    Observable<PageEntity<List<LinkedTreeMap>>> getOrders(@Body RequestBody data);
+    Observable<PageEntity<List<LinkedTreeMap>>> getOrders(@Body BetBody data);
 
     /**
      * 7.14订单详情(POST)
@@ -87,7 +88,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/order")
-    Observable<CommonEntity<OrdersEntity>> getOrderDetail(@Body RequestBody data);
+    Observable<CommonEntity<OrdersEntity>> getOrderDetail(@Body BetDetailBody data);
 
 
     /**
@@ -98,7 +99,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/myWallet")
-    Observable<CommonEntity<WalletEntity>> getWallet(@Body RequestBody data);
+    Observable<CommonEntity<WalletEntity>> getWallet(@Body WalletBody data);
 
     /**
      * 7.15我的钱包-商家(POST)
@@ -108,7 +109,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/store/myWallet")
-    Observable<CommonEntity<WalletEntity>> getWalletStore(@Body RequestBody data);
+    Observable<CommonEntity<WalletEntity>> getWalletStore(@Body WalletBody data);
     /**
      * 7.17钱包记录-用户(POST)
      *  1．个人：设备编号+用户编号   deviceNo  userNo
@@ -117,7 +118,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/getWalletLogs")
-    Observable<PageEntity<List<LinkedTreeMap>>> getWalletLogs(@Body RequestBody data);
+    Observable<PageEntity<List<LinkedTreeMap>>> getWalletLogs(@Body WalletLogsBody data);
 
     /**
      * 7.18钱包记录-商家(POST)
@@ -127,7 +128,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/store/getWalletLogs")
-    Observable<PageEntity<List<LinkedTreeMap>>> getWalletStoreLogs(@Body RequestBody data);
+    Observable<PageEntity<List<LinkedTreeMap>>> getWalletStoreLogs(@Body WalletLogsBody data);
 
     /**
      * 7.11上传图片 (GET)

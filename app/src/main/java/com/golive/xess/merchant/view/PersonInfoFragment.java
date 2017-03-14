@@ -20,6 +20,7 @@ import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerPersonalComponent;
 import com.golive.xess.merchant.di.modules.PersonalModule;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.entity.UserInfo;
 import com.golive.xess.merchant.presenter.PersonalContract;
 import com.golive.xess.merchant.presenter.PersonalPresenter;
@@ -86,22 +87,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 .personalModule(new PersonalModule(this))
                 .build().inject(this);
 //        presenter.submitEdit();
-
-        Map<String,String> map = new HashMap<>();
-        map.put("deviceNo", SharedPreferencesUtils.getString("deviceNo"));
-        map.put("mobile","18515966636");
-        String ss = new Gson().toJson(map);
-        String data  = null;
-        try {
-            data = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        RequestBody requestBody =
-                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
-                        data);
-        presenter.initViewData(requestBody);
+        presenter.initViewData(new UserBody("18515966636",SharedPreferencesUtils.getString("deviceNo")));
     }
 
     @OnClick(R.id.edit_per_bt)
@@ -204,11 +190,11 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
             if(XessConfig._VERSION == XessConfig._PERSONAL) {
                 idTv.setText(userInfo.getUid());
                 nicknameEt.setText(userInfo.getName());
-                addressTv.setText(userInfo.getClientIp());
+                addressTv.setText(userInfo.getCity());
             } else {
                 idTv.setText(userInfo.getStoreNo());
-                nicknameEt.setText(userInfo.getStoreName());
-                addressTv.setText("");
+                nicknameEt.setText(userInfo.getStoreAlias());
+                addressTv.setText(userInfo.getCity());
             }
         }
     }

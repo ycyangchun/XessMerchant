@@ -18,6 +18,9 @@ import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerWalletComponent;
 import com.golive.xess.merchant.di.modules.WalletModule;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.BetBody;
+import com.golive.xess.merchant.model.api.body.WalletBody;
+import com.golive.xess.merchant.model.api.body.WalletLogsBody;
 import com.golive.xess.merchant.model.entity.WalletEntity;
 import com.golive.xess.merchant.model.entity.WalletLogEntity;
 import com.golive.xess.merchant.presenter.WalletContract;
@@ -97,54 +100,20 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
                 .netComponent(XessApp.get(activity).getNetComponent())
                 .walletModule(new WalletModule(this)).build().inject(this);
 
-        //////////////////////////////
-        Map<String,String> map = new HashMap<>();
-        map.put("deviceNo", SharedPreferencesUtils.getString("deviceNo"));
 
+        WalletBody body;
         if(XessConfig._VERSION == XessConfig._PERSONAL)
-            map.put("userNo","100001");
+            body = new WalletBody("","100001",deviceNo);
         else
-            map.put("storeNo",SharedPreferencesUtils.getString("storeNo"));
-
-        String ss = new Gson().toJson(map);
-        System.out.println("=======getWalletInfo===========>"+ss);
-        String data  = null;
-        try {
-            data = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        RequestBody requestBody =
-                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
-                        data);
-        presenter.getWalletInfo(requestBody);
-        //////////////////////////////
-
-        //////////////////////////////
-        Map<String,String> map2 = new HashMap<>();
-        map2.put("deviceNo", SharedPreferencesUtils.getString("deviceNo"));
-        map2.put("pageNo","0");
-        map2.put("pageSize","10");
-
+            body = new WalletBody(storeNo,"",deviceNo);
+        presenter.getWalletInfo(body);
+        ////////////////////////
+        WalletLogsBody logsBody;
         if(XessConfig._VERSION == XessConfig._PERSONAL)
-            map2.put("userNo","");
+            logsBody = new WalletLogsBody("","100001",deviceNo,"0","10");
         else
-            map2.put("storeNo",SharedPreferencesUtils.getString("storeNo"));
-
-        String ss2 = new Gson().toJson(map2);
-        String data2  = null;
-        try {
-            data2 = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss2));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        RequestBody requestBody2=
-                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
-                        data2);
-
-        presenter.getWalletLogs(requestBody2);
+            logsBody = new WalletLogsBody(storeNo,"",deviceNo,"0","10");
+        presenter.getWalletLogs(logsBody);
         //////////////////////////////
         mapList = new ArrayList<>();
         walletAdapter = new ItemWalletAdapter(mInflater,mapList);

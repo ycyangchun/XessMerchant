@@ -11,6 +11,7 @@ import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerBetDetailComponent;
 import com.golive.xess.merchant.di.modules.BetDetailModule;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.BetDetailBody;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.presenter.BetDetailContract;
 import com.golive.xess.merchant.presenter.BetDetailPresenter;
@@ -47,7 +48,7 @@ public class DialogBetDetailActivity extends BaseActivity implements BetDetailCo
     @BindView(R.id.bet_play_type_tv) TextView bet_play_type_tv;
     @BindView(R.id.bet_times_tv) TextView bet_times_tv;
 
-    String orderNo ,deviceNo;
+    String orderNo ;
 
     @Inject
     BetDetailPresenter presenter;
@@ -58,29 +59,12 @@ public class DialogBetDetailActivity extends BaseActivity implements BetDetailCo
         setContentView(R.layout.dialog_bet_detail);
         ButterKnife.bind(this);
         orderNo = getIntent().getStringExtra("orderNo");
-        deviceNo = SharedPreferencesUtils.getString("deviceNo");
 
         DaggerBetDetailComponent.builder()
                 .netComponent(XessApp.get(this).getNetComponent())
                 .betDetailModule(new BetDetailModule(this))
                 .build().inject(this);
-        Map<String,String> map = new HashMap<>();
-        map.put("deviceNo",SharedPreferencesUtils.getString("deviceNo"));
-        map.put("orderNo",orderNo);
-
-        String ss = new Gson().toJson(map);
-        System.out.println("==================>"+ss);
-        String data  = null;
-        try {
-            data = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        RequestBody requestBody =
-                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
-                        data);
-        presenter.getDetail(requestBody);
+        presenter.getDetail(new BetDetailBody(deviceNo, orderNo));
     }
 
     @Override

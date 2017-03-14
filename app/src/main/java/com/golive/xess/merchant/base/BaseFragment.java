@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.MainActivity;
 
 import java.text.MessageFormat;
@@ -16,10 +17,12 @@ import java.text.MessageFormat;
 
 public abstract class BaseFragment extends Fragment {
     public MainActivity activity;
-
+    public String deviceNo ,storeNo;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         activity = (MainActivity) getActivity();
+        deviceNo = SharedPreferencesUtils.getString("deviceNo");
+        storeNo = SharedPreferencesUtils.getString("storeNo");
         super.onActivityCreated(savedInstanceState);
     }
 
