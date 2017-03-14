@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.model.api;
 
 
+import com.golive.xess.merchant.model.api.body.DeviceBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
@@ -19,6 +20,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -46,7 +48,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
     @POST("lottery/doDeviceAuth")
-    Observable<CommonEntity<DeviceEntity>> getDeviceAuth(@Body RequestBody data);
+    Observable<CommonEntity<DeviceEntity>> getDeviceAuth(@Body DeviceBody data);
 
     /**
      * 7.7获取用户信息(POST)

@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
+import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -46,13 +47,13 @@ public class JsonResponseBodyConverter<T> implements Converter<ResponseBody, T> 
     @Override
     public T convert(ResponseBody responseBody) throws IOException {
         String response = responseBody.string();
-        String result = null;//解密
+        String result ;//解密
         try {
             result = Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).decode(Base64Util.decode(response));
         } catch (Exception e) {
            throw new IOException("Decryption failure");
         }
-        Log.i("===>解密", "解密的服务器数据：" + result);
+        Logger.i( "解密的服务器数据：" + result);
         JsonReader jsonReader = mGson.newJsonReader(new StringReader(result));
         try {
             return adapter.read(jsonReader);

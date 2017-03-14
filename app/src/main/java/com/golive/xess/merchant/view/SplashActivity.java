@@ -12,6 +12,7 @@ import com.golive.xess.merchant.di.components.DaggerSplashComponent;
 import com.golive.xess.merchant.di.modules.SplashModule;
 import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.NoNetworkException;
+import com.golive.xess.merchant.model.api.body.DeviceBody;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.presenter.SplashContract;
 import com.golive.xess.merchant.presenter.SplashPresenter;
@@ -50,21 +51,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .netComponent(XessApp.get(this).getNetComponent())
                 .splashModule(new SplashModule(this))
                 .build().inject(this);
-//        presenter.getSplash("");
-        Map<String,String> map = new HashMap<>();
-        map.put("deviceNo","95A32E080CB74C638C5E7471D6C21EE3");
-        String ss = new Gson().toJson(map);
-        String data  = null;
-        try {
-            data = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        RequestBody requestBody =
-                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
-                        data);
-        presenter.deviceAuth(requestBody);
+        presenter.getSplash("");
+        presenter.deviceAuth(new DeviceBody("95A32E080CB74C638C5E7471D6C21EE3"));
 
     }
 

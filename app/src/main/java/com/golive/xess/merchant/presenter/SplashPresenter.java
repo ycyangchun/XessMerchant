@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.DeviceBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.SplashEntity;
@@ -32,7 +33,7 @@ public class SplashPresenter implements SplashContract.Presenter{
     }
 
     @Override
-    public void deviceAuth(RequestBody data) {
+    public void deviceAuth(DeviceBody data) {
         apiService.getDeviceAuth(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
