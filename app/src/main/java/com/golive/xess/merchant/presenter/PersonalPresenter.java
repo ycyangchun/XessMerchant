@@ -35,7 +35,7 @@ public class PersonalPresenter implements PersonalContract.Persenter {
     @Override
     public void initViewData(RequestBody data) {
         Observable<CommonEntity<UserInfo>> observable ;
-        if (XessConfig.APP_VERSION == 1)
+        if (XessConfig._VERSION == XessConfig._PERSONAL)
             observable = apiService.getUserInfo(data);
         else
             observable = apiService.getStoreInfo(data);

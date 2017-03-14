@@ -201,7 +201,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     @Override
     public void successLoad(UserInfo userInfo) {
         if(userInfo != null){
-            if(XessConfig.APP_VERSION == 1) {
+            if(XessConfig._VERSION == XessConfig._PERSONAL) {
                 idTv.setText(userInfo.getUid());
                 nicknameEt.setText(userInfo.getName());
                 addressTv.setText(userInfo.getClientIp());

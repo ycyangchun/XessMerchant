@@ -8,6 +8,7 @@ import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.model.entity.SplashEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
 import com.golive.xess.merchant.model.entity.WalletEntity;
+import com.golive.xess.merchant.model.entity.WalletLogEntity;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
@@ -86,10 +87,10 @@ public interface ApiService {
     @POST("lottery/order")
     Observable<CommonEntity<OrdersEntity>> getOrderDetail(@Body RequestBody data);
 
+
     /**
-     * 7.15我的钱包(POST)
+     * 7.14我的钱包-用户(POST)
      *  1．个人：设备编号+用户编号   deviceNo  userNo
-     *  2．商家：设备编号+商家编号   deviceNo  storeNo
      * @param data
      * @return
      */
@@ -98,15 +99,33 @@ public interface ApiService {
     Observable<CommonEntity<WalletEntity>> getWallet(@Body RequestBody data);
 
     /**
-     * 7.17钱包记录
-     *  1．个人：设备编号+用户编号   deviceNo  userNo
+     * 7.15我的钱包-商家(POST)
      *  2．商家：设备编号+商家编号   deviceNo  storeNo
      * @param data
      * @return
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
-    @POST("lottery/store/getWalletLogs ")
-    Observable<CommonEntity<WalletEntity>> getWalletStoreLogs(@Body RequestBody data);
+    @POST("lottery/lottery/store/myWallet")
+    Observable<CommonEntity<WalletEntity>> getWalletStore(@Body RequestBody data);
+    /**
+     * 7.17钱包记录-用户(POST)
+     *  1．个人：设备编号+用户编号   deviceNo  userNo
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/getWalletLogs")
+    Observable<PageEntity<List<LinkedTreeMap>>> getWalletLogs(@Body RequestBody data);
+
+    /**
+     * 7.18钱包记录-商家(POST)
+     *  2．商家：设备编号+商家编号   deviceNo  storeNo
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/store/getWalletLogs")
+    Observable<PageEntity<List<LinkedTreeMap>>> getWalletStoreLogs(@Body RequestBody data);
 
 
 

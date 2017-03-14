@@ -52,6 +52,15 @@ public class PageEntity<T> {
         private int pageSize;
         private int pageNo;
         private List<?> orders;
+        private List<?> accountings;
+
+        public List<?> getAccountings() {
+            return accountings;
+        }
+
+        public void setAccountings(List<?> accountings) {
+            this.accountings = accountings;
+        }
 
         public int getPageSize() {
             return pageSize;

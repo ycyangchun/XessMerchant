@@ -96,13 +96,13 @@ public class DialogBetDetailActivity extends BaseActivity implements BetDetailCo
             betTimeTv.setText(getMessageFormatString(this ,R.string.bet_time_s,ordersEntity.getCreateTime()));
             betWinMoneyTv.setText(getMessageFormatString(this ,R.string.bet_win_money_s,ordersEntity.getWinAmount()));
             betMobileTv.setText(getMessageFormatString(this ,R.string.bet_mobile_s,ordersEntity.getMobile()));
-            bet_play_type_tv.setText(getMessageFormatString(this ,R.string.bet_lottery_s,EnumUtils.getName(ordersEntity.getLid())));
-            betPlayTv.setText(getMessageFormatString(this ,R.string.bet_play_s,EnumUtils.getName(ordersEntity.getPid())));
+            bet_play_type_tv.setText(getMessageFormatString(this ,R.string.bet_lottery_s,EnumUtils.Lottery.getName(ordersEntity.getLid())));
+            betPlayTv.setText(getMessageFormatString(this ,R.string.bet_play_s,EnumUtils.Lottery.getName(ordersEntity.getPid())));
             bet_times_tv.setText(getMessageFormatString(this ,R.string.bet_times_s,ordersEntity.getTimesCount()));
 //            betDetailKidneyTv.setText("");
             betKaiStatusTv.setText(getMessageFormatString(this ,R.string.bet_kai_status_s,ordersEntity.getOrderStateDesc()));
             betNoteTv.setText(getMessageFormatString(this ,R.string.bet_note_s,ordersEntity.getInvestNum()));
-            betWinStatusTv.setText(getMessageFormatString(this ,R.string.bet_win_status_s,EnumUtils.getName(ordersEntity.getWinState())));
+            betWinStatusTv.setText(getMessageFormatString(this ,R.string.bet_win_status_s,EnumUtils.Lottery.getName(ordersEntity.getWinState())));
             betLotteryNumTv.setText(getMessageFormatString(this ,R.string.bet_lottery_num_s,ordersEntity.getInvestCode()));
         }
     }

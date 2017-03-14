@@ -11,17 +11,19 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
+import com.golive.xess.merchant.utils.EnumUtils;
+import com.google.gson.internal.LinkedTreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ItemWalletAdapter extends BaseAdapter {
 
-    private List<Integer> objects;
+    private List<LinkedTreeMap> objects;
 
     private LayoutInflater layoutInflater;
 
-    public ItemWalletAdapter(LayoutInflater mInflater ,List<Integer> obj) {
+    public ItemWalletAdapter(LayoutInflater mInflater,List<LinkedTreeMap> obj) {
         this.layoutInflater = mInflater;
         this.objects =obj;
     }
@@ -32,7 +34,7 @@ public class ItemWalletAdapter extends BaseAdapter {
     }
 
     @Override
-    public Integer getItem(int position) {
+    public LinkedTreeMap getItem(int position) {
         return objects.get(position);
     }
 
@@ -51,10 +53,10 @@ public class ItemWalletAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void initializeViews(Integer object, ViewHolder holder) {
-        holder.itemOptionTv.setText("同步院线-消费");
-        holder.itemMoneyTv.setText("彩豆");
-        holder.itemDateTv.setText("2017-03-10 16:02:01");
+    private void initializeViews(LinkedTreeMap map, ViewHolder holder) {
+        holder.itemOptionTv.setText((String) map.get("actionTypeDesc"));
+        holder.itemMoneyTv.setText((Double)map.get("peaConsume")+"");
+        holder.itemDateTv.setText((String)map.get("createTime"));
     }
 
     static class ViewHolder {

@@ -73,9 +73,9 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     public void showOnFailure(Throwable throwable) {
         if ( throwable instanceof NoNetworkException) {
             //'no network'
-            Toast.makeText(this,"No Network Connection",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,throwable.getMessage()+" No Network Connection",Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this,"Some Other Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,throwable.getMessage()+" Some Other Error", Toast.LENGTH_SHORT).show();
         }
     }
 

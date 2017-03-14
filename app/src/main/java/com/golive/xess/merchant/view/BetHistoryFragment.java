@@ -17,7 +17,6 @@ import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerBetComponent;
 import com.golive.xess.merchant.di.modules.BetModule;
 import com.golive.xess.merchant.model.api.ApiService;
-import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.presenter.BetContract;
 import com.golive.xess.merchant.presenter.BetPresenter;
 import com.golive.xess.merchant.utils.Base64Util;
@@ -95,7 +94,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         map.put("pageNo","0");
         map.put("pageSize","10");
 
-        if(XessConfig.APP_VERSION == 1)
+        if(XessConfig._VERSION == XessConfig._PERSONAL)
             map.put("userNo","");
         else
             map.put("storeNo",SharedPreferencesUtils.getString("storeNo"));

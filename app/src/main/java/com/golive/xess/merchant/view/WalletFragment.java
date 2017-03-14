@@ -12,22 +12,36 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
+import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerWalletComponent;
 import com.golive.xess.merchant.di.modules.WalletModule;
+import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.entity.WalletEntity;
+import com.golive.xess.merchant.model.entity.WalletLogEntity;
 import com.golive.xess.merchant.presenter.WalletContract;
 import com.golive.xess.merchant.presenter.WalletPresenter;
+import com.golive.xess.merchant.utils.Base64Util;
+import com.golive.xess.merchant.utils.Des3Util;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.adapter.ItemWalletAdapter;
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * Created by YangChun .
@@ -60,8 +74,8 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
     @Inject
     WalletPresenter presenter;
 
-    List list;
-
+    List<LinkedTreeMap> mapList;
+    ItemWalletAdapter walletAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -82,9 +96,60 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
         DaggerWalletComponent.builder()
                 .netComponent(XessApp.get(activity).getNetComponent())
                 .walletModule(new WalletModule(this)).build().inject(this);
-        presenter.getWalletData();
-        list = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18);
-        walletLv.setAdapter(new ItemWalletAdapter(mInflater,list));
+
+        //////////////////////////////
+        Map<String,String> map = new HashMap<>();
+        map.put("deviceNo", SharedPreferencesUtils.getString("deviceNo"));
+
+        if(XessConfig._VERSION == XessConfig._PERSONAL)
+            map.put("userNo","100001");
+        else
+            map.put("storeNo",SharedPreferencesUtils.getString("storeNo"));
+
+        String ss = new Gson().toJson(map);
+        System.out.println("==================>"+ss);
+        String data  = null;
+        try {
+            data = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody =
+                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
+                        data);
+        presenter.getWalletInfo(requestBody);
+        //////////////////////////////
+
+        //////////////////////////////
+        Map<String,String> map2 = new HashMap<>();
+        map2.put("deviceNo", SharedPreferencesUtils.getString("deviceNo"));
+        map2.put("pageNo","0");
+        map2.put("pageSize","10");
+
+        if(XessConfig._VERSION == XessConfig._PERSONAL)
+            map2.put("userNo","");
+        else
+            map2.put("storeNo",SharedPreferencesUtils.getString("storeNo"));
+
+        String ss2 = new Gson().toJson(map2);
+        System.out.println("==================>"+ss2);
+        String data2  = null;
+        try {
+            data2 = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody2=
+                RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
+                        data2);
+
+        presenter.getWalletLogs(requestBody2);
+        //////////////////////////////
+        mapList = new ArrayList<>();
+        walletAdapter = new ItemWalletAdapter(mInflater,mapList);
+        walletLv.setAdapter(walletAdapter);
     }
 
     @OnClick(R.id.recharge_bt)
@@ -103,14 +168,33 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
     }
 
     ///////////////////WalletContract.View////////////////////////
+
     @Override
-    public void dataFailed(Throwable throwable) {
+    public void dataFailed(Throwable throwable, int type) {
 
     }
 
     @Override
-    public void dataSuccess() {
+    public void dataInfoSuccess(WalletEntity walletEntity) {
+        if(walletEntity != null){
+            if(XessConfig._VERSION == XessConfig._PERSONAL) {
+                currentlyKidneyTv.setText(getMessageFormatString(activity ,R.string.currently_kidney_s,walletEntity.getKidneyBean()));
+                winKidneyTv.setText(getMessageFormatString(activity ,R.string.win_kidney_s,walletEntity.getGainBean()));
+                topAwardTv.setText(getMessageFormatString(activity ,R.string.top_award_s,walletEntity.getTopMoney()));
+                winCountTv.setText(getMessageFormatString(activity ,R.string.win_count_s,walletEntity.getWinTimes()));
+//                commissionKidneyTv.setText();
+            }else {
+                currentlyKidneyTv.setText(getMessageFormatString(activity ,R.string.currently_kidney_s,walletEntity.getKidneyBean()));
+            }
+        }
     }
+
+    @Override
+        public void dataLogsSuccess(List<LinkedTreeMap> walletLogEntity) {
+        mapList.addAll(walletLogEntity);
+        walletAdapter.notifyDataSetChanged();
+    }
+
     ///////////////////WalletContract.View////////////////////////
 
 }

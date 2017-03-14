@@ -17,7 +17,9 @@ public class XessConfig {
      * 商家版 0
      * 个人版 1
      */
-    public static int APP_VERSION = 0;
+    public static final int _STORE = 0;
+    public static final int _PERSONAL = 1;
+    public static int _VERSION = _STORE;
 
     /**
      * 测试环境
@@ -53,6 +55,6 @@ public class XessConfig {
     }
 
     public static void setAppVersion(int appVersion) {
-        APP_VERSION = appVersion;
+        _VERSION = appVersion;
     }
 }
