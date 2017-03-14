@@ -27,7 +27,7 @@ import rx.Observable;
 public interface ApiService {
     String SECRET_KEY = "golive_lottery@123456#$%~";
     String SECRET_VALUE = "12345678";
-    /**
+    /** retrofit 测试用
      * <p>http://static.owspace.com/static/picture_list.txt?client=android&version=1.3.0&time=1467864021&device_id=866963027059338</p>
      *
      * @param client
@@ -105,7 +105,7 @@ public interface ApiService {
      * @return
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
-    @POST("lottery/lottery/store/myWallet")
+    @POST("lottery/store/myWallet")
     Observable<CommonEntity<WalletEntity>> getWalletStore(@Body RequestBody data);
     /**
      * 7.17钱包记录-用户(POST)
@@ -127,6 +127,11 @@ public interface ApiService {
     @POST("lottery/store/getWalletLogs")
     Observable<PageEntity<List<LinkedTreeMap>>> getWalletStoreLogs(@Body RequestBody data);
 
+    /**
+     * 7.11上传图片 (GET)
+     */
+    @GET("file/upload")
+    Observable<String> uploadFile(@Query("fileData") String fileData,@Query("fileSuff") String fileSuff,@Query("fileType") String fileType);
 
 
 

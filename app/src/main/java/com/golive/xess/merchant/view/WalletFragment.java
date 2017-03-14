@@ -107,7 +107,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
             map.put("storeNo",SharedPreferencesUtils.getString("storeNo"));
 
         String ss = new Gson().toJson(map);
-        System.out.println("==================>"+ss);
+        System.out.println("=======getWalletInfo===========>"+ss);
         String data  = null;
         try {
             data = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss));
@@ -133,7 +133,6 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
             map2.put("storeNo",SharedPreferencesUtils.getString("storeNo"));
 
         String ss2 = new Gson().toJson(map2);
-        System.out.println("==================>"+ss2);
         String data2  = null;
         try {
             data2 = Base64Util.encode(Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).encode(ss2));
@@ -184,7 +183,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
                 winCountTv.setText(getMessageFormatString(activity ,R.string.win_count_s,walletEntity.getWinTimes()));
 //                commissionKidneyTv.setText();
             }else {
-                currentlyKidneyTv.setText(getMessageFormatString(activity ,R.string.currently_kidney_s,walletEntity.getKidneyBean()));
+                currentlyKidneyTv.setText(getMessageFormatString(activity ,R.string.currently_kidney_s,walletEntity.getKidney_bean()));
             }
         }
     }

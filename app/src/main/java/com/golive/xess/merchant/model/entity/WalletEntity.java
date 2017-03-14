@@ -22,6 +22,26 @@ public class WalletEntity {
     private String topMoney;
     private String winTimes;
 
+    //商家
+    private String logo;
+    private String kidney_bean;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getKidney_bean() {
+        return kidney_bean;
+    }
+
+    public void setKidney_bean(String kidney_bean) {
+        this.kidney_bean = kidney_bean;
+    }
+
     public String getHeadImg() {
         return headImg;
     }
