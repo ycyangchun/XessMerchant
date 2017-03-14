@@ -1,7 +1,9 @@
 package com.golive.xess.merchant.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.util.LogWriter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.golive.xess.merchant.base.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by YangChun .
@@ -46,5 +49,10 @@ public class SetFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_set, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @OnClick(R.id.change_user_bt)
+    public void onClickChangeUser(){
+        startActivity(new Intent(activity, LoginActivity.class));
     }
 }

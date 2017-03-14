@@ -30,8 +30,14 @@
             android:name=".view.MainActivity"
             android:configChanges="keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+           />
+
         <activity android:name=".view.DialogBetDetailActivity"
             android:theme="@style/ShareDialog"/>
+
     </application>
 
 </manifest>
