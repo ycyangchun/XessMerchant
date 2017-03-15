@@ -46,7 +46,13 @@ public class WalletPresenter implements WalletContract.Persenter {
                 .subscribe(new Action1<CommonEntity<WalletEntity>>() {
                     @Override
                     public void call(CommonEntity<WalletEntity> walletEntityCommonEntity) {
-                        view.dataInfoSuccess(walletEntityCommonEntity.getData());
+
+                        String code = walletEntityCommonEntity.getCode();
+                        String msg = walletEntityCommonEntity.getMsg();
+                        if("0".equals(code)) {
+                            view.dataInfoSuccess(walletEntityCommonEntity.getData());
+                        } else
+                            view.dataFailed(new Throwable(msg), WalletContract.TYPEINFO);
                     }
                 }, new Action1<Throwable>() {
                     @Override
@@ -68,7 +74,12 @@ public class WalletPresenter implements WalletContract.Persenter {
                 .subscribe(new Action1<PageEntity<List<LinkedTreeMap>>>() {
                     @Override
                     public void call(PageEntity<List<LinkedTreeMap>> walletLogEntityPageEntity) {
-                        view.dataLogsSuccess((List<LinkedTreeMap>) walletLogEntityPageEntity.getData().getAccountings());
+                        String code = walletLogEntityPageEntity.getCode();
+                        String msg = walletLogEntityPageEntity.getMsg();
+                        if("0".equals(code)) {
+                            view.dataLogsSuccess((List<LinkedTreeMap>) walletLogEntityPageEntity.getData().getAccountings());
+                        } else
+                            view.dataFailed(new Throwable(msg), WalletContract.TYPELOGS);
                     }
                 }, new Action1<Throwable>() {
                     @Override

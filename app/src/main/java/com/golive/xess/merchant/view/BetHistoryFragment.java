@@ -87,7 +87,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             body = new BetBody("",deviceNo,"userNo","0","10");
         else
             body = new BetBody(storeUid,deviceNo,"","0","10");
-//        presenter.query(body);
+        presenter.query(body);
     }
 
     private void initView() {
@@ -100,7 +100,6 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     /////////////////BetContract.View////////////////
     @Override
     public void showOnFailure(Throwable throwable,int type) {
-        System.out.println(throwable.getMessage());
         Toast.makeText(activity,throwable.getMessage(),Toast.LENGTH_SHORT).show();
     }
 

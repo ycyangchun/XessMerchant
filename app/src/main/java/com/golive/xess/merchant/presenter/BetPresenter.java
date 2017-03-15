@@ -1,24 +1,16 @@
 package com.golive.xess.merchant.presenter;
 
-import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.body.BetBody;
-import com.golive.xess.merchant.model.entity.CommonEntity;
-import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
-import com.golive.xess.merchant.model.entity.UserInfo;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import okhttp3.RequestBody;
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -48,7 +40,12 @@ public class BetPresenter implements BetContract.Presenter {
                 .subscribe(new Action1<PageEntity<List<LinkedTreeMap>>>() {
                     @Override
                     public void call(PageEntity<List<LinkedTreeMap>> list) {
-                        view.successQuery((List<LinkedTreeMap>)list.getData().getOrders());
+                        String code = list.getCode();
+                        String msg = list.getMsg();
+                        if("0".equals(code)) {
+                            view.successQuery((List<LinkedTreeMap>)list.getData().getOrders());
+                        } else
+                            view.showOnFailure(new Throwable(msg),BetContract.TYPEORDER);
                     }
                 }, new Action1<Throwable>() {
                     @Override

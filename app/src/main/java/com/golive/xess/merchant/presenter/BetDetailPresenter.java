@@ -7,7 +7,6 @@ import com.golive.xess.merchant.model.entity.OrdersEntity;
 
 import javax.inject.Inject;
 
-import okhttp3.RequestBody;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -35,7 +34,12 @@ public class BetDetailPresenter implements BetDetailContract.Presenter {
                 .subscribe(new Action1<CommonEntity<OrdersEntity>>() {
                     @Override
                     public void call(CommonEntity<OrdersEntity> ordersEntityCommonEntity) {
-                        view.successLoad(ordersEntityCommonEntity.getData());
+                        String code = ordersEntityCommonEntity.getCode();
+                        String msg = ordersEntityCommonEntity.getMsg();
+                        if("0".equals(code)) {
+                            view.successLoad(ordersEntityCommonEntity.getData());
+                        } else
+                            view.showOnFailure(new Throwable(msg));
                     }
                 }, new Action1<Throwable>() {
                     @Override
