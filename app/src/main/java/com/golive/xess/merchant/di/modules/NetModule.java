@@ -81,8 +81,7 @@ public class NetModule {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okhttpClient)
                 .baseUrl(XessConfig.getServerUrl())
-//                .addConverterFactory(StringConverterFactory.create())
-//                .addConverterFactory(GsonConverterFactory.create(EntityUtils.gson))
+                .addConverterFactory(StringConverterFactory.create())
                 .addConverterFactory(JsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

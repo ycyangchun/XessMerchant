@@ -1,17 +1,18 @@
 package com.golive.xess.merchant.presenter;
 
+import android.content.Context;
+
+import com.golive.xess.merchant.base.XessApp;
+import com.golive.xess.merchant.di.components.NetComponent;
 import com.golive.xess.merchant.model.api.ApiService;
-import com.golive.xess.merchant.model.api.body.DeviceBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
-import com.golive.xess.merchant.model.entity.SplashEntity;
-import com.golive.xess.merchant.utils.TimeUtil;
-
-import java.util.List;
+import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.DeviceUtils;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 
 import javax.inject.Inject;
 
-import okhttp3.RequestBody;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -32,73 +33,32 @@ public class SplashPresenter implements SplashContract.Presenter{
         this.apiService = apiService;
     }
 
-    @Override
-    public void deviceAuth(DeviceBody data) {
-        apiService.getDeviceAuth(data)
+
+    public void updateDevice(Context context){
+        final String deviceNo = DeviceUtils.getDeviceNo(context);
+        apiService.devicesAuto(AppUtil.getPhoneProduct(),AppUtil.getBuildLevel() + "",AppUtil.getBuildVersion(),AppUtil.getDeviceId(context)
+                ,AppUtil.getMacByWifi(context),AppUtil.getMacByBlue(),AppUtil.getDisplay(context),AppUtil.getPhoneBrand(),AppUtil.getPhoneModel()
+                ,deviceNo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Func1<CommonEntity<DeviceEntity>, Observable<DeviceEntity>>() {
+                .subscribe(new Action1<CommonEntity<DeviceEntity>>() {
                     @Override
-                    public Observable<DeviceEntity> call(CommonEntity<DeviceEntity> deviceEntityCommonEntity) {
-                        return Observable.just(deviceEntityCommonEntity.getData());
+                    public void call(CommonEntity<DeviceEntity> deviceEntity) {
+                        String code = deviceEntity.getCode();
+                        String msg = deviceEntity.getMsg();
+                        if("0".equals(code)) {
+                            SharedPreferencesUtils.put("deviceNo", deviceNo);
+                            view.successLoad(code);
+                        }else
+                            view.showOnFailure(new Throwable(msg));
+
                     }
-                }, new Func1<Throwable, Observable<? extends DeviceEntity>>() {
+                }, new Action1<Throwable>() {
                     @Override
-                    public Observable<? extends DeviceEntity> call(Throwable throwable) {
+                    public void call(Throwable throwable) {
                         view.showOnFailure(throwable);
-                        return null;
-                    }
-                }, new Func0<Observable<? extends DeviceEntity>>() {
-                    @Override
-                    public Observable<? extends DeviceEntity> call() {
-                        return null;
-                    }
-                })
-                .subscribe(new Action1<DeviceEntity>() {
-                    @Override
-                    public void call(DeviceEntity deviceEntity) {
-                       view.successLoad(deviceEntity);
                     }
                 });
-    }
-
-    //////////////测试用 retrofit //////////////
-    @Override
-    public void getSplash(String deviceId) {
-        String client = "android";
-        String version = "1.3.0";
-        Long time = TimeUtil.getCurrentSeconds();
-        apiService.getSplash(client, version, time, deviceId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Func1<SplashEntity, Observable<String>>() {
-                    @Override
-                    public Observable<String> call(SplashEntity splashEntity) {
-                        List<String> list = splashEntity.getImages();
-                        String[] arr = list.toArray(new String[list.size()]);
-                        return Observable.from(arr);
-                    }
-                }, new Func1<Throwable, Observable<? extends String>>() {
-                    @Override
-                    public Observable<? extends String> call(Throwable throwable) {
-                        view.showOnFailure(throwable);
-                        return null;
-                    }
-                }, new Func0<Observable<? extends String>>() {
-                    @Override
-                    public Observable<? extends String> call() {
-                        return null;
-                    }
-                })
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String s) {
-                        System.out.println(s);
-
-                    }
-                });
-
-
     }
 
 }

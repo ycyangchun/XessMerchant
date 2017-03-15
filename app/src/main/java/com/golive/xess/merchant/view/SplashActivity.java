@@ -10,28 +10,14 @@ import com.golive.xess.merchant.base.BaseActivity;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerSplashComponent;
 import com.golive.xess.merchant.di.modules.SplashModule;
-import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.NoNetworkException;
-import com.golive.xess.merchant.model.api.body.DeviceBody;
-import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.presenter.SplashContract;
 import com.golive.xess.merchant.presenter.SplashPresenter;
-import com.golive.xess.merchant.utils.Base64Util;
-import com.golive.xess.merchant.utils.Des3Util;
-import com.golive.xess.merchant.utils.DisplayUtils;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
-import com.google.gson.Gson;
-import com.orhanobut.logger.Logger;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
@@ -51,8 +37,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .netComponent(XessApp.get(this).getNetComponent())
                 .splashModule(new SplashModule(this))
                 .build().inject(this);
-//        presenter.getSplash("");
-        presenter.deviceAuth(new DeviceBody("95A32E080CB74C638C5E7471D6C21EE3"));
+        presenter.updateDevice(this);
 
     }
 
@@ -68,14 +53,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     @Override
-    public void successLoad(DeviceEntity device) {
-        if(device != null){
-            Logger.d(device.getDeviceNo());
-            SharedPreferencesUtils.put("deviceNo",device.getDeviceNo());
-            SharedPreferencesUtils.put("storeNo",device);
-
+    public void successLoad(String code) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
-        }
     }
 }

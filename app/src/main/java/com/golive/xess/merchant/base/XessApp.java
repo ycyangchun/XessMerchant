@@ -8,15 +8,14 @@ import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.di.components.DaggerNetComponent;
 import com.golive.xess.merchant.di.components.NetComponent;
 import com.golive.xess.merchant.di.modules.NetModule;
-import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.DeviceUtils;
 import com.golive.xess.merchant.utils.PathUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
-import com.leechuanrong.DevicesUtils;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by yc on 2017/3/6.
@@ -32,33 +31,14 @@ public class XessApp extends Application {
     public static XessApp get(Context context) {
         return (XessApp) context.getApplicationContext();
     }
-
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
         initLog();
-        initDeviceNo();
         initNet();
         initPath();
         initDadaBase();
-
-    }
-
-    private void initDeviceNo() {
-        Map<String,String> req = new LinkedHashMap<>();
-        req.put("deviceModel", AppUtil.getPhoneProduct());
-        req.put("versionSdk", AppUtil.getBuildLevel()+"");
-        req.put("versionRelease", AppUtil.getBuildVersion());
-        req.put("deviceId", AppUtil.getDeviceId(this));
-        req.put("wlanMac", AppUtil.getMacByWifi(this));
-        req.put("btMac",AppUtil.getMacByBlue());
-        req.put("screenInches", AppUtil.getDisplay(this));
-        req.put("brand", AppUtil.getPhoneBrand());
-        req.put("model", AppUtil.getPhoneModel());
-        req.put("url", XessConfig.getServerUrl());
-        String d = DevicesUtils.getInstance().getDeviceNo(req);
-        Logger.d("DeviceNo "+d);
     }
 
     private void initDadaBase() {

@@ -3,7 +3,6 @@ package com.golive.xess.merchant.model.api;
 
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.BetDetailBody;
-import com.golive.xess.merchant.model.api.body.DeviceBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.api.body.WalletBody;
 import com.golive.xess.merchant.model.api.body.WalletLogsBody;
@@ -11,14 +10,12 @@ import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
-import com.golive.xess.merchant.model.entity.SplashEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
 import com.golive.xess.merchant.model.entity.WalletEntity;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
 
-import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -32,26 +29,18 @@ import rx.Observable;
 public interface ApiService {
     String SECRET_KEY = "golive_lottery@123456#$%~";
     String SECRET_VALUE = "12345678";
-    /** retrofit 测试用
-     * <p>http://static.owspace.com/static/picture_list.txt?client=android&version=1.3.0&time=1467864021&device_id=866963027059338</p>
-     *
-     * @param client
-     * @param version
-     * @param time
-     * @param deviceId
-     * @return
-     */
-    @GET("static/picture_list.txt")
-    Observable<SplashEntity> getSplash(@Query("client") String client, @Query("version") String version, @Query("time") Long time, @Query("device_id") String deviceId);
 
     /**
-     *
-     * @param data
-     * @return
+     *  设备信息上传
      */
-    @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
-    @POST("lottery/doDeviceAuth")
-    Observable<CommonEntity<DeviceEntity>> getDeviceAuth(@Body DeviceBody data);
+    @POST("lottery/devicesAuto")
+    Observable<CommonEntity<DeviceEntity>> devicesAuto(@Query("deviceModel") String deviceModel,
+                                   @Query("versionSdk") String versionSdk,@Query("versionRelease") String versionRelease,
+                                   @Query("deviceId") String deviceId,@Query("wlanMac") String wlanMac,
+                                   @Query("btMac") String btMac,@Query("screenInches") String screenInches,
+                                   @Query("brand") String brand,@Query("model") String model,
+                                   @Query("deviceNo") String deviceNo);
+
 
     /**
      * 7.7获取用户信息(POST)

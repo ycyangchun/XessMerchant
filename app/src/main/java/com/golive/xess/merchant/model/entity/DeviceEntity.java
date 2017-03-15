@@ -3,77 +3,33 @@ package com.golive.xess.merchant.model.entity;
 /**
  * Created by YangChun .
  * on 2017/3/11.
- * 设备信息初始化
+ * 设备信息上传
  */
 
 public class DeviceEntity {
-
     /**
-     * code : 0
-     * msg : success
-     * data : {"deviceNo":"95A32E080CB74C638C5E7471D6C21EE3","storeNo":"6AC3559BDF3C4B90AF68AA055DD4BA20","channelNo":"C1BF373010464B5FA04057831F218E53","deviceName":"TCL定制机","brand":"TCL","deviceModel":"4687553019","storeName":"全球播官方和彩","storeAlias":"Golive和彩","enStoreAlias":"golive_test_01","state":"0","kidneyBean":0,"channelName":"全球播自营渠道","enChannelName":"Golive"}
+     * deviceNo : BA201956CFB9EC2295984BDEA0BA2F78
+     * deviceName : MiTV3S-43
+     * brand : Xiaomi
+     * wifiMac : 8c:57:9b:26:ec:eb
+     * btMac : 00:9E:C8:36:F9:46
+     * deviceModel : hancock
      */
-
-    /**
-     * deviceNo : 95A32E080CB74C638C5E7471D6C21EE3
-     * storeNo : 6AC3559BDF3C4B90AF68AA055DD4BA20
-     * channelNo : C1BF373010464B5FA04057831F218E53
-     * deviceName : TCL定制机
-     * brand : TCL
-     * deviceModel : 4687553019
-     * storeName : 全球播官方和彩
-     * storeAlias : Golive和彩
-     * enStoreAlias : golive_test_01
-     * state : 0
-     * kidneyBean : 0
-     * channelName : 全球播自营渠道
-     * enChannelName : Golive
-     */
+    /*{"code":"0","msg":"已经存在"}*/
 
     private String deviceNo;
-    private String storeNo;
-    private String channelNo;
     private String deviceName;
     private String brand;
+    private String wifiMac;
+    private String btMac;
     private String deviceModel;
-    private String storeName;
-    private String storeAlias;
-    private String enStoreAlias;
-    private String state;
-    private int kidneyBean;
-    private String channelName;
-    private String enChannelName;
 
-    public String getBrand() {
-        return brand;
+    public String getDeviceNo() {
+        return deviceNo;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getChannelName() {
-        return channelName;
-    }
-
-    public void setChannelName(String channelName) {
-        this.channelName = channelName;
-    }
-
-    public String getChannelNo() {
-        return channelNo;
-    }
-
-    public void setChannelNo(String channelNo) {
-        this.channelNo = channelNo;
-    }
-
-    public String getDeviceModel() {
-        return deviceModel;
-    }
-
-    public void setDeviceModel(String deviceModel) {
-        this.deviceModel = deviceModel;
+    public void setDeviceNo(String deviceNo) {
+        this.deviceNo = deviceNo;
     }
 
     public String getDeviceName() {
@@ -84,67 +40,35 @@ public class DeviceEntity {
         this.deviceName = deviceName;
     }
 
-    public String getDeviceNo() {
-        return deviceNo;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setDeviceNo(String deviceNo) {
-        this.deviceNo = deviceNo;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    public String getEnChannelName() {
-        return enChannelName;
+    public String getWifiMac() {
+        return wifiMac;
     }
 
-    public void setEnChannelName(String enChannelName) {
-        this.enChannelName = enChannelName;
+    public void setWifiMac(String wifiMac) {
+        this.wifiMac = wifiMac;
     }
 
-    public String getEnStoreAlias() {
-        return enStoreAlias;
+    public String getBtMac() {
+        return btMac;
     }
 
-    public void setEnStoreAlias(String enStoreAlias) {
-        this.enStoreAlias = enStoreAlias;
+    public void setBtMac(String btMac) {
+        this.btMac = btMac;
     }
 
-    public int getKidneyBean() {
-        return kidneyBean;
+    public String getDeviceModel() {
+        return deviceModel;
     }
 
-    public void setKidneyBean(int kidneyBean) {
-        this.kidneyBean = kidneyBean;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getStoreAlias() {
-        return storeAlias;
-    }
-
-    public void setStoreAlias(String storeAlias) {
-        this.storeAlias = storeAlias;
-    }
-
-    public String getStoreName() {
-        return storeName;
-    }
-
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
-    }
-
-    public String getStoreNo() {
-        return storeNo;
-    }
-
-    public void setStoreNo(String storeNo) {
-        this.storeNo = storeNo;
+    public void setDeviceModel(String deviceModel) {
+        this.deviceModel = deviceModel;
     }
 }
