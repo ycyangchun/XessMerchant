@@ -106,14 +106,14 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
             body = new WalletBody("","100001",deviceNo);
         else
             body = new WalletBody(storeUid,"",deviceNo);
-        presenter.getWalletInfo(body);
+//        presenter.getWalletInfo(body);
         ////////////////////////
         WalletLogsBody logsBody;
         if(XessConfig._VERSION == XessConfig._PERSONAL)
             logsBody = new WalletLogsBody("","100001",deviceNo,"0","10");
         else
             logsBody = new WalletLogsBody(storeUid,"",deviceNo,"0","10");
-        presenter.getWalletLogs(logsBody);
+//        presenter.getWalletLogs(logsBody);
         //////////////////////////////
         mapList = new ArrayList<>();
         walletAdapter = new ItemWalletAdapter(mInflater,mapList);

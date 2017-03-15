@@ -17,6 +17,15 @@ public class LoginBody {
     private String password;
     private String deviceNo;
 
+    public LoginBody() {
+    }
+
+    public LoginBody(String storeUid, String password, String deviceNo) {
+        this.storeUid = storeUid;
+        this.password = password;
+        this.deviceNo = deviceNo;
+    }
+
     public String getStoreUid() {
         return storeUid;
     }

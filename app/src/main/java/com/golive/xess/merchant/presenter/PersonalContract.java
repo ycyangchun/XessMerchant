@@ -1,6 +1,8 @@
 package com.golive.xess.merchant.presenter;
 
+import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
+import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
 
 import okhttp3.RequestBody;
@@ -12,13 +14,13 @@ import okhttp3.RequestBody;
 
 public interface PersonalContract {
     interface Persenter{
-        void initViewData(UserBody data);
+        void initViewData(LoginBody body);
         void submitEdit();
     }
     interface View{
         void editOnFailure(Throwable throwable);
         void successEdit();
         void showOnFailure(Throwable throwable);
-        void successLoad(UserInfo userInfo);
+        void successLoad(LoginEntity loginEntity );
     }
 }

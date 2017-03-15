@@ -2,9 +2,11 @@ package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
+import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
 import com.orhanobut.logger.Logger;
 
@@ -34,36 +36,24 @@ public class PersonalPresenter implements PersonalContract.Persenter {
     }
 
     @Override
-    public void initViewData(UserBody data) {
-        Observable<CommonEntity<UserInfo>> observable ;
-        if (XessConfig._VERSION == XessConfig._PERSONAL)
-            observable = apiService.getUserInfo(data);
-        else
-            observable = apiService.getStoreInfo(data);
-
-        observable.subscribeOn(Schedulers.io())
+    public void initViewData(LoginBody data) {
+        apiService.storeLogin(data)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Func1<CommonEntity<UserInfo>, Observable<UserInfo>>() {
+                .subscribe(new Action1<CommonEntity<LoginEntity>>() {
                     @Override
-                    public Observable<UserInfo> call(CommonEntity<UserInfo> deviceEntityCommonEntity) {
-                        return Observable.just(deviceEntityCommonEntity.getData());
+                    public void call(CommonEntity<LoginEntity> commonEntity) {
+                        String code = commonEntity.getCode();
+                        String msg = commonEntity.getMsg();
+                        if("0".equals(code)) {
+                            view.successLoad(commonEntity.getData());
+                        }else
+                            view.showOnFailure(new Throwable(msg));
                     }
-                }, new Func1<Throwable, Observable<? extends UserInfo>>() {
+                }, new Action1<Throwable>() {
                     @Override
-                    public Observable<? extends UserInfo> call(Throwable throwable) {
+                    public void call(Throwable throwable) {
                         view.showOnFailure(throwable);
-                        return null;
-                    }
-                }, new Func0<Observable<? extends UserInfo>>() {
-                    @Override
-                    public Observable<? extends UserInfo> call() {
-                        return null;
-                    }
-                })
-                .subscribe(new Action1<UserInfo>() {
-                    @Override
-                    public void call(UserInfo userInfo) {
-                        view.successLoad(userInfo);
                     }
                 });
     }

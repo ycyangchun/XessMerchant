@@ -20,7 +20,9 @@ import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerPersonalComponent;
 import com.golive.xess.merchant.di.modules.PersonalModule;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
+import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
 import com.golive.xess.merchant.presenter.PersonalContract;
 import com.golive.xess.merchant.presenter.PersonalPresenter;
@@ -87,7 +89,8 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 .personalModule(new PersonalModule(this))
                 .build().inject(this);
 //        presenter.submitEdit();
-//        presenter.initViewData(new UserBody("18515966636",SharedPreferencesUtils.getString("deviceNo")));
+        presenter.initViewData(new LoginBody(storeUid,
+                SharedPreferencesUtils.getString("password"),deviceNo));
     }
 
     @OnClick(R.id.edit_per_bt)
@@ -185,16 +188,14 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     }
 
     @Override
-    public void successLoad(UserInfo userInfo) {
-        if(userInfo != null){
+    public void successLoad(LoginEntity loginEntity) {
+        if(loginEntity != null){
             if(XessConfig._VERSION == XessConfig._PERSONAL) {
-                idTv.setText(userInfo.getUid());
-                nicknameEt.setText(userInfo.getName());
-                addressTv.setText(userInfo.getCity());
+
             } else {
-                idTv.setText(userInfo.getStoreNo());
-                nicknameEt.setText(userInfo.getStoreAlias());
-                addressTv.setText(userInfo.getCity());
+                idTv.setText(loginEntity.getStoreUid()+"");
+                nicknameEt.setText(loginEntity.getStoreAlias());
+                addressTv.setText(loginEntity.getProvince());
             }
         }
     }

@@ -28,6 +28,24 @@ public class LoginEntity {
     private String city;
     private String town;
     private String headImg;
+    private String storeName;
+    private String storeAlias;
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public String getStoreAlias() {
+        return storeAlias;
+    }
+
+    public void setStoreAlias(String storeAlias) {
+        this.storeAlias = storeAlias;
+    }
 
     public String getProvince() {
         return province;

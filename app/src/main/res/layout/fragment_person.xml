@@ -17,30 +17,6 @@
         />
 
     <LinearLayout
-        android:id="@+id/id_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_heightPercent="8.9%"
-        app:layout_marginTopPercent="4.6%">
-
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="@string/id_s" />
-
-        <TextView
-            android:id="@+id/id_tv"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="1452369" />
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/nick_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,7 +43,7 @@
             android:paddingLeft="3dp"
             android:inputType="text"
             android:imeOptions="actionDone"
-            android:text="momo" />
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -93,7 +69,7 @@
             android:id="@+id/address_tv"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="1452369" />
+             />
     </LinearLayout>
 
     <Button
@@ -104,6 +80,32 @@
         android:layout_centerHorizontal="true"
         android:text="@string/editor_info_s"
         app:layout_marginTopPercent="4.6%" />
+
+    <LinearLayout
+        android:id="@+id/id_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_heightPercent="8.9%"
+        app:layout_marginTopPercent="4.6%"
+        android:layout_below="@+id/imageView"
+        android:layout_alignLeft="@+id/address_ll"
+        android:layout_alignStart="@+id/address_ll"
+        android:layout_marginTop="25dp">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/id_s" />
+
+        <TextView
+            android:id="@+id/id_tv"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+             />
+    </LinearLayout>
 
 
 </com.zhy.android.percent.support.PercentRelativeLayout>
