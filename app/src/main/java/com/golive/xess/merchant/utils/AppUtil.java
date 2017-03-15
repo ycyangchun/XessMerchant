@@ -126,7 +126,11 @@ public class AppUtil {
     public static String getDisplay(Context context){
         int height = DisplayUtils.getScreenHeight(context);
         int width = DisplayUtils.getScreenWidth(context);
-        return  width+"X"+height;
+        if(height > width) {
+            return height + "X" + width;
+        } else {
+            return width + "X" + height;
+        }
     }
     /**
      * 设备型号

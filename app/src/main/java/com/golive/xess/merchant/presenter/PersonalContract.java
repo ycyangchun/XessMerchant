@@ -15,6 +15,7 @@ import okhttp3.RequestBody;
 public interface PersonalContract {
     interface Persenter{
         void initViewData(LoginBody body);
+        void upLoadPicture(String fileData,String fileSuff,String fileType);
         void submitEdit();
     }
     interface View{
@@ -22,5 +23,6 @@ public interface PersonalContract {
         void successEdit();
         void showOnFailure(Throwable throwable);
         void successLoad(LoginEntity loginEntity );
+        void successUpload(String string);
     }
 }

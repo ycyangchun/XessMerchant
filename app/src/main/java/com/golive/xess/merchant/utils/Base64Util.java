@@ -2,6 +2,9 @@ package com.golive.xess.merchant.utils;
 
 import android.util.Base64;
 
+import java.io.File;
+import java.io.FileInputStream;
+
 /**
  * Created by YangChun .
  * on 2017/3/11.

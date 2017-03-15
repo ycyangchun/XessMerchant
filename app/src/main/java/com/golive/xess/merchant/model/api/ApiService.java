@@ -44,6 +44,12 @@ public interface ApiService {
                                    @Query("deviceNo") String deviceNo);
 
     /**
+     *  设备信息上传
+     */
+    @Headers({"Content-Type: text/plain","Transfer-Encoding: chunked"})
+    @GET("file/upload")
+    Observable<String> upload(@Query("fileSuff") String fileSuff,@Query("fileType") String fileType,@Query("fileData") String fileData);
+    /**
      * 7.16商家登录(POST)
      * @param data
      * @return

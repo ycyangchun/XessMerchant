@@ -2,6 +2,7 @@ package com.golive.xess.merchant.view;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,27 +14,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerPersonalComponent;
 import com.golive.xess.merchant.di.modules.PersonalModule;
-import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.body.LoginBody;
-import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.entity.LoginEntity;
-import com.golive.xess.merchant.model.entity.UserInfo;
 import com.golive.xess.merchant.presenter.PersonalContract;
 import com.golive.xess.merchant.presenter.PersonalPresenter;
 import com.golive.xess.merchant.utils.Base64Util;
-import com.golive.xess.merchant.utils.Des3Util;
+import com.golive.xess.merchant.utils.GlideImageLoader;
+import com.golive.xess.merchant.utils.PictureUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.widget.ChangeAddressDialog;
-import com.google.gson.Gson;
+import com.golive.xess.merchant.view.widget.GlideRoundTransform;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -41,8 +43,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 /**
  * Created by YangChun .
@@ -62,6 +62,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     TextView addressTv;
     @BindView(R.id.edit_per_bt)
     Button editBt;
+    private ArrayList<ImageItem> imageItems;
 
     @Inject
     PersonalPresenter presenter;
@@ -130,7 +131,14 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 .setItems(new String[]{"拍照", "从相册获取"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(activity," picture ",Toast.LENGTH_SHORT).show();
+                        ImagePicker imagePicker = ImagePicker.getInstance();
+                        imagePicker.setImageLoader(new GlideImageLoader());
+                        imagePicker.setMultiMode(true);   //多选
+                        imagePicker.setShowCamera(true);  //显示拍照按钮
+                        imagePicker.setSelectLimit(1);    //最多选择9张
+                        imagePicker.setCrop(false);       //不进行裁剪
+                        Intent intent = new Intent(activity, ImageGridActivity.class);
+                        startActivityForResult(intent, 100);
                         dialog.dismiss();
                     }
                 })
@@ -200,5 +208,39 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
         }
     }
 
+    @Override
+    public void successUpload(String string) {
+
+    }
+
     ////////////////////PersonalContract.View//////////////////////////
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == 100) {
+                imageItems = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (imageItems != null && imageItems.size() > 0) {
+//                    StringBuilder sb = new StringBuilder();
+//                    for (int i = 0; i < imageItems.size(); i++) {
+//                        if (i == imageItems.size() - 1) sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path);
+//                        else sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path).append("\n");
+//                    }
+//                    System.out.println(imageItems.get(0).path);
+                    Glide.with(activity).load(imageItems.get(0).path).transform(new GlideRoundTransform(activity)).into(imageView);
+                }
+            } else {
+
+                Toast.makeText(activity, "没有选择图片", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            String path = "/storage/emulated/0/Android/data/com.golive.lottery/appSource/accept_bg_focus.png";
+            Glide.with(activity).load(path).transform(new GlideRoundTransform(activity)).into(imageView);
+            try {
+                presenter.upLoadPicture("jpg","I",PictureUtils.bitmapToString(path));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

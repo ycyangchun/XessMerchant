@@ -1,11 +1,16 @@
 package com.golive.xess.merchant.base;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.golive.xess.merchant.utils.DisplayUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
@@ -51,4 +56,6 @@ public abstract class BaseActivity extends FragmentActivity {
     public String getMessageFormatString(Context context, int stringId ,Object ... arguments ) {
         return MessageFormat.format(context.getResources().getString(stringId),arguments);
     }
+
+
 }

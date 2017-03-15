@@ -103,9 +103,11 @@
             android:text="@string/login_s" />
 
         <CheckBox
+            android:layout_marginTop="10dp"
             android:text="@string/user_protocol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/login_bt"
             android:layout_centerVertical="true"
             android:layout_alignLeft="@+id/login_bt"
             android:layout_alignStart="@+id/login_bt"

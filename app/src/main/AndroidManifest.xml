@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".view.SplashActivity"
-            android:configChanges="keyboardHidden|screenSize"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,15 +31,16 @@
         </activity>
         <activity
             android:name=".view.MainActivity"
-            android:configChanges="keyboardHidden|screenSize"
+            android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <activity
             android:name=".view.LoginActivity"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-           />
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
 
-        <activity android:name=".view.DialogBetDetailActivity"
-            android:theme="@style/ShareDialog"/>
+        <activity
+            android:name=".view.DialogBetDetailActivity"
+            android:theme="@style/ShareDialog" />
 
     </application>
 

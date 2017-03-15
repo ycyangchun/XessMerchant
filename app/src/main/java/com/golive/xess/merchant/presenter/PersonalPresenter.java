@@ -8,7 +8,12 @@ import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
+import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.orhanobut.logger.Logger;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.inject.Inject;
 
@@ -33,6 +38,35 @@ public class PersonalPresenter implements PersonalContract.Persenter {
     public PersonalPresenter(PersonalContract.View view, ApiService apiService) {
         this.view = view;
         this.apiService = apiService;
+    }
+
+    @Override
+    public void upLoadPicture(String fileSuff, String fileType,String fileData) {
+        apiService.upload(fileSuff,fileType,fileData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String deviceEntity) {
+                        try {
+                            JSONObject object = new JSONObject(deviceEntity);
+                            String code = object.getString("code");
+                            String msg = object.getString("msg");
+                            if("0".equals(code)) {
+                                view.successUpload(msg);
+                            }else
+                                view.showOnFailure(new Throwable(msg));
+                        } catch (JSONException e) {
+                            view.showOnFailure(e);
+                        }
+
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        view.showOnFailure(throwable);
+                    }
+                });
     }
 
     @Override
