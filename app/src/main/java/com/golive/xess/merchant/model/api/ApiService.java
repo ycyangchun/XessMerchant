@@ -34,7 +34,7 @@ public interface ApiService {
      *  设备信息上传
      */
     @POST("lottery/devicesAuto")
-    Observable<CommonEntity<DeviceEntity>> devicesAuto(@Query("deviceModel") String deviceModel,
+    Observable<String> devicesAuto(@Query("deviceModel") String deviceModel,
                                    @Query("versionSdk") String versionSdk,@Query("versionRelease") String versionRelease,
                                    @Query("deviceId") String deviceId,@Query("wlanMac") String wlanMac,
                                    @Query("btMac") String btMac,@Query("screenInches") String screenInches,

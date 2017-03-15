@@ -2,6 +2,7 @@ package com.golive.xess.merchant.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,7 +55,11 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void successLoad(String code) {
+        if(!TextUtils.isEmpty(password)) {
             startActivity(new Intent(this, MainActivity.class));
-            finish();
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        finish();
     }
 }

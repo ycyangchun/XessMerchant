@@ -11,6 +11,9 @@ import com.golive.xess.merchant.utils.AppUtil;
 import com.golive.xess.merchant.utils.DeviceUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.inject.Inject;
 
 import rx.Observable;
@@ -41,16 +44,21 @@ public class SplashPresenter implements SplashContract.Presenter{
                 ,deviceNo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<CommonEntity<DeviceEntity>>() {
+                .subscribe(new Action1<String>() {
                     @Override
-                    public void call(CommonEntity<DeviceEntity> deviceEntity) {
-                        String code = deviceEntity.getCode();
-                        String msg = deviceEntity.getMsg();
-                        if("0".equals(code)) {
-                            SharedPreferencesUtils.put("deviceNo", deviceNo);
-                            view.successLoad(code);
-                        }else
-                            view.showOnFailure(new Throwable(msg));
+                    public void call(String deviceEntity) {
+                        try {
+                            JSONObject object = new JSONObject(deviceEntity);
+                            String code = object.getString("code");
+                            String msg = object.getString("msg");
+                            if("0".equals(code)) {
+                                SharedPreferencesUtils.put("deviceNo", deviceNo);
+                                view.successLoad(code);
+                            }else
+                                view.showOnFailure(new Throwable(msg));
+                        } catch (JSONException e) {
+                            view.showOnFailure(e);
+                        }
 
                     }
                 }, new Action1<Throwable>() {

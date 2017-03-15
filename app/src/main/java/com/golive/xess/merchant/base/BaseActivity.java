@@ -21,14 +21,16 @@ import java.text.MessageFormat;
 public abstract class BaseActivity extends FragmentActivity {
     private int height;
     private int width;
-    public String deviceNo ,storeNo;
+    public String deviceNo ,storeUid ,password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         height = DisplayUtils.getScreenHeight(this);
         width = DisplayUtils.getScreenWidth(this);
         deviceNo = SharedPreferencesUtils.getString("deviceNo");
-        storeNo = SharedPreferencesUtils.getString("storeNo");
+        storeUid = SharedPreferencesUtils.getString("storeUid");
+        password = SharedPreferencesUtils.getString("password");
+
         Logger.d("height "+height+" width "+width +" 是否竖屏 "+DisplayUtils.isPortrait(this));
         if( height > width && DisplayUtils.isPortrait(this)){
             requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
