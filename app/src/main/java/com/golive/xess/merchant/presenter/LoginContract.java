@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.presenter;
 
-import com.golive.xess.merchant.model.entity.UserInfo;
+import com.golive.xess.merchant.model.api.body.LoginBody;
+import com.golive.xess.merchant.model.entity.LoginEntity;
 
 /**
  * Created by YangChun .
@@ -10,12 +11,10 @@ import com.golive.xess.merchant.model.entity.UserInfo;
 
 public interface LoginContract {
     interface Presenter{
-        void getVerification();
-        void login();
+        void login(LoginBody body);
     }
     interface  View{
         void showOnFailure(Throwable throwable);
-        void successLogin(UserInfo UserInfo);
-        void successVerification(String verification);
+        void successLogin(LoginEntity loginEntity ,String pwd);
     }
 }

@@ -87,7 +87,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 .personalModule(new PersonalModule(this))
                 .build().inject(this);
 //        presenter.submitEdit();
-        presenter.initViewData(new UserBody("18515966636",SharedPreferencesUtils.getString("deviceNo")));
+//        presenter.initViewData(new UserBody("18515966636",SharedPreferencesUtils.getString("deviceNo")));
     }
 
     @OnClick(R.id.edit_per_bt)
