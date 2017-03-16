@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="center"
+            android:textColor="@color/white"
             app:layout_textSizePercent="40%" />
     </com.zhy.android.percent.support.PercentLinearLayout>
 
@@ -29,6 +30,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:gravity="center"
+        android:textColor="@color/white"
         app:layout_marginLeftPercent="1.4%"
         app:layout_textSizePercent="40%" />
 
@@ -39,6 +41,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:gravity="center"
+        android:textColor="@color/white"
         app:layout_marginLeftPercent="1.4%"
         app:layout_textSizePercent="40%" />
 
@@ -49,6 +52,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:gravity="center"
+        android:textColor="@color/white"
         app:layout_marginLeftPercent="1.4%"
         app:layout_textSizePercent="40%" />
 
@@ -58,6 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
+        android:textColor="@color/white"
         android:gravity="center"
         app:layout_marginLeftPercent="1.4%"
         app:layout_textSizePercent="40%" />
@@ -69,6 +74,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:gravity="center"
+        android:textColor="@color/white"
         app:layout_marginLeftPercent="1.4%"
         app:layout_textSizePercent="40%" />
 
@@ -79,6 +85,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:gravity="center"
+        android:textColor="@color/white"
         app:layout_marginLeftPercent="1.4%"
         app:layout_textSizePercent="40%" />
     <!-- detail_tv left 10/710 = 0.014-->
@@ -90,7 +97,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:background="@drawable/bet_detail_selector"
+        android:textColor="@color/blue"
+        android:background="@null"
         android:gravity="center"
         app:layout_heightPercent="70%"
         app:layout_marginLeftPercent="1.4%"
@@ -103,7 +111,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:background="@drawable/bet_detail_selector"
+        android:textColor="@color/blue"
+        android:background="@null"
         android:gravity="center"
         app:layout_heightPercent="70%"
         app:layout_marginLeftPercent="1%"
