@@ -59,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             app:layout_heightPercent="47%">
 
             <!--textSize 18/40 = 0.45-->
@@ -71,7 +72,7 @@
 
             <!--width 72/710 = 0.101-->
             <!--height 30/40 = 0.75-->
-            <EditText
+            <TextView
                 android:id="@+id/bet_time_start_et"
                 android:layout_width="72dp"
                 android:layout_height="wrap_content"
@@ -79,7 +80,8 @@
                 android:textColor="@color/white"
                 android:focusable="false"
                 app:layout_textSizePercent="45%"
-                app:layout_widthPercent="10.1%" />
+                app:layout_widthPercent="10.1%"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,7 +89,7 @@
                 android:text=" - "
                 android:textColor="@color/white" />
 
-            <EditText
+            <TextView
                 android:id="@+id/bet_time_end_et"
                 android:layout_width="72dp"
                 android:focusable="false"
@@ -95,7 +97,8 @@
                 android:background="@drawable/bg_nick"
                 android:textColor="@color/white"
                 app:layout_textSizePercent="45%"
-                app:layout_widthPercent="10.1%" />
+                app:layout_widthPercent="10.1%"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -112,6 +115,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_nick"
                 android:textColor="@color/white"
+                android:inputType="number"
                 app:layout_textSizePercent="45%"
                 app:layout_widthPercent="10.1%" />
 
