@@ -2,58 +2,65 @@
 <com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
-
+    android:background="@drawable/bg_main_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--               width  height-->
     <!--percent         960 X 540 -->
-    <!--title_ll         830 X 405 -->
-    <!--width  75/830 = 0.09-->
-    <!--height  216/540 = 0.40-->
-    <!--margin 60/830 = 0.072-->
+
+    <!--height  86/540 = 0.159-->
+    <View
+        android:layout_width="match_parent"
+        android:background="@drawable/bg_main_top"
+        android:layout_height="86dp"
+        app:layout_heightPercent="15.9%"/>
+        
+    
+    <!--width  405/960 = 0.086-->
+    <!--height  86/540 = 0.159-->
+
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:id="@+id/title_ll"
         android:layout_width="216dp"
-        android:layout_height="75dp"
+        android:layout_height="86dp"
         android:layout_alignParentRight="true"
         android:orientation="horizontal"
-        app:layout_heightPercent="9%"
+        app:layout_heightPercent="15.9%"
         app:layout_marginRightPercent="7.2%"
-        app:layout_marginTopPercent="5%"
         app:layout_widthPercent="40%">
 
         <com.flyco.tablayout.CommonTabLayout
             android:id="@+id/tl_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#fff"
+            android:background="@color/transparent"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             tl:tl_iconVisible="false"
-            tl:tl_indicator_color="@color/selector"
-            tl:tl_indicator_margin_left="2dp"
-            tl:tl_indicator_margin_right="2dp"
-            tl:tl_indicator_style="BLOCK"
+            tl:tl_indicator_color="#eeeeee"
+            tl:tl_indicator_corner_radius="1.5dp"
+            tl:tl_indicator_height="3dp"
+            tl:tl_indicator_style="TRIANGLE"
+            tl:tl_indicator_width="10dp"
             tl:tl_textSelectColor="#fff"
-            tl:tl_textUnselectColor="#333333"
-            tl:tl_textsize="14sp" />
+            tl:tl_textUnselectColor="#9487B2"
+            tl:tl_textsize="20sp" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
-    <!--         830 X 405 -->
-    <!--width  830/960 = 0.864-->
+    <!--         880 X 405 -->
+    <!--width  880/960 = 0.9166-->
     <!--height  405/540 = 0.75-->
-    <!--margin 60/830 = 0.072-->
+    <!--margin 38/880 = 0.043-->
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:layout_width="830dp"
         android:layout_height="405dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/title_ll"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/bg_border"
+        android:background="@drawable/bg_main_border"
         app:layout_heightPercent="75%"
-        app:layout_marginLeftPercent="7%"
-        app:layout_marginRightPercent="7%"
-        app:layout_widthPercent="86.4%">
+        app:layout_marginLeftPercent="4.3%"
+        app:layout_marginRightPercent="4.3%"
+        app:layout_widthPercent="91.66%">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/content_vp"
