@@ -52,7 +52,9 @@ public class SplashPresenter implements SplashContract.Presenter{
                             String code = object.getString("code");
                             String msg = object.getString("msg");
                             if("0".equals(code)) {
-                                SharedPreferencesUtils.put("deviceNo", deviceNo);
+//                                SharedPreferencesUtils.put("deviceNo", deviceNo);
+                                SharedPreferencesUtils.put("deviceNo", "95A32E080CB74C638C5E7471D6C21EE3");
+
                                 view.successLoad(code);
                             }else
                                 view.showOnFailure(new Throwable(msg));
