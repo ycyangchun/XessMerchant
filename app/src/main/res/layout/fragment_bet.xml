@@ -177,7 +177,8 @@
                 android:text="@string/time_s" />
 
             <!--width 72/710 = 0.101-->
-            <EditText
+            <!--height 30/40 = 0.75-->
+            <TextView
                 android:id="@+id/bet_time_start_et"
                 android:layout_width="72dp"
                 android:layout_height="wrap_content"
@@ -191,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:text=" - " />
 
-            <EditText
+            <TextView
                 android:id="@+id/bet_time_end_et"
                 android:layout_width="72dp"
                 android:layout_height="wrap_content"
@@ -204,6 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 app:layout_textSizePercent="45%"
+                android:inputType="number"
                 android:text="@string/mobile_s" />
 
             <EditText

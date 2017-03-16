@@ -92,18 +92,18 @@ public class AppUtil {
         try {
             BluetoothAdapter btAda = BluetoothAdapter.getDefaultAdapter();
             //开启蓝牙
-            if (btAda.isEnabled() == false) {
-                if (btAda.enable()) {
-                    while (btAda.getState() == BluetoothAdapter.STATE_TURNING_ON
-                            || btAda.getState() != BluetoothAdapter.STATE_ON) {
-                        try {
-                            Thread.sleep(100);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
+//            if (btAda.isEnabled() == false) {
+//                if (btAda.enable()) {
+//                    while (btAda.getState() == BluetoothAdapter.STATE_TURNING_ON
+//                            || btAda.getState() != BluetoothAdapter.STATE_ON) {
+//                        try {
+//                            Thread.sleep(100);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            }
             String blue = btAda.getAddress();
             blue = blue != null ? blue :"";
             return blue;
