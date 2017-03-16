@@ -26,7 +26,7 @@ import java.text.MessageFormat;
 public abstract class BaseActivity extends FragmentActivity {
     private int height;
     private int width;
-    public String deviceNo ,storeUid ,password;
+    public String deviceNo ,storeUid ,password ,storeNo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,7 @@ public abstract class BaseActivity extends FragmentActivity {
         deviceNo = SharedPreferencesUtils.getString("deviceNo");
         storeUid = SharedPreferencesUtils.getString("storeUid");
         password = SharedPreferencesUtils.getString("password");
+        storeNo = SharedPreferencesUtils.getString("storeNo");
 
         Logger.d("height "+height+" width "+width +" 是否竖屏 "+DisplayUtils.isPortrait(this));
         if( height > width && DisplayUtils.isPortrait(this)){

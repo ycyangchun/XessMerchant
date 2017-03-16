@@ -13,14 +13,14 @@ public class WalletLogsBody {
      * pageSize : 10
      */
 
-    private String storeNo;
+    private String storeUid;
     private String deviceNo;
     private String pageNo;
     private String pageSize;
     private String userNo;
 
-    public WalletLogsBody(String storeNo, String userNo ,String deviceNo, String pageNo, String pageSize) {
-        this.storeNo = storeNo;
+    public WalletLogsBody(String storeUid, String userNo ,String deviceNo, String pageNo, String pageSize) {
+        this.storeUid = storeUid;
         this.deviceNo = deviceNo;
         this.pageNo = pageNo;
         this.pageSize = pageSize;
@@ -35,12 +35,12 @@ public class WalletLogsBody {
         this.userNo = userNo;
     }
 
-    public String getStoreNo() {
-        return storeNo;
+    public String getStoreUid() {
+        return storeUid;
     }
 
-    public void setStoreNo(String storeNo) {
-        this.storeNo = storeNo;
+    public void setStoreUid(String storeUid) {
+        this.storeUid = storeUid;
     }
 
     public String getDeviceNo() {

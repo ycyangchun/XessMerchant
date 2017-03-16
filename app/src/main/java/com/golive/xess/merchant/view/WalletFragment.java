@@ -153,7 +153,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
                 winCountTv.setText(getMessageFormatString(activity ,R.string.win_count_s,walletEntity.getWinTimes()));
 //                commissionKidneyTv.setText();
             }else {
-                currentlyKidneyTv.setText(getMessageFormatString(activity ,R.string.currently_kidney_s,walletEntity.getKidney_bean()));
+                currentlyKidneyTv.setText(getMessageFormatString(activity ,R.string.currently_kidney_s,walletEntity.getKidneyBean()));
             }
         }
     }

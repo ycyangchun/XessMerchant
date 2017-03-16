@@ -5,6 +5,7 @@ import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 
 import javax.inject.Inject;
 
@@ -38,6 +39,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                         String code = loginEntity.getCode();
                         String msg = loginEntity.getMsg();
                         if("0".equals(code)) {
+                            SharedPreferencesUtils.put("storeNo",loginEntity.getData().getStoreNo());
                             view.successLogin(loginEntity.getData(),body.getPassword());
                         }else
                             view.showOnFailure(new Throwable(msg));

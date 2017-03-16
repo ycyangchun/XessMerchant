@@ -17,12 +17,13 @@ import java.text.MessageFormat;
 
 public abstract class BaseFragment extends Fragment {
     public MainActivity activity;
-    public String deviceNo ,storeUid;
+    public String deviceNo ,storeUid,storeNo;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         activity = (MainActivity) getActivity();
         deviceNo = SharedPreferencesUtils.getString("deviceNo");
         storeUid = SharedPreferencesUtils.getString("storeUid");
+        storeNo = SharedPreferencesUtils.getString("storeNo");
         super.onActivityCreated(savedInstanceState);
     }
 

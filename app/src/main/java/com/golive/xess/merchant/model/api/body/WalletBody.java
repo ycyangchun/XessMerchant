@@ -13,20 +13,20 @@ public class WalletBody {
 
     private String userNo;
     private String deviceNo;
-    private String storeNo;
+    private String storeUid;
 
-    public WalletBody(String storeNo, String userNo , String deviceNo) {
-        this.storeNo = storeNo;
+    public WalletBody(String storeUid, String userNo , String deviceNo) {
+        this.storeUid = storeUid;
         this.deviceNo = deviceNo;
         this.userNo = userNo;
     }
 
-    public String getStoreNo() {
-        return storeNo;
+    public String getStoreUid() {
+        return storeUid;
     }
 
-    public void setStoreNo(String storeNo) {
-        this.storeNo = storeNo;
+    public void setStoreUid(String storeUid) {
+        this.storeUid = storeUid;
     }
 
     public String getUserNo() {
