@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,6 @@ import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.presenter.PersonalContract;
 import com.golive.xess.merchant.presenter.PersonalPresenter;
-import com.golive.xess.merchant.utils.Base64Util;
 import com.golive.xess.merchant.utils.GlideImageLoader;
 import com.golive.xess.merchant.utils.PictureUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
@@ -34,6 +34,7 @@ import com.golive.xess.merchant.view.widget.GlideRoundTransform;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.zhy.android.percent.support.PercentRelativeLayout;
 
 import java.util.ArrayList;
 
@@ -62,19 +63,24 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     TextView addressTv;
     @BindView(R.id.edit_per_bt)
     Button editBt;
+    @BindView(R.id.edit_rl)
+    PercentRelativeLayout editRl;
+    @BindView(R.id.girl_finish)
+    RelativeLayout girlFinish;
     private ArrayList<ImageItem> imageItems;
 
     @Inject
     PersonalPresenter presenter;
 
-    private boolean isEdit = true;// 可控件编辑
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_person, container, false);
+        ButterKnife.bind(this, view);
         return view;
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -91,36 +97,38 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 .build().inject(this);
 //        presenter.submitEdit();
         presenter.initViewData(new LoginBody(storeUid,
-                SharedPreferencesUtils.getString("password"),deviceNo));
+                SharedPreferencesUtils.getString("password"), deviceNo));
     }
 
     @OnClick(R.id.edit_per_bt)
-    void onClickEdit(){
+    void onClickEdit() {
         //控件是否可以 编辑
-        nicknameEt.setEnabled(isEdit);
-        imageView.setFocusable(isEdit);
-        imageView.setFocusableInTouchMode(isEdit);
-        addressTv.setFocusable(isEdit);
-        addressTv.setFocusableInTouchMode(isEdit);
+        girlFinish.setVisibility(View.VISIBLE);
+        editRl.setVisibility(View.GONE);
+        girlFinish.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                editRl.setVisibility(View.VISIBLE);
+                girlFinish.setVisibility(View.GONE);
+            }
+        },1500);
 
     }
 
     @OnClick(R.id.imageView)
-    void onClickImg(){
-        if(isEdit){
-            openPhotoAlbum();
-        }
+    void onClickImg() {
+        openPhotoAlbum();
     }
 
     @OnFocusChange(R.id.imageView)
-    void onFocusImg(boolean b){
-        if(isEdit && b){
+    void onFocusImg(boolean b) {
+        if (b) {
             openPhotoAlbum();
         }
     }
 
     // 打开相册
-    void openPhotoAlbum(){
+    void openPhotoAlbum() {
         new AlertDialog.Builder(activity)
                 .setItems(new String[]{"拍照", "从相册获取"}, new DialogInterface.OnClickListener() {
                     @Override
@@ -140,20 +148,19 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     }
 
     @OnClick(R.id.address_tv)
-    void onClickAddress(){
-        if(isEdit){
+    void onClickAddress() {
+        editAddress();
+    }
+
+    @OnFocusChange(R.id.address_tv)
+    void onFocusAddress(boolean b) {
+        if (b) {
             editAddress();
         }
     }
 
-    @OnFocusChange(R.id.address_tv)
-    void onFocusAddress(boolean b){
-        if(isEdit && b){
-            editAddress();
-        }
-    }
     // 编辑地址
-    void editAddress(){
+    void editAddress() {
         ChangeAddressDialog mChangeAddressDialog = new ChangeAddressDialog(
                 activity);
         mChangeAddressDialog.setAddress("北京", "朝阳区");
@@ -191,11 +198,11 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
 
     @Override
     public void successLoad(LoginEntity loginEntity) {
-        if(loginEntity != null){
-            if(XessConfig._VERSION == XessConfig._PERSONAL) {
+        if (loginEntity != null) {
+            if (XessConfig._VERSION == XessConfig._PERSONAL) {
 
             } else {
-                idTv.setText(loginEntity.getStoreUid()+"");
+                idTv.setText(loginEntity.getStoreUid() + "");
                 nicknameEt.setText(loginEntity.getStoreAlias());
                 addressTv.setText(loginEntity.getProvince());
             }
@@ -231,7 +238,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
             String path = "/storage/emulated/0/Android/data/com.golive.lottery/appSource/accept_bg_focus.png";
             Glide.with(activity).load(path).transform(new GlideRoundTransform(activity)).into(imageView);
             try {
-                presenter.upLoadPicture("jpg","I",PictureUtils.bitmapToString(path));
+                presenter.upLoadPicture("jpg", "I", PictureUtils.bitmapToString(path));
             } catch (Exception e) {
                 e.printStackTrace();
             }
