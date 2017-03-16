@@ -67,7 +67,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     @Inject
     PersonalPresenter presenter;
 
-    private boolean isEdit = false;// 可控件编辑
+    private boolean isEdit = true;// 可控件编辑
 
     @Nullable
     @Override
@@ -96,12 +96,6 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
 
     @OnClick(R.id.edit_per_bt)
     void onClickEdit(){
-        if(!isEdit){
-            editBt.setText(activity.getString(R.string.finish_s));
-        } else {
-            editBt.setText(activity.getString(R.string.editor_info_s));
-        }
-        isEdit = !isEdit;
         //控件是否可以 编辑
         nicknameEt.setEnabled(isEdit);
         imageView.setFocusable(isEdit);

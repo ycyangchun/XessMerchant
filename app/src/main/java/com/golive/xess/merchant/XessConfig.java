@@ -37,7 +37,7 @@ public class XessConfig {
     /**
      * 测试环境根路径
      */
-    public static final String SERVER_ROOT_TEST = "http://61.182.134.3:8809/";
+    public static final String SERVER_ROOT_TEST = "http://221.99.241.7:8809/";
     /**
      * 生产版本根路径
      */

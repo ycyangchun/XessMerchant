@@ -44,12 +44,23 @@
             tl:tl_indicator_width="10dp"
             tl:tl_textSelectColor="#fff"
             tl:tl_textUnselectColor="#9487B2"
-            tl:tl_textsize="20sp" />
+            tl:tl_textsize="18sp" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
     <!--         880 X 405 -->
     <!--width  880/960 = 0.9166-->
     <!--height  405/540 = 0.75-->
     <!--margin 38/880 = 0.043-->
+    <View
+        android:layout_width="830dp"
+        android:layout_height="405dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/title_ll"
+        android:background="@drawable/bg_viewpager"
+        app:layout_heightPercent="75%"
+        app:layout_marginLeftPercent="4.3%"
+        app:layout_marginRightPercent="4.3%"
+        app:layout_widthPercent="91.66%"/>
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:layout_width="830dp"
         android:layout_height="405dp"
