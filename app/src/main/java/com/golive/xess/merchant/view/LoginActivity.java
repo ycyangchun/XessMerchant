@@ -82,6 +82,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             SharedPreferencesUtils.put("storeUid",loginEntity.getStoreUid()+"");
             SharedPreferencesUtils.put("password",pwd);
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
     }
 

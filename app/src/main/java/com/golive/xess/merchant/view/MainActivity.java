@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -45,6 +46,12 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         mContext = this;
         initView();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        contentVp.setCurrentItem(0);
     }
 
     private void initView() {
