@@ -113,6 +113,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/wallet_btn_recharge"
                 android:text="@string/recharge_s"
+                android:paddingBottom="3dp"
                 app:layout_marginTopPercent="3%"
                 app:layout_textSizePercent="4.4%" />
 
@@ -124,6 +125,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/wallet_btn_withdraw"
                 android:text="@string/withdraw_s"
+                android:paddingBottom="3dp"
                 app:layout_marginTopPercent="1%"
                 app:layout_textSizePercent="4.4%" />
 

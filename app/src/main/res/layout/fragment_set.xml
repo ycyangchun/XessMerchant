@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bt_background"
             android:gravity="center"
-            android:paddingBottom="2dp"
+            android:paddingBottom="3dp"
             android:text="@string/cut_personal_s"
             android:textSize="18sp" />
 
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bt_background"
             android:gravity="center"
-            android:paddingBottom="2dp"
+            android:paddingBottom="3dp"
             android:text="@string/exit_s"
             android:textSize="18sp" />
 
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bt_background"
             android:gravity="center"
-            android:paddingBottom="2dp"
+            android:paddingBottom="3dp"
             android:text="@string/change_user_s"
             android:textSize="18sp" />
 

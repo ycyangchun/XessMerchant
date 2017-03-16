@@ -58,7 +58,7 @@ public class MainActivity extends BaseActivity {
         mTitles = getResources().getStringArray(R.array.main_arr);
 
         for (int i = 0; i < mTitles.length; i++) {
-            mTabEntities.add(new TabEntity(mTitles[i]));
+            mTabEntities.add(new TabEntity(mTitles[i], R.drawable.selected,R.color.transparent ));
         }
 
         tlTitle.setTabData(mTabEntities);
@@ -146,25 +146,29 @@ public class MainActivity extends BaseActivity {
     }
 
     class TabEntity implements CustomTabEntity {
-        String titles;
+        public String title;
+        public int selectedIcon;
+        public int unSelectedIcon;
 
-        public TabEntity(String titles) {
-            this.titles = titles;
+        public TabEntity(String title, int selectedIcon, int unSelectedIcon) {
+            this.title = title;
+            this.selectedIcon = selectedIcon;
+            this.unSelectedIcon = unSelectedIcon;
         }
 
         @Override
         public String getTabTitle() {
-            return titles;
+            return title;
         }
 
         @Override
         public int getTabSelectedIcon() {
-            return 0;
+            return selectedIcon;
         }
 
         @Override
         public int getTabUnselectedIcon() {
-            return 0;
+            return unSelectedIcon;
         }
     }
 }
