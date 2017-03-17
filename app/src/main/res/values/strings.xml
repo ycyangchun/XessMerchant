@@ -24,7 +24,7 @@
     <string name="date_s">日期</string>
     <string name="time_s">时间：</string>
     <string name="mobile_s">手机号：</string>
-    <string name="lottery_s">菜种：</string>
+    <string name="lottery_s">彩种：</string>
     <string name="query_s">查询</string>
     <string name="statement_s">生成对账单</string>
     <string name="all_select_s">全选</string>
@@ -33,7 +33,7 @@
     <string name="bet_money_s">投注金额：{0}元</string>
     <string name="order_time_s">下单时间</string>
     <string name="mobile_num_s">手机号</string>
-    <string name="lottery_type_s">菜种</string>
+    <string name="lottery_type_s">彩种</string>
     <string name="issue_s">期号</string>
     <string name="num_s">数量</string>
     <string name="bet_kidney_s">投注菜豆</string>
@@ -41,7 +41,7 @@
     <string name="win_reminder_s">温馨提示：如中奖，万元以上奖金专人通知，万元以下奖金汇入菜豆钱包</string>
     <string name="bet_detail_s">投注详情</string>
     <string name="bet_issue_s">期号：{0}</string>
-    <string name="bet_lottery_s">菜种：{0}</string>
+    <string name="bet_lottery_s">彩种：{0}</string>
     <string name="bet_order_s">订单号：{0}</string>
     <string name="bet_time_s">投注时间：{0}</string>
     <string name="bet_win_money_s">中奖金额：{0}</string>

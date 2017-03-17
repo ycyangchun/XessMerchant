@@ -41,7 +41,7 @@ import butterknife.OnClick;
  * 钱包
  */
 
-public class WalletFragment extends BaseFragment implements WalletContract.View{
+public class WalletFragment extends BaseFragment implements WalletContract.View {
 
     @BindView(R.id.imageView)
     ImageView imageView;
@@ -68,6 +68,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
 
     List<LinkedTreeMap> mapList;
     ItemWalletAdapter walletAdapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
         View view = inflater.inflate(R.layout.fragment_wallet, container, false);
         return view;
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -89,34 +91,48 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
                 .netComponent(XessApp.get(activity).getNetComponent())
                 .walletModule(new WalletModule(this)).build().inject(this);
 
+        initView();
+        initData();
+    }
 
+    private void initView() {
+        if (XessConfig._VERSION == XessConfig._PERSONAL) {
+
+        } else {
+            winKidneyTv.setVisibility(View.GONE);
+            topAwardTv.setVisibility(View.GONE);
+            winCountTv.setVisibility(View.GONE);
+        }
+    }
+
+    private void initData() {
         WalletBody body;
-        if(XessConfig._VERSION == XessConfig._PERSONAL)
-            body = new WalletBody("","100001",deviceNo);
+        if (XessConfig._VERSION == XessConfig._PERSONAL)
+            body = new WalletBody("", "100001", deviceNo);
         else
-            body = new WalletBody(storeUid,"",deviceNo);
+            body = new WalletBody(storeUid, "", deviceNo);
         presenter.getWalletInfo(body);
         ////////////////////////
         WalletLogsBody logsBody;
-        if(XessConfig._VERSION == XessConfig._PERSONAL)
-            logsBody = new WalletLogsBody("","100001",deviceNo,"0","10");
+        if (XessConfig._VERSION == XessConfig._PERSONAL)
+            logsBody = new WalletLogsBody("", "100001", deviceNo, "0", "10");
         else
-            logsBody = new WalletLogsBody(storeUid,"",deviceNo,"0","10");
+            logsBody = new WalletLogsBody(storeUid, "", deviceNo, "0", "10");
         presenter.getWalletLogs(logsBody);
         //////////////////////////////
         mapList = new ArrayList<>();
-        walletAdapter = new ItemWalletAdapter(mInflater,mapList);
+        walletAdapter = new ItemWalletAdapter(mInflater, mapList);
         walletLv.setAdapter(walletAdapter);
     }
 
     @OnClick(R.id.recharge_bt)
-    void onClickRecharge(){
+    void onClickRecharge() {
 
     }
 
     @OnClick(R.id.withdraw_bt)
-    void onClickWithdraw(){
-        Common_dialog dialog = new Common_dialog(activity,0,10);
+    void onClickWithdraw() {
+        Common_dialog dialog = new Common_dialog(activity, 0, 10);
         dialog.show();
     }
 
@@ -124,26 +140,26 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
 
     @Override
     public void dataFailed(Throwable throwable, int type) {
-        Toast.makeText(activity,throwable.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void dataInfoSuccess(WalletEntity walletEntity) {
-        if(walletEntity != null){
-            if(XessConfig._VERSION == XessConfig._PERSONAL) {
-                currentlyKidneyTv.setText(getMessageFormatString(activity ,R.string.currently_kidney_s,walletEntity.getKidneyBean()));
-                winKidneyTv.setText(getMessageFormatString(activity ,R.string.win_kidney_s,walletEntity.getGainBean()));
-                topAwardTv.setText(getMessageFormatString(activity ,R.string.top_award_s,walletEntity.getTopMoney()));
-                winCountTv.setText(getMessageFormatString(activity ,R.string.win_count_s,walletEntity.getWinTimes()));
+        if (walletEntity != null) {
+            if (XessConfig._VERSION == XessConfig._PERSONAL) {
+                currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, walletEntity.getKidneyBean()));
+                winKidneyTv.setText(getMessageFormatString(activity, R.string.win_kidney_s, walletEntity.getGainBean()));
+                topAwardTv.setText(getMessageFormatString(activity, R.string.top_award_s, walletEntity.getTopMoney()));
+                winCountTv.setText(getMessageFormatString(activity, R.string.win_count_s, walletEntity.getWinTimes()));
 //                commissionKidneyTv.setText();
-            }else {
-                currentlyKidneyTv.setText(getMessageFormatString(activity ,R.string.currently_kidney_s,walletEntity.getKidneyBean()));
+            } else {
+                currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, walletEntity.getKidneyBean()));
             }
         }
     }
 
     @Override
-        public void dataLogsSuccess(List<LinkedTreeMap> walletLogEntity) {
+    public void dataLogsSuccess(List<LinkedTreeMap> walletLogEntity) {
         mapList.addAll(walletLogEntity);
         walletAdapter.notifyDataSetChanged();
     }
