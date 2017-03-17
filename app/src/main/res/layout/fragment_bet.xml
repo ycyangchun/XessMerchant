@@ -58,8 +58,8 @@
         <com.zhy.android.percent.support.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:layout_heightPercent="47%">
 
             <!--textSize 18/40 = 0.45-->
@@ -72,16 +72,17 @@
 
             <!--width 72/710 = 0.101-->
             <!--height 30/40 = 0.75-->
+            <!--textSize 14/40 = 0.35-->
+            <!--padding 3/72 = 0.35-->
             <TextView
+                android:gravity="center"
                 android:id="@+id/bet_time_start_et"
                 android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_nick"
                 android:textColor="@color/white"
-                android:focusable="false"
-                app:layout_textSizePercent="45%"
-                app:layout_widthPercent="10.1%"
-                />
+                app:layout_textSizePercent="35%"
+                app:layout_widthPercent="10.1%" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,15 +91,14 @@
                 android:textColor="@color/white" />
 
             <TextView
+                android:gravity="center"
                 android:id="@+id/bet_time_end_et"
                 android:layout_width="72dp"
-                android:focusable="false"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_nick"
                 android:textColor="@color/white"
-                app:layout_textSizePercent="45%"
-                app:layout_widthPercent="10.1%"
-                />
+                app:layout_textSizePercent="35%"
+                app:layout_widthPercent="10.1%" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -114,8 +114,8 @@
                 android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_nick"
-                android:textColor="@color/white"
                 android:inputType="number"
+                android:textColor="@color/white"
                 app:layout_textSizePercent="45%"
                 app:layout_widthPercent="10.1%" />
 
@@ -334,8 +334,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_main_border"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></RelativeLayout>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bg_main_border"></RelativeLayout>
 </com.zhy.android.percent.support.PercentRelativeLayout>

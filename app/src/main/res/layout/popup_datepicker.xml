@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_common_dialog">
+
+    <DatePicker
+        android:id="@+id/myDatePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:calendarTextColor="@color/white"
+        android:calendarViewShown="true"
+        android:datePickerMode="calendar"
+        android:dayOfWeekBackground="@color/white"
+        android:dayOfWeekTextAppearance="@color/white"
+        android:endYear="2020"
+        android:headerDayOfMonthTextAppearance="@color/white"
+        android:headerMonthTextAppearance="@color/white"
+        android:headerYearTextAppearance="@color/white"
+        android:spinnersShown="true"
+        android:startYear="2015"
+        android:yearListItemTextAppearance="@color/white"
+        android:yearListSelectorColor="@color/white">
+
+    </DatePicker>
+
+</RelativeLayout>

@@ -124,15 +124,6 @@
             android:text="@string/cut_personal_s"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/exit_bt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bt_background"
-            android:gravity="center"
-            android:paddingBottom="3dp"
-            android:text="@string/exit_s"
-            android:textSize="18sp" />
 
         <Button
             android:id="@+id/change_user_bt"
@@ -144,6 +135,15 @@
             android:text="@string/change_user_s"
             android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/exit_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_background"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:text="@string/exit_s"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
