@@ -30,6 +30,10 @@
         android:id="@+id/detail_rl"
         android:layout_width="880dp"
         android:layout_height="405dp"
+        app:layout_heightPercent="75%"
+        app:layout_marginLeftPercent="7%"
+        app:layout_marginRightPercent="7%"
+        app:layout_widthPercent="86.4%"
         android:layout_below="@+id/top"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -206,5 +210,13 @@
             android:textSize="13sp"
             android:layout_alignLeft="@+id/bet_issue_tv" />
     </RelativeLayout>
-
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_main_border"
+        app:layout_heightPercent="75%"
+        app:layout_marginLeftPercent="7%"
+        app:layout_marginRightPercent="7%"
+        app:layout_marginTopPercent="14.8%"
+        app:layout_widthPercent="86.4%" />
 </com.zhy.android.percent.support.PercentRelativeLayout>
