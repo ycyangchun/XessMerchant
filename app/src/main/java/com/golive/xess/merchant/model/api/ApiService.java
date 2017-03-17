@@ -134,12 +134,6 @@ public interface ApiService {
     @POST("lottery/store/getWalletLogs")
     Observable<PageEntity<List<LinkedTreeMap>>> getWalletStoreLogs(@Body WalletLogsBody data);
 
-    /**
-     * 7.11上传图片 (GET)
-     */
-    @GET("file/upload")
-    Observable<String> uploadFile(@Query("fileData") String fileData,@Query("fileSuff") String fileSuff,@Query("fileType") String fileType);
-
 
 
 }

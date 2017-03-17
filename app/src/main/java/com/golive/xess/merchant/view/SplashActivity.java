@@ -39,7 +39,6 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .splashModule(new SplashModule(this))
                 .build().inject(this);
         presenter.updateDevice(this);
-        startActivity(new Intent(this, MainActivity.class));
     }
 
 
