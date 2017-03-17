@@ -1,6 +1,5 @@
 package com.golive.xess.merchant.view;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -18,34 +17,23 @@ import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerWalletComponent;
 import com.golive.xess.merchant.di.modules.WalletModule;
-import com.golive.xess.merchant.model.api.ApiService;
-import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.WalletBody;
 import com.golive.xess.merchant.model.api.body.WalletLogsBody;
 import com.golive.xess.merchant.model.entity.WalletEntity;
-import com.golive.xess.merchant.model.entity.WalletLogEntity;
 import com.golive.xess.merchant.presenter.WalletContract;
 import com.golive.xess.merchant.presenter.WalletPresenter;
-import com.golive.xess.merchant.utils.Base64Util;
-import com.golive.xess.merchant.utils.Des3Util;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.adapter.ItemWalletAdapter;
-import com.google.gson.Gson;
+import com.golive.xess.merchant.view.widget.Common_dialog;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 /**
  * Created by YangChun .
@@ -128,12 +116,8 @@ public class WalletFragment extends BaseFragment implements WalletContract.View{
 
     @OnClick(R.id.withdraw_bt)
     void onClickWithdraw(){
-        new AlertDialog.Builder(activity)
-                .setTitle("确认")
-                .setMessage("确认提现5000彩豆？")
-                .setPositiveButton("提现至余额",null)
-                .setNegativeButton("提现至银行卡",null)
-                .show();
+        Common_dialog dialog = new Common_dialog(activity,0,10);
+        dialog.show();
     }
 
     ///////////////////WalletContract.View////////////////////////

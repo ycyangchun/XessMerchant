@@ -57,6 +57,8 @@ public abstract class BaseActivity extends FragmentActivity {
     public String getMessageFormatString(Context context, int stringId ,Object ... arguments ) {
         return MessageFormat.format(context.getResources().getString(stringId),arguments);
     }
-
+    public  String getResourcesString(Context context, int stringId ) {
+        return context.getResources().getString(stringId);
+    }
 
 }

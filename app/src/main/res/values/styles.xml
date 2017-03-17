@@ -11,6 +11,8 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!--Activity切换时，可能出现的白色闪屏解决方案-->
+        <item name="android:windowContentOverlay">@null</item>
         <!--<item name="android:windowBackground">@drawable/bg_screen_view</item>-->
     </style>
 
