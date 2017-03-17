@@ -8,14 +8,10 @@ import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.di.components.DaggerNetComponent;
 import com.golive.xess.merchant.di.components.NetComponent;
 import com.golive.xess.merchant.di.modules.NetModule;
-import com.golive.xess.merchant.utils.DeviceUtils;
 import com.golive.xess.merchant.utils.PathUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
-
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by yc on 2017/3/6.

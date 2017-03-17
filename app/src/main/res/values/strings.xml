@@ -59,7 +59,14 @@
     <string name="affirm_s">确认</string>
     <string name="affirm_withdraw_s">确认提现{0}彩豆？</string>
     <string name="withdraw_success_s">提现成功</string>
-    <string name="withdraw_context_s">恭喜您，{}个彩豆已经提现成功！\n 彩豆已经放入您的钱包，快去兑换彩票吧！</string>
+    <string name="withdraw_context_s">恭喜您，{0}个彩豆已经提现成功！\n 彩豆已经放入您的钱包，快去兑换彩票吧！</string>
     <string name="withdraw_to_balance_s">提现至余额</string>
     <string name="withdraw_to_card_s">提现至银行卡</string>
+    <string name="card_name_s">姓名：</string>
+    <string name="card_num_s">卡号：</string>
+    <string name="card_bank_s">开户行：</string>
+    <string name="binding_bank_s">绑定银行卡：</string>
+    <string name="binding_affirm_s">确认绑定</string>
+    <string name="withdraw_to_bank_s">您想领取{0}个彩豆到银行卡，请确认您的账号信息</string>
+    <string name="change_bank_s">更换银行卡</string>
 </resources>

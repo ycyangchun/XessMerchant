@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
@@ -30,17 +32,45 @@ public class Common_dialog extends Dialog {
     Button leftDialogBt;
     @BindView(R.id.right_dialog_bt)
     Button rightDialogBt;
+    @BindView(R.id.text_rl)
+    RelativeLayout textRl;
+    @BindView(R.id.card_name_et)
+    EditText cardNameEt;
+    @BindView(R.id.card_num_et)
+    EditText cardNumEt;
+    @BindView(R.id.card_bank_et)
+    EditText cardBankEt;
+    @BindView(R.id.card_rl)
+    RelativeLayout cardRl;
+    @BindView(R.id.withdraw_to_bank_tv)
+    TextView withdrawToBankTv;
+    @BindView(R.id.withdraw_card_name_tv)
+    TextView withdrawCardNameEt;
+    @BindView(R.id.withdraw_card_num_tv)
+    TextView withdrawCardNumEt;
+    @BindView(R.id.card_affirm_rl)
+    RelativeLayout cardAffirmRl;
 
     public final static int DIALOG_STATUS_AFFIRM = 0;//确认提现
     public final static int DIALOG_STATUS_WITHDRAW = 1;//提现成功
-    private  int status = 0 , kidney = 0;
+    public final static int DIALOG_STATUS_CARD = 2;//绑定银行卡
+    public final static int DIALOG_STATUS_CARD_AFFIRM = 3;//银行卡 确认
+
+
+    private int status = 0, kidney = 0;
     private BaseActivity mContext;
 
-    public Common_dialog(BaseActivity context, int status ,int kidney) {
+    public Common_dialog(BaseActivity context, int status, int kidney) {
         super(context, R.style.ShareDialog);
         this.mContext = context;
         this.status = status;
         this.kidney = kidney;
+    }
+
+    public Common_dialog(BaseActivity context, int status) {
+        super(context, R.style.ShareDialog);
+        this.mContext = context;
+        this.status = status;
     }
 
     @Override
@@ -50,22 +80,46 @@ public class Common_dialog extends Dialog {
         ButterKnife.bind(this);
         initView();
     }
+
     private void initView() {
         switch (status) {
             case DIALOG_STATUS_AFFIRM:
-                dialogTitleTv.setText(mContext.getResourcesString(mContext,R.string.affirm_s));
-                dialogContextTv.setText(mContext.getMessageFormatString(mContext,R.string.affirm_withdraw_s,kidney+""));
-                leftDialogBt.setText(mContext.getResourcesString(mContext,R.string.withdraw_to_balance_s));
-                rightDialogBt.setText(mContext.getResourcesString(mContext,R.string.withdraw_to_card_s));
-
+                textRl.setVisibility(View.VISIBLE);
+                cardRl.setVisibility(View.GONE);
+                cardAffirmRl.setVisibility(View.GONE);
+                dialogTitleTv.setText(mContext.getResourcesString(mContext, R.string.affirm_s));
+                dialogContextTv.setText(mContext.getMessageFormatString(mContext, R.string.affirm_withdraw_s, kidney + ""));
+                leftDialogBt.setText(mContext.getResourcesString(mContext, R.string.withdraw_to_balance_s));
+                rightDialogBt.setText(mContext.getResourcesString(mContext, R.string.withdraw_to_card_s));
                 break;
             case DIALOG_STATUS_WITHDRAW:
-                dialogTitleTv.setText(mContext.getResourcesString(mContext,R.string.withdraw_success_s));
-                dialogContextTv.setText(mContext.getMessageFormatString(mContext,R.string.withdraw_context_s,kidney+""));
+                textRl.setVisibility(View.VISIBLE);
+                cardRl.setVisibility(View.GONE);
+                cardAffirmRl.setVisibility(View.GONE);
+                dialogTitleTv.setText(mContext.getResourcesString(mContext, R.string.withdraw_success_s));
+                dialogContextTv.setText(mContext.getMessageFormatString(mContext, R.string.withdraw_context_s, kidney + ""));
                 leftDialogBt.setVisibility(View.GONE);
-                rightDialogBt.setText(mContext.getResourcesString(mContext,R.string.affirm_s));
+                rightDialogBt.setText(mContext.getResourcesString(mContext, R.string.affirm_s));
                 break;
+            case DIALOG_STATUS_CARD:
+                textRl.setVisibility(View.GONE);
+                cardRl.setVisibility(View.VISIBLE);
+                cardAffirmRl.setVisibility(View.GONE);
+                dialogTitleTv.setText(mContext.getResourcesString(mContext, R.string.binding_bank_s));
+                leftDialogBt.setVisibility(View.GONE);
+                rightDialogBt.setText(mContext.getResourcesString(mContext, R.string.binding_affirm_s));
+                break;
+            case DIALOG_STATUS_CARD_AFFIRM:
+                textRl.setVisibility(View.GONE);
+                cardRl.setVisibility(View.GONE);
+                cardAffirmRl.setVisibility(View.VISIBLE);
+                dialogTitleTv.setText(mContext.getResourcesString(mContext, R.string.affirm_s));
+                leftDialogBt.setVisibility(View.GONE);
+                rightDialogBt.setText(mContext.getResourcesString(mContext, R.string.binding_affirm_s));
+                break;
+            default:
 
+                break;
         }
     }
 
@@ -76,12 +130,38 @@ public class Common_dialog extends Dialog {
                 dismiss();
                 break;
             case R.id.left_dialog_bt:
-                Common_dialog dialog = new Common_dialog(mContext,1,10);
-                dialog.show();
-                dismiss();
+                leftClick();
                 break;
             case R.id.right_dialog_bt:
-                dismiss();
+                rightClick();
+                break;
+        }
+    }
+
+    void leftClick() {
+        dismiss();
+        switch (status) {
+            case DIALOG_STATUS_AFFIRM:
+                new Common_dialog(mContext, 1, 10).show();
+                break;
+        }
+    }
+
+    void rightClick() {
+        dismiss();
+        switch (status) {
+            case DIALOG_STATUS_AFFIRM:
+                //  是否已绑定卡
+                new Common_dialog(mContext, 2).show();
+                break;
+            case DIALOG_STATUS_WITHDRAW:
+
+                break;
+            case DIALOG_STATUS_CARD:
+                new Common_dialog(mContext, 3).show();
+                break;
+            case DIALOG_STATUS_CARD_AFFIRM:
+
                 break;
         }
     }
