@@ -2,25 +2,27 @@
 <com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main_background">
     <!--               width  height-->
     <!--percent         960 X 540 -->
     <!--width  830/960 = 0.864-->
     <!--height  405/540 = 0.75-->
     <!--marginLeft 60/830 = 0.072-->
     <!--marginTop 78/540 = 0.144-->
+
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:id="@+id/percentRelativeLayout"
         android:layout_width="830dp"
         android:layout_height="405dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:background="@drawable/bg_border"
         app:layout_heightPercent="75%"
         app:layout_marginLeftPercent="7%"
         app:layout_marginRightPercent="7%"
         app:layout_marginTopPercent="14.4%"
-        app:layout_widthPercent="86.4%"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        app:layout_widthPercent="86.4%">
 
         <TextView
             android:id="@+id/login_tv"
@@ -29,7 +31,9 @@
             android:layout_alignTop="@+id/percentRelativeLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:text="@string/login_s" />
+            android:text="@string/login_s"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:id="@+id/login_mobile_ll"
@@ -45,19 +49,23 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="@string/store_uid_s" />
+                android:text="@string/store_uid_s"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <EditText
-                android:text="10000"
                 android:id="@+id/login_mobile_tv"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_bet_edit_border"
+                android:background="@drawable/bg_nick"
                 android:imeOptions="actionDone"
                 android:inputType="number"
                 android:maxLines="1"
                 android:paddingLeft="3dp"
-                />
+                android:paddingStart="10dp"
+                android:text="10000"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,43 +83,60 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="@string/password_s" />
+                android:text="@string/password_s"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <EditText
-                android:text="123456"
                 android:id="@+id/login_password_tv"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_bet_edit_border"
+                android:background="@drawable/bg_nick"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingLeft="3dp"
-               />
+                android:paddingStart="10dp"
+                android:text="123456"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/login_bt"
-            android:layout_width="260dp"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/login_verification_ll"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bet_detail_selector"
+            android:background="@drawable/wallet_btn_withdraw"
             android:gravity="center"
-            android:text="@string/login_s" />
+            android:text="@string/login_s"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <CheckBox
-            android:layout_marginTop="10dp"
-            android:text="@string/user_protocol"
+            android:id="@+id/protocol_cb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/login_bt"
-            android:layout_centerVertical="true"
             android:layout_alignLeft="@+id/login_bt"
             android:layout_alignStart="@+id/login_bt"
-            android:id="@+id/protocol_cb" />
+            android:layout_below="@+id/login_bt"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/user_protocol"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_main_border"
+        app:layout_heightPercent="75%"
+        app:layout_marginLeftPercent="7%"
+        app:layout_marginRightPercent="7%"
+        app:layout_marginTopPercent="12.3%"
+        app:layout_widthPercent="86.4%" />
 </com.zhy.android.percent.support.PercentRelativeLayout>

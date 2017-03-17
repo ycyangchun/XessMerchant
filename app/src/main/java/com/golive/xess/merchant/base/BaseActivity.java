@@ -27,6 +27,7 @@ public abstract class BaseActivity extends FragmentActivity {
     private int height;
     private int width;
     public String deviceNo ,storeUid ,password ,storeNo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
