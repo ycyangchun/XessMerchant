@@ -115,6 +115,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_nick"
                 android:inputType="number"
+                android:maxLines="1"
                 android:textColor="@color/white"
                 app:layout_textSizePercent="45%"
                 app:layout_widthPercent="10.1%" />
@@ -133,6 +134,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_nick"
                 android:textColor="@color/white"
+                android:maxLines="1"
                 app:layout_textSizePercent="45%"
                 app:layout_widthPercent="10.1%" />
 

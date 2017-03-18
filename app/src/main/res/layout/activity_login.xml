@@ -30,23 +30,32 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/percentRelativeLayout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:text="@string/login_s"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textColor="@color/pink"
+            android:textSize="24sp" />
+
+        <View
+            android:layout_marginTop="10dp"
+            android:id="@+id/login_line"
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:layout_below="@+id/login_tv"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/login_title_hover" />
 
         <LinearLayout
             android:id="@+id/login_mobile_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/login_tv"
+            android:layout_below="@+id/login_line"
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            app:layout_marginTopPercent="4.6%">
+            android:layout_marginTop="20dp">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:text="@string/store_uid_s"
@@ -74,13 +83,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/login_mobile_ll"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            app:layout_marginTopPercent="4.6%">
+            android:layout_marginTop="20dp">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:text="@string/password_s"
@@ -109,10 +117,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/login_verification_ll"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/wallet_btn_withdraw"
-            android:paddingBottom="3dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bt_login"
             android:gravity="center"
+            android:paddingBottom="3dp"
             android:text="@string/login_s"
             android:textColor="@color/white"
             android:textSize="18sp" />
@@ -128,7 +136,8 @@
             android:layout_marginTop="10dp"
             android:text="@string/user_protocol"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="gone" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
     <View

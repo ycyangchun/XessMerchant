@@ -138,7 +138,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                         imagePicker.setMultiMode(true);   //多选
                         imagePicker.setShowCamera(true);  //显示拍照按钮
                         imagePicker.setSelectLimit(1);    //最多选择9张
-                        imagePicker.setCrop(false);       //不进行裁剪
+                        imagePicker.setCrop(true);       //不进行裁剪
                         Intent intent = new Intent(activity, ImageGridActivity.class);
                         startActivityForResult(intent, 100);
                         dialog.dismiss();
@@ -222,12 +222,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
             if (data != null && requestCode == 100) {
                 imageItems = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (imageItems != null && imageItems.size() > 0) {
-//                    StringBuilder sb = new StringBuilder();
-//                    for (int i = 0; i < imageItems.size(); i++) {
-//                        if (i == imageItems.size() - 1) sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path);
-//                        else sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path).append("\n");
-//                    }
-//                    System.out.println(imageItems.get(0).path);
+                    System.out.println(imageItems.get(0).path);
                     Glide.with(activity).load(imageItems.get(0).path).transform(new GlideRoundTransform(activity)).into(imageView);
                 }
             } else {
@@ -235,7 +230,9 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 Toast.makeText(activity, "没有选择图片", Toast.LENGTH_SHORT).show();
             }
         } else {
-            String path = "/storage/emulated/0/Android/data/com.golive.lottery/appSource/accept_bg_focus.png";
+//            String path = "/storage/emulated/0/Android/data/com.golive.lottery/appSource/accept_bg_focus.png";
+            String path = "/storage/emulated/0/tencent/MicroMsg/WeiXin/wx_camera_1488017384347.jpg";
+
             Glide.with(activity).load(path).transform(new GlideRoundTransform(activity)).into(imageView);
             try {
                 presenter.upLoadPicture("jpg", "I", PictureUtils.bitmapToString(path));

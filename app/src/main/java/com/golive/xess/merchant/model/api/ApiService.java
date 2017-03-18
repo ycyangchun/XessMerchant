@@ -48,7 +48,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/octet-stream","Charset : UTF-8"})
     @POST("file/upload")
-    Observable<String> upload(@Query("fileSuff") String fileSuff,@Query("fileType") String fileType,@Query("fileData") String fileData);
+    Observable<String> upload(@Query("fileSuffix") String fileSuffix,@Query("fileType") String fileType,@Query("fileData") String fileData);
     /**
      * 7.16商家登录(POST)
      * @param data
