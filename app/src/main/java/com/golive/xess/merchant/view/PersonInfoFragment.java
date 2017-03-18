@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ import com.golive.xess.merchant.presenter.PersonalPresenter;
 import com.golive.xess.merchant.utils.GlideImageLoader;
 import com.golive.xess.merchant.utils.PictureUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
-import com.golive.xess.merchant.view.widget.ChangeAddressDialog;
+import com.golive.xess.merchant.view.widget.AddressDialog;
 import com.golive.xess.merchant.view.widget.GlideRoundTransform;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -74,6 +73,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     @Inject
     PersonalPresenter presenter;
 
+    private String provinceCode, cityCode ;
 
     @Nullable
     @Override
@@ -163,22 +163,22 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
 
     // 编辑地址
     void editAddress() {
-        ChangeAddressDialog mChangeAddressDialog = new ChangeAddressDialog(
+        AddressDialog mChangeAddressDialog = new AddressDialog(
                 activity);
-        mChangeAddressDialog.setAddress("北京", "朝阳区");
+        mChangeAddressDialog.setAddress("北京市", "朝阳区");
         mChangeAddressDialog.show();
         mChangeAddressDialog
-                .setAddresskListener(new ChangeAddressDialog.OnAddressCListener() {
+                .setAddresskListener(new AddressDialog.OnAddressCListener() {
 
                     @Override
-                    public void onClick(String province, String city) {
+                    public void onClick(String province, String city ,String pCode,String cCode) {
                         // TODO Auto-generated method stub
-                        Toast.makeText(activity,
-                                province + "-" + city,
-                                Toast.LENGTH_LONG).show();
+                        provinceCode = pCode;
+                        cityCode = cCode;
+                        addressTv.setText(province+" "+city);
+
                     }
                 });
-
     }
 
 
@@ -229,13 +229,14 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                     Glide.with(activity).load(path).transform(new GlideRoundTransform(activity)).into(imageView);
                     StoreBody storeBody = new StoreBody();
                     storeBody.setStoreUid(storeUid);
-                    storeBody.setProvince("110000");
-                    storeBody.setCity("110101");
+                    storeBody.setProvince(provinceCode);
+                    storeBody.setCity(cityCode);
                     storeBody.setDeviceNo(deviceNo);
                     storeBody.setFileSuffix("jpg");
                     storeBody.setFileType("I");
                     storeBody.setHeadImg(PictureUtils.bitmapToString(path));
                     storeBody.setName("momo");
+                    System.out.println(storeBody.toString());
                     presenter.updateStore(storeBody);
                 }
             } else {

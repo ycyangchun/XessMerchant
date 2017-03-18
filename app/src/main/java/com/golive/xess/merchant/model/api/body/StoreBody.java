@@ -90,4 +90,17 @@ public class StoreBody {
     public void setFileType(String fileType) {
         this.fileType = fileType;
     }
+
+    @Override
+    public String toString() {
+        return "StoreBody{" +
+                "storeUid='" + storeUid + '\'' +
+                ", name='" + name + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", deviceNo='" + deviceNo + '\'' +
+                ", fileSuffix='" + fileSuffix + '\'' +
+                ", fileType='" + fileType + '\'' +
+                '}';
+    }
 }

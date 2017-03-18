@@ -33,7 +33,7 @@ public class PictureUtils {
         BitmapFactory.decodeFile(filePath, options);
 
         // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, 480, 480);
+        options.inSampleSize = calculateInSampleSize(options, 200, 200);
 
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;

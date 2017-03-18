@@ -13,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
+import com.golive.xess.merchant.model.entity.CityEntity;
 import com.golive.xess.merchant.view.widget.wheel.adapters.AbstractWheelTextAdapter;
 import com.golive.xess.merchant.view.widget.wheel.views.OnWheelChangedListener;
 import com.golive.xess.merchant.view.widget.wheel.views.OnWheelScrollListener;
 import com.golive.xess.merchant.view.widget.wheel.views.WheelView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,14 +27,16 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * 地址dialog
  */
-public class ChangeAddressDialog extends Dialog implements android.view.View.OnClickListener {
+public class AddressDialog extends Dialog implements View.OnClickListener {
 
     private WheelView wvProvince;
     private WheelView wvCitys;
@@ -41,23 +46,24 @@ public class ChangeAddressDialog extends Dialog implements android.view.View.OnC
     private TextView btnCancel;
 
     private Context context;
-    private JSONObject mJsonObj;
+    private String mJsons;
     private String[] mProvinceDatas;
     private Map<String, String[]> mCitisDatasMap = new HashMap<String, String[]>();
+    private Map<String, String> mCodeMap = new HashMap<String, String>();
 
     private ArrayList<String> arrProvinces = new ArrayList<String>();
     private ArrayList<String> arrCitys = new ArrayList<String>();
     private AddressTextAdapter provinceAdapter;
     private AddressTextAdapter cityAdapter;
 
-    private String strProvince = "北京";
+    private String strProvince = "北京市";
     private String strCity = "朝阳区";
     private OnAddressCListener onAddressCListener;
 
     private int maxsize = 24;
     private int minsize = 14;
 
-    public ChangeAddressDialog(Context context) {
+    public AddressDialog(Context context) {
         super(context, R.style.ShareDialog);
         this.context = context;
     }
@@ -210,7 +216,7 @@ public class ChangeAddressDialog extends Dialog implements android.view.View.OnC
         // TODO Auto-generated method stub
         if (v == btnSure) {
             if (onAddressCListener != null) {
-                onAddressCListener.onClick(strProvince, strCity);
+                onAddressCListener.onClick(strProvince, strCity,mCodeMap.get(strProvince) , mCodeMap.get(strCity));
             }
         } else if (v == btnCancel) {
 
@@ -228,7 +234,7 @@ public class ChangeAddressDialog extends Dialog implements android.view.View.OnC
      * @author Administrator
      */
     public interface OnAddressCListener {
-        public void onClick(String province, String city);
+        public void onClick(String province, String city, String pCode,String cCode);
     }
 
     /**
@@ -237,17 +243,15 @@ public class ChangeAddressDialog extends Dialog implements android.view.View.OnC
     private void initJsonData() {
         try {
             StringBuffer sb = new StringBuffer();
-            InputStream is = context.getAssets().open("city.json");
+            InputStream is = context.getAssets().open("area.json");
             int len = -1;
             byte[] buf = new byte[1024];
             while ((len = is.read(buf)) != -1) {
-                sb.append(new String(buf, 0, len, "gbk"));
+                sb.append(new String(buf, 0, len, "utf-8"));
             }
             is.close();
-            mJsonObj = new JSONObject(sb.toString());
+            mJsons = sb.toString();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -256,54 +260,26 @@ public class ChangeAddressDialog extends Dialog implements android.view.View.OnC
      * 解析数据
      */
     private void initDatas() {
-        try {
-            JSONArray jsonArray = mJsonObj.getJSONArray("citylist");
-            mProvinceDatas = new String[jsonArray.length()];
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonP = jsonArray.getJSONObject(i);
-                String province = jsonP.getString("p");
-
-                mProvinceDatas[i] = province;
-
-                JSONArray jsonCs = null;
-                try {
-                    /**
-                     * Throws JSONException if the mapping doesn't exist or is
-                     * not a JSONArray.
-                     */
-                    jsonCs = jsonP.getJSONArray("c");
-                } catch (Exception e1) {
-                    continue;
-                }
-                String[] mCitiesDatas = new String[jsonCs.length()];
-                for (int j = 0; j < jsonCs.length(); j++) {
-                    JSONObject jsonCity = jsonCs.getJSONObject(j);
-                    String city = jsonCity.getString("n");
-                    mCitiesDatas[j] = city;
-                    JSONArray jsonAreas = null;
-                    try {
-                        /**
-                         * Throws JSONException if the mapping doesn't exist or
-                         * is not a JSONArray.
-                         */
-                        jsonAreas = jsonCity.getJSONArray("a");
-                    } catch (Exception e) {
-                        continue;
-                    }
-
-                    String[] mAreasDatas = new String[jsonAreas.length()];
-                    for (int k = 0; k < jsonAreas.length(); k++) {
-                        String area = jsonAreas.getJSONObject(k).getString("s");
-                        mAreasDatas[k] = area;
-                    }
-                }
-                mCitisDatasMap.put(province, mCitiesDatas);
+        List<CityEntity> cityEntities;
+        Type type = new TypeToken<List<CityEntity>>(){}.getType();
+        cityEntities = new Gson().fromJson(mJsons,type);
+        mProvinceDatas = new String[cityEntities.size()];
+        for(int i = 0; i < cityEntities.size() ; i++){
+            String province = cityEntities.get(i).getName();
+            String pcode = cityEntities.get(i).getCode();
+            mProvinceDatas[i] = province;
+            List<CityEntity.CityBean> cityBeen = cityEntities.get(i).getCity();
+            mCodeMap.put(province,pcode);
+            String citys[] = new String[cityBeen.size()];
+            for(int j = 0; j < cityBeen.size() ; j++) {
+                String city = cityBeen.get(j).getName();
+                String code = cityBeen.get(j).getCode();
+                citys[j] = city;
+                mCodeMap.put(city,code);
             }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+            mCitisDatasMap.put(province,citys);
         }
-        mJsonObj = null;
+        mJsons = null;
     }
 
     /**
@@ -329,7 +305,7 @@ public class ChangeAddressDialog extends Dialog implements android.view.View.OnC
                 arrCitys.add(citys[i]);
             }
         } else {
-            String[] city = mCitisDatasMap.get("北京");
+            String[] city = mCitisDatasMap.get("北京市");
             arrCitys.clear();
             int length = city.length;
             for (int i = 0; i < length; i++) {
@@ -358,7 +334,7 @@ public class ChangeAddressDialog extends Dialog implements android.view.View.OnC
     }
 
     /**
-     * 返回省会索引，没有就返回默认“北京”
+     * 返回省会索引，没有就返回默认“北京市”
      *
      * @param province
      * @return
@@ -376,7 +352,7 @@ public class ChangeAddressDialog extends Dialog implements android.view.View.OnC
             }
         }
         if (noprovince) {
-            strProvince = "北京";
+            strProvince = "北京市";
             return 22;
         }
         return provinceIndex;
