@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.body.BetBody;
+import com.golive.xess.merchant.model.api.body.PayBody;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -21,11 +22,12 @@ public interface BetContract {
     interface  Presenter{
         void query(BetBody data);
         void statement();
-        void batchPay();
+        void batchPay(PayBody payBody);
         void detail();
     }
     interface  View{
         void showOnFailure(Throwable throwable, int type);
         void successQuery(List<LinkedTreeMap> ordersEntityList);
+        void successPay(List<LinkedTreeMap> payEntityList);
     }
 }

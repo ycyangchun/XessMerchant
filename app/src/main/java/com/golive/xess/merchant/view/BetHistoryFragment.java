@@ -23,6 +23,7 @@ import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerBetComponent;
 import com.golive.xess.merchant.di.modules.BetModule;
 import com.golive.xess.merchant.model.api.body.BetBody;
+import com.golive.xess.merchant.model.api.body.PayBody;
 import com.golive.xess.merchant.presenter.BetContract;
 import com.golive.xess.merchant.presenter.BetPresenter;
 import com.golive.xess.merchant.view.adapter.ItemBetAdapter;
@@ -101,6 +102,12 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     }
 
     /////////////////BetContract.View////////////////
+
+    @Override
+    public void successPay(List<LinkedTreeMap> payEntityList) {
+
+    }
+
     @Override
     public void showOnFailure(Throwable throwable, int type) {
         Toast.makeText(activity, throwable.getMessage(), Toast.LENGTH_SHORT).show();
@@ -143,7 +150,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         }
     }
     //////////////ItemBetAdapter.BetItemClickListener //////////////
-    @OnClick({R.id.bet_time_start_et, R.id.bet_time_end_et})
+    @OnClick({R.id.bet_time_start_et, R.id.bet_time_end_et , R.id.bet_query_bt ,R.id.bet_statement_bt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bet_time_start_et:
@@ -151,6 +158,15 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                 break;
             case R.id.bet_time_end_et:
                 showPopupWindow(betTimeEndEt);
+                break;
+            case R.id.bet_query_bt:
+                break;
+            case R.id.bet_statement_bt:
+                PayBody payBody = new PayBody();
+                payBody.setDeviceNo(deviceNo);
+                payBody.setStoreUid(storeUid);
+                payBody.setOids("201703090918506047175100124#201703090759354116649100119");
+                presenter.batchPay(payBody);
                 break;
         }
     }

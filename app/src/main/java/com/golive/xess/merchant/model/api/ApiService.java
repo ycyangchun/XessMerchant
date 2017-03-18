@@ -4,6 +4,7 @@ package com.golive.xess.merchant.model.api;
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.BetDetailBody;
 import com.golive.xess.merchant.model.api.body.LoginBody;
+import com.golive.xess.merchant.model.api.body.PayBody;
 import com.golive.xess.merchant.model.api.body.StoreBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.api.body.WalletBody;
@@ -136,5 +137,13 @@ public interface ApiService {
     Observable<PageEntity<List<LinkedTreeMap>>> getWalletStoreLogs(@Body WalletLogsBody data);
 
 
+    /**
+     * 7.26商家待投注(POST)
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/batchAgentPay")
+    Observable<CommonEntity<List<LinkedTreeMap>>> batchAgentPay(@Body PayBody data);
 
 }
