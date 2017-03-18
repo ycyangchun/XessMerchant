@@ -34,13 +34,20 @@ public class BetBody {
     private String endTime;
     private String pageNo;
     private String pageSize;
+    private String storeUid;
 
-    public BetBody(String storeNo, String deviceNo, String userNo, String pageNo, String pageSize) {
-        this.storeNo = storeNo;
-        this.deviceNo = deviceNo;
-        this.userNo = userNo;
+    public BetBody(String storeUid ,String pageNo, String pageSize) {
+        this.storeUid = storeUid;
         this.pageNo = pageNo;
         this.pageSize = pageSize;
+    }
+
+    public String getStoreUid() {
+        return storeUid;
+    }
+
+    public void setStoreUid(String storeUid) {
+        this.storeUid = storeUid;
     }
 
     public String getLid() {

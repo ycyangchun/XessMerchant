@@ -8,6 +8,9 @@
 
     <!-- textSize 16/40 = 0.40-->
     <!-- marginLeft 10/710 = 0.014-->
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <com.zhy.android.percent.support.PercentLinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -17,6 +17,11 @@ public class PageEntity<T> {
     private String code;
     private String msg;
     private DataBean data;
+    /**
+     * other : {"num":8,"amount":1800,"singular":8}
+     */
+
+    private OtherBean other;
 
     public String getCode() {
         return code;
@@ -40,6 +45,14 @@ public class PageEntity<T> {
 
     public void setData(DataBean data) {
         this.data = data;
+    }
+
+    public OtherBean getOther() {
+        return other;
+    }
+
+    public void setOther(OtherBean other) {
+        this.other = other;
     }
 
     public static class DataBean {
@@ -84,6 +97,42 @@ public class PageEntity<T> {
 
         public void setOrders(List<?> orders) {
             this.orders = orders;
+        }
+    }
+
+    public static class OtherBean {
+        /**
+         * num : 8
+         * amount : 1800.0
+         * singular : 8
+         */
+
+        private int num;
+        private double amount;
+        private int singular;
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public void setAmount(double amount) {
+            this.amount = amount;
+        }
+
+        public int getSingular() {
+            return singular;
+        }
+
+        public void setSingular(int singular) {
+            this.singular = singular;
         }
     }
 }

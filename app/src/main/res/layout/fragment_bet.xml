@@ -181,7 +181,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/all_select_s"
-                android:visibility="gone" />
+                android:textColor="@color/blue"
+                />
 
             <TextView
                 android:id="@+id/bet_orders_tv"

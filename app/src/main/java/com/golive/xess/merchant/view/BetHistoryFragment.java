@@ -88,9 +88,9 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
         BetBody body;
         if (XessConfig._VERSION == XessConfig._PERSONAL)
-            body = new BetBody("", deviceNo, "userNo", "0", "10");
+            body = new BetBody(storeUid, "0", "10");
         else
-            body = new BetBody(storeNo, deviceNo, "", "0", "10");
+            body = new BetBody(storeUid, "0", "10");
         presenter.query(body);
     }
 
