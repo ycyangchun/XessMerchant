@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -222,23 +223,17 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
             if (data != null && requestCode == 100) {
                 imageItems = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (imageItems != null && imageItems.size() > 0) {
-                    System.out.println(imageItems.get(0).path);
-                    Glide.with(activity).load(imageItems.get(0).path).transform(new GlideRoundTransform(activity)).into(imageView);
+                    String path = imageItems.get(0).path;
+                    System.out.println(path);
+                    Glide.with(activity).load(path).transform(new GlideRoundTransform(activity)).into(imageView);
+                    presenter.upLoadPicture("jpg", "I", PictureUtils.bitmapToString(path));
+//                    presenter.upLoadPicture("jpg", "I", Base64.encodeToString("111".getBytes(), Base64.DEFAULT));
                 }
             } else {
-
                 Toast.makeText(activity, "没有选择图片", Toast.LENGTH_SHORT).show();
             }
         } else {
-//            String path = "/storage/emulated/0/Android/data/com.golive.lottery/appSource/accept_bg_focus.png";
-            String path = "/storage/emulated/0/tencent/MicroMsg/WeiXin/wx_camera_1488017384347.jpg";
 
-            Glide.with(activity).load(path).transform(new GlideRoundTransform(activity)).into(imageView);
-            try {
-                presenter.upLoadPicture("jpg", "I", PictureUtils.bitmapToString(path));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 }

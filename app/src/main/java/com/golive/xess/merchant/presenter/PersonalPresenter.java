@@ -9,11 +9,15 @@ import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
 import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.Base64Util;
+import com.golive.xess.merchant.utils.Des3Util;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.orhanobut.logger.Logger;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 import javax.inject.Inject;
 
@@ -49,14 +53,15 @@ public class PersonalPresenter implements PersonalContract.Persenter {
                     @Override
                     public void call(String deviceEntity) {
                         try {
-                            JSONObject object = new JSONObject(deviceEntity);
+                            String result = Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).decode(Base64Util.decode(deviceEntity));
+                            JSONObject object = new JSONObject(result);
                             String code = object.getString("code");
                             String msg = object.getString("msg");
                             if("0".equals(code)) {
                                 view.successUpload(msg);
                             }else
                                 view.showOnFailure(new Throwable(msg));
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             view.showOnFailure(e);
                         }
 
