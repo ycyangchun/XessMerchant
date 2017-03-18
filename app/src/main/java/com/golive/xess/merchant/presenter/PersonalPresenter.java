@@ -56,7 +56,7 @@ public class PersonalPresenter implements PersonalContract.Persenter {
                     public void call(CommonEntity deviceEntity) {
                         try {
                             String code = deviceEntity.getCode();
-                            String msg = deviceEntity.getCode();
+                            String msg = deviceEntity.getMsg();
                             if("0".equals(code)) {
                                 view.successUpload(msg);
                             }else
@@ -97,8 +97,4 @@ public class PersonalPresenter implements PersonalContract.Persenter {
                 });
     }
 
-    @Override
-    public void submitEdit() {
-        view.successEdit();
-    }
 }

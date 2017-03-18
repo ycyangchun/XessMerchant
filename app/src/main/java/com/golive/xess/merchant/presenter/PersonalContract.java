@@ -17,11 +17,8 @@ public interface PersonalContract {
     interface Persenter{
         void initViewData(LoginBody body);
         void updateStore(StoreBody body);
-        void submitEdit();
     }
     interface View{
-        void editOnFailure(Throwable throwable);
-        void successEdit();
         void showOnFailure(Throwable throwable);
         void successLoad(LoginEntity loginEntity );
         void successUpload(String string);

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerPersonalComponent;
 import com.golive.xess.merchant.di.modules.PersonalModule;
+import com.golive.xess.merchant.model.api.NoNetworkException;
 import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.api.body.StoreBody;
 import com.golive.xess.merchant.model.entity.LoginEntity;
@@ -73,7 +75,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     @Inject
     PersonalPresenter presenter;
 
-    private String provinceCode, cityCode ;
+    private String provinceCode, cityCode ,headImg;
 
     @Nullable
     @Override
@@ -97,24 +99,30 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 .netComponent(XessApp.get(activity).getNetComponent())
                 .personalModule(new PersonalModule(this))
                 .build().inject(this);
-//        presenter.submitEdit();
         presenter.initViewData(new LoginBody(storeUid,
                 SharedPreferencesUtils.getString("password"), deviceNo));
     }
 
     @OnClick(R.id.edit_per_bt)
     void onClickEdit() {
-        //控件是否可以 编辑
-        girlFinish.setVisibility(View.VISIBLE);
-        editRl.setVisibility(View.GONE);
-        girlFinish.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                editRl.setVisibility(View.VISIBLE);
-                girlFinish.setVisibility(View.GONE);
-            }
-        },1500);
-
+        String name = nicknameEt.getText().toString().trim();
+        //
+        StoreBody storeBody = new StoreBody();
+        storeBody.setStoreUid(storeUid);
+        storeBody.setDeviceNo(deviceNo);
+        if(!TextUtils.isEmpty(provinceCode))
+            storeBody.setProvince(provinceCode);
+        if(!TextUtils.isEmpty(cityCode))
+            storeBody.setCity(cityCode);
+        if(!TextUtils.isEmpty(headImg)) {
+            storeBody.setHeadImg(PictureUtils.bitmapToString(headImg));
+            storeBody.setFileSuffix("jpg");
+            storeBody.setFileType("I");
+        }
+        if(!TextUtils.isEmpty(name))
+            storeBody.setName(name);
+        System.out.println(storeBody.toString());
+        presenter.updateStore(storeBody);
     }
 
     @OnClick(R.id.imageView)
@@ -183,19 +191,15 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
 
 
     ////////////////////PersonalContract.View//////////////////////////
-    @Override
-    public void editOnFailure(Throwable throwable) {
-
-    }
-
-    @Override
-    public void successEdit() {
-        System.out.println("=======successEdit=======>");
-    }
 
     @Override
     public void showOnFailure(Throwable throwable) {
-
+        if ( throwable instanceof NoNetworkException) {
+            //'no network'
+            Toast.makeText(activity,throwable.getMessage()+" No Network Connection",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(activity,throwable.getMessage()+" Some Other Error", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -213,6 +217,15 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
 
     @Override
     public void successUpload(String string) {
+        girlFinish.setVisibility(View.VISIBLE);
+        editRl.setVisibility(View.GONE);
+        girlFinish.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                editRl.setVisibility(View.VISIBLE);
+                girlFinish.setVisibility(View.GONE);
+            }
+        },1500);
 
     }
 
@@ -224,20 +237,9 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
             if (data != null && requestCode == 100) {
                 imageItems = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (imageItems != null && imageItems.size() > 0) {
-                    String path = imageItems.get(0).path;
-                    System.out.println(path);
-                    Glide.with(activity).load(path).transform(new GlideRoundTransform(activity)).into(imageView);
-                    StoreBody storeBody = new StoreBody();
-                    storeBody.setStoreUid(storeUid);
-                    storeBody.setProvince(provinceCode);
-                    storeBody.setCity(cityCode);
-                    storeBody.setDeviceNo(deviceNo);
-                    storeBody.setFileSuffix("jpg");
-                    storeBody.setFileType("I");
-                    storeBody.setHeadImg(PictureUtils.bitmapToString(path));
-                    storeBody.setName("momo");
-                    System.out.println(storeBody.toString());
-                    presenter.updateStore(storeBody);
+                    headImg = imageItems.get(0).path;
+                    System.out.println(headImg);
+                    Glide.with(activity).load(headImg).transform(new GlideRoundTransform(activity)).into(imageView);
                 }
             } else {
                 Toast.makeText(activity, "没有选择图片", Toast.LENGTH_SHORT).show();
