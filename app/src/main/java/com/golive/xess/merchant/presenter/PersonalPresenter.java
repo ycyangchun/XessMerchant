@@ -3,6 +3,7 @@ package com.golive.xess.merchant.presenter;
 import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.body.LoginBody;
+import com.golive.xess.merchant.model.api.body.StoreBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
@@ -44,19 +45,18 @@ public class PersonalPresenter implements PersonalContract.Persenter {
         this.apiService = apiService;
     }
 
+
     @Override
-    public void upLoadPicture(String fileSuff, String fileType,String fileData) {
-        apiService.upload(fileSuff,fileType,fileData)
+    public void updateStore(StoreBody body) {
+        apiService.updateStoreAccount(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<String>() {
+                .subscribe(new Action1<CommonEntity>() {
                     @Override
-                    public void call(String deviceEntity) {
+                    public void call(CommonEntity deviceEntity) {
                         try {
-                            String result = Des3Util.getInstance(ApiService.SECRET_KEY, ApiService.SECRET_VALUE).decode(Base64Util.decode(deviceEntity));
-                            JSONObject object = new JSONObject(result);
-                            String code = object.getString("code");
-                            String msg = object.getString("msg");
+                            String code = deviceEntity.getCode();
+                            String msg = deviceEntity.getCode();
                             if("0".equals(code)) {
                                 view.successUpload(msg);
                             }else

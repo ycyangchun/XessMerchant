@@ -24,6 +24,7 @@ import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerPersonalComponent;
 import com.golive.xess.merchant.di.modules.PersonalModule;
 import com.golive.xess.merchant.model.api.body.LoginBody;
+import com.golive.xess.merchant.model.api.body.StoreBody;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.presenter.PersonalContract;
 import com.golive.xess.merchant.presenter.PersonalPresenter;
@@ -226,8 +227,16 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                     String path = imageItems.get(0).path;
                     System.out.println(path);
                     Glide.with(activity).load(path).transform(new GlideRoundTransform(activity)).into(imageView);
-                    presenter.upLoadPicture("jpg", "I", PictureUtils.bitmapToString(path));
-//                    presenter.upLoadPicture("jpg", "I", Base64.encodeToString("111".getBytes(), Base64.DEFAULT));
+                    StoreBody storeBody = new StoreBody();
+                    storeBody.setStoreUid(storeUid);
+                    storeBody.setProvince("110000");
+                    storeBody.setCity("110101");
+                    storeBody.setDeviceNo(deviceNo);
+                    storeBody.setFileSuffix("jpg");
+                    storeBody.setFileType("I");
+                    storeBody.setHeadImg(PictureUtils.bitmapToString(path));
+                    storeBody.setName("momo");
+                    presenter.updateStore(storeBody);
                 }
             } else {
                 Toast.makeText(activity, "没有选择图片", Toast.LENGTH_SHORT).show();

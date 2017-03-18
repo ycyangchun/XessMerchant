@@ -24,6 +24,8 @@
         app:layout_marginTopPercent="14.4%"
         app:layout_widthPercent="86.4%">
 
+        <!-- top 40/405 = 0.098-->
+        <!--textsize 24/40 = -->
         <TextView
             android:id="@+id/login_tv"
             android:layout_width="wrap_content"
@@ -33,15 +35,16 @@
             android:layout_marginTop="40dp"
             android:text="@string/login_s"
             android:textColor="@color/pink"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            app:layout_marginTopPercent="9.8%" />
 
         <View
-            android:layout_marginTop="10dp"
             android:id="@+id/login_line"
             android:layout_width="200dp"
             android:layout_height="1dp"
             android:layout_below="@+id/login_tv"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:background="@drawable/login_title_hover" />
 
         <LinearLayout
@@ -50,9 +53,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/login_line"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            app:layout_marginTopPercent="4.9%">
 
             <TextView
                 android:layout_width="100dp"
@@ -83,9 +87,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/login_mobile_ll"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            app:layout_marginTopPercent="4.9%">
 
             <TextView
                 android:layout_width="100dp"
@@ -123,7 +128,8 @@
             android:paddingBottom="3dp"
             android:text="@string/login_s"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:layout_marginTopPercent="9.8%" />
 
         <CheckBox
             android:id="@+id/protocol_cb"

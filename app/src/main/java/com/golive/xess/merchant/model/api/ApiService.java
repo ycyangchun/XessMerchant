@@ -4,6 +4,7 @@ package com.golive.xess.merchant.model.api;
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.BetDetailBody;
 import com.golive.xess.merchant.model.api.body.LoginBody;
+import com.golive.xess.merchant.model.api.body.StoreBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.api.body.WalletBody;
 import com.golive.xess.merchant.model.api.body.WalletLogsBody;
@@ -43,11 +44,12 @@ public interface ApiService {
                                    @Query("brand") String brand,@Query("model") String model,
                                    @Query("deviceNo") String deviceNo);
 
+
     /**
-     *  设备信息上传
+     *  7.25修改商户信息(POST)
      */
-    @GET("file/upload")
-    Observable<String> upload(@Query("fileSuffix") String fileSuffix,@Query("fileType") String fileType,@Query("fileData") String fileData);
+    @POST("lottery/updateStoreAccountInfo")
+    Observable<CommonEntity> updateStoreAccount(@Body StoreBody body);
     /**
      * 7.16商家登录(POST)
      * @param data
