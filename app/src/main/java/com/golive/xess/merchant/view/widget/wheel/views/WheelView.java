@@ -46,7 +46,7 @@ import java.util.List;
 public class WheelView extends View {
 
 	/** Top and bottom shadows colors */
-	private static final int[] SHADOWS_COLORS = new int[] { 0xeeffffff, 0xeaffffff, 0x33ffffff };
+	private static final int[] SHADOWS_COLORS = new int[] { 0xee1C1340, 0xea1C1340, 0x331C1340};
 
 	/** Top and bottom items offset (to hide that) */
 	private static final int ITEM_OFFSET_PERCENT = 10;
