@@ -75,7 +75,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     @Inject
     PersonalPresenter presenter;
 
-    private String provinceCode, cityCode ,headImg;
+    private String provinceCode = "", cityCode = "" ,headImg= "";
 
     @Nullable
     @Override
@@ -110,17 +110,12 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
         StoreBody storeBody = new StoreBody();
         storeBody.setStoreUid(storeUid);
         storeBody.setDeviceNo(deviceNo);
-        if(!TextUtils.isEmpty(provinceCode))
-            storeBody.setProvince(provinceCode);
-        if(!TextUtils.isEmpty(cityCode))
-            storeBody.setCity(cityCode);
-        if(!TextUtils.isEmpty(headImg)) {
-            storeBody.setHeadImg(PictureUtils.bitmapToString(headImg));
-            storeBody.setFileSuffix("jpg");
-            storeBody.setFileType("I");
-        }
-        if(!TextUtils.isEmpty(name))
-            storeBody.setName(name);
+        storeBody.setProvince(provinceCode);
+        storeBody.setCity(cityCode);
+        storeBody.setHeadImg(PictureUtils.bitmapToString(headImg));
+        storeBody.setFileSuffix("jpg");
+        storeBody.setFileType("I");
+        storeBody.setName(name);
         System.out.println(storeBody.toString());
         presenter.updateStore(storeBody);
     }

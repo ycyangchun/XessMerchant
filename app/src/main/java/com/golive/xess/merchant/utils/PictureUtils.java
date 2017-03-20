@@ -2,6 +2,7 @@ package com.golive.xess.merchant.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.TextUtils;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
@@ -43,7 +44,8 @@ public class PictureUtils {
 
     //把bitmap转换成String
     public static String bitmapToString(String filePath) {
-
+        if (TextUtils.isEmpty(filePath))
+            return "";
         Bitmap bm = getSmallBitmap(filePath);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);
