@@ -24,6 +24,7 @@ import com.golive.xess.merchant.di.components.DaggerBetComponent;
 import com.golive.xess.merchant.di.modules.BetModule;
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.PayBody;
+import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.presenter.BetContract;
 import com.golive.xess.merchant.presenter.BetPresenter;
 import com.golive.xess.merchant.view.adapter.ItemBetAdapter;
@@ -53,17 +54,23 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     ListView betLeftLv;
     @BindView(R.id.bet_lv)
     ListView bet_lv;
-
-    LayoutInflater mInflater;
-    ItemBetAdapter adapter;
-    List<LinkedTreeMap> linkedTreeMaps;//加分页的时候在处理
-    @Inject
-    BetPresenter presenter;
     @BindView(R.id.bet_time_start_et)
     TextView betTimeStartEt;
     @BindView(R.id.bet_time_end_et)
     TextView betTimeEndEt;
+    @BindView(R.id.bet_orders_tv)
+    TextView betOrdersTv;
+    @BindView(R.id.note_tv)
+    TextView noteTv;
+    @BindView(R.id.bet_money_tv)
+    TextView betMoneyTv;
 
+    @Inject
+    BetPresenter presenter;
+
+    LayoutInflater mInflater;
+    ItemBetAdapter adapter;
+    List<LinkedTreeMap> linkedTreeMaps;//加分页的时候在处理
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bet, container, false);
@@ -116,10 +123,14 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     int focusPosition = -1;//Selected焦点在哪个position
 
     @Override
-    public void successQuery(List<LinkedTreeMap> ordersEntityList) {
+    public void successQuery(List<LinkedTreeMap> ordersEntityList, PageEntity.OtherBean otherBean) {
         adapter = new ItemBetAdapter(mInflater, ordersEntityList, this);
         bet_lv.setAdapter(adapter);
-
+        if (otherBean != null) {
+            betOrdersTv.setText(getMessageFormatString(activity,R.string.bet_orders_s,otherBean.getSingular()));
+            noteTv.setText(getMessageFormatString(activity,R.string.bet_note_s,otherBean.getNum()));
+            betMoneyTv.setText(getMessageFormatString(activity,R.string.bet_money_s,otherBean.getAmount()+""));
+        }
         bet_lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -149,8 +160,9 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             activity.startActivity(intent);
         }
     }
+
     //////////////ItemBetAdapter.BetItemClickListener //////////////
-    @OnClick({R.id.bet_time_start_et, R.id.bet_time_end_et , R.id.bet_query_bt ,R.id.bet_statement_bt})
+    @OnClick({R.id.bet_time_start_et, R.id.bet_time_end_et, R.id.bet_query_bt, R.id.bet_statement_bt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bet_time_start_et:
@@ -189,11 +201,11 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH) + 1;
         day = calendar.get(Calendar.DAY_OF_MONTH);
-        mView.setText(year+" "+month+" "+day);
+        mView.setText(year + " " + month + " " + day);
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                mView.setText(year+" "+monthOfYear+" "+dayOfMonth);
+                mView.setText(year + " " + monthOfYear + " " + dayOfMonth);
             }
         });
         popupWindow.setTouchable(true);

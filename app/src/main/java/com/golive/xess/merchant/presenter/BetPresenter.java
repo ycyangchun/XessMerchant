@@ -58,11 +58,11 @@ public class BetPresenter implements BetContract.Presenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<PageEntity<List<LinkedTreeMap>>>() {
                     @Override
-                    public void call(PageEntity<List<LinkedTreeMap>> list) {
-                        String code = list.getCode();
-                        String msg = list.getMsg();
+                    public void call(PageEntity<List<LinkedTreeMap>> pageEntity) {
+                        String code = pageEntity.getCode();
+                        String msg = pageEntity.getMsg();
                         if("0".equals(code)) {
-                            view.successQuery((List<LinkedTreeMap>)list.getData().getOrders());
+                            view.successQuery((List<LinkedTreeMap>)pageEntity.getData().getOrders(),pageEntity.getOther());
                         } else
                             view.showOnFailure(new Throwable(msg),BetContract.TYPEORDER);
                     }
