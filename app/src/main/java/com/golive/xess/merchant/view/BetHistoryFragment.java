@@ -220,6 +220,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                 String mobile = betMobileEt.getText().toString().trim();
                 if(!TextUtils.isEmpty(mobile))
                     presenter.statement(new AccountBody(mobile));
+                else
+                    Toast.makeText(activity, "未输入手机号！", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.bet_bath_pay_bt:
                 String p = adapter.getPayListS();
