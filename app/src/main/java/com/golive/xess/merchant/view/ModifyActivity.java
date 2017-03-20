@@ -78,6 +78,7 @@ public class ModifyActivity extends BaseActivity implements ModifyContract.View{
 
     @Override
     public void successModify(LoginEntity loginEntity, String pwd) {
+        Toast.makeText(this,"修改密码成功",Toast.LENGTH_SHORT).show();
         SharedPreferencesUtils.put("password",pwd);
         startActivity(new Intent(this, MainActivity.class));
         finish();
