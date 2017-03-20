@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_common_dialog">
+
+        <TextView
+            android:id="@+id/ssq_kidney_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="110dp"
+            android:layout_marginRight="110dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/ssq_kidney_s"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/dlt_kidney_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ssq_kidney_tv"
+            android:layout_alignStart="@+id/ssq_kidney_tv"
+            android:layout_below="@+id/ssq_kidney_tv"
+            android:layout_marginTop="20dp"
+            android:text="@string/dlt_kidney_s"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/kuai_3_kidney_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/dlt_kidney_tv"
+            android:layout_alignStart="@+id/dlt_kidney_tv"
+            android:layout_below="@+id/dlt_kidney_tv"
+            android:layout_marginTop="20dp"
+            android:text="@string/kuai_3_kidney_s"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/eleven_kidney_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/kuai_3_kidney_tv"
+            android:layout_alignStart="@+id/kuai_3_kidney_tv"
+            android:layout_below="@+id/kuai_3_kidney_tv"
+            android:layout_marginTop="20dp"
+            android:text="@string/eleven_kidney_s"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/soccer_kidney_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/eleven_kidney_tv"
+            android:layout_alignStart="@+id/eleven_kidney_tv"
+            android:layout_below="@+id/eleven_kidney_tv"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/soccer_kidney_s"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/head_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/kuai_3_kidney_tv"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            app:srcCompat="@drawable/ic_head" />
+
+        <TextView
+            android:id="@+id/mobiles_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/soccer_kidney_tv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/head_img"
+            android:layout_toRightOf="@+id/head_img"
+            android:text="@string/mobiles_s"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sum_kidney_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/head_img"
+            android:layout_alignStart="@+id/head_img"
+            android:layout_alignTop="@+id/dlt_kidney_tv"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/sum_kidney_s"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </RelativeLayout>
+</RelativeLayout>

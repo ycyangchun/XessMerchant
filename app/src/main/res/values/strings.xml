@@ -70,4 +70,11 @@
     <string name="binding_affirm_s">确认绑定</string>
     <string name="withdraw_to_bank_s">您想领取{0}个菜豆到银行卡，请确认您的账号信息</string>
     <string name="change_bank_s">更换银行卡</string>
+    <string name="ssq_kidney_s">双色球&#160;&#160;&#160;&#160;{0}菜豆</string>
+    <string name="dlt_kidney_s">大乐透&#160;&#160;&#160;&#160;{0}菜豆</string>
+    <string name="kuai_3_kidney_s">快3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{0}菜豆</string>
+    <string name="eleven_kidney_s">11选5&#160;&#160;&#160;&#160;&#160;&#160;{0}菜豆</string>
+    <string name="soccer_kidney_s">足彩&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{0}菜豆</string>
+    <string name="mobiles_s">手机号：{0}</string>
+    <string name="sum_kidney_s">共计：{0}菜豆</string>
 </resources>

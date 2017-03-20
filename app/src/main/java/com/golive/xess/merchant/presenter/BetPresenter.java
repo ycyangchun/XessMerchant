@@ -1,8 +1,10 @@
 package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.PayBody;
+import com.golive.xess.merchant.model.entity.AccountEntity;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.google.gson.internal.LinkedTreeMap;
@@ -75,8 +77,26 @@ public class BetPresenter implements BetContract.Presenter {
     }
 
     @Override
-    public void statement() {
-
+    public void statement(AccountBody accountBody) {
+        apiService.getAccount(accountBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<CommonEntity<AccountEntity>>() {
+                    @Override
+                    public void call(CommonEntity<AccountEntity> accountEntity) {
+                        String code = accountEntity.getCode();
+                        String msg = accountEntity.getMsg();
+                        if("0".equals(code)) {
+                            view.successAccount(accountEntity.getData());
+                        } else
+                            view.showOnFailure(new Throwable(msg),BetContract.TYPEACCOUNT);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        view.showOnFailure(throwable, BetContract.TYPEACCOUNT);
+                    }
+                });
     }
 
     @Override

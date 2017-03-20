@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.model.api;
 
 
+import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.BetDetailBody;
 import com.golive.xess.merchant.model.api.body.LoginBody;
@@ -9,6 +10,7 @@ import com.golive.xess.merchant.model.api.body.StoreBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.api.body.WalletBody;
 import com.golive.xess.merchant.model.api.body.WalletLogsBody;
+import com.golive.xess.merchant.model.entity.AccountEntity;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
@@ -145,5 +147,14 @@ public interface ApiService {
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/batchAgentPay")
     Observable<CommonEntity<List<LinkedTreeMap>>> batchAgentPay(@Body PayBody data);
+
+    /**
+     * 7.23生成对账信息(POST)
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/dzOrders")
+    Observable<CommonEntity<AccountEntity>> getAccount(@Body AccountBody data);
 
 }

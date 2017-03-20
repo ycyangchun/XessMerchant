@@ -116,8 +116,9 @@
                 android:background="@drawable/bg_nick"
                 android:inputType="number"
                 android:maxLines="1"
+                android:text="18515966636"
                 android:textColor="@color/white"
-                app:layout_textSizePercent="45%"
+                app:layout_textSizePercent="30%"
                 app:layout_widthPercent="10.1%" />
 
             <TextView

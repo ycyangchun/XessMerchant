@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -25,13 +26,16 @@ import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerBetComponent;
 import com.golive.xess.merchant.di.modules.BetModule;
+import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.PayBody;
+import com.golive.xess.merchant.model.entity.AccountEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.presenter.BetContract;
 import com.golive.xess.merchant.presenter.BetPresenter;
 import com.golive.xess.merchant.view.adapter.ItemBetAdapter;
 import com.golive.xess.merchant.view.adapter.ItemLeftBetTvAdapter;
+import com.golive.xess.merchant.view.widget.AccountDialog;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.Arrays;
@@ -70,6 +74,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     TextView betMoneyTv;
     @BindView(R.id.checkBox)
     CheckBox checkBox;
+    @BindView(R.id.bet_mobile_et)
+    EditText betMobileEt;
 
     @Inject
     BetPresenter presenter;
@@ -77,6 +83,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     LayoutInflater mInflater;
     ItemBetAdapter adapter;
     List<LinkedTreeMap> linkedTreeMaps;//加分页的时候在处理
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -118,12 +125,18 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     /////////////////BetContract.View////////////////
 
     @Override
+    public void successAccount(AccountEntity accountEntity) {
+        AccountDialog accountDialog = new AccountDialog(activity,accountEntity);
+        accountDialog.show();
+    }
+
+    @Override
     public void successPay(List<LinkedTreeMap> payEntityList) {
         String describe = "";
-        for(LinkedTreeMap map : payEntityList){
-            describe += (String) map.get("describe")+"\n";
+        for (LinkedTreeMap map : payEntityList) {
+            describe += (String) map.get("describe") + "\n";
         }
-        Toast.makeText(activity,describe,Toast.LENGTH_LONG).show();
+        Toast.makeText(activity, describe, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -132,9 +145,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     }
 
     int focusPosition = -1;//Selected焦点在哪个position
-
     @Override
-    public void successQuery(List<LinkedTreeMap> ordersEntityList ,PageEntity.DataBean.OtherBean otherBean) {
+    public void successQuery(List<LinkedTreeMap> ordersEntityList, PageEntity.DataBean.OtherBean otherBean) {
         adapter = new ItemBetAdapter(mInflater, ordersEntityList, this);
         bet_lv.setAdapter(adapter);
         if (otherBean != null) {
@@ -185,8 +197,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
     //////////////ItemBetAdapter.BetItemClickListener //////////////
     @OnCheckedChanged(R.id.checkBox)
-    public void checkBox(CompoundButton buttonView, boolean isChecked){
-        if(isChecked)
+    public void checkBox(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked)
             adapter.selectAll();
         else
             adapter.againstAll();
@@ -205,14 +217,16 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             case R.id.bet_query_bt:
                 break;
             case R.id.bet_statement_bt:
-
+                String mobile = betMobileEt.getText().toString().trim();
+                if(!TextUtils.isEmpty(mobile))
+                    presenter.statement(new AccountBody(mobile));
                 break;
             case R.id.bet_bath_pay_bt:
                 String p = adapter.getPayListS();
-                if(!TextUtils.isEmpty(p))
+                if (!TextUtils.isEmpty(p))
                     bathPay(p);
                 else
-                    Toast.makeText(activity,"未选择代付项！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, "未选择代付项！", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
