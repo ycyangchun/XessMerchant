@@ -40,6 +40,11 @@
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
 
         <activity
+            android:name=".view.ModifyActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
+        <activity
             android:name=".view.DialogBetDetailActivity"
             android:theme="@style/ShareDialog" />
     </application>

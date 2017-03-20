@@ -77,4 +77,8 @@
     <string name="soccer_kidney_s">足彩&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{0}菜豆</string>
     <string name="mobiles_s">手机号：{0}</string>
     <string name="sum_kidney_s">共计：{0}菜豆</string>
+    <string name="original_pwd_s">原&#160;&#160;密&#160;&#160;码：</string>
+    <string name="new_pwd_s">新&#160;&#160;密&#160;&#160;码：</string>
+    <string name="affirm_pwd_s">确认密码：</string>
+    <string name="modify_pwd_s">修改密码</string>
 </resources>

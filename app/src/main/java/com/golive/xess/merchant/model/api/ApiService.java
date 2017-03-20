@@ -5,6 +5,7 @@ import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.BetDetailBody;
 import com.golive.xess.merchant.model.api.body.LoginBody;
+import com.golive.xess.merchant.model.api.body.ModifyBody;
 import com.golive.xess.merchant.model.api.body.PayBody;
 import com.golive.xess.merchant.model.api.body.StoreBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
@@ -157,4 +158,12 @@ public interface ApiService {
     @POST("lottery/dzOrders")
     Observable<CommonEntity<AccountEntity>> getAccount(@Body AccountBody data);
 
+    /**
+     * 7.19修改商家用户密码(POST)
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/mofifyPwdByStore")
+    Observable<CommonEntity<LoginEntity>> modifyPwd(@Body ModifyBody data);
 }

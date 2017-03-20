@@ -3,7 +3,6 @@ package com.golive.xess.merchant.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.util.LogWriter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +35,6 @@ public class SetFragment extends BaseFragment {
     TextView servicePhoneEt;
     @BindView(R.id.address_tv)
     TextView addressTv;
-    @BindView(R.id.exit_bt)
-    Button exitBt;
-    @BindView(R.id.change_user_bt)
-    Button changeUserBt;
     @BindView(R.id.cut_version_bt)
     Button cutVersionBt;
 
@@ -51,8 +46,21 @@ public class SetFragment extends BaseFragment {
         return view;
     }
 
-    @OnClick(R.id.change_user_bt)
-    public void onClickChangeUser(){
-        startActivity(new Intent(activity, LoginActivity.class));
+    @OnClick({R.id.cut_version_bt, R.id.modify_pwd_bt, R.id.change_user_bt, R.id.exit_bt})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.cut_version_bt:
+                break;
+            case R.id.modify_pwd_bt:
+                startActivity(new Intent(activity, ModifyActivity.class));
+                break;
+            case R.id.change_user_bt:
+                startActivity(new Intent(activity, LoginActivity.class));
+                break;
+            case R.id.exit_bt:
+                break;
+        }
     }
+
+
 }
