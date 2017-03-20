@@ -40,6 +40,7 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.zhy.android.percent.support.PercentRelativeLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -204,8 +205,13 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
 
             } else {
                 idTv.setText(loginEntity.getStoreUid() + "");
-                nicknameEt.setText(loginEntity.getStoreAlias());
-                addressTv.setText(loginEntity.getProvince());
+                nicknameEt.setText(loginEntity.getName());
+                provinceCode = loginEntity.getProvince();
+                cityCode = loginEntity.getCity();
+                addressTv.setText(loginEntity.getAddress());
+                String head = loginEntity.getHeadImg();
+                if(!TextUtils.isEmpty(head))
+                    Glide.with(activity).load(head).transform(new GlideRoundTransform(activity)).into(imageView);
             }
         }
     }

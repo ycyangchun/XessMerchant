@@ -1,5 +1,7 @@
 package com.golive.xess.merchant.model.entity;
 
+import java.util.List;
+
 /**
  * Created by YangChun .
  * on 2017/3/15.
@@ -7,77 +9,34 @@ package com.golive.xess.merchant.model.entity;
 
 public class LoginEntity {
 
+
     /**
      * storeUid : 10000
      * storeNo : 6AC3559BDF3C4B90AF68AA055DD4BA20
      * storeAccountNo : 7AB2C7943ABC44DEB0D5FE2816AC4F9B
-     * kidneyBean : 0.0
-     * clientIp : 125.33.167.202
+     * name : 黄金
+     * kidneyBean : 200
+     * clientIp : 123.121.70.197
+     * headImg : http://211.99.241.7/wxqrcode/2017032011489978870906i.jpg
+     * province : 110000
+     * city : 110105
      * createTime : 2017-03-13 19:17:54:000
-     * updateTime : 2017-03-15 11:30:10:744
+     * updateTime : 2017-03-20 11:02:07:718
+     * areas : [{"code":"110000","name":"北京市"},{"code":"110105","name":"朝阳区"}]
      */
 
     private int storeUid;
     private String storeNo;
     private String storeAccountNo;
-    private double kidneyBean;
+    private String name;
+    private int kidneyBean;
     private String clientIp;
-    private String createTime;
-    private String updateTime;
+    private String headImg;
     private String province;
     private String city;
-    private String town;
-    private String headImg;
-    private String storeName;
-    private String storeAlias;
-
-    public String getStoreName() {
-        return storeName;
-    }
-
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
-    }
-
-    public String getStoreAlias() {
-        return storeAlias;
-    }
-
-    public void setStoreAlias(String storeAlias) {
-        this.storeAlias = storeAlias;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
-    }
-
-    public String getHeadImg() {
-        return headImg;
-    }
-
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg;
-    }
+    private String createTime;
+    private String updateTime;
+    private List<AreasBean> areas;
 
     public int getStoreUid() {
         return storeUid;
@@ -103,11 +62,19 @@ public class LoginEntity {
         this.storeAccountNo = storeAccountNo;
     }
 
-    public double getKidneyBean() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getKidneyBean() {
         return kidneyBean;
     }
 
-    public void setKidneyBean(double kidneyBean) {
+    public void setKidneyBean(int kidneyBean) {
         this.kidneyBean = kidneyBean;
     }
 
@@ -117,6 +84,30 @@ public class LoginEntity {
 
     public void setClientIp(String clientIp) {
         this.clientIp = clientIp;
+    }
+
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getCreateTime() {
@@ -133,5 +124,47 @@ public class LoginEntity {
 
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<AreasBean> getAreas() {
+        return areas;
+    }
+
+    public void setAreas(List<AreasBean> areas) {
+        this.areas = areas;
+    }
+
+    public static class AreasBean {
+        /**
+         * code : 110000
+         * name : 北京市
+         */
+
+        private String code;
+        private String name;
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
+    public String getAddress(){
+        String address = "";
+        if(areas != null) {
+            address += areas.get(0).getName()+" "+areas.get(1).getName();
+        }
+        return address;
     }
 }

@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -39,6 +42,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 /**
@@ -64,6 +68,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     TextView noteTv;
     @BindView(R.id.bet_money_tv)
     TextView betMoneyTv;
+    @BindView(R.id.checkBox)
+    CheckBox checkBox;
 
     @Inject
     BetPresenter presenter;
@@ -71,6 +77,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     LayoutInflater mInflater;
     ItemBetAdapter adapter;
     List<LinkedTreeMap> linkedTreeMaps;//加分页的时候在处理
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bet, container, false);
@@ -105,14 +112,18 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         List arr = Arrays.asList("全部订单", "中奖订单", "未开奖订单");
         betLeftLv.setAdapter(new ItemLeftBetTvAdapter(mInflater, arr));
         betLeftLv.setSelection(0);
-
     }
+
 
     /////////////////BetContract.View////////////////
 
     @Override
     public void successPay(List<LinkedTreeMap> payEntityList) {
-
+        String describe = "";
+        for(LinkedTreeMap map : payEntityList){
+            describe += (String) map.get("describe")+"\n";
+        }
+        Toast.makeText(activity,describe,Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -123,13 +134,13 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     int focusPosition = -1;//Selected焦点在哪个position
 
     @Override
-    public void successQuery(List<LinkedTreeMap> ordersEntityList, PageEntity.OtherBean otherBean) {
+    public void successQuery(List<LinkedTreeMap> ordersEntityList ,PageEntity.DataBean.OtherBean otherBean) {
         adapter = new ItemBetAdapter(mInflater, ordersEntityList, this);
         bet_lv.setAdapter(adapter);
         if (otherBean != null) {
-            betOrdersTv.setText(getMessageFormatString(activity,R.string.bet_orders_s,otherBean.getSingular()));
-            noteTv.setText(getMessageFormatString(activity,R.string.bet_note_s,otherBean.getNum()));
-            betMoneyTv.setText(getMessageFormatString(activity,R.string.bet_money_s,otherBean.getAmount()+""));
+            betOrdersTv.setText(getMessageFormatString(activity, R.string.bet_orders_s, otherBean.getSingular()));
+            noteTv.setText(getMessageFormatString(activity, R.string.bet_note_s, otherBean.getNum()));
+            betMoneyTv.setText(getMessageFormatString(activity, R.string.bet_money_s, otherBean.getAmount() + ""));
         }
         bet_lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -158,11 +169,31 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             intent.setClass(activity, DialogBetDetailActivity.class);
             intent.putExtra("orderNo", orderNo);
             activity.startActivity(intent);
+        } else {
+            bathPay(orderNo);
         }
     }
 
+    // 代付
+    private void bathPay(String orderNo) {
+        PayBody payBody = new PayBody();
+        payBody.setDeviceNo(deviceNo);
+        payBody.setStoreUid(storeUid);
+        payBody.setOids(orderNo);
+        presenter.batchPay(payBody);
+    }
+
     //////////////ItemBetAdapter.BetItemClickListener //////////////
-    @OnClick({R.id.bet_time_start_et, R.id.bet_time_end_et, R.id.bet_query_bt, R.id.bet_statement_bt})
+    @OnCheckedChanged(R.id.checkBox)
+    public void checkBox(CompoundButton buttonView, boolean isChecked){
+        if(isChecked)
+            adapter.selectAll();
+        else
+            adapter.againstAll();
+    }
+
+
+    @OnClick({R.id.bet_time_start_et, R.id.bet_time_end_et, R.id.bet_query_bt, R.id.bet_statement_bt, R.id.bet_bath_pay_bt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bet_time_start_et:
@@ -174,11 +205,14 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             case R.id.bet_query_bt:
                 break;
             case R.id.bet_statement_bt:
-                PayBody payBody = new PayBody();
-                payBody.setDeviceNo(deviceNo);
-                payBody.setStoreUid(storeUid);
-                payBody.setOids("201703090918506047175100124#201703090759354116649100119");
-                presenter.batchPay(payBody);
+
+                break;
+            case R.id.bet_bath_pay_bt:
+                String p = adapter.getPayListS();
+                if(!TextUtils.isEmpty(p))
+                    bathPay(p);
+                else
+                    Toast.makeText(activity,"未选择代付项！",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -225,4 +259,5 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         popupWindow.showAsDropDown(mView);
 
     }
+
 }

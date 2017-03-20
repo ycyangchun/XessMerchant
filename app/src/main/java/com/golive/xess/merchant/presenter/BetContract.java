@@ -28,7 +28,7 @@ public interface BetContract {
     }
     interface  View{
         void showOnFailure(Throwable throwable, int type);
-        void successQuery(List<LinkedTreeMap> ordersEntityList , PageEntity.OtherBean otherBean);
+        void successQuery(List<LinkedTreeMap> ordersEntityList , PageEntity.DataBean.OtherBean otherBean);
         void successPay(List<LinkedTreeMap> payEntityList);
     }
 }

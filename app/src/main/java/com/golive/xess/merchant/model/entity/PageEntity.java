@@ -13,15 +13,10 @@ public class PageEntity<T> {
      * msg : success
      * data : {"pageSize":10,"pageNo":0,"orders":[]}
      */
-
     private String code;
     private String msg;
     private DataBean data;
-    /**
-     * other : {"num":8,"amount":1800,"singular":8}
-     */
 
-    private OtherBean other;
 
     public String getCode() {
         return code;
@@ -29,14 +24,6 @@ public class PageEntity<T> {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
     }
 
     public DataBean getData() {
@@ -47,12 +34,12 @@ public class PageEntity<T> {
         this.data = data;
     }
 
-    public OtherBean getOther() {
-        return other;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setOther(OtherBean other) {
-        this.other = other;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public static class DataBean {
@@ -66,6 +53,20 @@ public class PageEntity<T> {
         private int pageNo;
         private List<?> orders;
         private List<?> accountings;
+
+        /**
+         * other : {"num":8,"amount":1800,"singular":8}
+         */
+
+        private OtherBean other;
+
+        public OtherBean getOther() {
+            return other;
+        }
+
+        public void setOther(OtherBean other) {
+            this.other = other;
+        }
 
         public List<?> getAccountings() {
             return accountings;
@@ -98,41 +99,43 @@ public class PageEntity<T> {
         public void setOrders(List<?> orders) {
             this.orders = orders;
         }
+
+        public static class OtherBean {
+            /**
+             * num : 8
+             * amount : 1800.0
+             * singular : 8
+             */
+
+            private int num;
+            private double amount;
+            private int singular;
+
+            public int getNum() {
+                return num;
+            }
+
+            public void setNum(int num) {
+                this.num = num;
+            }
+
+            public double getAmount() {
+                return amount;
+            }
+
+            public void setAmount(double amount) {
+                this.amount = amount;
+            }
+
+            public int getSingular() {
+                return singular;
+            }
+
+            public void setSingular(int singular) {
+                this.singular = singular;
+            }
+        }
     }
 
-    public static class OtherBean {
-        /**
-         * num : 8
-         * amount : 1800.0
-         * singular : 8
-         */
 
-        private int num;
-        private double amount;
-        private int singular;
-
-        public int getNum() {
-            return num;
-        }
-
-        public void setNum(int num) {
-            this.num = num;
-        }
-
-        public double getAmount() {
-            return amount;
-        }
-
-        public void setAmount(double amount) {
-            this.amount = amount;
-        }
-
-        public int getSingular() {
-            return singular;
-        }
-
-        public void setSingular(int singular) {
-            this.singular = singular;
-        }
-    }
 }

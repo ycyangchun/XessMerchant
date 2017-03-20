@@ -27,6 +27,7 @@
     <string name="lottery_s">彩种：</string>
     <string name="query_s">查询</string>
     <string name="statement_s">生成对账单</string>
+    <string name="bath_pay_s">批量代付</string>
     <string name="all_select_s">全选</string>
     <string name="bet_orders_s">投注单数：{0}单</string>
     <string name="note_s">注数：{0}注</string>

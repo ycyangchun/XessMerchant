@@ -62,7 +62,7 @@ public class BetPresenter implements BetContract.Presenter {
                         String code = pageEntity.getCode();
                         String msg = pageEntity.getMsg();
                         if("0".equals(code)) {
-                            view.successQuery((List<LinkedTreeMap>)pageEntity.getData().getOrders(),pageEntity.getOther());
+                            view.successQuery((List<LinkedTreeMap>)pageEntity.getData().getOrders(),pageEntity.getData().getOther());
                         } else
                             view.showOnFailure(new Throwable(msg),BetContract.TYPEORDER);
                     }

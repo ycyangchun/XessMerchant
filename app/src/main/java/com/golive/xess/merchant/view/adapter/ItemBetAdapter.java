@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
@@ -14,6 +16,7 @@ import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.utils.EnumUtils;
 import com.google.gson.internal.LinkedTreeMap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,11 +28,30 @@ public class ItemBetAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
     private BetItemClickListener betItemClickListener;
+    private List<String> payList;//代付list
+    private boolean isSelectAll = false;
 
     public ItemBetAdapter(LayoutInflater mInflater ,List<LinkedTreeMap> obj , BetItemClickListener listener) {
         this.betItemClickListener = listener;
         this.layoutInflater = mInflater;
         this.objects =obj;
+        payList = new ArrayList<>();
+    }
+
+    //全选
+    public void selectAll(){
+        isSelectAll = true;
+        payList.clear();
+        for(LinkedTreeMap map : objects){
+            payList.add((String) map.get("orderNo"));
+        }
+        this.notifyDataSetChanged();
+    }
+    //反全选
+    public void againstAll(){
+        isSelectAll = false;
+        payList.clear();
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -65,6 +87,11 @@ public class ItemBetAdapter extends BaseAdapter {
         holder.numTv.setText(order.getInvestNum()+"注");
         holder.betKidneyTv.setText(order.getAmount()+"彩豆");
         holder.betStatusTv.setText(order.getOrderStateDesc());*/
+        if(isSelectAll) {
+            holder.item_cb.setChecked(true);
+        } else {
+            holder.item_cb.setChecked(false);
+        }
         holder.orderTimeTv.setText((String)order.get("createTime"));
         holder.mobileNumTv.setText((String)order.get("mobile"));
         holder.lotteryTypeTv.setText(EnumUtils.Lottery.getName((String)order.get("lid")));
@@ -90,6 +117,30 @@ public class ItemBetAdapter extends BaseAdapter {
                 betItemClickListener.betItemClick(v,position,orderNo,"option");
             }
         });
+
+        holder.item_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(!payList.contains(orderNo))
+                        payList.add(orderNo);
+                } else{
+                    if(payList.contains(orderNo))
+                        payList.remove(orderNo);
+                }
+            }
+        });
+
+    }
+
+    public String getPayListS(){
+        String s = "";
+        for(String p : payList){
+            s += p+"#";
+        }
+        if(s.endsWith("#"))
+            s = s.substring(0,s.lastIndexOf("#"));
+        return s;
     }
 
     public interface  BetItemClickListener{
@@ -128,6 +179,8 @@ public class ItemBetAdapter extends BaseAdapter {
         Button optionTv;
         @BindView(R.id.detail_bt)
         Button detail_tv;
+        @BindView(R.id.item_cb)
+        CheckBox item_cb;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
