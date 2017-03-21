@@ -23,7 +23,8 @@ import com.golive.xess.merchant.model.entity.WalletEntity;
 import com.golive.xess.merchant.presenter.WalletContract;
 import com.golive.xess.merchant.presenter.WalletPresenter;
 import com.golive.xess.merchant.view.adapter.ItemWalletAdapter;
-import com.golive.xess.merchant.view.widget.Common_dialog;
+import com.golive.xess.merchant.view.widget.CommonDialog;
+import com.golive.xess.merchant.view.widget.DialogRecharge;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
@@ -127,12 +128,12 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
 
     @OnClick(R.id.recharge_bt)
     void onClickRecharge() {
-
+        new DialogRecharge(activity).show();
     }
 
     @OnClick(R.id.withdraw_bt)
     void onClickWithdraw() {
-        Common_dialog dialog = new Common_dialog(activity, 0, 10);
+        CommonDialog dialog = new CommonDialog(activity, 0, 10);
         dialog.show();
     }
 

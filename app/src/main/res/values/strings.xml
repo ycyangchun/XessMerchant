@@ -81,4 +81,10 @@
     <string name="new_pwd_s">新&#160;&#160;密&#160;&#160;码：</string>
     <string name="affirm_pwd_s">确认密码：</string>
     <string name="modify_pwd_s">修改密码</string>
+    <string name="recharge_kidney_s">{0}菜豆</string>
+    <string name="recharge_kidney_hint_s">1元=100菜豆</string>
+    <string name="alipay_s">支付宝支付</string>
+    <string name="weixin_s">微信支付</string>
+    <string name="pay_money_s">您要兑换{0}个菜豆，需要支付{1}元</string>
+    <string name="edit_hint_s">请输入菜豆数量</string>
 </resources>

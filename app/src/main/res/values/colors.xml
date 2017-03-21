@@ -11,4 +11,5 @@
     <color name="dialog_text">#ffc9fe</color>
     <color name="detail_text">#FF73FA</color>
     <color name="detail_red_text">#B24C01</color>
+    <color name="recharge_text">#472212</color>
 </resources>

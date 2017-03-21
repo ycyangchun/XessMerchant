@@ -20,7 +20,7 @@ import butterknife.OnClick;
  * on 2017/3/17.
  */
 
-public class Common_dialog extends Dialog {
+public class CommonDialog extends Dialog {
 
     @BindView(R.id.dialog_title_tv)
     TextView dialogTitleTv;
@@ -60,14 +60,14 @@ public class Common_dialog extends Dialog {
     private int status = 0, kidney = 0;
     private BaseActivity mContext;
 
-    public Common_dialog(BaseActivity context, int status, int kidney) {
+    public CommonDialog(BaseActivity context, int status, int kidney) {
         super(context, R.style.ShareDialog);
         this.mContext = context;
         this.status = status;
         this.kidney = kidney;
     }
 
-    public Common_dialog(BaseActivity context, int status) {
+    public CommonDialog(BaseActivity context, int status) {
         super(context, R.style.ShareDialog);
         this.mContext = context;
         this.status = status;
@@ -142,7 +142,7 @@ public class Common_dialog extends Dialog {
         dismiss();
         switch (status) {
             case DIALOG_STATUS_AFFIRM:
-                new Common_dialog(mContext, 1, 10).show();
+                new CommonDialog(mContext, 1, 10).show();
                 break;
         }
     }
@@ -152,13 +152,13 @@ public class Common_dialog extends Dialog {
         switch (status) {
             case DIALOG_STATUS_AFFIRM:
                 //  是否已绑定卡
-                new Common_dialog(mContext, 2).show();
+                new CommonDialog(mContext, 2).show();
                 break;
             case DIALOG_STATUS_WITHDRAW:
 
                 break;
             case DIALOG_STATUS_CARD:
-                new Common_dialog(mContext, 3).show();
+                new CommonDialog(mContext, 3).show();
                 break;
             case DIALOG_STATUS_CARD_AFFIRM:
 

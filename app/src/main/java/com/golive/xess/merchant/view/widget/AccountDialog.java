@@ -1,7 +1,6 @@
 package com.golive.xess.merchant.view.widget;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.base.BaseActivity;
-import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
 
 import java.text.MessageFormat;
