@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']//这一句是设置目标的so存放路径，也就是组装到apk中的so路径
+        }
+    }
 }
 
 dependencies {
@@ -51,9 +56,8 @@ dependencies {
     compile 'com.zhy:percent-support-extends:1.1.1'
     //flycoTab
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-    //deviceNo jar
-    compile files('src/main/libs/lcr.terminal.assist-1.0.jar')
-    //
+    // 图片选取
     compile 'com.lzy.widget:imagepicker:0.3.2'
     compile 'com.lzy.widget:ninegridview:0.2.1'
+
 }
