@@ -7,16 +7,20 @@ import com.golive.xess.merchant.model.api.body.BetDetailBody;
 import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.api.body.ModifyBody;
 import com.golive.xess.merchant.model.api.body.PayBody;
+import com.golive.xess.merchant.model.api.body.ReplacePayBody;
 import com.golive.xess.merchant.model.api.body.StoreBody;
+import com.golive.xess.merchant.model.api.body.SyncBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.api.body.WalletBody;
 import com.golive.xess.merchant.model.api.body.WalletLogsBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
 import com.golive.xess.merchant.model.entity.CommonEntity;
-import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
+import com.golive.xess.merchant.model.entity.PayEntity;
+import com.golive.xess.merchant.model.entity.SplashEntity;
+import com.golive.xess.merchant.model.entity.SyncEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
 import com.golive.xess.merchant.model.entity.WalletEntity;
 import com.google.gson.internal.LinkedTreeMap;
@@ -24,7 +28,6 @@ import com.google.gson.internal.LinkedTreeMap;
 import java.util.List;
 
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -147,7 +150,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/batchAgentPay")
-    Observable<CommonEntity<List<LinkedTreeMap>>> batchAgentPay(@Body PayBody data);
+    Observable<CommonEntity<List<LinkedTreeMap>>> batchAgentPay(@Body ReplacePayBody data);
 
     /**
      * 7.23生成对账信息(POST)
@@ -166,4 +169,22 @@ public interface ApiService {
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/mofifyPwdByStore")
     Observable<CommonEntity<LoginEntity>> modifyPwd(@Body ModifyBody data);
+
+    /**
+     * 7.32获取支付二维码(POST)
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/payCenter")
+    Observable<CommonEntity<PayEntity>> payCenter(@Body PayBody data);
+
+    /**
+     * 用户同步
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/syncUserInfo")
+    Observable<CommonEntity<SyncEntity>> syncUserInfo(@Body SyncBody data);
 }

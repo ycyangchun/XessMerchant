@@ -14,6 +14,7 @@ import com.golive.xess.merchant.di.modules.SplashModule;
 import com.golive.xess.merchant.model.api.NoNetworkException;
 import com.golive.xess.merchant.presenter.SplashContract;
 import com.golive.xess.merchant.presenter.SplashPresenter;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 
 import javax.inject.Inject;
 
@@ -39,6 +40,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .splashModule(new SplashModule(this))
                 .build().inject(this);
         presenter.updateDevice(this);
+        presenter.syncDevice(this);
     }
 
 
@@ -60,5 +62,10 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
             startActivity(new Intent(this, LoginActivity.class));
         }
         finish();
+    }
+
+    @Override
+    public void successSync(String lhq) {
+        SharedPreferencesUtils.put("lhqId",lhq);
     }
 }

@@ -68,6 +68,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="7dp"
                 android:background="@color/white" />
+
         </RelativeLayout>
 
         <TextView
@@ -101,6 +102,22 @@
                 android:layout_height="match_parent"
                 android:layout_margin="7dp"
                 android:background="@color/white" />
+
+            <ImageView
+                android:id="@+id/alipay_logo_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:background="@drawable/ic_alipay_logo"
+                />
+
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/alipay_pb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp" />
         </RelativeLayout>
 
         <TextView
@@ -122,10 +139,18 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialog_line"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/white"
             android:layout_marginTop="8dp"
-            android:textSize="14sp"
-            android:text="@string/pay_money_s" />
+            android:text="@string/pay_money_s"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
 
     </RelativeLayout>
+
+    <WebView
+        android:id="@+id/alipay_wv"
+        android:layout_width="1dip"
+        android:layout_height="1dip"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hardwareAccelerated="true" />
 </RelativeLayout>

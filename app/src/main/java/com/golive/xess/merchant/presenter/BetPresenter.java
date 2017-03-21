@@ -3,7 +3,7 @@ package com.golive.xess.merchant.presenter;
 import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.api.body.BetBody;
-import com.golive.xess.merchant.model.api.body.PayBody;
+import com.golive.xess.merchant.model.api.body.ReplacePayBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
@@ -33,12 +33,12 @@ public class BetPresenter implements BetContract.Presenter {
     }
 
     @Override
-    public void batchPay(PayBody payBody) {
+    public void batchPay(ReplacePayBody payBody) {
         apiService.batchAgentPay(payBody).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<CommonEntity<List<LinkedTreeMap>>>() {
-                    @Override
-                    public void call(CommonEntity<List<LinkedTreeMap>> list) {
+                            .subscribe(new Action1<CommonEntity<List<LinkedTreeMap>>>() {
+                                @Override
+                                public void call(CommonEntity<List<LinkedTreeMap>> list) {
                         String code = list.getCode();
                         String msg = list.getMsg();
                         if("0".equals(code)) {

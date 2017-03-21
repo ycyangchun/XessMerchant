@@ -2,15 +2,12 @@ package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.api.body.BetBody;
-import com.golive.xess.merchant.model.api.body.PayBody;
+import com.golive.xess.merchant.model.api.body.ReplacePayBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
-import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
-
-import okhttp3.RequestBody;
 
 /**
  * Created by YangChun .
@@ -26,7 +23,7 @@ public interface BetContract {
     interface  Presenter{
         void query(BetBody data);
         void statement(AccountBody accountBody);
-        void batchPay(PayBody payBody);
+        void batchPay(ReplacePayBody payBody);
         void detail();
     }
     interface  View{

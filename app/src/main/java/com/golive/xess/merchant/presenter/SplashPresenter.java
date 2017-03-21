@@ -5,8 +5,10 @@ import android.content.Context;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.NetComponent;
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.SyncBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.DeviceEntity;
+import com.golive.xess.merchant.model.entity.SyncEntity;
 import com.golive.xess.merchant.utils.AppUtil;
 import com.golive.xess.merchant.utils.DeviceUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
@@ -69,4 +71,28 @@ public class SplashPresenter implements SplashContract.Presenter{
                 });
     }
 
+    @Override
+    public void syncDevice(Context context) {
+        final String deviceNo = DeviceUtils.getDeviceNo(context);
+        SyncBody body = new SyncBody(deviceNo,AppUtil.getMacByWifi(context));
+        apiService.syncUserInfo(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<CommonEntity<SyncEntity>>() {
+                    @Override
+                    public void call(CommonEntity<SyncEntity> syncEntityCommonEntity) {
+                        String code = syncEntityCommonEntity.getCode();
+                        String msg = syncEntityCommonEntity.getMsg();
+                        if("0".equals(code)) {
+                            view.successSync(syncEntityCommonEntity.getData().getLhqId());
+                        }else
+                            view.showOnFailure(new Throwable(msg));
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        view.showOnFailure(throwable);
+                    }
+                });
+    }
 }

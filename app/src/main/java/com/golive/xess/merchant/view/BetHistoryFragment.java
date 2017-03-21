@@ -28,7 +28,7 @@ import com.golive.xess.merchant.di.components.DaggerBetComponent;
 import com.golive.xess.merchant.di.modules.BetModule;
 import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.api.body.BetBody;
-import com.golive.xess.merchant.model.api.body.PayBody;
+import com.golive.xess.merchant.model.api.body.ReplacePayBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.presenter.BetContract;
@@ -188,7 +188,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
     // 代付
     private void bathPay(String orderNo) {
-        PayBody payBody = new PayBody();
+        ReplacePayBody payBody = new ReplacePayBody();
         payBody.setDeviceNo(deviceNo);
         payBody.setStoreUid(storeUid);
         payBody.setOids(orderNo);

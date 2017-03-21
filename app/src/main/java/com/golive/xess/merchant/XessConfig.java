@@ -12,13 +12,13 @@ public class XessConfig {
     /**
      * true 为debug状态，打印日志;false为上线发布状态
      */
-    public static boolean IS_DEBUG = false;
+    public static boolean IS_DEBUG = true;
     /**
-     * 商家版 0
-     * 个人版 1
+     * 商家版 1
+     * 个人版 0
      */
-    public static final int _STORE = 0;
-    public static final int _PERSONAL = 1;
+    public static final int _STORE = 1;
+    public static final int _PERSONAL = 0;
     public static int _VERSION = _STORE;
 
     /**

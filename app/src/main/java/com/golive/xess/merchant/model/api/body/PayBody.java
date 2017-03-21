@@ -2,42 +2,102 @@ package com.golive.xess.merchant.model.api.body;
 
 /**
  * Created by YangChun .
- * on 2017/3/18.
+ * on 2017/3/21.
  */
 
 public class PayBody {
 
     /**
-     * storeUid : 100001
-     * deviceNo : 95A32E080CB74C638C5E7471D6C21EE3
-     * oids : 201703090918506047175100124#201703090759354116649100119
+     * mac : 7777777
+     * deviceId : 88888888
+     * clientType : TEST-TCL
+     * userNo : 10086
+     * lhqId : 53776
+     * bean : 10
+     * proportion : 1
+     * type : 0
+     * coin_type : 0
      */
 
-    private String storeUid;
-    private String deviceNo;
-    private String oids;
+    private String mac;
+    private String deviceId;
+    private String clientType;
+    private String userNo;
+    private String lhqId;
+    private String bean;
+    private String proportion;
+    private String type;
+    private String coin_type;
 
-    public String getStoreUid() {
-        return storeUid;
+    public String getMac() {
+        return mac;
     }
 
-    public void setStoreUid(String storeUid) {
-        this.storeUid = storeUid;
+    public void setMac(String mac) {
+        this.mac = mac;
     }
 
-    public String getDeviceNo() {
-        return deviceNo;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setDeviceNo(String deviceNo) {
-        this.deviceNo = deviceNo;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
-    public String getOids() {
-        return oids;
+    public String getClientType() {
+        return clientType;
     }
 
-    public void setOids(String oids) {
-        this.oids = oids;
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
+    }
+
+    public String getUserNo() {
+        return userNo;
+    }
+
+    public void setUserNo(String userNo) {
+        this.userNo = userNo;
+    }
+
+    public String getLhqId() {
+        return lhqId;
+    }
+
+    public void setLhqId(String lhqId) {
+        this.lhqId = lhqId;
+    }
+
+    public String getBean() {
+        return bean;
+    }
+
+    public void setBean(String bean) {
+        this.bean = bean;
+    }
+
+    public String getProportion() {
+        return proportion;
+    }
+
+    public void setProportion(String proportion) {
+        this.proportion = proportion;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCoin_type() {
+        return coin_type;
+    }
+
+    public void setCoin_type(String coin_type) {
+        this.coin_type = coin_type;
     }
 }
