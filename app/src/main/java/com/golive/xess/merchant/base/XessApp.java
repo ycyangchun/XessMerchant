@@ -37,8 +37,8 @@ public class XessApp extends Application {
         initNet();
         initPath();
         initDadaBase();
-//        JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
-//        JPushInterface.init(this);                          // 初始化 JPush
+        JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);                          // 初始化 JPush
     }
 
     private void initDadaBase() {

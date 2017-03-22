@@ -17,9 +17,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+//    task nativeLibsToJar(type: Zip, description: "create a jar archive of the native libs") {
+//        destinationDir file("$projectDir/libs")
+//        baseName "Native_Libs2"
+//        extension "jar"
+//        from fileTree(dir: "libs", include: "**/*.so")
+//        into "lib"
+//    }
+//
+//    tasks.withType(JavaCompile) {
+//        compileTask -> compileTask.dependsOn(nativeLibsToJar)
+//    }
+//    dependencies {
+//        compile files('libs/Native_Libs2.jar')
+//    }
+
     sourceSets {
         main {
-            jniLibs.srcDirs = ['libs']//这一句是设置目标的so存放路径，也就是组装到apk中的so路径
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -59,5 +75,4 @@ dependencies {
     // 图片选取
     compile 'com.lzy.widget:imagepicker:0.3.2'
     compile 'com.lzy.widget:ninegridview:0.2.1'
-
 }
