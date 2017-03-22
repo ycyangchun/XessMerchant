@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
@@ -81,6 +82,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         if(loginEntity != null){
             SharedPreferencesUtils.put("storeUid",loginEntity.getStoreUid()+"");
             SharedPreferencesUtils.put("password",pwd);
+            JPushInterface.setAlias(getApplicationContext(), loginEntity.getStoreUid()+"", null);
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
