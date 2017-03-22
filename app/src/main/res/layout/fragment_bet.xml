@@ -238,7 +238,7 @@
     <!--bottomModule      710 X 320 -->
     <!--bottomModule width 710/830 = 0.855-->
     <!--bottomModule height 320/405 = 0.79-->
-    <RelativeLayout
+    <com.zhy.android.percent.support.PercentRelativeLayout
         android:layout_width="710dp"
         android:layout_height="320dp"
         android:layout_below="@+id/bet_top_rl"
@@ -248,11 +248,13 @@
         app:layout_widthPercent="85.5%">
         <!-- textSize 20/40 = 0.50-->
         <!-- marginLeft 10/710 = 0.014-->
+        <!-- bottom_ll 38/320 = 0.118-->
         <com.zhy.android.percent.support.PercentLinearLayout
             android:id="@+id/bottom_ll"
             android:layout_width="match_parent"
             android:layout_height="38dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_heightPercent="11.8%">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -350,7 +352,7 @@
             android:layout_below="@+id/bottom_ll"
             android:divider="@null"
             android:listSelector="@android:color/transparent" />
-    </RelativeLayout>
+    </com.zhy.android.percent.support.PercentRelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
