@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.golive.xess.merchant.model.api.ApiService;
+import com.golive.xess.merchant.model.api.body.PayBody;
+import com.golive.xess.merchant.model.entity.PayEvent;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hwangjr.rxbus.annotation.Subscribe;
@@ -49,7 +51,7 @@ public class MyReceiver extends BroadcastReceiver {
             dealMessage(context, bundle);
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.i(TAG,"[MyReceiver] 接收到推送下来的通知");
-            
+
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.i(TAG, "[MyReceiver] 用户点击打开了通知");
 
@@ -123,10 +125,11 @@ public class MyReceiver extends BroadcastReceiver {
 
     private void payment(Context context, String data) {
         Gson gson = new Gson();
-        Type cla = new TypeToken<Map<String, String>>() {
+        Type cla = new TypeToken<PayEvent>() {
         }.getType();
-        Map<String, String> map = gson.fromJson(data, cla);
-        if (map.get("result").equals("success")) {
+        PayEvent payEvent = gson.fromJson(data,cla);
+        RxBus.getInstance().post(payEvent);
+        if (payEvent.getResult().equals("success")) {
             android.widget.Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
         } else {
             android.widget.Toast.makeText(context, "支付失败", Toast.LENGTH_SHORT).show();

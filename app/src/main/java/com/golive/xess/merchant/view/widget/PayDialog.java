@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Base64;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -35,7 +34,9 @@ import com.golive.xess.merchant.di.components.NetComponent;
 import com.golive.xess.merchant.model.api.body.PayBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.PayEntity;
+import com.golive.xess.merchant.model.entity.PayEvent;
 import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.RxBus;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 
 import java.text.MessageFormat;
@@ -43,6 +44,7 @@ import java.text.MessageFormat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -69,7 +71,7 @@ public class PayDialog extends Dialog {
 
     private BaseActivity mContext;
     private Double payNum;
-
+    Subscription rxSubscription;
     public PayDialog(BaseActivity context, Double num) {
         super(context, R.style.ShareDialog);
         this.mContext = context;
@@ -85,7 +87,19 @@ public class PayDialog extends Dialog {
         payMoneyTv.setText(getFormatString(payNum, payNum / 100));
         initWebView();
         initData();
+        initRxBus();
     }
+
+    private void initRxBus() {
+        rxSubscription = RxBus.getInstance().toObserverable(PayEvent.class)
+                .subscribe(new Action1<PayEvent>() {
+                    @Override
+                    public void call(PayEvent studentEvent) {
+                        dismiss();
+                    }
+                });
+    }
+
     private void initData() {
         NetComponent netComponent = XessApp.get(mContext).getNetComponent();
         PayBody body = new PayBody();
@@ -145,7 +159,11 @@ public class PayDialog extends Dialog {
     public void dismiss() {
         super.dismiss();
         deleteZhifubaoParams();
+        if (!rxSubscription.isUnsubscribed()){
+            rxSubscription.unsubscribe();
+        }
     }
+
 
     ////////////////////////////////////////////////////////////////////////////
     //=============================支付宝============================
