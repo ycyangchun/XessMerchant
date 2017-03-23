@@ -30,8 +30,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @BindView(R.id.login_mobile_tv)
     EditText loginMobileTv;
-    @BindView(R.id.protocol_cb)
-    CheckBox protocolCb;
     @BindView(R.id.login_password_tv)
     EditText loginPasswordTv;
 
