@@ -38,10 +38,10 @@
             android:theme="@style/ShareDialog" />
 
         <!--jpush-->
-        <!-- yc 4c8158d10f6186e77481a8bc    app   -->
+        <!-- yc 4c8158d10f6186e77481a8bc    app 11bcc2c089b2195158d7defd  -->
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="4c8158d10f6186e77481a8bc" />
+            android:value="11bcc2c089b2195158d7defd" />
         <!-- Rich push 核心功能 since 2.0.6 -->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
@@ -156,7 +156,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- Optional for location -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!--<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
