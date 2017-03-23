@@ -19,9 +19,12 @@ import com.golive.xess.merchant.di.components.DaggerWalletComponent;
 import com.golive.xess.merchant.di.modules.WalletModule;
 import com.golive.xess.merchant.model.api.body.WalletBody;
 import com.golive.xess.merchant.model.api.body.WalletLogsBody;
+import com.golive.xess.merchant.model.entity.PayEvent;
 import com.golive.xess.merchant.model.entity.WalletEntity;
 import com.golive.xess.merchant.presenter.WalletContract;
 import com.golive.xess.merchant.presenter.WalletPresenter;
+import com.golive.xess.merchant.utils.RxBus;
+import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.adapter.ItemWalletAdapter;
 import com.golive.xess.merchant.view.widget.CommonDialog;
 import com.golive.xess.merchant.view.widget.DialogRecharge;
@@ -35,6 +38,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
+import rx.functions.Action1;
 
 /**
  * Created by YangChun .
@@ -69,7 +74,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
 
     List<LinkedTreeMap> mapList;
     ItemWalletAdapter walletAdapter;
-
+    Subscription rxSubscription;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -94,8 +99,20 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
 
         initView();
         initData();
+        initRxBus();
     }
 
+    private void initRxBus() {
+        rxSubscription = RxBus.getInstance().toObserverable(PayEvent.class)
+                .subscribe(new Action1<PayEvent>() {
+                    @Override
+                    public void call(PayEvent studentEvent) {
+                        String kidneyBean = studentEvent.getKidneyBean();
+                        SharedPreferencesUtils.put("kidneyBean",kidneyBean);
+                        currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
+                    }
+                });
+    }
     private void initView() {
         if (XessConfig._VERSION == XessConfig._PERSONAL) {
 
@@ -147,14 +164,16 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     @Override
     public void dataInfoSuccess(WalletEntity walletEntity) {
         if (walletEntity != null) {
+            String kidneyBean = walletEntity.getKidneyBean();
+            SharedPreferencesUtils.put("kidneyBean",kidneyBean);
             if (XessConfig._VERSION == XessConfig._PERSONAL) {
-                currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, walletEntity.getKidneyBean()));
+                currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
                 winKidneyTv.setText(getMessageFormatString(activity, R.string.win_kidney_s, walletEntity.getGainBean()));
                 topAwardTv.setText(getMessageFormatString(activity, R.string.top_award_s, walletEntity.getTopMoney()));
                 winCountTv.setText(getMessageFormatString(activity, R.string.win_count_s, walletEntity.getWinTimes()));
 //                commissionKidneyTv.setText();
             } else {
-                currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, walletEntity.getKidneyBean()));
+                currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
             }
         }
     }
@@ -167,4 +186,12 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
 
     ///////////////////WalletContract.View////////////////////////
 
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (!rxSubscription.isUnsubscribed()){
+            rxSubscription.unsubscribe();
+        }
+    }
 }
