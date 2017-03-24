@@ -116,9 +116,14 @@ public class AppUtil {
      * wifi网络mac
      */
     public static String getMacByWifi(Context context){
-        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        WifiInfo info = wifi.getConnectionInfo();
-        return info.getMacAddress();
+        try {
+            WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            WifiInfo info = wifi.getConnectionInfo();
+            return info.getMacAddress();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
     /**
      * 屏幕尺寸

@@ -34,9 +34,9 @@
             android:layout_marginTop="40dp"
             android:text="@string/login_s"
             android:textColor="@color/pink"
-            android:textSize="24sp"
+            android:textSize="@dimen/w48"
             app:layout_marginTopPercent="9.8%"
-            app:layout_textSizePercent="6%" />
+           />
 
         <!-- top 20/405 = 0.049-->
         <!-- layout_width 200/880 = 0.227-->
@@ -64,8 +64,8 @@
             android:maxLines="1"
             android:text="@string/store_uid_s"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_textSizePercent="4.4%" />
+            android:textSize="@dimen/w36"
+            />
         <!-- width 270/880 = 0.30-->
         <EditText
             android:id="@+id/login_mobile_tv"
@@ -80,8 +80,7 @@
             android:maxLines="1"
             android:text="10000"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_textSizePercent="4.4%"
+            android:textSize="@dimen/w36"
             app:layout_widthPercent="30%" />
 
 
@@ -94,8 +93,8 @@
             android:maxLines="1"
             android:text="@string/password_s"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_textSizePercent="4.4%" />
+            android:textSize="@dimen/w36"
+            />
 
         <EditText
             android:id="@+id/login_password_tv"
@@ -111,8 +110,7 @@
             android:paddingStart="18dp"
             android:text="123456"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_textSizePercent="4.4%"
+            android:textSize="@dimen/w36"
             app:layout_widthPercent="30%" />
         <!-- top 60/405 = 0.148-->
         <!-- top 45/405 = 0.111-->
@@ -128,11 +126,10 @@
             android:paddingBottom="3dp"
             android:text="@string/login_s"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="@dimen/w36"
             app:layout_paddingBottomPercent="0.5%"
             app:layout_widthPercent="34%"
             app:layout_heightPercent="11.1%"
-            app:layout_textSizePercent="4.4%"
             app:layout_marginTopPercent="14.8%" />
 
 

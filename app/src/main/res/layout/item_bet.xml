@@ -1,126 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="@dimen/w76"
     android:descendantFocusability="afterDescendants"
+    android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <!-- textSize 16/40 = 0.40-->
-    <!-- marginLeft 10/710 = 0.014-->
     <CheckBox
         android:id="@+id/item_cb"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/w104"
         android:layout_height="wrap_content" />
-    <com.zhy.android.percent.support.PercentLinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
 
-        <TextView
-            android:id="@+id/order_time_tv"
-            android:layout_width="105dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:textColor="@color/white"
-            app:layout_textSizePercent="40%" />
-    </com.zhy.android.percent.support.PercentLinearLayout>
+    <TextView
+        android:id="@+id/order_time_tv"
+        android:layout_width="@dimen/w148"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/w12"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/w24" />
 
     <TextView
         android:id="@+id/mobile_num_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/w172"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="2"
+        android:layout_marginLeft="@dimen/w52"
         android:gravity="center"
         android:textColor="@color/white"
-        app:layout_marginLeftPercent="1.4%"
-        app:layout_textSizePercent="40%" />
+        android:textSize="@dimen/w24" />
 
     <TextView
         android:id="@+id/lottery_type_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/w72"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/w56"
         android:gravity="center"
         android:textColor="@color/white"
-        app:layout_marginLeftPercent="1.4%"
-        app:layout_textSizePercent="40%" />
+        android:textSize="@dimen/w24" />
 
     <TextView
         android:id="@+id/issue_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/w108"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="2"
+        android:layout_marginLeft="@dimen/w44"
         android:gravity="center"
         android:textColor="@color/white"
-        app:layout_marginLeftPercent="1.4%"
-        app:layout_textSizePercent="40%" />
+        android:textSize="@dimen/w24" />
 
     <TextView
         android:id="@+id/num_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/w76"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:textColor="@color/white"
+        android:layout_marginLeft="@dimen/w48"
         android:gravity="center"
-        app:layout_marginLeftPercent="1.4%"
-        app:layout_textSizePercent="40%" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/w24" />
 
     <TextView
         android:id="@+id/bet_kidney_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/w104"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="2"
+        android:layout_marginLeft="@dimen/w64"
         android:gravity="center"
         android:textColor="@color/white"
-        app:layout_marginLeftPercent="1.4%"
-        app:layout_textSizePercent="40%" />
+        android:textSize="@dimen/w24" />
 
     <TextView
         android:id="@+id/bet_status_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/w100"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="2"
+        android:layout_marginLeft="@dimen/w80"
         android:gravity="center"
         android:textColor="@color/white"
-        app:layout_marginLeftPercent="1.4%"
-        app:layout_textSizePercent="40%" />
-    <!-- detail_tv left 10/710 = 0.014-->
-    <!-- detail_tv height 28/40 = 0.70-->
-    <!-- detail_tv width 40/710 = 0.056-->
+        android:textSize="@dimen/w24" />
+
     <Button
         android:id="@+id/detail_bt"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/w100"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:textColor="@color/blue"
+        android:layout_marginLeft="@dimen/w24"
         android:background="@null"
         android:gravity="center"
-        app:layout_heightPercent="70%"
-        app:layout_marginLeftPercent="1.4%"
-        app:layout_textSizePercent="40%"
-        app:layout_widthPercent="5.6%" />
+        android:textColor="@color/blue"
+        android:textSize="@dimen/w24" />
 
     <Button
         android:id="@+id/option_bt"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/w100"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:textColor="@color/blue"
+        android:layout_marginLeft="@dimen/w4"
         android:background="@null"
         android:gravity="center"
-        app:layout_heightPercent="70%"
-        app:layout_marginLeftPercent="1%"
-        app:layout_textSizePercent="40%"
-        app:layout_widthPercent="5.6%" />
+        android:textColor="@color/blue"
+        android:textSize="@dimen/w24" />
 
-</com.zhy.android.percent.support.PercentLinearLayout>
+</LinearLayout>

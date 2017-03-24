@@ -34,8 +34,8 @@
             android:layout_marginTop="40dp"
             android:text="@string/modify_pwd_s"
             android:textColor="@color/pink"
-            android:textSize="24sp"
-            app:layout_marginTopPercent="9.8%" />
+            android:textSize="@dimen/w48"
+           />
 
         <View
             android:id="@+id/login_line"
@@ -59,8 +59,7 @@
             android:maxLines="1"
             android:text="@string/original_pwd_s"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_textSizePercent="4.4%" />
+            android:textSize="@dimen/w36"/>
         <!-- width 270/880 = 0.30-->
         <EditText
             android:id="@+id/original_pwd_tv"
@@ -76,8 +75,7 @@
             app:layout_marginTopPercent="4.4%"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_textSizePercent="4.4%"
+            android:textSize="@dimen/w36"
             app:layout_widthPercent="30%" />
 
 
@@ -90,8 +88,8 @@
             android:maxLines="1"
             android:text="@string/new_pwd_s"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_textSizePercent="4.4%" />
+            android:textSize="@dimen/w36"
+             />
 
         <EditText
             android:id="@+id/new_pwd_tv"
@@ -107,8 +105,7 @@
             android:paddingStart="18dp"
             android:text="123456"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_textSizePercent="4.4%"
+            android:textSize="@dimen/w36"
             app:layout_widthPercent="30%" />
 
 
@@ -121,8 +118,8 @@
             android:maxLines="1"
             android:text="@string/affirm_pwd_s"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_textSizePercent="4.4%" />
+            android:textSize="@dimen/w36"
+             />
 
         <EditText
             android:id="@+id/affirm_pwd_tv"
@@ -138,8 +135,7 @@
             android:paddingStart="18dp"
             android:text="123456"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_textSizePercent="4.4%"
+            android:textSize="@dimen/w36"
             app:layout_widthPercent="30%" />
 
         <!-- top 45/405 = 0.111-->
@@ -154,11 +150,10 @@
             android:paddingBottom="3dp"
             android:text="@string/finish_s"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="@dimen/w36"
             app:layout_paddingBottomPercent="0.5%"
             app:layout_widthPercent="34%"
             app:layout_heightPercent="11.1%"
-            app:layout_textSizePercent="4.4%"
             app:layout_marginTopPercent="11.1%"  />
 
 

@@ -12,4 +12,9 @@
     <color name="detail_text">#FF73FA</color>
     <color name="detail_red_text">#B24C01</color>
     <color name="recharge_text">#472212</color>
+    <color name="bt_yellow_text">#5B2815</color>
+    <color name="bt_pink_text">#161326</color>
+    <color name="bg_bet_top">#272F53</color>
+    <color name="listView_driver">#0A133E</color>
+
 </resources>
