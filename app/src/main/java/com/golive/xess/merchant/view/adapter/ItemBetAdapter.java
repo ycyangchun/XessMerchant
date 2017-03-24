@@ -97,7 +97,7 @@ public class ItemBetAdapter extends BaseAdapter {
         holder.lotteryTypeTv.setText(EnumUtils.Lottery.getName((String)order.get("lid")));
         holder.issueTv.setText("");
         holder.numTv.setText(order.get("investNum")+"注");
-        holder.betKidneyTv.setText(order.get("amount")+"彩豆");
+        holder.betKidneyTv.setText(order.get("amount")+"菜豆");
         holder.betStatusTv.setText((String)order.get("orderStateDesc"));
 
         holder.detail_tv.setText("详情");

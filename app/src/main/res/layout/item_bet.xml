@@ -87,9 +87,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/w24"
-        android:background="@null"
+        android:background="@drawable/bet_detail_selector"
         android:gravity="center"
-        android:textColor="@color/blue"
+        android:textColor="@color/white"
         android:textSize="@dimen/w24" />
 
     <Button
@@ -100,7 +100,7 @@
         android:layout_marginLeft="@dimen/w4"
         android:background="@null"
         android:gravity="center"
-        android:textColor="@color/blue"
+        android:textColor="@color/white"
         android:textSize="@dimen/w24" />
 
 </LinearLayout>
