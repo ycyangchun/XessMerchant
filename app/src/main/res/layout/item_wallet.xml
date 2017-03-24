@@ -2,7 +2,7 @@
 <com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="30dp"
+    android:layout_height="@dimen/w60"
     android:gravity="center_vertical"
     android:orientation="horizontal">
     <!-- android:layout_height="30dp" -->
@@ -18,10 +18,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="left|center_vertical"
-        app:layout_marginLeftPercent="13.7%"
         android:textColor="@color/white"
+        android:textSize="@dimen/w28"
         app:layout_heightPercent="83.3%"
-        app:layout_textSizePercent="60%"
+        app:layout_marginLeftPercent="13.7%"
         app:layout_widthPercent="25.8%" />
 
     <TextView
@@ -29,9 +29,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        app:layout_heightPercent="83.3%"
         android:textColor="@color/white"
-        app:layout_textSizePercent="60%"
+        android:textSize="@dimen/w28"
+        app:layout_heightPercent="83.3%"
         app:layout_widthPercent="25.8%" />
     <!--  width 200/580 = 0.345-->
     <TextView
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/white"
+        android:textSize="@dimen/w28"
         app:layout_heightPercent="83.3%"
-        app:layout_textSizePercent="60%"
         app:layout_widthPercent="34.5%" />
 </com.zhy.android.percent.support.PercentLinearLayout>

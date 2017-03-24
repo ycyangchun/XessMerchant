@@ -7,30 +7,33 @@
     <!--percent         880 X 405 -->
     <!--leftModule      230 X 405 -->
 
-    <!--w_left_rl width  230/830 = 0.277-->
+    <!--w_left_rl width  230/880 = 0.261-->
     <RelativeLayout
-        android:layout_width="wrap_content"
         android:id="@+id/w_left_rl"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        >
+        app:layout_widthPercent="26.1%">
 
         <com.zhy.android.percent.support.PercentRelativeLayout
-            android:layout_width="230dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:background="@drawable/bg_wallet_border"
-            app:layout_widthPercent="27.7%">
+            android:background="@drawable/bg_wallet_border">
             <!--imageView top 25/405 = 0.06-->
+            <!--width 80/230 = 0.347-->
+            <!--height 80/405 = 0.197-->
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/ic_head"
-                app:layout_marginTopPercent="6%" />
+                app:layout_marginTopPercent="6%"
+                app:layout_heightPercent="19.7%"
+                app:layout_widthPercent="34.7%"/>
             <!-- currently_kidney_tv top 15/405 = 0.037-->
             <!-- currently_kidney_tv height 20/405 = 0.05-->
             <!-- currently_kidney_tv textSize 18/405 = 0.044-->
@@ -113,8 +116,8 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/wallet_btn_recharge"
                 android:text="@string/recharge_s"
-                android:paddingBottom="3dp"
-                app:layout_marginTopPercent="3%"
+                app:layout_widthPercent="55%"
+                app:layout_marginTopPercent="5%"
                 app:layout_textSizePercent="4.4%" />
 
             <Button
@@ -125,7 +128,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/wallet_btn_withdraw"
                 android:text="@string/withdraw_s"
-                android:paddingBottom="3dp"
+                app:layout_widthPercent="55%"
                 app:layout_marginTopPercent="1%"
                 app:layout_textSizePercent="4.4%" />
 
@@ -186,11 +189,10 @@
         android:layout_height="2dp"
         android:layout_below="@+id/w_top_ll"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/ic_line"
         android:layout_toEndOf="@+id/w_left_rl"
         android:layout_toRightOf="@+id/w_left_rl"
-        app:layout_widthPercent="69%"
-        />
+        android:background="@drawable/ic_line"
+        app:layout_widthPercent="69%" />
     <!-- w_top_ll height 335/405 = 0.827-->
     <!-- w_top_ll width 580/830 = 0.699-->
     <com.zhy.android.percent.support.PercentLinearLayout

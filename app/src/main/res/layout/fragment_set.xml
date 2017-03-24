@@ -99,7 +99,7 @@
     <View
         android:id="@+id/ling_view"
         android:layout_width="620dp"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/h4"
         android:layout_below="@+id/version_ll"
         android:layout_centerHorizontal="true"
         android:background="@drawable/ic_line"
