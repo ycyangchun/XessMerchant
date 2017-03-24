@@ -116,6 +116,7 @@
             app:layout_widthPercent="30%" />
         <!-- top 60/405 = 0.148-->
         <!-- top 45/405 = 0.111-->
+        <!-- paddingBottom  3/45 = 0.06-->
         <Button
             android:id="@+id/login_bt"
             android:layout_width="wrap_content"
@@ -124,7 +125,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:background="@drawable/bt_login"
-            android:gravity="center"
             android:paddingBottom="3dp"
             android:text="@string/login_s"
             android:textColor="@color/white"
