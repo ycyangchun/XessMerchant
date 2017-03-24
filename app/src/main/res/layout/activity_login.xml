@@ -6,26 +6,25 @@
     android:background="@drawable/bg_main_background">
     <!--               width  height-->
     <!--percent         960 X 540 -->
-    <!--width  830/960 = 0.864-->
+    <!--         880 X 405 -->
+    <!--width  880/960 = 0.9166-->
     <!--height  405/540 = 0.75-->
-    <!--marginLeft 60/830 = 0.072-->
-    <!--marginTop 78/540 = 0.144-->
+    <!--margin 38/880 = 0.043-->
 
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:id="@+id/percentRelativeLayout"
-        android:layout_width="830dp"
+        android:layout_width="880dp"
         android:layout_height="405dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/bg_border"
-        app:layout_heightPercent="75%"
-        app:layout_marginLeftPercent="7%"
-        app:layout_marginRightPercent="7%"
-        app:layout_marginTopPercent="14.4%"
-        app:layout_widthPercent="86.4%">
+        app:layout_heightPercent="74%"
+        app:layout_marginLeftPercent="4.4%"
+        app:layout_marginRightPercent="4.34%"
+        app:layout_widthPercent="90%">
 
         <!-- top 40/405 = 0.098-->
-        <!--textsize 24/405 = 0.6-->
+        <!--textsize 24/405 = 0.06-->
         <TextView
             android:id="@+id/login_tv"
             android:layout_width="wrap_content"
@@ -37,9 +36,10 @@
             android:textColor="@color/pink"
             android:textSize="24sp"
             app:layout_marginTopPercent="9.8%"
-            app:layout_textSizePercent="6%"/>
+            app:layout_textSizePercent="6%" />
 
         <!-- top 20/405 = 0.049-->
+        <!-- layout_width 200/880 = 0.227-->
         <View
             android:id="@+id/login_line"
             android:layout_width="200dp"
@@ -47,94 +47,92 @@
             android:layout_below="@+id/login_tv"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:background="@drawable/login_title_hover"
             app:layout_marginTopPercent="4.9%"
-            android:background="@drawable/login_title_hover" />
+            app:layout_widthPercent="22.7%" />
 
-        <!-- top 50/405 = 0.08-->
-        <LinearLayout
-            android:id="@+id/login_mobile_ll"
+        <!-- textSize 18/405 = 0.044-->
+        <!-- top 20/405 = 0.05-->
+
+        <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/login_mobile_tv"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@+id/login_mobile_tv"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/store_uid_s"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_textSizePercent="4.4%" />
+        <!-- width 270/880 = 0.30-->
+        <EditText
+            android:id="@+id/login_mobile_tv"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/login_line"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_marginTopPercent="8%">
+            android:layout_centerInParent="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/text_focus"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLines="1"
+            android:text="10000"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_textSizePercent="4.4%"
+            app:layout_widthPercent="30%" />
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="@string/store_uid_s"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/login_mobile_tv"
-                android:layout_width="270dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/text_focus"
-                android:imeOptions="actionDone"
-                android:inputType="number"
-                android:maxLines="1"
-                android:paddingLeft="3dp"
-                android:paddingStart="18dp"
-                android:text="10000"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <!-- top 10/405 = 0.025-->
-        <LinearLayout
-            android:id="@+id/login_verification_ll"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/login_mobile_ll"
-            android:layout_centerHorizontal="true"
+            android:layout_alignTop="@+id/login_password_tv"
             android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_marginTopPercent="2.5%">
+            android:layout_toLeftOf="@+id/login_password_tv"
+            android:maxLines="1"
+            android:text="@string/password_s"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_textSizePercent="4.4%" />
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="@string/password_s"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/login_password_tv"
-                android:layout_width="270dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/text_focus"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:paddingLeft="3dp"
-                android:paddingStart="18dp"
-                android:text="123456"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-        <!-- top 15/405 = 0.037-->
+        <EditText
+            android:id="@+id/login_password_tv"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/login_mobile_tv"
+            android:layout_below="@+id/login_mobile_tv"
+            android:background="@drawable/text_focus"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingLeft="3dp"
+            android:paddingStart="18dp"
+            android:text="123456"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_textSizePercent="4.4%"
+            app:layout_widthPercent="30%" />
+        <!-- top 60/405 = 0.148-->
+        <!-- top 45/405 = 0.111-->
         <Button
             android:id="@+id/login_bt"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/login_verification_ll"
+            android:layout_height="45dp"
+            android:layout_below="@+id/login_password_tv"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/bt_login"
             android:gravity="center"
             android:paddingBottom="3dp"
             android:text="@string/login_s"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_marginTopPercent="3.7%" />
+            app:layout_widthPercent="34%"
+            app:layout_heightPercent="11.1%"
+            app:layout_textSizePercent="4.4%"
+            app:layout_marginTopPercent="14.8%" />
 
 
     </com.zhy.android.percent.support.PercentRelativeLayout>
@@ -142,10 +140,11 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:background="@drawable/bg_main_border"
         app:layout_heightPercent="75%"
-        app:layout_marginLeftPercent="7%"
-        app:layout_marginRightPercent="7%"
-        app:layout_marginTopPercent="12.3%"
-        app:layout_widthPercent="86.4%" />
+        app:layout_marginLeftPercent="4.3%"
+        app:layout_marginRightPercent="4.3%"
+        app:layout_widthPercent="91.66%" />
 </com.zhy.android.percent.support.PercentRelativeLayout>
