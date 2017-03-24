@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_main_border">
@@ -9,21 +8,30 @@
     <!--width 100/880= 0.113-->
     <!--top 50/540= 0.925-->
 
-    <com.zhy.android.percent.support.PercentRelativeLayout
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/girl_finish"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_girl" />
+
+    <RelativeLayout
         android:id="@+id/edit_rl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/w156"
+            android:layout_height="@dimen/w156"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:src="@drawable/ic_head"
-            app:layout_heightPercent="18.5%"
-            app:layout_marginTopPercent="9.25%"
-            app:layout_widthPercent="11.3%" />
+            android:layout_marginTop="@dimen/w100"
+            />
 
 
         <!--top 25/540= 0.046-->
@@ -31,28 +39,27 @@
         <LinearLayout
             android:id="@+id/id_ll"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_alignLeft="@+id/address_ll"
-            android:layout_alignStart="@+id/address_ll"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/imageView"
-            android:layout_marginTop="25dp"
-            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/w36"
+            android:layout_centerHorizontal="true"
             android:orientation="horizontal"
-            app:layout_heightPercent="8.9%"
-            app:layout_marginTopPercent="4.6%">
+            >
 
             <TextView
-                android:layout_width="160dp"
+                android:layout_width="@dimen/w160"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="@string/id_s"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/w36" />
 
             <TextView
                 android:id="@+id/id_tv"
-                android:layout_width="200dp"
+                android:layout_width="@dimen/w300"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/w36" />
         </LinearLayout>
         <!--top 25/540= 0.046-->
 
@@ -64,28 +71,28 @@
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            app:layout_marginTopPercent="4.6%">
+           android:layout_marginTop="@dimen/w48">
 
             <TextView
-                android:layout_width="160dp"
+                android:layout_width="@dimen/w160"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:maxLines="1"
                 android:text="@string/nickname_s"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="@dimen/w36" />
 
             <EditText
                 android:id="@+id/nickname_et"
-                android:layout_width="200dp"
+                android:layout_width="@dimen/w300"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_nick"
+                android:background="@drawable/text_focus"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:maxLines="1"
-                android:paddingLeft="10dp"
+                android:paddingLeft="18dp"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="@dimen/w36" />
         </LinearLayout>
         <!--top 25/540= 0.046-->
         <LinearLayout
@@ -96,41 +103,34 @@
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            app:layout_heightPercent="8.9%"
-            app:layout_marginTopPercent="4.6%">
+           android:layout_marginTop="@dimen/w44">
 
             <TextView
-                android:layout_width="160dp"
+                android:layout_width="@dimen/w160"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:maxLines="1"
                 android:text="@string/address_s"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="@dimen/w36" />
 
             <TextView
                 android:id="@+id/address_tv"
-                android:layout_width="200dp"
+                android:layout_width="@dimen/w300"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="@dimen/w36" />
         </LinearLayout>
 
         <Button
             android:id="@+id/edit_per_bt"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/w300"
+            android:layout_height="@dimen/w88"
             android:layout_below="@+id/address_ll"
             android:layout_centerHorizontal="true"
             android:background="@drawable/bt_finish"
-            app:layout_marginTopPercent="4.6%" />
+            android:textSize="@dimen/w36"
+            android:layout_marginTop="@dimen/w60"/>
 
-    </com.zhy.android.percent.support.PercentRelativeLayout>
-
-    <RelativeLayout
-        android:visibility="gone"
-        android:id="@+id/girl_finish"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/ic_girl" />
+    </RelativeLayout>
 </RelativeLayout>

@@ -68,7 +68,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
     @BindView(R.id.edit_per_bt)
     Button editBt;
     @BindView(R.id.edit_rl)
-    PercentRelativeLayout editRl;
+    RelativeLayout editRl;
     @BindView(R.id.girl_finish)
     RelativeLayout girlFinish;
     private ArrayList<ImageItem> imageItems;

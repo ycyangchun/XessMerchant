@@ -38,7 +38,7 @@ public abstract class BaseActivity extends FragmentActivity {
         password = SharedPreferencesUtils.getString("password");
         storeNo = SharedPreferencesUtils.getString("storeNo");
 
-        Logger.d("height "+height+" width "+width +" 是否竖屏 "+DisplayUtils.isPortrait(this));
+        Logger.d("height "+height+" width "+width +" 是否竖屏 "+DisplayUtils.isPortrait(this) );
         if( height > width && DisplayUtils.isPortrait(this)){
             requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
