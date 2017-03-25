@@ -52,6 +52,10 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         } else {
             Toast.makeText(this,throwable.getMessage()+" Some Other Error", Toast.LENGTH_SHORT).show();
         }
+        if("设备信息上传-参数异常".equals(throwable.getMessage())) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
     }
 
     @Override

@@ -81,7 +81,7 @@ public class AppUtil {
     public static String getDeviceId(Context context) {
         if(!TextUtils.isEmpty(deviceId)) return  deviceId;
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        deviceId= tm.getDeviceId();
+        deviceId = tm.getDeviceId();
         return deviceId;
     }
     /**

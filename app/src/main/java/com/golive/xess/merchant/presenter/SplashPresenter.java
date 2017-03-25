@@ -57,7 +57,7 @@ public class SplashPresenter implements SplashContract.Presenter{
                                 SharedPreferencesUtils.put("deviceNo", deviceNo);
                                 view.successLoad(code);
                             }else
-                                view.showOnFailure(new Throwable(msg));
+                                view.showOnFailure(new Throwable("设备信息上传-"+msg));
                         } catch (JSONException e) {
                             view.showOnFailure(e);
                         }
