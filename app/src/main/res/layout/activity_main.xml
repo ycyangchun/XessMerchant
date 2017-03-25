@@ -42,7 +42,7 @@
             tl:tl_indicator_corner_radius="3dp"
             tl:tl_indicator_height="5dp"
             tl:tl_indicator_style="TRIANGLE"
-            tl:tl_indicator_width="10dp"
+            tl:tl_indicator_width="20dp"
             tl:tl_textSelectColor="#fff"
             tl:tl_textUnselectColor="#9487B2"
             tl:tl_textsize="@dimen/w36" />

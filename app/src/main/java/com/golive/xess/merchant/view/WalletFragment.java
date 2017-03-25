@@ -152,6 +152,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     void onClickWithdraw() {
         CommonDialog dialog = new CommonDialog(activity, 0, 10);
         dialog.show();
+        dialog.setCanceledOnTouchOutside(true);// show之前设置无效
     }
 
     ///////////////////WalletContract.View////////////////////////

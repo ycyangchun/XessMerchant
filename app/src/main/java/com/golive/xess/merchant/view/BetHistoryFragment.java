@@ -128,6 +128,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     public void successAccount(AccountEntity accountEntity) {
         AccountDialog accountDialog = new AccountDialog(activity,accountEntity);
         accountDialog.show();
+        accountDialog.setCanceledOnTouchOutside(true);
     }
 
     @Override

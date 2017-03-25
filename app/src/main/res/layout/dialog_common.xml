@@ -5,14 +5,14 @@
     android:gravity="center">
 
     <RelativeLayout
-        android:layout_width="400dp"
-        android:layout_height="250dp"
+        android:layout_width="@dimen/h800"
+        android:layout_height="@dimen/h500"
         android:background="@drawable/bg_common_dialog">
 
         <RelativeLayout
             android:id="@+id/dialog_title_rl"
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="@dimen/w92">
 
             <TextView
                 android:id="@+id/dialog_title_tv"
@@ -21,7 +21,7 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:textColor="@color/dialog_text"
-                android:textSize="18sp" />
+                android:textSize="@dimen/w36" />
 
             <TextView
                 android:id="@+id/dialog_close_tv"
@@ -29,13 +29,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:drawableLeft="@drawable/ic_dialog_close"
-                android:padding="10dp" />
+                android:padding="@dimen/w20" />
         </RelativeLayout>
 
         <View
             android:id="@+id/dialog_line"
-            android:layout_width="320dp"
-            android:layout_height="1.5dp"
+            android:layout_width="@dimen/h640"
+            android:layout_height="@dimen/w4"
             android:layout_below="@+id/dialog_title_rl"
             android:layout_centerHorizontal="true"
             android:background="@drawable/ic_line" />
@@ -49,10 +49,10 @@
             <RelativeLayout
                 android:id="@+id/text_rl"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="@dimen/w220"
                 android:gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingLeft="@dimen/w20"
+                android:paddingRight="@dimen/w20">
 
                 <TextView
                     android:id="@+id/dialog_context_tv"
@@ -61,13 +61,13 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/w36" />
             </RelativeLayout>
             <!-- 绑定银行卡-->
             <RelativeLayout
                 android:id="@+id/card_rl"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="@dimen/w260"
                 android:visibility="gone"
                 >
 
@@ -76,30 +76,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="@dimen/w160"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="@string/card_name_s"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/w36" />
                     <EditText
                         android:id="@+id/card_name_et"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_nick"
-                        android:enabled="false"
+                        android:layout_width="@dimen/w400"
+                        android:layout_height="@dimen/w92"
+                        android:background="@drawable/text_focus"
                         android:imeOptions="actionDone"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:paddingLeft="3dp"
+                        android:paddingLeft="@dimen/w16"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/w36" />
 
                 </LinearLayout>
 
@@ -109,31 +107,29 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/card_name_ll"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="@dimen/w160"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="@string/card_num_s"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/w36" />
 
                     <EditText
                         android:id="@+id/card_num_et"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_nick"
-                        android:enabled="false"
+                        android:layout_width="@dimen/w400"
+                        android:layout_height="@dimen/w92"
+                        android:background="@drawable/text_focus"
                         android:imeOptions="actionDone"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:paddingLeft="3dp"
+                        android:paddingLeft="@dimen/w16"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/w36" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -142,31 +138,29 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/card_num_ll"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="@dimen/w160"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="@string/card_bank_s"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/w36" />
 
                     <EditText
                         android:id="@+id/card_bank_et"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_nick"
-                        android:enabled="false"
+                        android:layout_width="@dimen/w400"
+                        android:layout_height="@dimen/w92"
+                        android:background="@drawable/text_focus"
                         android:imeOptions="actionDone"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:paddingLeft="3dp"
+                        android:paddingLeft="@dimen/w16"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/w36" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -174,7 +168,7 @@
             <RelativeLayout
                 android:id="@+id/card_affirm_rl"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="@dimen/w260"
                 android:visibility="gone">
 
                 <TextView
@@ -185,7 +179,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/withdraw_to_bank_s"
                     android:textColor="@color/pink"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/w28" />
 
                 <LinearLayout
                     android:id="@+id/withdraw_card_name_ll"
@@ -193,28 +187,28 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/withdraw_to_bank_tv"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/w20"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="@dimen/w160"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="@string/card_name_s"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/w36" />
 
                     <TextView
                         android:id="@+id/withdraw_card_name_tv"
-                        android:layout_width="200dp"
+                        android:layout_width="@dimen/w300"
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:maxLines="1"
                         android:paddingLeft="3dp"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/w36" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -223,31 +217,31 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/withdraw_card_name_ll"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/w12"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="@dimen/w160"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="@string/card_num_s"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/w36" />
 
                     <TextView
                         android:id="@+id/withdraw_card_num_tv"
-                        android:layout_width="200dp"
+                        android:layout_width="@dimen/w300"
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:maxLines="1"
-                        android:paddingLeft="3dp"
+                        android:paddingLeft="@dimen/w4"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/w36" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="@dimen/w32"
                     android:orientation="horizontal"
                     android:layout_below="@id/withdraw_card_num_ll"
                     android:id="@+id/withdraw_card_ll"
@@ -265,7 +259,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/change_bank_s"
                         android:textColor="@color/pink"
-                        android:textSize="18sp"/>
+                        android:textSize="@dimen/w36"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -279,26 +273,24 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/middle_rl"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="@dimen/w4"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/left_dialog_bt"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/w260"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bt_background"
                 android:gravity="center"
-                android:paddingBottom="3dp"
-                android:textSize="18sp" />
+                android:textSize="@dimen/w36" />
 
             <Button
                 android:id="@+id/right_dialog_bt"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/w260"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bt_background"
                 android:gravity="center"
-                android:paddingBottom="3dp"
-                android:textSize="18sp" />
+                android:textSize="@dimen/w36" />
 
         </LinearLayout>
     </RelativeLayout>

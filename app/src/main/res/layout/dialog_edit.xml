@@ -5,14 +5,14 @@
     android:gravity="center">
 
     <RelativeLayout
-        android:layout_width="400dp"
-        android:layout_height="250dp"
+        android:layout_width="@dimen/h800"
+        android:layout_height="@dimen/h500"
         android:background="@drawable/bg_common_dialog">
 
         <RelativeLayout
             android:id="@+id/dialog_title_rl"
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="@dimen/h92">
 
             <TextView
                 android:id="@+id/dialog_title_tv"
@@ -21,7 +21,7 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:textColor="@color/dialog_text"
-                android:textSize="18sp" />
+                android:textSize="@dimen/h36" />
 
             <TextView
                 android:id="@+id/dialog_close_tv"
@@ -29,14 +29,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:drawableLeft="@drawable/ic_dialog_close"
-                android:padding="10dp" />
+                android:padding="@dimen/h20" />
         </RelativeLayout>
 
 
         <View
             android:id="@+id/dialog_line"
-            android:layout_width="320dp"
-            android:layout_height="1.5dp"
+            android:layout_width="@dimen/h620"
+            android:layout_height="@dimen/h4"
             android:layout_below="@+id/dialog_title_rl"
             android:layout_centerHorizontal="true"
             android:background="@drawable/ic_line" />
@@ -44,11 +44,11 @@
         <EditText
             android:id="@+id/edit_et"
             android:layout_centerInParent="true"
-            android:layout_width="220dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/h440"
+            android:layout_height="@dimen/h96"
             android:background="@drawable/bg_nick"
-            android:textSize="18sp"
-            android:paddingLeft="10dp"
+            android:textSize="@dimen/h36"
+            android:paddingLeft="@dimen/h20"
             android:inputType="number"
             android:textColorHint="#d5cfe6"
             android:hint="@string/edit_hint_s"
@@ -56,7 +56,7 @@
 
 
             <Button
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="@dimen/h52"
                 android:layout_below="@+id/edit_et"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/right_dialog_bt"
@@ -64,8 +64,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bt_background"
                 android:gravity="center"
-                android:paddingBottom="3dp"
-                android:textSize="18sp" />
+                android:paddingBottom="@dimen/h8"
+                android:textSize="@dimen/h36" />
 
     </RelativeLayout>
 </RelativeLayout>

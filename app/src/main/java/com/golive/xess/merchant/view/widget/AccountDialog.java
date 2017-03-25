@@ -2,6 +2,7 @@ package com.golive.xess.merchant.view.widget;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ import butterknife.ButterKnife;
  * on 2017/3/20.
  */
 
-public class AccountDialog extends Dialog {
+public class AccountDialog extends Dialog{
 
     @BindView(R.id.ssq_kidney_tv)
     TextView ssqKidneyTv;
@@ -71,4 +72,6 @@ public class AccountDialog extends Dialog {
     public String getMessageFormatString(int stringId ,Object ... arguments ) {
         return MessageFormat.format(mContext.getResources().getString(stringId),arguments);
     }
+
+   
 }
