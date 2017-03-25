@@ -1,5 +1,7 @@
 package com.golive.xess.merchant.view.adapter;
 
+import android.content.Context;
+import android.os.Build;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,11 +32,12 @@ public class ItemBetAdapter extends BaseAdapter {
     private BetItemClickListener betItemClickListener;
     private List<String> payList;//代付list
     private boolean isSelectAll = false;
-
-    public ItemBetAdapter(LayoutInflater mInflater ,List<LinkedTreeMap> obj , BetItemClickListener listener) {
+    private Context mContext;
+    public ItemBetAdapter(LayoutInflater mInflater ,Context context ,List<LinkedTreeMap> obj , BetItemClickListener listener) {
         this.betItemClickListener = listener;
         this.layoutInflater = mInflater;
         this.objects =obj;
+        this.mContext = context;
         payList = new ArrayList<>();
     }
 
@@ -101,7 +104,7 @@ public class ItemBetAdapter extends BaseAdapter {
         holder.betStatusTv.setText((String)order.get("orderStateDesc"));
 
         holder.detail_tv.setText("详情");
-        holder.optionTv.setText("代付");
+
         holder.detail_tv.setTag(R.id.details_id,position);
         holder.optionTv.setTag(R.id.option_id,position);
         final String orderNo = (String)order.get("orderNo");
@@ -130,7 +133,13 @@ public class ItemBetAdapter extends BaseAdapter {
                 }
             }
         });
-
+        String orderStatus = (String)order.get("orderState");
+        if("10302".equals(orderStatus)){
+            holder.optionTv.setText("代付");
+            holder.optionTv.setBackgroundResource(R.drawable.bet_pay_selector);
+        } else {
+            holder.optionTv.setBackgroundResource(R.drawable.bet_pay_selector);
+        }
     }
 
     public String getPayListS(){

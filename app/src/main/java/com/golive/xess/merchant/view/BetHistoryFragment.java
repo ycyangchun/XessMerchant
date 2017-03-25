@@ -147,7 +147,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     int focusPosition = -1;//Selected焦点在哪个position
     @Override
     public void successQuery(List<LinkedTreeMap> ordersEntityList, PageEntity.DataBean.OtherBean otherBean) {
-        adapter = new ItemBetAdapter(mInflater, ordersEntityList, this);
+        adapter = new ItemBetAdapter(mInflater, activity ,ordersEntityList, this);
         bet_lv.setAdapter(adapter);
         if (otherBean != null) {
             betOrdersTv.setText(getMessageFormatString(activity, R.string.bet_orders_s, otherBean.getSingular()));

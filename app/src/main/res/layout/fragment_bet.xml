@@ -219,7 +219,7 @@
                 android:layout_width="@dimen/w196"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/w16"
+                android:layout_marginRight="@dimen/w20"
                 android:background="@drawable/wallet_btn_recharge"
                 android:gravity="center"
                 android:text="@string/bath_pay_s"
@@ -345,7 +345,7 @@
         <ListView
             android:id="@+id/bet_lv"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/h420"
+            android:layout_height="@dimen/h432"
             android:layout_below="@+id/bottom_ll"
             android:divider="@color/listView_driver"
             android:dividerHeight="@dimen/w12"

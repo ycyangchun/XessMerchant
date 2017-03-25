@@ -83,8 +83,8 @@
 
     <Button
         android:id="@+id/detail_bt"
-        android:layout_width="@dimen/w100"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/w104"
+        android:layout_height="@dimen/w60"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/w24"
         android:background="@drawable/bet_detail_selector"
@@ -94,8 +94,8 @@
 
     <Button
         android:id="@+id/option_bt"
-        android:layout_width="@dimen/w100"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/w104"
+        android:layout_height="@dimen/w60"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/w4"
         android:background="@null"
