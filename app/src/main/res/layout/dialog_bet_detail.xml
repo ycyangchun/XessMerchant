@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_main_background">
     <!--height  86/540 = 0.159-->
     <RelativeLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
-        android:background="@drawable/bg_main_top"
         android:layout_height="86dp"
-        app:layout_heightPercent="15%"
-        >
+        android:background="@drawable/bg_main_top"
+        app:layout_heightPercent="15%">
+
         <TextView
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textSize="35sp"
-            android:text="@string/bet_detail_s"
             android:layout_centerInParent="true"
-            />
-        </RelativeLayout>
+            android:text="@string/bet_detail_s"
+            android:textColor="@color/white"
+            android:textSize="@dimen/w72" />
+    </RelativeLayout>
     <!--         880 X 405 -->
     <!--width  880/960 = 0.9166-->
     <!--height  405/540 = 0.75-->
@@ -30,72 +28,68 @@
         android:id="@+id/detail_rl"
         android:layout_width="880dp"
         android:layout_height="405dp"
-        app:layout_heightPercent="75%"
-        app:layout_marginLeftPercent="7%"
-        app:layout_marginRightPercent="7%"
-        app:layout_widthPercent="86.4%"
         android:layout_below="@+id/top"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/bg_border">
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_border"
+        app:layout_heightPercent="74%"
+        app:layout_marginLeftPercent="4.4%"
+        app:layout_marginRightPercent="4.34%"
+        app:layout_widthPercent="90.6%">
 
         <TextView
-            android:textColor="@color/detail_text"
             android:id="@+id/bet_detail_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:textSize="18sp"
-            />
+            android:textColor="@color/detail_text"
+            android:textSize="@dimen/w36" />
 
         <TextView
-            android:textColor="@color/detail_text"
             android:id="@+id/bet_issue_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bet_detail_tv"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="90dp"
-            android:textSize="18sp"
-            android:text="@string/bet_issue_s" />
+            android:layout_marginLeft="@dimen/w164"
+            android:layout_marginTop="@dimen/w56"
+            android:text="@string/bet_issue_s"
+            android:textColor="@color/detail_text"
+            android:textSize="@dimen/w36"/>
 
         <TextView
             android:id="@+id/bet_play_type_tv"
-            android:textColor="@color/detail_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/bet_issue_tv"
-            android:layout_marginLeft="30dp"
-            android:textSize="18sp"
+            android:layout_marginLeft="@dimen/w92"
             android:layout_toRightOf="@+id/bet_issue_tv"
-            android:text="@string/bet_lottery_s" />
+            android:text="@string/bet_lottery_s"
+            android:textColor="@color/detail_text"
+            android:textSize="@dimen/w36"/>
 
         <TextView
-            android:textColor="@color/detail_text"
             android:id="@+id/bet_orders_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/bet_issue_tv"
-            android:layout_marginLeft="50dp"
             android:layout_toEndOf="@+id/bet_detail_tv"
             android:layout_toRightOf="@+id/bet_detail_tv"
-            android:textSize="18sp"
-            android:text="@string/bet_order_s" />
+            android:text="@string/bet_order_s"
+            android:textColor="@color/detail_text"
+            android:textSize="@dimen/w36" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/bet_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/bet_issue_tv"
             android:layout_alignStart="@+id/bet_issue_tv"
             android:layout_below="@+id/bet_issue_tv"
-            android:layout_marginTop="40dp"
-            android:textSize="15sp"
-            android:text="@string/bet_time_s" />
+            android:layout_marginTop="@dimen/w84"
+            android:text="@string/bet_time_s"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/w32" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/bet_win_money_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,120 +97,123 @@
             android:layout_below="@+id/bet_orders_tv"
             android:layout_toEndOf="@+id/bet_detail_tv"
             android:layout_toRightOf="@+id/bet_detail_tv"
-            android:textSize="15sp"
-            android:text="@string/bet_win_money_s" />
+            android:text="@string/bet_win_money_s"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/w32"/>
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/bet_mobile_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/bet_issue_tv"
             android:layout_alignStart="@+id/bet_issue_tv"
             android:layout_below="@+id/bet_time_tv"
-            android:textSize="15sp"
-            android:layout_marginTop="25dp"
-            android:text="@string/bet_mobile_s" />
+            android:layout_marginTop="@dimen/w36"
+            android:text="@string/bet_mobile_s"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/w32" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/bet_play_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/bet_mobile_tv"
             android:layout_toEndOf="@+id/bet_detail_tv"
             android:layout_toRightOf="@+id/bet_detail_tv"
-            android:textSize="15sp"
-            android:text="@string/bet_play_s" />
+            android:text="@string/bet_play_s"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/w32"/>
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/bet_detail_kidney_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/bet_issue_tv"
             android:layout_alignStart="@+id/bet_issue_tv"
             android:layout_below="@+id/bet_mobile_tv"
-            android:layout_marginTop="25dp"
-            android:textSize="15sp"
-            android:text="@string/bet_detail_kidney_s" />
+            android:layout_marginTop="@dimen/w24"
+            android:text="@string/bet_detail_kidney_s"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/w32" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/bet_times_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/bet_detail_kidney_tv"
             android:layout_toEndOf="@+id/bet_detail_tv"
             android:layout_toRightOf="@+id/bet_detail_tv"
-            android:textSize="15sp"
-            android:text="@string/bet_times_s" />
+            android:text="@string/bet_times_s"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/w32" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/bet_kai_status_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/bet_issue_tv"
             android:layout_alignStart="@+id/bet_issue_tv"
             android:layout_below="@+id/bet_detail_kidney_tv"
-            android:layout_marginTop="25dp"
-            android:textSize="15sp"
-            android:text="@string/bet_kai_status_s" />
+            android:layout_marginTop="@dimen/w24"
+            android:text="@string/bet_kai_status_s"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/w32" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/bet_note_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/bet_kai_status_tv"
             android:layout_toEndOf="@+id/bet_detail_tv"
             android:layout_toRightOf="@+id/bet_detail_tv"
-            android:textSize="15sp"
-            android:text="@string/bet_note_s" />
+            android:text="@string/bet_note_s"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/w32" />
 
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/bet_win_status_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/bet_issue_tv"
             android:layout_alignStart="@+id/bet_issue_tv"
             android:layout_below="@+id/bet_kai_status_tv"
-            android:layout_marginTop="50dp"
-            android:textSize="15sp"
-            android:text="@string/bet_win_status_s" />
+            android:layout_marginTop="@dimen/w96"
+            android:text="@string/bet_win_status_s"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/w32" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/bet_lottery_num_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/bet_win_status_tv"
             android:layout_toEndOf="@+id/bet_detail_tv"
             android:layout_toRightOf="@+id/bet_detail_tv"
-            android:textSize="15sp"
-            android:text="@string/bet_lottery_num_s" />
+            android:text="@string/bet_lottery_num_s"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/w32"/>
 
         <TextView
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/bet_win_status_tv"
-            android:layout_alignStart="@+id/bet_issue_tv"
-            android:textColor="@color/detail_red_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/bet_issue_tv"
+            android:layout_alignStart="@+id/bet_issue_tv"
+            android:layout_below="@+id/bet_win_status_tv"
+            android:layout_marginTop="@dimen/w36"
             android:text="@string/win_reminder_s"
-            android:textSize="13sp"
-            android:layout_alignLeft="@+id/bet_issue_tv" />
+            android:textColor="@color/detail_red_text"
+            android:textSize="@dimen/w24" />
     </RelativeLayout>
+
     <View
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/top"
+        android:layout_centerInParent="true"
         android:background="@drawable/bg_main_border"
-        app:layout_heightPercent="75%"
-        app:layout_marginLeftPercent="7%"
-        app:layout_marginRightPercent="7%"
-        app:layout_marginTopPercent="14.8%"
-        app:layout_widthPercent="86.4%" />
+        app:layout_heightPercent="75.9%"
+        app:layout_marginLeftPercent="3.75%"
+        app:layout_marginRightPercent="3.75%"
+        app:layout_widthPercent="92.1%" />
 </com.zhy.android.percent.support.PercentRelativeLayout>
