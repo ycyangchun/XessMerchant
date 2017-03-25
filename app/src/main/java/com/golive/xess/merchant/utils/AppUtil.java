@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.WindowManager;
 
 /**
@@ -76,19 +77,19 @@ public class AppUtil {
     /**
      * deviceId
      */
+    public static  String deviceId = "";
     public static String getDeviceId(Context context) {
+        if(!TextUtils.isEmpty(deviceId)) return  deviceId;
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String deviceId = tm.getDeviceId();
-        if (deviceId == null) {
-            return "";
-        } else {
-            return deviceId;
-        }
+        deviceId= tm.getDeviceId();
+        return deviceId;
     }
     /**
      * 蓝牙mac地址
      */
+    public static String blue = "";
     public static String getMacByBlue() {
+        if(!TextUtils.isEmpty(blue)) return  blue;
         try {
             BluetoothAdapter btAda = BluetoothAdapter.getDefaultAdapter();
             //开启蓝牙
@@ -104,27 +105,32 @@ public class AppUtil {
 //                    }
 //                }
 //            }
-            String blue = btAda.getAddress();
-            blue = blue != null ? blue :"";
+            blue = btAda.getAddress();
             return blue;
         } catch (Exception e) {
             e.printStackTrace();
-            return "";
+            return blue;
         }
     }
     /**
      * wifi网络mac
      */
+
+    public static String wifiMac = "";
     public static String getMacByWifi(Context context){
+        if(!TextUtils.isEmpty(wifiMac)) return  wifiMac;
         try {
             WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             WifiInfo info = wifi.getConnectionInfo();
-            return info.getMacAddress();
+            wifiMac = info.getMacAddress();
+            return wifiMac;
         } catch (Exception e) {
             e.printStackTrace();
-            return "";
+            return wifiMac;
         }
     }
+
+
     /**
      * 屏幕尺寸
      */
