@@ -56,11 +56,12 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void successLoad(String code) {
-        if(!TextUtils.isEmpty(password)) {
+        /*if(!TextUtils.isEmpty(password)) {
             startActivity(new Intent(this, MainActivity.class));
         } else {
             startActivity(new Intent(this, LoginActivity.class));
-        }
+        }*/
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
