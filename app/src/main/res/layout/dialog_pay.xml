@@ -6,16 +6,16 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_marginRight="@dimen/h340"
-        android:layout_marginLeft="@dimen/w340"
         android:layout_width="match_parent"
         android:layout_height="@dimen/h680"
+        android:layout_marginLeft="@dimen/w340"
+        android:layout_marginRight="@dimen/h340"
         android:background="@drawable/bg_common_dialog">
 
         <RelativeLayout
             android:id="@+id/dialog_title_rl"
             android:layout_width="match_parent"
-            android:layout_height="55dp">
+            android:layout_height="@dimen/w112">
 
             <TextView
                 android:id="@+id/dialog_title_tv"
@@ -37,12 +37,12 @@
 
         <View
             android:id="@+id/dialog_line"
-            android:layout_marginRight="@dimen/h16"
-            android:layout_marginLeft="@dimen/h16"
             android:layout_width="match_parent"
             android:layout_height="@dimen/h4"
             android:layout_below="@+id/dialog_title_rl"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/h16"
+            android:layout_marginRight="@dimen/h16"
             android:background="@drawable/ic_line" />
 
 
@@ -57,85 +57,97 @@
             android:textColor="@color/white"
             android:textSize="@dimen/w32" />
 
-        <RelativeLayout
-            android:id="@+id/weixin_rl"
-            android:layout_width="@dimen/w304"
-            android:layout_height="@dimen/w304"
-            android:layout_alignTop="@+id/alipay_rl"
-            android:layout_toLeftOf="@+id/recharge_hint_tv"
-            android:layout_toStartOf="@+id/recharge_hint_tv"
-            android:background="@drawable/bg_qrcode">
+        <View
+            android:id="@+id/center_v"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true" />
 
-            <ImageView
-                android:id="@+id/weixin_pay_iv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/w16"
-                android:background="@color/white" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pay_money_tv"
+            android:layout_marginRight="@dimen/h52"
+            android:layout_toLeftOf="@+id/center_v"
+            android:gravity="center_vertical">
+
+            <RelativeLayout
+                android:id="@+id/weixin_rl"
+                android:layout_width="@dimen/w304"
+                android:layout_height="@dimen/w304"
+                android:background="@drawable/bg_qrcode">
+
+                <ImageView
+                    android:id="@+id/weixin_pay_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/w16"
+                    android:background="@color/white" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_below="@+id/weixin_rl"
+                android:id="@+id/weixin_tv"
+                android:layout_width="@dimen/w304"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/w20"
+                android:gravity="center"
+                android:text="@string/weixin_s"
+                android:textColor="@color/white"
+                android:textSize="@dimen/w28" />
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/weixin_tv"
-            android:layout_width="@dimen/w304"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/weixin_rl"
-            android:layout_alignStart="@+id/weixin_rl"
-            android:layout_below="@+id/weixin_rl"
-            android:layout_marginTop="@dimen/w20"
-            android:gravity="center"
-            android:text="@string/weixin_s"
-            android:textColor="@color/white"
-            android:textSize="@dimen/w28" />
-
         <RelativeLayout
-            android:id="@+id/alipay_rl"
-            android:layout_width="@dimen/w304"
-            android:layout_height="@dimen/w304"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/w112"
-            android:layout_marginRight="@dimen/w112"
-            android:layout_toLeftOf="@+id/weixin_rl"
-            android:layout_toStartOf="@+id/weixin_rl"
-            android:background="@drawable/bg_qrcode"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/alipay_pay_iv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/w16"
-                android:background="@color/white" />
-
-            <ImageView
-                android:id="@+id/alipay_logo_iv"
-                android:layout_width="@dimen/w52"
-                android:layout_height="@dimen/w52"
-                android:layout_centerInParent="true"
-                android:visibility="gone"
-                android:background="@drawable/ic_alipay_logo"
-                />
-
-            <ProgressBar
-                android:visibility="gone"
-                android:id="@+id/alipay_pb"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/w20" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/alipay_tv"
-            android:layout_width="@dimen/h304"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/alipay_rl"
-            android:layout_alignStart="@+id/alipay_rl"
-            android:layout_below="@+id/alipay_rl"
-            android:layout_marginTop="@dimen/w20"
-            android:gravity="center"
-            android:text="@string/alipay_s"
-            android:textColor="@color/white"
-            android:textSize="@dimen/w28" />
+            android:layout_below="@+id/pay_money_tv"
+            android:layout_marginLeft="@dimen/h52"
+            android:layout_toRightOf="@+id/center_v"
+            android:gravity="center_vertical">
+
+            <RelativeLayout
+                android:id="@+id/alipay_rl"
+                android:layout_width="@dimen/w304"
+                android:layout_height="@dimen/w304"
+                android:background="@drawable/bg_qrcode"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/alipay_pay_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/w16"
+                    android:background="@color/white" />
+
+                <ImageView
+                    android:id="@+id/alipay_logo_iv"
+                    android:layout_width="@dimen/w52"
+                    android:layout_height="@dimen/w52"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_alipay_logo"
+                    android:visibility="gone" />
+
+                <ProgressBar
+                    android:id="@+id/alipay_pb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/w20"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/alipay_tv"
+                android:layout_width="@dimen/h304"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/alipay_rl"
+                android:layout_marginTop="@dimen/w20"
+                android:gravity="center"
+                android:text="@string/alipay_s"
+                android:textColor="@color/white"
+                android:textSize="@dimen/w28" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/pay_money_tv"
@@ -143,8 +155,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialog_line"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/w32"
             android:layout_marginBottom="@dimen/w32"
+            android:layout_marginTop="@dimen/w32"
             android:text="@string/pay_money_s"
             android:textColor="@color/white"
             android:textSize="@dimen/w28" />
