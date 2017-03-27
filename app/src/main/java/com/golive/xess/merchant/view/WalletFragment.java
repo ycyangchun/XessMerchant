@@ -107,10 +107,16 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
         rxSubscription = RxBus.getInstance().toObserverable(PayEvent.class)
                 .subscribe(new Action1<PayEvent>() {
                     @Override
-                    public void call(PayEvent studentEvent) {
-                        String kidneyBean = studentEvent.getKidneyBean();
-                        SharedPreferencesUtils.put("kidneyBean",kidneyBean);
-                        currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
+                    public void call(PayEvent payEvent) {
+                        String result = payEvent.getResult();
+                        if("success".equals(result)) {
+                            result = "支付成功";
+                            String kidneyBean = payEvent.getKidneyBean();
+                            SharedPreferencesUtils.put("kidneyBean", kidneyBean);
+                            currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
+                        } else
+                            result = "支付失败";
+                        new DialogErr(activity,result).show();
                     }
                 });
     }

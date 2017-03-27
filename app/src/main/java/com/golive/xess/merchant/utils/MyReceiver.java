@@ -129,11 +129,11 @@ public class MyReceiver extends BroadcastReceiver {
         }.getType();
         PayEvent payEvent = gson.fromJson(data,cla);
         RxBus.getInstance().post(payEvent);
-        if (payEvent.getResult().equals("success")) {
-            android.widget.Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
-        } else {
-            android.widget.Toast.makeText(context, "支付失败", Toast.LENGTH_SHORT).show();
-        }
+//        if (payEvent.getResult().equals("success")) {
+//            android.widget.Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
+//        } else {
+//            android.widget.Toast.makeText(context, "支付失败", Toast.LENGTH_SHORT).show();
+//        }
     }
 
 }
