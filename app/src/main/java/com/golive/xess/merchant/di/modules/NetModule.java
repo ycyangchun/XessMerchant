@@ -62,7 +62,7 @@ public class NetModule {
                 if (connected) {
                     return chain.proceed(chain.request());
                 } else {
-                    throw new NoNetworkException();
+                    throw new NoNetworkException("网络未连接，请查看网络设置");
                 }
             }
         };
