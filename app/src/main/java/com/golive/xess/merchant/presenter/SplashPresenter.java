@@ -2,12 +2,9 @@ package com.golive.xess.merchant.presenter;
 
 import android.content.Context;
 
-import com.golive.xess.merchant.base.XessApp;
-import com.golive.xess.merchant.di.components.NetComponent;
 import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.body.SyncBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
-import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.SyncEntity;
 import com.golive.xess.merchant.utils.AppUtil;
 import com.golive.xess.merchant.utils.DeviceUtils;
@@ -18,11 +15,8 @@ import org.json.JSONObject;
 
 import javax.inject.Inject;
 
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -42,7 +36,7 @@ public class SplashPresenter implements SplashContract.Presenter{
     public void updateDevice(Context context){
         final String deviceNo = DeviceUtils.getDeviceNo(context);
         apiService.devicesAuto(AppUtil.getPhoneProduct(),AppUtil.getBuildLevel() + "",AppUtil.getBuildVersion(),AppUtil.getDeviceId(context)
-                ,AppUtil.getMacByWifi(context),AppUtil.getMacByBlue(),AppUtil.getDisplay(context),AppUtil.getPhoneBrand(),AppUtil.getPhoneModel()
+                ,AppUtil.getMacByWifi(),AppUtil.getMacByBlue(),AppUtil.getDisplay(context),AppUtil.getPhoneBrand(),AppUtil.getPhoneModel()
                 ,deviceNo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -74,7 +68,7 @@ public class SplashPresenter implements SplashContract.Presenter{
     @Override
     public void syncDevice(Context context) {
         final String deviceNo = DeviceUtils.getDeviceNo(context);
-        SyncBody body = new SyncBody(deviceNo,AppUtil.getMacByWifi(context));
+        SyncBody body = new SyncBody(deviceNo,AppUtil.getMacByWifi());
         apiService.syncUserInfo(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

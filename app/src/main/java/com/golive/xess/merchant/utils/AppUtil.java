@@ -6,9 +6,14 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.WindowManager;
+
+import java.io.FileInputStream;
+
+import static java.security.AccessController.getContext;
 
 /**
  *
@@ -80,8 +85,9 @@ public class AppUtil {
     public static  String deviceId = "";
     public static String getDeviceId(Context context) {
         if(!TextUtils.isEmpty(deviceId)) return  deviceId;
-        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        deviceId = tm.getDeviceId();
+//        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+//        deviceId = tm.getDeviceId();
+        deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         return deviceId;
     }
     /**
@@ -116,10 +122,10 @@ public class AppUtil {
      * wifi网络mac
      */
 
-    public static String wifiMac = "";
-    public static String getMacByWifi(Context context){
+    public static String wifiMac = null;
+    public static String getMacByWifi(){
         if(!TextUtils.isEmpty(wifiMac)) return  wifiMac;
-        try {
+        /*try {
             WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             WifiInfo info = wifi.getConnectionInfo();
             wifiMac = info.getMacAddress();
@@ -127,7 +133,49 @@ public class AppUtil {
         } catch (Exception e) {
             e.printStackTrace();
             return wifiMac;
-        }
+        }*/
+        //在不开起WiFi的情况下获取mac地址
+        try {
+                String path = "sys/class/net/eth0/address";
+                FileInputStream fis_name = new FileInputStream(path);
+                byte[] buffer_name = new byte[8192];
+                int byteCount_name = fis_name.read(buffer_name);
+                if (byteCount_name > 0) {
+                    wifiMac = new String(buffer_name, 0, byteCount_name, "utf-8");
+                }
+                if (wifiMac == null) {
+                    fis_name.close();
+                    return wifiMac;
+                }
+                fis_name.close();
+            } catch (Exception io) {
+                String path = "sys/class/net/wlan0/address";
+                FileInputStream fis_name;
+                try {
+                    fis_name = new FileInputStream(path);
+                    byte[] buffer_name = new byte[8192];
+                    int byteCount_name = fis_name.read(buffer_name);
+                    if (byteCount_name > 0) {
+                        wifiMac = new String(buffer_name, 0, byteCount_name, "utf-8");
+                    }
+                    fis_name.close();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+
+            if (wifiMac == null) {
+                return wifiMac;
+            } else {
+                wifiMac = wifiMac.trim();
+                if(wifiMac.contains("\n")){
+                    wifiMac = wifiMac.substring(0,wifiMac.indexOf("\\"));
+                }
+                return wifiMac;
+            }
+
     }
 
 

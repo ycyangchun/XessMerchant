@@ -108,7 +108,7 @@ public class PayDialog extends Dialog {
         body.setCoin_type("0");//钱币类型 0 菜豆 1 金币
         body.setDeviceId(SharedPreferencesUtils.getString("deviceNo"));
         body.setLhqId(SharedPreferencesUtils.getString("lhqId"));
-        body.setMac(AppUtil.getMacByWifi(mContext));
+        body.setMac(AppUtil.getMacByWifi());
         body.setProportion("0.01");
         body.setUserNo(SharedPreferencesUtils.getString("storeUid"));
         body.setType(XessConfig._VERSION+"");

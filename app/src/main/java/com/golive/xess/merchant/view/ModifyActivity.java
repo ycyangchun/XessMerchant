@@ -61,7 +61,7 @@ public class ModifyActivity extends BaseActivity implements ModifyContract.View{
         String affirmPwd = affirmPwdTv.getText().toString().trim();
         if(!TextUtils.isEmpty(original) && !TextUtils.isEmpty(newPwd) && !TextUtils.isEmpty(affirmPwd)) {
             if(newPwd.equals(affirmPwd))
-            presenter.modify(new ModifyBody(deviceNo, storeUid, AppUtil.getMacByWifi(this)
+            presenter.modify(new ModifyBody(deviceNo, storeUid, AppUtil.getMacByWifi()
                     , original, affirmPwd));
             else
                 Toast.makeText(this,"两次输入密码不一致",Toast.LENGTH_SHORT).show();

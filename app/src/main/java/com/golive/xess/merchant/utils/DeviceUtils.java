@@ -28,7 +28,7 @@ public class DeviceUtils {
         req.put("versionSdk", AppUtil.getBuildLevel() + "");
         req.put("versionRelease", AppUtil.getBuildVersion());
         req.put("deviceId", AppUtil.getDeviceId(context));
-        req.put("wlanMac", AppUtil.getMacByWifi(context));
+        req.put("wlanMac", AppUtil.getMacByWifi());
         req.put("btMac", AppUtil.getMacByBlue());
         req.put("screenInches", AppUtil.getDisplay(context));
         req.put("brand", AppUtil.getPhoneBrand());
