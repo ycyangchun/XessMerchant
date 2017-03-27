@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
  * on 2017/3/20.
  */
 
-public class AccountDialog extends Dialog{
+public class AccountDialog extends Dialog {
 
     @BindView(R.id.ssq_kidney_tv)
     TextView ssqKidneyTv;
@@ -39,10 +40,13 @@ public class AccountDialog extends Dialog{
     TextView mobilesTv;
     @BindView(R.id.sum_kidney_tv)
     TextView sumKidneyTv;
+    @BindView(R.id.account_rl)
+    RelativeLayout accountRl;
 
     private BaseActivity mContext;
     AccountEntity body;
-    public AccountDialog(BaseActivity context ,AccountEntity accountBody) {
+
+    public AccountDialog(BaseActivity context, AccountEntity accountBody) {
         super(context, R.style.ShareDialog);
         this.mContext = context;
         this.body = accountBody;
@@ -54,24 +58,30 @@ public class AccountDialog extends Dialog{
         setContentView(R.layout.dialog_account);
         ButterKnife.bind(this);
         initData(body);
+        accountRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
     }
 
-    public void initData(AccountEntity accountBody){
-        if(accountBody !=null){
-            ssqKidneyTv.setText(getMessageFormatString(R.string.ssq_kidney_s,accountBody.getSsqAmount()+""));
-            dltKidneyTv.setText(getMessageFormatString(R.string.dlt_kidney_s,accountBody.getDltAmount()+""));
-            kuai3KidneyTv.setText(getMessageFormatString(R.string.kuai_3_kidney_s,accountBody.getK3Amount()+""));
-            elevenKidneyTv.setText(getMessageFormatString(R.string.eleven_kidney_s,accountBody.getElevenChoseFiveAmount()+""));
-            soccerKidneyTv.setText(getMessageFormatString(R.string.soccer_kidney_s,accountBody.getFootBallAmount()+""));
-            mobilesTv.setText(getMessageFormatString(R.string.mobiles_s,accountBody.getMobile()+""));
-            sumKidneyTv.setText(getMessageFormatString(R.string.sum_kidney_s,accountBody.getTotalAmount()+""));
+    public void initData(AccountEntity accountBody) {
+        if (accountBody != null) {
+            ssqKidneyTv.setText(getMessageFormatString(R.string.ssq_kidney_s, accountBody.getSsqAmount() + ""));
+            dltKidneyTv.setText(getMessageFormatString(R.string.dlt_kidney_s, accountBody.getDltAmount() + ""));
+            kuai3KidneyTv.setText(getMessageFormatString(R.string.kuai_3_kidney_s, accountBody.getK3Amount() + ""));
+            elevenKidneyTv.setText(getMessageFormatString(R.string.eleven_kidney_s, accountBody.getElevenChoseFiveAmount() + ""));
+            soccerKidneyTv.setText(getMessageFormatString(R.string.soccer_kidney_s, accountBody.getFootBallAmount() + ""));
+            mobilesTv.setText(getMessageFormatString(R.string.mobiles_s, accountBody.getMobile() + ""));
+            sumKidneyTv.setText(getMessageFormatString(R.string.sum_kidney_s, accountBody.getTotalAmount() + ""));
             Glide.with(mContext).load(accountBody.getHeadImg()).error(R.drawable.ic_head).into(headImg);
         }
     }
 
-    public String getMessageFormatString(int stringId ,Object ... arguments ) {
-        return MessageFormat.format(mContext.getResources().getString(stringId),arguments);
+    public String getMessageFormatString(int stringId, Object... arguments) {
+        return MessageFormat.format(mContext.getResources().getString(stringId), arguments);
     }
 
-   
+
 }
