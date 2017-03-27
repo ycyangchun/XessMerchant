@@ -42,6 +42,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .build().inject(this);
         presenter.updateDevice(this);
         presenter.syncDevice(this);
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 
 
@@ -67,8 +69,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         } else {
             startActivity(new Intent(this, LoginActivity.class));
         }*/
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
+//        startActivity(new Intent(this, LoginActivity.class));
+//        finish();
     }
 
     @Override

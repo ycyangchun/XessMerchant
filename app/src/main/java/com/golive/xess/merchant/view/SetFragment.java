@@ -58,6 +58,7 @@ public class SetFragment extends BaseFragment {
                 startActivity(new Intent(activity, LoginActivity.class));
                 break;
             case R.id.exit_bt:
+                activity.finish();
                 break;
         }
     }
