@@ -200,6 +200,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     //////////////ItemBetAdapter.BetItemClickListener //////////////
     @OnCheckedChanged(R.id.checkBox)
     public void checkBox(CompoundButton buttonView, boolean isChecked) {
+        if(adapter == null) return;
         if (isChecked)
             adapter.selectAll();
         else
