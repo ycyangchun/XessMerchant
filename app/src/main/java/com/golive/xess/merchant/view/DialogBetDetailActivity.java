@@ -19,6 +19,7 @@ import com.golive.xess.merchant.utils.Base64Util;
 import com.golive.xess.merchant.utils.Des3Util;
 import com.golive.xess.merchant.utils.EnumUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
+import com.golive.xess.merchant.view.widget.DialogErr;
 import com.google.gson.Gson;
 
 import java.text.MessageFormat;
@@ -69,7 +70,7 @@ public class DialogBetDetailActivity extends BaseActivity implements BetDetailCo
 
     @Override
     public void showOnFailure(Throwable throwable) {
-
+        new DialogErr(this,throwable.getMessage()).show();
     }
 
     @Override

@@ -27,6 +27,7 @@ import com.golive.xess.merchant.utils.RxBus;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.adapter.ItemWalletAdapter;
 import com.golive.xess.merchant.view.widget.CommonDialog;
+import com.golive.xess.merchant.view.widget.DialogErr;
 import com.golive.xess.merchant.view.widget.DialogRecharge;
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -159,7 +160,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
 
     @Override
     public void dataFailed(Throwable throwable, int type) {
-        Toast.makeText(activity, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+        new DialogErr(activity,throwable.getMessage()).show();
     }
 
     @Override

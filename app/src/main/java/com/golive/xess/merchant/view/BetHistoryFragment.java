@@ -36,6 +36,7 @@ import com.golive.xess.merchant.presenter.BetPresenter;
 import com.golive.xess.merchant.view.adapter.ItemBetAdapter;
 import com.golive.xess.merchant.view.adapter.ItemLeftBetTvAdapter;
 import com.golive.xess.merchant.view.widget.AccountDialog;
+import com.golive.xess.merchant.view.widget.DialogErr;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.Arrays;
@@ -142,7 +143,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
     @Override
     public void showOnFailure(Throwable throwable, int type) {
-        Toast.makeText(activity, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+        new DialogErr(activity,throwable.getMessage()).show();
     }
 
     int focusPosition = -1;//Selected焦点在哪个position

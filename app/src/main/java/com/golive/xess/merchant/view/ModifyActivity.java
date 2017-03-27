@@ -16,6 +16,7 @@ import com.golive.xess.merchant.presenter.ModifyContract;
 import com.golive.xess.merchant.presenter.ModifyPresenter;
 import com.golive.xess.merchant.utils.AppUtil;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
+import com.golive.xess.merchant.view.widget.DialogErr;
 import com.zhy.android.percent.support.PercentRelativeLayout;
 
 import android.text.TextUtils;
@@ -73,7 +74,7 @@ public class ModifyActivity extends BaseActivity implements ModifyContract.View{
 
     @Override
     public void showOnFailure(Throwable throwable) {
-        Toast.makeText(this,throwable.getMessage(),Toast.LENGTH_SHORT).show();
+        new DialogErr(this,throwable.getMessage()).show();
     }
 
     @Override

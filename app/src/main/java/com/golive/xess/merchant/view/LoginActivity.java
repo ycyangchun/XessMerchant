@@ -18,6 +18,7 @@ import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.presenter.LoginContract;
 import com.golive.xess.merchant.presenter.LoginPresenter;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
+import com.golive.xess.merchant.view.widget.DialogErr;
 
 import javax.inject.Inject;
 
@@ -67,12 +68,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     ////////////LoginContract.View///////////////////
     @Override
     public void showOnFailure(Throwable throwable) {
-        if ( throwable instanceof NoNetworkException) {
-            //'no network'
-            Toast.makeText(this,throwable.getMessage()+" No Network Connection",Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this,throwable.getMessage()+" Some Other Error", Toast.LENGTH_SHORT).show();
-        }
+        new DialogErr(this,throwable.getMessage()).show();
     }
 
     @Override

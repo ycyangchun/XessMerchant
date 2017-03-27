@@ -15,6 +15,7 @@ import com.golive.xess.merchant.model.api.NoNetworkException;
 import com.golive.xess.merchant.presenter.SplashContract;
 import com.golive.xess.merchant.presenter.SplashPresenter;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
+import com.golive.xess.merchant.view.widget.DialogErr;
 
 import javax.inject.Inject;
 
@@ -46,16 +47,17 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void showOnFailure(Throwable throwable) {
-        if ( throwable instanceof NoNetworkException) {
+       /* if ( throwable instanceof NoNetworkException) {
             //'no network'
             Toast.makeText(this,throwable.getMessage()+" No Network Connection",Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this,throwable.getMessage()+" Some Other Error", Toast.LENGTH_SHORT).show();
-        }
+        }*/
         if("设备信息上传-参数异常".equals(throwable.getMessage())) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
-        }
+        } else
+            new DialogErr(this,throwable.getMessage()).show();
     }
 
     @Override

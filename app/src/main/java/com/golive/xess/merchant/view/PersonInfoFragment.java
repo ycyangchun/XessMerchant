@@ -33,6 +33,7 @@ import com.golive.xess.merchant.utils.GlideImageLoader;
 import com.golive.xess.merchant.utils.PictureUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.widget.AddressDialog;
+import com.golive.xess.merchant.view.widget.DialogErr;
 import com.golive.xess.merchant.view.widget.GlideRoundTransform;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -190,12 +191,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
 
     @Override
     public void showOnFailure(Throwable throwable) {
-        if ( throwable instanceof NoNetworkException) {
-            //'no network'
-            Toast.makeText(activity,throwable.getMessage()+" No Network Connection",Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(activity,throwable.getMessage()+" Some Other Error", Toast.LENGTH_SHORT).show();
-        }
+        new DialogErr(activity,throwable.getMessage()).show();
     }
 
     @Override
