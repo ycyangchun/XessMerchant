@@ -40,8 +40,17 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .netComponent(XessApp.get(this).getNetComponent())
                 .splashModule(new SplashModule(this))
                 .build().inject(this);
-        presenter.updateDevice(this,deviceNo);
-        presenter.syncDevice(this);
+        String updateDevice = SharedPreferencesUtils.getString("updateDevice");
+        if(!"0".equals(updateDevice)) {
+            presenter.updateDevice(this, deviceNo);
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
+        String lhqId = SharedPreferencesUtils.getString("lhqId");
+        if(TextUtils.isEmpty(lhqId)) {
+            presenter.syncDevice(this);
+        }
 
     }
 
@@ -65,6 +74,6 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void successSync(String lhq) {
-        SharedPreferencesUtils.put("lhqId",lhq);
+
     }
 }

@@ -47,6 +47,7 @@ public class SplashPresenter implements SplashContract.Presenter{
                             String code = object.getString("code");
                             String msg = object.getString("msg");
                             if("0".equals(code)) {
+                                SharedPreferencesUtils.put("updateDevice",code);
                                 view.successLoad(code);
                             }else
                                 view.showOnFailure(new Throwable("设备信息上传-"+msg));
@@ -76,7 +77,9 @@ public class SplashPresenter implements SplashContract.Presenter{
                         String code = syncEntityCommonEntity.getCode();
                         String msg = syncEntityCommonEntity.getMsg();
                         if("0".equals(code)) {
-                            view.successSync(syncEntityCommonEntity.getData().getLhqId());
+                            String lhq = syncEntityCommonEntity.getData().getLhqId();
+                            SharedPreferencesUtils.put("lhqId",lhq);
+                            view.successSync(lhq);
                         }else
                             view.showOnFailure(new Throwable(msg));
                     }

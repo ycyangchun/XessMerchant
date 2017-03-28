@@ -39,8 +39,11 @@
             android:id="@+id/dialog_context_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/dialog_title_rl"
             android:textColor="@color/white"
+            android:layout_marginTop="@dimen/w44"
+            android:gravity="center"
             android:textSize="@dimen/w36" />
 
         <Button
