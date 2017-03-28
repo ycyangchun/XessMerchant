@@ -118,7 +118,6 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
         storeBody.setFileSuffix("jpg");
         storeBody.setFileType("I");
         storeBody.setName(name);
-        System.out.println(storeBody.toString());
         presenter.updateStore(storeBody);
     }
 
@@ -207,7 +206,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 addressTv.setText(loginEntity.getAddress());
                 String head = loginEntity.getHeadImg();
                 if(!TextUtils.isEmpty(head))
-                    Glide.with(activity).load(head).transform(new GlideRoundTransform(activity)).into(imageView);
+                    Glide.with(activity).load(head).error(R.drawable.ic_head).transform(new GlideRoundTransform(activity)).into(imageView);
             }
         }
     }

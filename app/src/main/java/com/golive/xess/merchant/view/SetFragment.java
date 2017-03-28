@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +47,16 @@ public class SetFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_set, container, false);
         ButterKnife.bind(this, view);
-        versionTv.setText(getMessageFormatString(activity,R.string.app_version,AppUtil.getAppVersionName(activity)+""));
-        userProtocolTv.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG ); //下划线
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        String v = AppUtil.getAppVersionName(activity)+"";
+        if(TextUtils.isEmpty(v)) v = "";
+        versionTv.setText(getMessageFormatString(activity,R.string.app_version,v));
+        userProtocolTv.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG ); //下划线
     }
 
     @OnClick({R.id.cut_version_bt, R.id.modify_pwd_bt, R.id.change_user_bt, R.id.exit_bt ,R.id.user_protocol_tv})
@@ -72,6 +80,7 @@ public class SetFragment extends BaseFragment {
 
         }
     }
+
 
 
 }

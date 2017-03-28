@@ -23,8 +23,62 @@ public class WalletEntity {
     private String winTimes;
 
     //商家
+    private String commission;
+    private String bankNo;
+    private String bankInfo;
+    private String bankUserName;
+    /**
+     * {
+         " storeNo":" 6AC3559BDF3C4B90AF68AA055DD4BA20",
+         "userName":"徐淼",
+         "bankNo":"621661280000447287",
+         "bankName":"中国银行·个人普卡",
+         "bankInfo":"北京通州支行",
+         "createTime":"2017-03-28 13:57:45:922"
+     }
+     *  storeNo :  6AC3559BDF3C4B90AF68AA055DD4BA20
+     * userName : 徐淼
+     * bankName : 中国银行·个人普卡
+     * createTime : 2017-03-28 13:57:45:922
+     */
+
+    private String storeNo;
+    private String userName;
+    private String bankName;
+    private String createTime;
 
 
+    public String getCommission() {
+        return commission;
+    }
+
+    public void setCommission(String commission) {
+        this.commission = commission;
+    }
+
+    public String getBankNo() {
+        return bankNo;
+    }
+
+    public void setBankNo(String bankNo) {
+        this.bankNo = bankNo;
+    }
+
+    public String getBankInfo() {
+        return bankInfo;
+    }
+
+    public void setBankInfo(String bankInfo) {
+        this.bankInfo = bankInfo;
+    }
+
+    public String getBankUserName() {
+        return bankUserName;
+    }
+
+    public void setBankUserName(String bankUserName) {
+        this.bankUserName = bankUserName;
+    }
 
     public String getHeadImg() {
         return headImg;

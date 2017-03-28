@@ -125,7 +125,7 @@
                         android:layout_height="@dimen/w92"
                         android:background="@drawable/text_focus"
                         android:imeOptions="actionDone"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:paddingLeft="@dimen/w16"
                         android:textColor="@color/white"

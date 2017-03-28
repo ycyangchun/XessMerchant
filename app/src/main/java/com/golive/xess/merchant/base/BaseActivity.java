@@ -22,7 +22,7 @@ import java.text.MessageFormat;
 public abstract class BaseActivity extends FragmentActivity {
     private int height;
     private int width;
-    public String deviceNo ,storeUid ,password ,storeNo;
+    public String deviceNo ,storeUid ,password ,storeNo , mac;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,6 @@ public abstract class BaseActivity extends FragmentActivity {
         storeUid = SharedPreferencesUtils.getString("storeUid");
         password = SharedPreferencesUtils.getString("password");
         storeNo = SharedPreferencesUtils.getString("storeNo");
-
         Logger.d("height "+height+" width "+width +" 是否竖屏 "+DisplayUtils.isPortrait(this) );
         if( height > width && DisplayUtils.isPortrait(this)){
             requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题

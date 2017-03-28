@@ -122,6 +122,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         if (loginEntity != null) {
             SharedPreferencesUtils.put("storeUid", loginEntity.getStoreUid() + "");
             SharedPreferencesUtils.put("password", pwd);
+            SharedPreferencesUtils.put("storeNo", loginEntity.getStoreNo());
             JPushInterface.setAlias(getApplicationContext(), loginEntity.getStoreUid() + "", null);
             startActivity(new Intent(this, MainActivity.class));
             finish();

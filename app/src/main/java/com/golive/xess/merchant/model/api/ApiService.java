@@ -4,22 +4,25 @@ package com.golive.xess.merchant.model.api;
 import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.BetDetailBody;
+import com.golive.xess.merchant.model.api.body.BindCardBody;
 import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.api.body.ModifyBody;
 import com.golive.xess.merchant.model.api.body.PayBody;
 import com.golive.xess.merchant.model.api.body.ReplacePayBody;
 import com.golive.xess.merchant.model.api.body.StoreBody;
 import com.golive.xess.merchant.model.api.body.SyncBody;
+import com.golive.xess.merchant.model.api.body.UnBindCardBody;
 import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.api.body.WalletBody;
 import com.golive.xess.merchant.model.api.body.WalletLogsBody;
+import com.golive.xess.merchant.model.api.body.WithdrawBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.model.entity.PayEntity;
-import com.golive.xess.merchant.model.entity.SplashEntity;
+import com.golive.xess.merchant.model.entity.PayEvent;
 import com.golive.xess.merchant.model.entity.SyncEntity;
 import com.golive.xess.merchant.model.entity.UserInfo;
 import com.golive.xess.merchant.model.entity.WalletEntity;
@@ -187,4 +190,43 @@ public interface ApiService {
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/syncUserInfo")
     Observable<CommonEntity<SyncEntity>> syncUserInfo(@Body SyncBody data);
+
+
+    /**
+     * 绑定银行卡
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/storeAccount/bindCard")
+    Observable<CommonEntity<WalletEntity>> bindCard(@Body BindCardBody data);
+
+    /**
+     *  变更银行卡
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/storeAccount/changeCard")
+    Observable<CommonEntity<WalletEntity>> changeCard(@Body BindCardBody data);
+
+    /**
+     *  解绑银行卡
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/storeAccount/unBindCard")
+    Observable<CommonEntity<WalletEntity>> unBindCard(@Body UnBindCardBody data);
+
+    /**
+     *  7.41商家佣金提现(POST)
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/storeWithdraw")
+    Observable<CommonEntity<PayEvent>> storeWithdraw(@Body WithdrawBody data);
+
+
 }

@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.XessConfig;
@@ -42,6 +41,8 @@ import butterknife.OnClick;
 import rx.Subscription;
 import rx.functions.Action1;
 
+import static com.golive.xess.merchant.presenter.WithDrawContract.DIALOG_STATUS_AFFIRM;
+
 /**
  * Created by YangChun .
  * on 2017/3/7.
@@ -69,13 +70,15 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     @BindView(R.id.wallet_lv)
     ListView walletLv;
 
-    LayoutInflater mInflater;
+
     @Inject
     WalletPresenter presenter;
 
     List<LinkedTreeMap> mapList;
     ItemWalletAdapter walletAdapter;
     Subscription rxSubscription;
+    private WalletEntity mWalletEntity;
+    LayoutInflater mInflater;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -157,7 +160,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
 
     @OnClick(R.id.withdraw_bt)
     void onClickWithdraw() {
-        CommonDialog dialog = new CommonDialog(activity, 0, 10);
+        CommonDialog dialog = new CommonDialog(activity, DIALOG_STATUS_AFFIRM ,mWalletEntity);
         dialog.show();
         dialog.setCanceledOnTouchOutside(true);// show之前设置无效
     }
@@ -172,6 +175,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     @Override
     public void dataInfoSuccess(WalletEntity walletEntity) {
         if (walletEntity != null) {
+            mWalletEntity = walletEntity;
             String kidneyBean = walletEntity.getKidneyBean();
             SharedPreferencesUtils.put("kidneyBean",kidneyBean);
             if (XessConfig._VERSION == XessConfig._PERSONAL) {
@@ -182,7 +186,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
 //                commissionKidneyTv.setText();
             } else {
                 currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
-                commissionKidneyTv.setText(getMessageFormatString(activity, R.string.commission_kidney_s, kidneyBean));
+                commissionKidneyTv.setText(getMessageFormatString(activity, R.string.commission_kidney_s, walletEntity.getCommission()));
             }
         }
     }

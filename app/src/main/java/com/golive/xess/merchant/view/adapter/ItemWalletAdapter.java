@@ -64,7 +64,7 @@ public class ItemWalletAdapter extends BaseAdapter {
             holder.itemMoneyTv.setTextColor(Color.parseColor("#00E6FD"));
             holder.itemMoneyTv.setText("+"+map.get("peaConsume"));
         } else {
-            holder.itemMoneyTv.setTextColor(Color.parseColor("#5E1E8C"));
+            holder.itemMoneyTv.setTextColor(Color.parseColor("#bb79ff"));
             holder.itemMoneyTv.setText("-"+map.get("peaConsume"));
         }
     }
