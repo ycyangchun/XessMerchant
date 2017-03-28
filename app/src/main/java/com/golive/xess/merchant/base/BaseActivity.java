@@ -1,20 +1,13 @@
 package com.golive.xess.merchant.base;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.golive.xess.merchant.utils.AppUtil;
-import com.golive.xess.merchant.utils.DeviceUtils;
 import com.golive.xess.merchant.utils.DisplayUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.orhanobut.logger.Logger;
@@ -51,7 +44,6 @@ public abstract class BaseActivity extends FragmentActivity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
     }
 

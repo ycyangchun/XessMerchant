@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.view.widget.DialogProtocol;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,7 +67,7 @@ public class SetFragment extends BaseFragment {
                 activity.finish();
                 break;
             case R.id.user_protocol_tv:
-
+                new DialogProtocol(activity, "").show();
                 break;
 
         }

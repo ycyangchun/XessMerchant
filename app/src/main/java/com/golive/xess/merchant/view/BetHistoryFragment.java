@@ -183,7 +183,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             intent.setClass(activity, DialogBetDetailActivity.class);
             intent.putExtra("orderNo", orderNo);
             activity.startActivity(intent);
-        } else {
+        } else if("option_10210".equals(type)){
             bathPay(orderNo);
         }
     }

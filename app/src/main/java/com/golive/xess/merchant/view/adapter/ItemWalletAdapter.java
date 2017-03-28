@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,8 +56,17 @@ public class ItemWalletAdapter extends BaseAdapter {
 
     private void initializeViews(LinkedTreeMap map, ViewHolder holder) {
         holder.itemOptionTv.setText((String) map.get("actionTypeDesc"));
-        holder.itemMoneyTv.setText(map.get("peaConsume")+"");
+
         holder.itemDateTv.setText((String)map.get("createTime"));
+        String actionType  = (String) map.get("actionType");
+        //1投注 2充值 3零花钱兑换 4消费 5提现 6退款 7返奖8注册赠送
+        if("2".equals(actionType) || "3".equals(actionType) ||"6".equals(actionType) ||"7".equals(actionType) ||"8".equals(actionType)){
+            holder.itemMoneyTv.setTextColor(Color.parseColor("#00E6FD"));
+            holder.itemMoneyTv.setText("+"+map.get("peaConsume"));
+        } else {
+            holder.itemMoneyTv.setTextColor(Color.parseColor("#5E1E8C"));
+            holder.itemMoneyTv.setText("-"+map.get("peaConsume"));
+        }
     }
 
     static class ViewHolder {

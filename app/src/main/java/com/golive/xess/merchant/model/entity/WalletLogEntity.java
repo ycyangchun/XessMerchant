@@ -15,6 +15,7 @@ public class WalletLogEntity {
      * createTime : 2017-03-09 16:20:10:000
      * updateTime : 2017-03-09 16:20:12:000
      * actionTypeDesc : 充值
+     * 1投注 2充值 3零花钱兑换 4消费 5提现 6退款 7返奖8注册赠送
      */
 
     private String storeNo;

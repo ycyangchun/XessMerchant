@@ -6,8 +6,10 @@
     android:gravity="center">
 
     <RelativeLayout
-        android:layout_width="@dimen/h776"
-        android:layout_height="@dimen/h440"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/h800"
+        android:layout_marginLeft="@dimen/w212"
+        android:layout_marginRight="@dimen/w212"
         android:background="@drawable/bg_common_dialog"
         >
 
@@ -33,12 +35,23 @@
                 android:drawableLeft="@drawable/ic_dialog_close"
                 android:padding="@dimen/w20" />
         </RelativeLayout>
-        <ScrollView
-            android:padding="@dimen/w12"
-            android:layout_below="@+id/dialog_title_rl"
+        <View
+            android:id="@+id/dialog_line"
+            android:layout_marginRight="@dimen/h16"
+            android:layout_marginLeft="@dimen/h16"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/h4"
+            android:layout_below="@+id/dialog_title_rl"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_line" />
+        <ScrollView
+            android:padding="@dimen/w16"
+            android:layout_below="@+id/dialog_line"
+            android:layout_width="match_parent"
+            android:scrollbars="vertical"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/protocol_tv"
                 android:textSize="@dimen/w36"
                 android:textColor="@color/protocol_text"
                 android:layout_width="match_parent"

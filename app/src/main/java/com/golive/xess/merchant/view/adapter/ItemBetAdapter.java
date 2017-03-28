@@ -108,6 +108,14 @@ public class ItemBetAdapter extends BaseAdapter {
         holder.detail_tv.setTag(R.id.details_id,position);
         holder.optionTv.setTag(R.id.option_id,position);
         final String orderNo = (String)order.get("orderNo");
+        final String investState = (String)order.get("investState");
+        if("10210".equals(investState)){//"investState":"10210",
+            holder.optionTv.setText("代付");
+            holder.optionTv.setBackgroundResource(R.drawable.bet_pay_selector);
+        } else {
+            holder.optionTv.setText("已代付");
+            holder.optionTv.setBackgroundResource(R.color.transparent);
+        }
         holder.detail_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +125,7 @@ public class ItemBetAdapter extends BaseAdapter {
         holder.optionTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                betItemClickListener.betItemClick(v,position,orderNo,"option");
+                betItemClickListener.betItemClick(v,position,orderNo,"option_"+investState);
             }
         });
 
@@ -133,13 +141,8 @@ public class ItemBetAdapter extends BaseAdapter {
                 }
             }
         });
-        String orderStatus = (String)order.get("orderState");
-        if("10302".equals(orderStatus)){
-            holder.optionTv.setText("代付");
-            holder.optionTv.setBackgroundResource(R.drawable.bet_pay_selector);
-        } else {
-            holder.optionTv.setBackgroundResource(R.drawable.bet_pay_selector);
-        }
+
+
     }
 
     public String getPayListS(){

@@ -17,8 +17,10 @@ import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.presenter.LoginContract;
 import com.golive.xess.merchant.presenter.LoginPresenter;
+import com.golive.xess.merchant.utils.DeviceUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.widget.DialogErr;
+import com.golive.xess.merchant.view.widget.DialogProtocol;
 
 import javax.inject.Inject;
 

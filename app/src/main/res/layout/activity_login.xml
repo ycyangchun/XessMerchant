@@ -78,7 +78,6 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:maxLines="1"
-            android:text="10000"
             android:textColor="@color/white"
             android:textSize="@dimen/w36"
             app:layout_widthPercent="30%" />
@@ -108,7 +107,6 @@
             android:maxLines="1"
             android:paddingLeft="3dp"
             android:paddingStart="18dp"
-            android:text="654321"
             android:textColor="@color/white"
             android:textSize="@dimen/w36"
             app:layout_widthPercent="30%" />
