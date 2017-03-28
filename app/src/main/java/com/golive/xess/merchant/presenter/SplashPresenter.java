@@ -65,8 +65,7 @@ public class SplashPresenter implements SplashContract.Presenter{
     }
 
     @Override
-    public void syncDevice(Context context) {
-        final String deviceNo = DeviceUtils.getDeviceNo(context);
+    public void syncDevice(Context context,String deviceNo) {
         SyncBody body = new SyncBody(deviceNo,AppUtil.getMacByWifi());
         apiService.syncUserInfo(body)
                 .subscribeOn(Schedulers.io())

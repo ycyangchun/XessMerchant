@@ -49,7 +49,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         }
         String lhqId = SharedPreferencesUtils.getString("lhqId");
         if(TextUtils.isEmpty(lhqId)) {
-            presenter.syncDevice(this);
+            presenter.syncDevice(this, deviceNo);
         }
 
     }
