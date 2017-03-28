@@ -42,14 +42,14 @@ public class WithDrawPresenter implements WithDrawContract.Presenter{
                         String code = payEventCommonEntity.getCode();
                         String msg = payEventCommonEntity.getMsg();
                         if("0".equals(code)) {
-                            view.successWithDraw(payEventCommonEntity.getData());
+                            view.successWithDraw(payEventCommonEntity.getData() , data.getType());
                         }else
-                            view.showOnFailure(new Throwable(msg), DIALOG_STATUS_CARD_AFFIRM, data.getType());
+                            view.showOnFailure(new Throwable(msg), DIALOG_STATUS_CARD_AFFIRM);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        view.showOnFailure(throwable, DIALOG_STATUS_CARD_AFFIRM ,data.getType());
+                        view.showOnFailure(throwable, DIALOG_STATUS_CARD_AFFIRM );
                     }
                 });
     }
@@ -67,12 +67,12 @@ public class WithDrawPresenter implements WithDrawContract.Presenter{
                         if("0".equals(code)) {
                             view.successBindCard(bindCardEntityCommonEntity.getData());
                         }else
-                            view.showOnFailure(new Throwable(msg), DIALOG_STATUS_CARD , "");
+                            view.showOnFailure(new Throwable(msg), DIALOG_STATUS_CARD);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        view.showOnFailure(throwable, DIALOG_STATUS_CARD, "");
+                        view.showOnFailure(throwable, DIALOG_STATUS_CARD);
                     }
                 });
     }

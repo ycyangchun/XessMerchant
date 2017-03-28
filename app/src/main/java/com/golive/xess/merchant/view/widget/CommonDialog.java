@@ -272,18 +272,19 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
 
 
     @Override
-    public void showOnFailure(Throwable throwable, int type , String leftOrRight) {
+    public void showOnFailure(Throwable throwable, int type) {
         if(type == DIALOG_STATUS_CARD_AFFIRM) {
-            leftOrRight = !leftOrRight.equals("2") ? "钱包里":"银行卡";
-            new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW_FAILED ,leftOrRight ).show();
+
+            new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW_FAILED ).show();
         } else{
             new DialogErr(mContext,throwable.getMessage()).show();
         }
     }
 
     @Override
-    public void successWithDraw(PayEvent payEvent) {
-        new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW).show();
+    public void successWithDraw(PayEvent payEvent, String leftOrRight) {
+        leftOrRight = !leftOrRight.equals("2") ? "钱包里":"银行卡";
+        new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW ,leftOrRight ).show();
     }
 
     @Override

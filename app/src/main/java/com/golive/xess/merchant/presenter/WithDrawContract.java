@@ -32,8 +32,8 @@ public interface WithDrawContract {
 
     }
     interface  View{
-        void showOnFailure(Throwable throwable, int type , String leftOrRight);
-        void successWithDraw(PayEvent payEvent);
+        void showOnFailure(Throwable throwable, int type);
+        void successWithDraw(PayEvent payEvent , String leftOrRight);
         void successBindCard(WalletEntity data);
     }
 }
