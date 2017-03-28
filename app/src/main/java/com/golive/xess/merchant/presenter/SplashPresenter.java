@@ -33,8 +33,7 @@ public class SplashPresenter implements SplashContract.Presenter{
     }
 
 
-    public void updateDevice(Context context){
-        final String deviceNo = DeviceUtils.getDeviceNo(context);
+    public void updateDevice(Context context ,String deviceNo){
         apiService.devicesAuto(AppUtil.getPhoneProduct(),AppUtil.getBuildLevel() + "",AppUtil.getBuildVersion(),AppUtil.getDeviceId(context)
                 ,AppUtil.getMacByWifi(),AppUtil.getMacByBlue(),AppUtil.getDisplay(context),AppUtil.getPhoneBrand(),AppUtil.getPhoneModel()
                 ,deviceNo)
