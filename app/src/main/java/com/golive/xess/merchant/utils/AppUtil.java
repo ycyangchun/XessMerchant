@@ -81,13 +81,15 @@ public class AppUtil {
     }
     /**
      * deviceId
+     * 获取设备序列号
      */
     public static  String deviceId = "";
     public static String getDeviceId(Context context) {
         if(!TextUtils.isEmpty(deviceId)) return  deviceId;
 //        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 //        deviceId = tm.getDeviceId();
-        deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+//        deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        deviceId =  android.os.Build.SERIAL;
         return deviceId;
     }
     /**
