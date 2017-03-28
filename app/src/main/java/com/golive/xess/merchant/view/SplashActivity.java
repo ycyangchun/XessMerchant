@@ -42,8 +42,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .build().inject(this);
         presenter.updateDevice(this);
         presenter.syncDevice(this);
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
+
     }
 
 
@@ -55,26 +54,18 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         } else {
             Toast.makeText(this,throwable.getMessage()+" Some Other Error", Toast.LENGTH_SHORT).show();
         }*/
-        if("设备信息上传-参数异常".equals(throwable.getMessage())) {
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        } else
-            new DialogErr(this,throwable.getMessage()).show();
+        new DialogErr(this,throwable.getMessage()).show();
     }
 
     @Override
     public void successLoad(String code) {
-        /*if(!TextUtils.isEmpty(password)) {
-            startActivity(new Intent(this, MainActivity.class));
-        } else {
-            startActivity(new Intent(this, LoginActivity.class));
-        }*/
-//        startActivity(new Intent(this, LoginActivity.class));
-//        finish();
+
     }
 
     @Override
     public void successSync(String lhq) {
         SharedPreferencesUtils.put("lhqId",lhq);
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 }
