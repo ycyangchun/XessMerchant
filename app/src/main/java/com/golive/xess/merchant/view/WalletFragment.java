@@ -182,6 +182,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
 //                commissionKidneyTv.setText();
             } else {
                 currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
+                commissionKidneyTv.setText(getMessageFormatString(activity, R.string.commission_kidney_s, kidneyBean));
             }
         }
     }

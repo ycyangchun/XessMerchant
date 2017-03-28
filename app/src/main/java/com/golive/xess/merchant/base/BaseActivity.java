@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.golive.xess.merchant.utils.DeviceUtils;
 import com.golive.xess.merchant.utils.DisplayUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.orhanobut.logger.Logger;
@@ -34,6 +36,10 @@ public abstract class BaseActivity extends FragmentActivity {
         height = DisplayUtils.getScreenHeight(this);
         width = DisplayUtils.getScreenWidth(this);
         deviceNo = SharedPreferencesUtils.getString("deviceNo");
+        if(TextUtils.isEmpty(deviceNo)){
+            deviceNo = DeviceUtils.getDeviceNo(this);
+            SharedPreferencesUtils.put("deviceNo", deviceNo);
+        }
         storeUid = SharedPreferencesUtils.getString("storeUid");
         password = SharedPreferencesUtils.getString("password");
         storeNo = SharedPreferencesUtils.getString("storeNo");
