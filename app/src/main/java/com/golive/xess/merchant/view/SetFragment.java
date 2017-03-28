@@ -1,6 +1,7 @@
 package com.golive.xess.merchant.view;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.base.BaseFragment;
+import com.golive.xess.merchant.utils.AppUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,13 +45,16 @@ public class SetFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_set, container, false);
         ButterKnife.bind(this, view);
+        versionTv.setText(getMessageFormatString(activity,R.string.app_version,AppUtil.getAppVersionName(activity)+""));
+        userProtocolTv.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG ); //下划线
         return view;
     }
 
-    @OnClick({R.id.cut_version_bt, R.id.modify_pwd_bt, R.id.change_user_bt, R.id.exit_bt})
+    @OnClick({R.id.cut_version_bt, R.id.modify_pwd_bt, R.id.change_user_bt, R.id.exit_bt ,R.id.user_protocol_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cut_version_bt:
+                activity.finish();
                 break;
             case R.id.modify_pwd_bt:
                 startActivity(new Intent(activity, ModifyActivity.class));
@@ -60,6 +65,10 @@ public class SetFragment extends BaseFragment {
             case R.id.exit_bt:
                 activity.finish();
                 break;
+            case R.id.user_protocol_tv:
+
+                break;
+
         }
     }
 

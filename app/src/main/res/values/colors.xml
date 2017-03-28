@@ -16,5 +16,5 @@
     <color name="bt_pink_text">#161326</color>
     <color name="bg_bet_top">#272F53</color>
     <color name="listView_driver">#0A133E</color>
-
+    <color name="protocol_text">#c9fbff</color>
 </resources>

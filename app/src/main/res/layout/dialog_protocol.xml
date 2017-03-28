@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_err_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="@dimen/h776"
+        android:layout_height="@dimen/h440"
+        android:background="@drawable/bg_common_dialog"
+        >
+
+        <RelativeLayout
+            android:id="@+id/dialog_title_rl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/w92">
+
+            <TextView
+                android:id="@+id/dialog_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textColor="@color/dialog_text"
+                android:textSize="@dimen/w36" />
+
+            <TextView
+                android:id="@+id/dialog_close_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@drawable/ic_dialog_close"
+                android:padding="@dimen/w20" />
+        </RelativeLayout>
+        <ScrollView
+            android:padding="@dimen/w12"
+            android:layout_below="@+id/dialog_title_rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textSize="@dimen/w36"
+                android:textColor="@color/protocol_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </ScrollView>
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.golive.xess.merchant.utils.AppUtil;
 import com.golive.xess.merchant.utils.DeviceUtils;
 import com.golive.xess.merchant.utils.DisplayUtils;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
@@ -37,7 +38,8 @@ public abstract class BaseActivity extends FragmentActivity {
         width = DisplayUtils.getScreenWidth(this);
         deviceNo = SharedPreferencesUtils.getString("deviceNo");
         if(TextUtils.isEmpty(deviceNo)){
-            deviceNo = DeviceUtils.getDeviceNo(this);
+//            deviceNo = DeviceUtils.getDeviceNo(this);
+            deviceNo = AppUtil.getDeviceId(this);
             SharedPreferencesUtils.put("deviceNo", deviceNo);
         }
         storeUid = SharedPreferencesUtils.getString("storeUid");

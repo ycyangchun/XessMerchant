@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:text="V1.0版"
+        android:text="@string/app_version"
         android:textColor="@color/white"
         android:textSize="@dimen/w36"
         app:layout_marginTopPercent="4.6%" />
@@ -42,8 +42,8 @@
     <!--top 40/540= 0.074-->
     <LinearLayout
         android:id="@+id/service_phone_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/w120"
+        android:layout_height="@dimen/w120"
         android:layout_below="@+id/user_protocol_tv"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
@@ -70,8 +70,8 @@
 
     <LinearLayout
         android:id="@+id/version_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/w120"
+        android:layout_height="@dimen/w120"
         android:layout_below="@+id/service_phone_ll"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
