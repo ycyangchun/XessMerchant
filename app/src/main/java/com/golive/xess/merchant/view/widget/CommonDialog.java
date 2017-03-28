@@ -75,7 +75,8 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
     RelativeLayout cardAffirmRl;
 
 
-    private int status = 0, kidney = 0;
+    private int status = 0;
+    double kidney = 0;
     private String withdrawType ;//= "钱包里";
     private BaseActivity mContext;
     private WalletEntity mWalletEntity;
@@ -99,7 +100,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
         this.status = status;
         this.mWalletEntity = walletEntity;
         try {
-            this.kidney = Integer.parseInt(walletEntity.getCommission());
+            this.kidney = Double.parseDouble(walletEntity.getCommission());
         } catch (NumberFormatException e) {
             e.printStackTrace();
             this.kidney = 0;
@@ -248,9 +249,9 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
 
     // 绑卡
     private void MyBindCard() {
-        String name = cardNameEt.getText().toString().trim();
-        String bankInfo = cardBankEt.getText().toString().trim();
-        String bankNo = cardNumEt.getText().toString().trim();
+        String name = cardNameEt.getText().toString();
+        String bankInfo = cardBankEt.getText().toString();
+        String bankNo = cardNumEt.getText().toString();
         if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(bankInfo) && !TextUtils.isEmpty(bankNo)) {
             BindCardBody body = new BindCardBody();
             body.setUserName(name);
