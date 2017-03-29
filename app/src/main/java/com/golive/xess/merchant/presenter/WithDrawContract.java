@@ -33,7 +33,7 @@ public interface WithDrawContract {
     }
     interface  View{
         void showOnFailure(Throwable throwable, int type);
-        void successWithDraw(PayEvent payEvent , String leftOrRight);
+        void successWithDraw(PayEvent payEvent ,String withdrawKidney, String leftOrRight);
         void successBindCard(WalletEntity data);
     }
 }

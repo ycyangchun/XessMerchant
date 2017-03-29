@@ -23,6 +23,7 @@ import com.golive.xess.merchant.model.entity.WalletEntity;
 import com.golive.xess.merchant.presenter.WithDrawContract;
 import com.golive.xess.merchant.presenter.WithDrawPresenter;
 import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.RxBus;
 import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 
 import javax.inject.Inject;
@@ -77,24 +78,22 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
 
     private int status = 0;
     double kidney = 0;
-    private String withdrawType ;//= "钱包里";
+    private String withdrawType , withdrawKidney;//= "钱包里";
     private BaseActivity mContext;
     private WalletEntity mWalletEntity;
 
     @Inject
     WithDrawPresenter presenter;
 
-    public CommonDialog(BaseActivity context, int status, String s) {
+    public CommonDialog(BaseActivity context, int status,String withdrawKidney, String withdrawType) {
         super(context, R.style.ShareDialog);
         this.mContext = context;
         this.status = status;
-        this.withdrawType = s;
-        if(kidney < 100 && status == DIALOG_STATUS_AFFIRM){
-            this.status = DIALOG_STATUS_REMINDER;
-        }
+        this.withdrawType = withdrawType;
+        this.withdrawKidney = withdrawKidney;
     }
 
-    public CommonDialog(BaseActivity context, int status,WalletEntity walletEntity) {
+    public CommonDialog(BaseActivity context, int status, WalletEntity walletEntity) {
         super(context, R.style.ShareDialog);
         this.mContext = context;
         this.status = status;
@@ -144,7 +143,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
                 cardRl.setVisibility(View.GONE);
                 cardAffirmRl.setVisibility(View.GONE);
                 dialogTitleTv.setText(mContext.getResourcesString(mContext, R.string.withdraw_success_s));
-                dialogContextTv.setText(mContext.getMessageFormatString(mContext, R.string.withdraw_context_s, kidney + "",withdrawType));
+                dialogContextTv.setText(mContext.getMessageFormatString(mContext, R.string.withdraw_context_s, withdrawKidney ,withdrawType));
                 leftDialogBt.setVisibility(View.GONE);
                 rightDialogBt.setText(mContext.getResourcesString(mContext, R.string.affirm_s));
                 break;
@@ -282,9 +281,11 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
     }
 
     @Override
-    public void successWithDraw(PayEvent payEvent, String leftOrRight) {
+    public void successWithDraw(PayEvent payEvent,String withdrawKidney, String leftOrRight) {
         leftOrRight = !leftOrRight.equals("2") ? "钱包里":"银行卡";
-        new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW ,leftOrRight ).show();
+        new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW ,withdrawKidney ,leftOrRight ).show();
+        payEvent.setResult("withdraw");
+        RxBus.getInstance().post(payEvent);
     }
 
     @Override

@@ -42,7 +42,7 @@ public class WithDrawPresenter implements WithDrawContract.Presenter{
                         String code = payEventCommonEntity.getCode();
                         String msg = payEventCommonEntity.getMsg();
                         if("0".equals(code)) {
-                            view.successWithDraw(payEventCommonEntity.getData() , data.getType());
+                            view.successWithDraw(payEventCommonEntity.getData() ,data.getKidneyBean(), data.getType());
                         }else
                             view.showOnFailure(new Throwable(msg), DIALOG_STATUS_CARD_AFFIRM);
                     }

@@ -8,10 +8,18 @@ package com.golive.xess.merchant.model.entity;
 public class PayEvent {
     private String result;
     private String kidneyBean;
-
+    private String commission;
     public PayEvent(String result, String kidneyBean) {
         this.result = result;
         this.kidneyBean = kidneyBean;
+    }
+
+    public String getCommission() {
+        return commission;
+    }
+
+    public void setCommission(String commission) {
+        this.commission = commission;
     }
 
     public String getResult() {

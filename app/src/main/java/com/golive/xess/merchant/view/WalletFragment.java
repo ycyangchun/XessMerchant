@@ -2,6 +2,7 @@ package com.golive.xess.merchant.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ import com.golive.xess.merchant.view.widget.DialogErr;
 import com.golive.xess.merchant.view.widget.DialogRecharge;
 import com.google.gson.internal.LinkedTreeMap;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,11 +118,23 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
                         if("success".equals(result)) {
                             result = "支付成功";
                             String kidneyBean = payEvent.getKidneyBean();
+                            kidneyBean = getBig(kidneyBean);
                             SharedPreferencesUtils.put("kidneyBean", kidneyBean);
                             currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
-                        } else
+                            new DialogErr(activity, result).show();
+                        } else if("withdraw".equals(result)){
+                            String kidneyBean = payEvent.getKidneyBean();
+                            String commission = payEvent.getCommission();
+                            kidneyBean = getBig(kidneyBean);
+                            commission = getBig(commission);
+                            SharedPreferencesUtils.put("kidneyBean", kidneyBean);
+                            currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
+                            commissionKidneyTv.setText(getMessageFormatString(activity, R.string.commission_kidney_s, commission));
+
+                        } else {
                             result = "支付失败";
-                        new DialogErr(activity,result).show();
+                            new DialogErr(activity,result).show();
+                        }
                     }
                 });
     }
@@ -177,7 +192,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
         if (walletEntity != null) {
             mWalletEntity = walletEntity;
             String kidneyBean = walletEntity.getKidneyBean();
-            SharedPreferencesUtils.put("kidneyBean",kidneyBean);
+            String commission = walletEntity.getCommission();
             if (XessConfig._VERSION == XessConfig._PERSONAL) {
                 currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
                 winKidneyTv.setText(getMessageFormatString(activity, R.string.win_kidney_s, walletEntity.getGainBean()));
@@ -185,8 +200,8 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
                 winCountTv.setText(getMessageFormatString(activity, R.string.win_count_s, walletEntity.getWinTimes()));
 //                commissionKidneyTv.setText();
             } else {
-                currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
-                commissionKidneyTv.setText(getMessageFormatString(activity, R.string.commission_kidney_s, walletEntity.getCommission()));
+                currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, getBig(kidneyBean)));
+                commissionKidneyTv.setText(getMessageFormatString(activity, R.string.commission_kidney_s, getBig(commission)));
             }
         }
     }
@@ -206,5 +221,12 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
         if (!rxSubscription.isUnsubscribed()){
             rxSubscription.unsubscribe();
         }
+    }
+
+    public String getBig(String s){
+        BigDecimal kid;
+        if(TextUtils.isEmpty(s))s = "0";
+        kid = new BigDecimal(Double.parseDouble(s));
+        return kid.toString();
     }
 }
