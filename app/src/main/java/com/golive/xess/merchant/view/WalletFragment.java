@@ -82,6 +82,8 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     Subscription rxSubscription;
     private WalletEntity mWalletEntity;
     LayoutInflater mInflater;
+    WalletBody body;
+    WalletLogsBody logsBody;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -130,7 +132,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
                             SharedPreferencesUtils.put("kidneyBean", kidneyBean);
                             currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
                             commissionKidneyTv.setText(getMessageFormatString(activity, R.string.commission_kidney_s, commission));
-
+                            presenter.getWalletLogs(logsBody);
                         } else {
                             result = "支付失败";
                             new DialogErr(activity,result).show();
@@ -149,14 +151,14 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     }
 
     private void initData() {
-        WalletBody body;
+
         if (XessConfig._VERSION == XessConfig._PERSONAL)
             body = new WalletBody("", "100001", deviceNo);
         else
             body = new WalletBody(storeUid, "", deviceNo);
         presenter.getWalletInfo(body);
         ////////////////////////
-        WalletLogsBody logsBody;
+
         if (XessConfig._VERSION == XessConfig._PERSONAL)
             logsBody = new WalletLogsBody("", "100001", deviceNo, "0", "10");
         else

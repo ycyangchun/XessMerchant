@@ -164,7 +164,8 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
                 rightDialogBt.setText(mContext.getResourcesString(mContext, R.string.withdraw_affirm_s));
                 withdrawCardNameTv.setText(mWalletEntity.getBankUserName());
                 withdrawCardNumTv.setText(mWalletEntity.getBankNo());
-                withdrawToBankTv.setText(mWalletEntity.getBankInfo());
+
+                withdrawToBankTv.setText(mContext.getMessageFormatString(mContext,R.string.withdraw_to_bank_s,mWalletEntity.getCommission()));
                 break;
 
             case DIALOG_STATUS_WITHDRAW_FAILED :
