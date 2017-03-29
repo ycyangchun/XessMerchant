@@ -81,12 +81,16 @@
         android:textColor="@color/white"
         android:textSize="@dimen/w24" />
 
+    <RelativeLayout
+        android:layout_marginLeft="@dimen/w24"
+        android:layout_width="@dimen/h212"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
     <Button
         android:id="@+id/detail_bt"
         android:layout_width="@dimen/w104"
         android:layout_height="@dimen/w60"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/w24"
         android:background="@drawable/bet_detail_selector"
         android:gravity="center"
         android:textColor="@color/white"
@@ -102,5 +106,5 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/w24" />
-
+    </RelativeLayout>
 </LinearLayout>

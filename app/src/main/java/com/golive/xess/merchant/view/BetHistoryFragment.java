@@ -84,7 +84,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     LayoutInflater mInflater;
     ItemBetAdapter adapter;
     List<LinkedTreeMap> linkedTreeMaps;//加分页的时候在处理
-
+    BetBody body;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -108,7 +108,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                 .netComponent(XessApp.get(activity).getNetComponent())
                 .betModule(new BetModule(this)).build().inject(this);
 
-        BetBody body;
+
         if (XessConfig._VERSION == XessConfig._PERSONAL)
             body = new BetBody(storeUid, "0", "10");
         else
@@ -138,7 +138,9 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         for (LinkedTreeMap map : payEntityList) {
             describe += (String) map.get("describe") + "\n";
         }
+        presenter.query(body);
         Toast.makeText(activity, describe, Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -218,6 +220,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                 showPopupWindow(betTimeEndEt);
                 break;
             case R.id.bet_query_bt:
+                presenter.query(body);
                 break;
             case R.id.bet_statement_bt:
                 String mobile = betMobileEt.getText().toString().trim();

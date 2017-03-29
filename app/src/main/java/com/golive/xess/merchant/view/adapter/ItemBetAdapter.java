@@ -109,15 +109,15 @@ public class ItemBetAdapter extends BaseAdapter {
         holder.optionTv.setTag(R.id.option_id,position);
         final String orderNo = (String)order.get("orderNo");
         final String investState = (String)order.get("investState");
+        final String origin= (String)order.get("origin");
         if("10210".equals(investState)){//"investState":"10210",
             holder.optionTv.setText("代付");
             holder.optionTv.setBackgroundResource(R.drawable.bet_pay_selector);
-        } else if("10210".equals(investState)){
+        } else if("10210".equals(investState) && "1".equals(origin)){
             holder.optionTv.setText("已代付");
             holder.optionTv.setBackgroundResource(R.color.transparent);
         } else {
-            holder.optionTv.setText("");
-            holder.optionTv.setBackgroundResource(R.color.transparent);
+            holder.optionTv.setVisibility(View.GONE);
         }
         holder.detail_tv.setOnClickListener(new View.OnClickListener() {
             @Override
