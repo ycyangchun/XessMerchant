@@ -83,13 +83,7 @@ public class ItemBetAdapter extends BaseAdapter {
     }
 
     private void initializeViews(LinkedTreeMap order, ViewHolder holder, final int position) {
-        /*holder.orderTimeTv.setText(order.getCreateTime());
-        holder.mobileNumTv.setText(order.getMobile());
-        holder.lotteryTypeTv.setText(order.getLid());
-        holder.issueTv.setText("第?期");
-        holder.numTv.setText(order.getInvestNum()+"注");
-        holder.betKidneyTv.setText(order.getAmount()+"彩豆");
-        holder.betStatusTv.setText(order.getOrderStateDesc());*/
+
         if(isSelectAll) {
             holder.item_cb.setChecked(true);
         } else {
@@ -111,9 +105,11 @@ public class ItemBetAdapter extends BaseAdapter {
         final String investState = (String)order.get("investState");
         final String origin= (String)order.get("origin");
         if("10210".equals(investState)){//"investState":"10210",
+            holder.optionTv.setVisibility(View.VISIBLE);
             holder.optionTv.setText("代付");
             holder.optionTv.setBackgroundResource(R.drawable.bet_pay_selector);
-        } else if("10210".equals(investState) && "1".equals(origin)){
+        } else if(!"10210".equals(investState) && "1".equals(origin)){
+            holder.optionTv.setVisibility(View.VISIBLE);
             holder.optionTv.setText("已代付");
             holder.optionTv.setBackgroundResource(R.color.transparent);
         } else {

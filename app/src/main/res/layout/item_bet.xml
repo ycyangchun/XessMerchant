@@ -97,6 +97,8 @@
         android:textSize="@dimen/w24" />
 
     <Button
+        android:visibility="gone"
+        android:layout_toRightOf="@+id/detail_bt"
         android:id="@+id/option_bt"
         android:layout_width="@dimen/w104"
         android:layout_height="@dimen/w60"

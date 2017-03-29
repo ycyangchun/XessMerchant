@@ -156,7 +156,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         if (otherBean != null) {
             betOrdersTv.setText(getMessageFormatString(activity, R.string.bet_orders_s, otherBean.getSingular()));
             noteTv.setText(getMessageFormatString(activity, R.string.bet_note_s, otherBean.getNum()));
-            betMoneyTv.setText(getMessageFormatString(activity, R.string.bet_money_s, otherBean.getAmount() + ""));
+            betMoneyTv.setText(getMessageFormatString(activity, R.string.bet_money_s, (otherBean.getAmount()/100 )+ ""));
         }
         bet_lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

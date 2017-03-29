@@ -116,7 +116,6 @@
                 android:inputType="number"
                 android:maxLines="1"
                 android:paddingLeft="@dimen/h4"
-                android:text="18515966636"
                 android:textColor="@color/white"
                 android:textSize="@dimen/w24"/>
 
