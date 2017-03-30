@@ -3,6 +3,7 @@ package com.golive.xess.merchant.model.api.body;
 /**
  * Created by YangChun .
  * on 2017/3/18.
+ * 代付  or  销售额
  */
 
 public class ReplacePayBody {
@@ -16,6 +17,20 @@ public class ReplacePayBody {
     private String storeUid;
     private String deviceNo;
     private String oids;
+
+    public ReplacePayBody() {
+    }
+
+    public ReplacePayBody(String storeUid, String deviceNo, String oids) {
+        this.storeUid = storeUid;
+        this.deviceNo = deviceNo;
+        this.oids = oids;
+    }
+
+    public ReplacePayBody(String storeUid, String deviceNo) {
+        this.storeUid = storeUid;
+        this.deviceNo = deviceNo;
+    }
 
     public String getStoreUid() {
         return storeUid;

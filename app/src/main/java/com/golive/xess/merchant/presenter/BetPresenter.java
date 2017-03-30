@@ -6,6 +6,7 @@ import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.ReplacePayBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
 import com.golive.xess.merchant.model.entity.CommonEntity;
+import com.golive.xess.merchant.model.entity.MarketEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -77,7 +78,7 @@ public class BetPresenter implements BetContract.Presenter {
     }
 
     @Override
-    public void statement(AccountBody accountBody) {
+    public void account(AccountBody accountBody) {
         apiService.getAccount(accountBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -99,8 +100,27 @@ public class BetPresenter implements BetContract.Presenter {
                 });
     }
 
-    @Override
-    public void detail() {
 
+    @Override
+    public void market(ReplacePayBody payBody) {
+        apiService.countNumAndAmountByTime(payBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<CommonEntity<MarketEntity>>() {
+                    @Override
+                    public void call(CommonEntity<MarketEntity> marketEntityCommonEntity) {
+                        String code = marketEntityCommonEntity.getCode();
+                        String msg = marketEntityCommonEntity.getMsg();
+                        if("0".equals(code)) {
+                            view.successMarket(marketEntityCommonEntity.getData());
+                        } else
+                            view.showOnFailure(new Throwable(msg),BetContract.TYPEACCOUNT);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        view.showOnFailure(throwable, BetContract.TYPEDMARKET);
+                    }
+                });
     }
 }

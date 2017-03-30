@@ -11,10 +11,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.ReplacePayBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
+import com.golive.xess.merchant.model.entity.MarketEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.presenter.BetContract;
 import com.golive.xess.merchant.presenter.BetPresenter;
@@ -38,6 +41,7 @@ import com.golive.xess.merchant.view.adapter.ItemLeftBetTvAdapter;
 import com.golive.xess.merchant.view.widget.AccountDialog;
 import com.golive.xess.merchant.view.widget.DialogErr;
 import com.google.gson.internal.LinkedTreeMap;
+import com.zhy.android.percent.support.PercentLinearLayout;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -77,6 +81,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     CheckBox checkBox;
     @BindView(R.id.bet_mobile_et)
     EditText betMobileEt;
+    @BindView(R.id.market_tv)
+    TextView marketTv;
 
     @Inject
     BetPresenter presenter;
@@ -85,6 +91,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     ItemBetAdapter adapter;
     List<LinkedTreeMap> linkedTreeMaps;//加分页的时候在处理
     BetBody body;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -114,6 +122,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         else
             body = new BetBody(storeUid, "0", "10");
         presenter.query(body);
+        presenter.market(new ReplacePayBody(storeUid , deviceNo));
     }
 
     private void initView() {
@@ -127,7 +136,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
     @Override
     public void successAccount(AccountEntity accountEntity) {
-        AccountDialog accountDialog = new AccountDialog(activity,accountEntity);
+        AccountDialog accountDialog = new AccountDialog(activity, accountEntity);
         accountDialog.show();
         accountDialog.setCanceledOnTouchOutside(true);
     }
@@ -145,18 +154,19 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
     @Override
     public void showOnFailure(Throwable throwable, int type) {
-        new DialogErr(activity,throwable.getMessage()).show();
+        new DialogErr(activity, throwable.getMessage()).show();
     }
 
     int focusPosition = -1;//Selected焦点在哪个position
+
     @Override
     public void successQuery(List<LinkedTreeMap> ordersEntityList, PageEntity.DataBean.OtherBean otherBean) {
-        adapter = new ItemBetAdapter(mInflater, activity ,ordersEntityList, this);
+        adapter = new ItemBetAdapter(mInflater, activity, ordersEntityList, this);
         bet_lv.setAdapter(adapter);
         if (otherBean != null) {
             betOrdersTv.setText(getMessageFormatString(activity, R.string.bet_orders_s, otherBean.getSingular()));
             noteTv.setText(getMessageFormatString(activity, R.string.bet_note_s, otherBean.getNum()));
-            betMoneyTv.setText(getMessageFormatString(activity, R.string.bet_money_s, (otherBean.getAmount()/100 )+ ""));
+            betMoneyTv.setText(getMessageFormatString(activity, R.string.bet_money_s, (otherBean.getAmount() / 100) + ""));
         }
         bet_lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -185,7 +195,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             intent.setClass(activity, DialogBetDetailActivity.class);
             intent.putExtra("orderNo", orderNo);
             activity.startActivity(intent);
-        } else if("option_10210".equals(type)){
+        } else if ("option_10210".equals(type)) {
             bathPay(orderNo);
         }
     }
@@ -199,10 +209,19 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         presenter.batchPay(payBody);
     }
 
+    @Override
+    public void successMarket(MarketEntity marketEntity) {
+        if (marketEntity != null) {
+            marketTv.setText(getMessageFormatString(activity, R.string.bet_day_money_s, marketEntity.getDayNum(),
+                    marketEntity.getDayAmount()/100 + "",
+                    marketEntity.getMonthNum(), marketEntity.getMonthAmount()/100 + ""));
+        }
+    }
+
     //////////////ItemBetAdapter.BetItemClickListener //////////////
     @OnCheckedChanged(R.id.checkBox)
     public void checkBox(CompoundButton buttonView, boolean isChecked) {
-        if(adapter == null) return;
+        if (adapter == null) return;
         if (isChecked)
             adapter.selectAll();
         else
@@ -224,8 +243,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                 break;
             case R.id.bet_statement_bt:
                 String mobile = betMobileEt.getText().toString().trim();
-                if(!TextUtils.isEmpty(mobile))
-                    presenter.statement(new AccountBody(mobile));
+                if (!TextUtils.isEmpty(mobile))
+                    presenter.account(new AccountBody(mobile));
                 else
                     Toast.makeText(activity, "未输入手机号！", Toast.LENGTH_SHORT).show();
                 break;

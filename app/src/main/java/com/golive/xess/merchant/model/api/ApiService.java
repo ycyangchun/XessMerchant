@@ -19,6 +19,7 @@ import com.golive.xess.merchant.model.api.body.WithdrawBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
+import com.golive.xess.merchant.model.entity.MarketEntity;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.model.entity.PayEntity;
@@ -228,5 +229,12 @@ public interface ApiService {
     @POST("lottery/storeWithdraw")
     Observable<CommonEntity<PayEvent>> storeWithdraw(@Body WithdrawBody data);
 
-
+    /**
+     *
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/store/CountNumAndAmountByTime")
+    Observable<CommonEntity<MarketEntity>> countNumAndAmountByTime(@Body ReplacePayBody data);
 }

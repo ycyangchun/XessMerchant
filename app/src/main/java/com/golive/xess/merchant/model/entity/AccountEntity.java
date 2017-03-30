@@ -3,6 +3,7 @@ package com.golive.xess.merchant.model.entity;
 /**
  * Created by YangChun .
  * on 2017/3/20.
+ * 对账单
  */
 
 public class AccountEntity {
