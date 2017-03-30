@@ -93,4 +93,12 @@
     <string name="app_version">V{0}版</string>
 
     <string name="protocol_title">Xess&#160;&#160;mini用户服务协议</string>
+    <string name="forget_success">密码修改成功，请重新登录</string>
+    <string name="forget_pass_null">密码不能为空</string>
+    <string name="forget_pass_agen_null">确认密码不能为空</string>
+    <string name="forget_pass_input_same">两次输入的密码不一致</string>
+    <string name="modify_original_null">原密码不能为空</string>
+    <string name="modify_new_null">新密码不能为空</string>
+    <string name="modify_affirm_null">确认密码不能为空</string>
+    <string name="modify_pass_input_same">两次输入的密码不一致</string>
 </resources>
