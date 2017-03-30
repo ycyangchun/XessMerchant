@@ -1,5 +1,6 @@
 package com.golive.xess.merchant.view;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.ToastUtil;
 import com.golive.xess.merchant.view.widget.DialogProtocol;
 
 import butterknife.BindView;
@@ -63,7 +65,15 @@ public class SetFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cut_version_bt:
-                activity.finish();
+                    try{
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                        ComponentName cn = new ComponentName("com.golive.lottery.user", "com.golive.xess.merchant.view.LoginActivity");
+                        intent.setComponent(cn);
+                        activity.startActivity(intent);
+                    }catch (Exception e){
+                        ToastUtil.makeText(activity,"切换到个人版失败", ToastUtil.LENGTH_SHORT).show();
+                    }
                 break;
             case R.id.modify_pwd_bt:
                 startActivity(new Intent(activity, ModifyActivity.class));
