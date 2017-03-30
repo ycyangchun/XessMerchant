@@ -205,8 +205,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 cityCode = loginEntity.getCity();
                 addressTv.setText(loginEntity.getAddress());
                 String head = loginEntity.getHeadImg();
-                if(!TextUtils.isEmpty(head))
-                    Glide.with(activity).load(head).error(R.drawable.ic_head).transform(new GlideRoundTransform(activity)).into(imageView);
+                Glide.with(activity).load(head).error(R.drawable.ic_head).transform(new GlideRoundTransform(activity)).into(imageView);
             }
         }
     }
@@ -235,7 +234,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 if (imageItems != null && imageItems.size() > 0) {
                     headImg = imageItems.get(0).path;
                     System.out.println(headImg);
-                    Glide.with(activity).load(headImg).transform(new GlideRoundTransform(activity)).into(imageView);
+                    Glide.with(activity).load(headImg).error(R.drawable.ic_head).transform(new GlideRoundTransform(activity)).into(imageView);
                 }
             } else {
                 Toast.makeText(activity, "没有选择图片", Toast.LENGTH_SHORT).show();
