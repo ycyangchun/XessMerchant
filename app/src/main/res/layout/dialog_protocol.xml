@@ -44,19 +44,13 @@
             android:layout_below="@+id/dialog_title_rl"
             android:layout_centerHorizontal="true"
             android:background="@drawable/ic_line" />
-        <ScrollView
+
+        <WebView
             android:padding="@dimen/w16"
-            android:layout_below="@+id/dialog_line"
+            android:id="@+id/protocol_wv"
             android:layout_width="match_parent"
-            android:scrollbars="vertical"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/protocol_tv"
-                android:textSize="@dimen/w36"
-                android:textColor="@color/protocol_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </ScrollView>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/dialog_line"/>
 
     </RelativeLayout>
 </RelativeLayout>

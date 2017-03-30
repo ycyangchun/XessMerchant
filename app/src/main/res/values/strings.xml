@@ -91,4 +91,6 @@
     <string name="edit_hint_s">请输入菜豆数量</string>
     <string name="bet_day_money_s">当日：投注{0}单&#160;&#160;销售额{1}元&#160;&#160;&#160;&#160;&#160;&#160;当月：投注{2}单&#160;&#160;销售额{3}元</string>
     <string name="app_version">V{0}版</string>
+
+    <string name="protocol_title">Xess&#160;&#160;mini用户服务协议</string>
 </resources>
