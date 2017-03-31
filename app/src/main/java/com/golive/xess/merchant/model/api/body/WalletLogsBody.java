@@ -19,12 +19,10 @@ public class WalletLogsBody {
     private String pageSize;
     private String userNo;
 
-    public WalletLogsBody(String storeUid, String userNo ,String deviceNo, String pageNo, String pageSize) {
+    public WalletLogsBody(String storeUid, String deviceNo,String pageSize) {
         this.storeUid = storeUid;
         this.deviceNo = deviceNo;
-        this.pageNo = pageNo;
         this.pageSize = pageSize;
-        this.userNo = userNo;
     }
 
     public String getUserNo() {

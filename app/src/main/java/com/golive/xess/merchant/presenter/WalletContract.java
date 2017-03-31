@@ -16,13 +16,15 @@ import java.util.List;
 public interface WalletContract {
     int TYPEINFO = 0;
     int TYPELOGS = 1;
+    int GAINDATA = 2;//获取数据
+    int GAINMORE = 3;//加载更多
     interface Persenter{
-        void getWalletInfo(WalletBody data);
-        void getWalletLogs(WalletLogsBody data);
+        void getWalletInfo(WalletBody data );
+        void getWalletLogs(WalletLogsBody data,int gain);
     }
     interface View{
-        void dataFailed(Throwable throwable , int type);
+        void dataFailed(Throwable throwable , int type ,int gain);
         void dataInfoSuccess(WalletEntity walletEntity);
-        void dataLogsSuccess(List<LinkedTreeMap> walletLogEntity);
+        void dataLogsSuccess(List<LinkedTreeMap> walletLogEntity,int gain);
     }
 }

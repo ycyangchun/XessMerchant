@@ -1,5 +1,6 @@
 package com.golive.xess.merchant.view.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class ItemLeftBetTvAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
 
+    public int index = 0;
     public ItemLeftBetTvAdapter(LayoutInflater inflater ,List<String> obj) {
         this.objects = obj;
         this.layoutInflater = inflater;
@@ -46,14 +48,23 @@ public class ItemLeftBetTvAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.item_left_bet_tv, parent,false);
             convertView.setTag(new ViewHolder(convertView));
         }
-        initializeViews(getItem(position), (ViewHolder) convertView.getTag());
+        initializeViews(position ,getItem(position), (ViewHolder) convertView.getTag());
         return convertView;
     }
 
-    private void initializeViews(String object, ViewHolder holder) {
+    private void initializeViews(int position, String object, ViewHolder holder) {
         holder.leftBetTv.setText(object);
+        if(position == index){
+            holder.leftBetTv.setBackgroundColor(Color.parseColor("#5E1E8C"));
+        } else{
+            holder.leftBetTv.setBackgroundColor(Color.parseColor("#00000000"));
+        }
     }
 
+    public void onItemSelect(int p){
+        index = p;
+        this.notifyDataSetChanged();
+    }
     static class ViewHolder {
         @BindView(R.id.left_bet_tv) TextView leftBetTv;
 

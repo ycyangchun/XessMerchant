@@ -52,18 +52,18 @@ public class WalletPresenter implements WalletContract.Persenter {
                         if("0".equals(code)) {
                             view.dataInfoSuccess(walletEntityCommonEntity.getData());
                         } else
-                            view.dataFailed(new Throwable(msg), WalletContract.TYPEINFO);
+                            view.dataFailed(new Throwable(msg), WalletContract.TYPEINFO ,0);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        view.dataFailed(throwable, WalletContract.TYPEINFO);
+                        view.dataFailed(throwable, WalletContract.TYPEINFO,0);
                     }
                 });
     }
 
     @Override
-    public void getWalletLogs(WalletLogsBody data) {
+    public void getWalletLogs(WalletLogsBody data , final int gain) {
         Observable observable ;
         if (XessConfig._VERSION == XessConfig._PERSONAL)
             observable = apiService.getWalletLogs(data);
@@ -77,14 +77,14 @@ public class WalletPresenter implements WalletContract.Persenter {
                         String code = walletLogEntityPageEntity.getCode();
                         String msg = walletLogEntityPageEntity.getMsg();
                         if("0".equals(code)) {
-                            view.dataLogsSuccess((List<LinkedTreeMap>) walletLogEntityPageEntity.getData().getAccountings());
+                            view.dataLogsSuccess((List<LinkedTreeMap>) walletLogEntityPageEntity.getData().getAccountings() ,gain);
                         } else
-                            view.dataFailed(new Throwable(msg), WalletContract.TYPELOGS);
+                            view.dataFailed(new Throwable(msg), WalletContract.TYPELOGS,gain);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        view.dataFailed(throwable, WalletContract.TYPELOGS);
+                        view.dataFailed(throwable, WalletContract.TYPELOGS,gain);
                     }
                 });
     }

@@ -25,11 +25,11 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:background="@drawable/bg_wallet_border"
-            android:cacheColorHint="@android:color/transparent"
             android:divider="#B228D3"
             android:dividerHeight="1dp"
             android:listSelector="@drawable/bet_listview_item_selector"
-            app:layout_marginLeftPercent="2.7%"
+            android:choiceMode="singleChoice"
+            app:layout_marginLeftPercent="2.9%"
             app:layout_marginTopPercent="15%" />
     </RelativeLayout>
     <!--topModule      736 X 120 -->
@@ -78,7 +78,7 @@
             <TextView
                 android:id="@+id/bet_time_start_et"
                 android:layout_width="@dimen/w152"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/w60"
                 android:background="@drawable/bg_nick"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -94,7 +94,7 @@
             <TextView
                 android:id="@+id/bet_time_end_et"
                 android:layout_width="@dimen/w152"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/w60"
                 android:background="@drawable/bg_nick"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -112,11 +112,11 @@
             <EditText
                 android:id="@+id/bet_mobile_et"
                 android:layout_width="@dimen/w200"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/w60"
                 android:background="@drawable/bg_nick"
                 android:inputType="number"
                 android:maxLines="1"
-                android:paddingLeft="@dimen/h4"
+                android:paddingLeft="@dimen/h8"
                 android:textColor="@color/white"
                 android:textSize="@dimen/w24"/>
 
@@ -131,7 +131,7 @@
             <EditText
                 android:id="@+id/bet_lottery_et"
                 android:layout_width="@dimen/w204"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/w60"
                 android:background="@drawable/bg_nick"
                 android:maxLines="1"
                 android:textColor="@color/white"
@@ -140,7 +140,7 @@
             <Button
                 android:id="@+id/bet_query_bt"
                 android:layout_width="@dimen/w152"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/w60"
                 android:layout_marginLeft="@dimen/w64"
                 android:background="@drawable/wallet_btn_withdraw"
                 android:gravity="center"
@@ -150,7 +150,7 @@
             <Button
                 android:id="@+id/bet_statement_bt"
                 android:layout_width="@dimen/w180"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/w60"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/wallet_btn_withdraw"
                 android:gravity="center"
@@ -216,10 +216,10 @@
             <Button
                 android:layout_centerVertical="true"
                 android:id="@+id/bet_bath_pay_bt"
-                android:layout_width="@dimen/w196"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/w180"
+                android:layout_height="@dimen/w60"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/w20"
+                android:layout_marginRight="@dimen/w36"
                 android:background="@drawable/wallet_btn_recharge"
                 android:gravity="center"
                 android:text="@string/bath_pay_s"
@@ -342,7 +342,7 @@
 
         </LinearLayout>
 
-        <ListView
+        <com.golive.xess.merchant.view.widget.MyListView
             android:id="@+id/bet_lv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/h432"
