@@ -35,8 +35,8 @@ import com.golive.xess.merchant.model.entity.MarketEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.presenter.BetContract;
 import com.golive.xess.merchant.presenter.BetPresenter;
-import com.golive.xess.merchant.presenter.WalletContract;
 import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.RxBus;
 import com.golive.xess.merchant.view.adapter.ItemBetAdapter;
 import com.golive.xess.merchant.view.adapter.ItemLeftBetTvAdapter;
 import com.golive.xess.merchant.view.widget.AccountDialog;
@@ -54,6 +54,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import rx.Subscription;
+import rx.functions.Action1;
 
 import static com.golive.xess.merchant.presenter.BetContract.GAINDATA;
 import static com.golive.xess.merchant.presenter.BetContract.GAINMORE;
@@ -101,7 +103,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     private static int pageNo = 0;
     private BetBody body;
     private List<String> arrTitle, winState;
-
+    Subscription rxSubscription;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -129,8 +131,24 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         winState = Arrays.asList("", "", "", "10400", "10402");
         body = new BetBody(storeUid, pageNo + "", pageSize + "");
         initView();
+        initRxBus();
     }
 
+    private void initRxBus() {
+        rxSubscription = RxBus.getInstance().toObserverable(String.class)
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String push) {
+                        if("Yes".equals(push)){
+                            if(body != null && adapter != null ) {
+                                linkedTreeMaps.clear();
+                                adapter.notifyDataSetChanged();
+                                getListRefreshData();
+                            }
+                        }
+                    }
+                });
+    }
     private void initView() {
         final ItemLeftBetTvAdapter adapterLeft = new ItemLeftBetTvAdapter(mInflater, arrTitle);
         betLeftLv.setAdapter(adapterLeft);
@@ -332,9 +350,11 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
     //获取 获更新数据
     private void getListRefreshData() {
-        body.setPageNo(pageNo+"");
-        presenter.query(body,GAINDATA);
-        presenter.market(new ReplacePayBody(storeUid, deviceNo));
+        if(body != null && presenter != null ) {
+            body.setPageNo(pageNo + "");
+            presenter.query(body, GAINDATA);
+            presenter.market(new ReplacePayBody(storeUid, deviceNo));
+        }
     }
 
     private void getListMoreData() {
@@ -385,5 +405,11 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         popupWindow.showAsDropDown(mView);
 
     }
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (!rxSubscription.isUnsubscribed()) {
+            rxSubscription.unsubscribe();
+        }
+    }
 }

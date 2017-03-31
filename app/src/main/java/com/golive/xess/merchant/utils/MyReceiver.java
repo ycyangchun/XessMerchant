@@ -5,10 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.golive.xess.merchant.model.api.ApiService;
-import com.golive.xess.merchant.model.api.body.PayBody;
+import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.PayEvent;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -115,6 +114,10 @@ public class MyReceiver extends BroadcastReceiver {
                 case "wxpay":
                     payment(context, data);
                     break;
+                case "pushOrder":
+                    pushOrder(context, data);
+                    break;
+
             }
         } catch (Exception e) {
             Log.e(TAG, "推送消息处理异常:" + e.getMessage());
@@ -129,11 +132,22 @@ public class MyReceiver extends BroadcastReceiver {
         }.getType();
         PayEvent payEvent = gson.fromJson(data,cla);
         RxBus.getInstance().post(payEvent);
-//        if (payEvent.getResult().equals("success")) {
-//            android.widget.Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
-//        } else {
-//            android.widget.Toast.makeText(context, "支付失败", Toast.LENGTH_SHORT).show();
-//        }
     }
 
+    private void pushOrder(Context context, String data) {
+        try {
+           /* Gson gson = new Gson();
+            Type cla = new TypeToken<CommonEntity>() {
+            }.getType();
+            CommonEntity commonEntity = gson.fromJson(data,cla);
+            String code = commonEntity.getCode();
+            String msg = commonEntity.getMsg();
+            if("0".equals(code) && "success".equals(msg)) {
+                RxBus.getInstance().post("Yes");
+            }*/
+            RxBus.getInstance().post("Yes");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
