@@ -26,5 +26,7 @@ public interface WalletContract {
         void dataFailed(Throwable throwable , int type ,int gain);
         void dataInfoSuccess(WalletEntity walletEntity);
         void dataLogsSuccess(List<LinkedTreeMap> walletLogEntity,int gain);
+        void loadProgress();
+        void hideProgress();
     }
 }

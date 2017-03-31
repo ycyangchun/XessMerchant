@@ -45,18 +45,19 @@ public class BetPresenter implements BetContract.Presenter {
                         if("0".equals(code)) {
                             view.successPay(list.getData());
                         } else
-                            view.showOnFailure(new Throwable(msg),BetContract.TYPEPAY);
+                            view.showOnFailure(new Throwable(msg),BetContract.TYPEPAY,0);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        view.showOnFailure(throwable, BetContract.TYPEPAY);
+                        view.showOnFailure(throwable, BetContract.TYPEPAY,0);
                     }
                 });
     }
 
     @Override
-    public void query(BetBody data) {
+    public void query(BetBody data, final int gain) {
+        view.loadProgress();
         apiService.getOrders(data).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<PageEntity<List<LinkedTreeMap>>>() {
@@ -65,14 +66,16 @@ public class BetPresenter implements BetContract.Presenter {
                         String code = pageEntity.getCode();
                         String msg = pageEntity.getMsg();
                         if("0".equals(code)) {
-                            view.successQuery((List<LinkedTreeMap>)pageEntity.getData().getOrders(),pageEntity.getData().getOther());
+                            view.successQuery((List<LinkedTreeMap>)pageEntity.getData().getOrders(),pageEntity.getData().getOther(),gain);
                         } else
-                            view.showOnFailure(new Throwable(msg),BetContract.TYPEORDER);
+                            view.showOnFailure(new Throwable(msg),BetContract.TYPEORDER,gain);
+                        view.hideProgress();
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        view.showOnFailure(throwable, BetContract.TYPEORDER);
+                        view.showOnFailure(throwable, BetContract.TYPEORDER,gain);
+                        view.hideProgress();
                     }
                 });
     }
@@ -90,12 +93,12 @@ public class BetPresenter implements BetContract.Presenter {
                         if("0".equals(code)) {
                             view.successAccount(accountEntity.getData());
                         } else
-                            view.showOnFailure(new Throwable(msg),BetContract.TYPEACCOUNT);
+                            view.showOnFailure(new Throwable(msg),BetContract.TYPEACCOUNT,0);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        view.showOnFailure(throwable, BetContract.TYPEACCOUNT);
+                        view.showOnFailure(throwable, BetContract.TYPEACCOUNT,0);
                     }
                 });
     }
@@ -114,12 +117,12 @@ public class BetPresenter implements BetContract.Presenter {
                         if("0".equals(code)) {
                             view.successMarket(marketEntityCommonEntity.getData());
                         } else
-                            view.showOnFailure(new Throwable(msg),BetContract.TYPEACCOUNT);
+                            view.showOnFailure(new Throwable(msg),BetContract.TYPEACCOUNT,0);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        view.showOnFailure(throwable, BetContract.TYPEDMARKET);
+                        view.showOnFailure(throwable, BetContract.TYPEDMARKET,0);
                     }
                 });
     }

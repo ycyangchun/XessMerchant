@@ -25,10 +25,10 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:background="@drawable/bg_wallet_border"
+            android:choiceMode="singleChoice"
             android:divider="#B228D3"
             android:dividerHeight="1dp"
             android:listSelector="@drawable/bet_listview_item_selector"
-            android:choiceMode="singleChoice"
             app:layout_marginLeftPercent="2.9%"
             app:layout_marginTopPercent="15%" />
     </RelativeLayout>
@@ -51,22 +51,21 @@
 
         <TextView
             android:id="@+id/market_tv"
-            android:layout_marginLeft="@dimen/h20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/w24"
+            android:layout_marginLeft="@dimen/h20"
+            android:layout_marginTop="@dimen/w28"
             android:text="@string/bet_day_money_s"
             android:textColor="@color/detail_text"
-            android:layout_marginTop="@dimen/w28"
-            android:layout_marginBottom="@dimen/w24"
             android:textSize="@dimen/w28" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
             android:layout_marginLeft="@dimen/h20"
-            >
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -82,14 +81,14 @@
                 android:background="@drawable/bg_nick"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/w24"/>
+                android:textSize="@dimen/w24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" - "
-                android:textSize="@dimen/w24"
-                android:textColor="@color/detail_text" />
+                android:textColor="@color/detail_text"
+                android:textSize="@dimen/w24" />
 
             <TextView
                 android:id="@+id/bet_time_end_et"
@@ -98,7 +97,7 @@
                 android:background="@drawable/bg_nick"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/w24"/>
+                android:textSize="@dimen/w24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,7 +106,7 @@
                 android:inputType="number"
                 android:text="@string/mobile_s"
                 android:textColor="@color/white"
-                android:textSize="@dimen/w24"/>
+                android:textSize="@dimen/w24" />
 
             <EditText
                 android:id="@+id/bet_mobile_et"
@@ -118,7 +117,7 @@
                 android:maxLines="1"
                 android:paddingLeft="@dimen/h8"
                 android:textColor="@color/white"
-                android:textSize="@dimen/w24"/>
+                android:textSize="@dimen/w24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -126,7 +125,7 @@
                 android:layout_marginLeft="@dimen/w40"
                 android:text="@string/lottery_s"
                 android:textColor="@color/white"
-                android:textSize="@dimen/w24"/>
+                android:textSize="@dimen/w24" />
 
             <EditText
                 android:id="@+id/bet_lottery_et"
@@ -135,7 +134,7 @@
                 android:background="@drawable/bg_nick"
                 android:maxLines="1"
                 android:textColor="@color/white"
-                android:textSize="@dimen/w24"/>
+                android:textSize="@dimen/w24" />
 
             <Button
                 android:id="@+id/bet_query_bt"
@@ -146,7 +145,8 @@
                 android:gravity="center"
                 android:text="@string/query_s"
                 android:textColor="@color/bt_pink_text"
-                android:textSize="@dimen/w24"/>
+                android:textSize="@dimen/w24" />
+
             <Button
                 android:id="@+id/bet_statement_bt"
                 android:layout_width="@dimen/w180"
@@ -160,72 +160,67 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_marginLeft="@dimen/h20"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/w72"
-            >
+            android:layout_marginLeft="@dimen/h20">
 
             <CheckBox
                 android:id="@+id/checkBox"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/all_select_s"
                 android:textColor="@color/blue"
                 android:textSize="@dimen/w16" />
 
             <TextView
-                android:layout_centerVertical="true"
                 android:id="@+id/bet_orders_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/w40"
                 android:layout_toRightOf="@+id/checkBox"
                 android:gravity="center"
                 android:text="@string/bet_orders_s"
                 android:textColor="@color/blue"
-                android:textSize="@dimen/w28"
-                />
+                android:textSize="@dimen/w28" />
 
             <TextView
-                android:layout_centerVertical="true"
                 android:id="@+id/note_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/w48"
                 android:layout_toRightOf="@+id/bet_orders_tv"
-                android:text="@string/note_s"
                 android:gravity="center"
+                android:text="@string/note_s"
                 android:textColor="@color/blue"
-                android:textSize="@dimen/w28"
-                />
+                android:textSize="@dimen/w28" />
 
             <TextView
-                android:layout_centerVertical="true"
                 android:id="@+id/bet_money_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/w40"
                 android:layout_toRightOf="@+id/note_tv"
-                android:text="@string/bet_money_s"
                 android:gravity="center"
+                android:text="@string/bet_money_s"
                 android:textColor="@color/blue"
-                android:textSize="@dimen/w28"
-                />
+                android:textSize="@dimen/w28" />
 
             <Button
-                android:layout_centerVertical="true"
                 android:id="@+id/bet_bath_pay_bt"
                 android:layout_width="@dimen/w180"
                 android:layout_height="@dimen/w60"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/w36"
                 android:background="@drawable/wallet_btn_recharge"
                 android:gravity="center"
                 android:text="@string/bath_pay_s"
-                android:textSize="@dimen/w24"
                 android:textColor="@color/bt_yellow_text"
-                />
+                android:textSize="@dimen/w24" />
         </RelativeLayout>
 
         <View
@@ -236,121 +231,108 @@
     <!--bottomModule      748 X 385 -->
     <!--bottomModule width 748/880 = 0.85-->
     <!--bottomModule height 385/405 = 0.95-->
-    <com.zhy.android.percent.support.PercentRelativeLayout
-        android:layout_width="748dp"
-        android:layout_height="385dp"
+
+    <LinearLayout
+        android:id="@+id/bottom_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/w96"
         android:layout_below="@+id/bet_top_rl"
         android:layout_toEndOf="@+id/bet_left_rl"
         android:layout_toRightOf="@+id/bet_left_rl"
-        app:layout_heightPercent="95%"
-        app:layout_widthPercent="85%">
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/bottom_ll"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/w96"
-            android:orientation="horizontal"
-            app:layout_heightPercent="11.8%">
+        <TextView
+            android:layout_width="@dimen/w128"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/w116"
+            android:gravity="center"
+            android:text="@string/order_time_s"
+            android:textColor="@color/white"
+            android:textSize="@dimen/w32" />
 
-            <TextView
-                android:layout_width="@dimen/w128"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:layout_marginLeft="@dimen/w116"
-                android:text="@string/order_time_s"
-                android:textSize="@dimen/w32"
-                android:textColor="@color/white"
-                app:layout_textSizePercent="50%" />
+        <TextView
+            android:layout_width="@dimen/w96"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/w104"
+            android:gravity="center"
+            android:text="@string/mobile_num_s"
+            android:textColor="@color/white"
+            android:textSize="@dimen/w32" />
 
-            <TextView
-                android:layout_width="@dimen/w96"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="@string/mobile_num_s"
-                android:layout_marginLeft="@dimen/w104"
-                android:textSize="@dimen/w32"
-                android:textColor="@color/white"
-                 />
+        <TextView
+            android:layout_width="@dimen/w64"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/w100"
+            android:gravity="center"
+            android:text="@string/lottery_type_s"
+            android:textColor="@color/white"
+            android:textSize="@dimen/w32" />
 
-            <TextView
-                android:layout_width="@dimen/w64"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="@string/lottery_type_s"
-                android:layout_marginLeft="@dimen/w100"
-                android:textSize="@dimen/w32"
-                android:textColor="@color/white"
-               />
+        <TextView
+            android:layout_width="@dimen/w64"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/w72"
+            android:gravity="center"
+            android:text="@string/issue_s"
+            android:textColor="@color/white"
+            android:textSize="@dimen/w32" />
 
-            <TextView
-                android:layout_width="@dimen/w64"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="@string/issue_s"
-                android:layout_marginLeft="@dimen/w72"
-                android:textSize="@dimen/w32"
-                android:textColor="@color/white"
-                />
+        <TextView
+            android:layout_width="@dimen/w64"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/w80"
+            android:gravity="center"
+            android:text="@string/num_s"
+            android:textColor="@color/white"
+            android:textSize="@dimen/w32" />
 
-            <TextView
-                android:layout_width="@dimen/w64"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="@string/num_s"
-                android:layout_marginLeft="@dimen/w80"
-                android:textSize="@dimen/w32"
-                android:textColor="@color/white"
-               />
+        <TextView
+            android:layout_width="@dimen/w128"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/w56"
+            android:gravity="center"
+            android:text="@string/bet_kidney_s"
+            android:textColor="@color/white"
+            android:textSize="@dimen/w32" />
 
-            <TextView
-                android:layout_width="@dimen/w128"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="@string/bet_kidney_s"
-                android:layout_marginLeft="@dimen/w56"
-                android:textSize="@dimen/w32"
-                android:textColor="@color/white"
-                />
+        <TextView
+            android:layout_width="@dimen/w128"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/w56"
+            android:gravity="center"
+            android:text="@string/bet_status_s"
+            android:textColor="@color/white"
+            android:textSize="@dimen/w32" />
 
-            <TextView
-                android:layout_width="@dimen/w128"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="@string/bet_status_s"
-                android:layout_marginLeft="@dimen/w56"
-                android:textSize="@dimen/w32"
-                android:textColor="@color/white"
-                />
+        <TextView
+            android:layout_width="@dimen/w64"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/w80"
+            android:gravity="center"
+            android:text="@string/option_s"
+            android:textColor="@color/white"
+            android:textSize="@dimen/w32" />
 
-            <TextView
-                android:layout_width="@dimen/w64"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="@string/option_s"
-                android:layout_marginLeft="@dimen/w80"
-                android:textSize="@dimen/w32"
-                android:textColor="@color/white"
-                />
+    </LinearLayout>
 
-        </LinearLayout>
-
-        <com.golive.xess.merchant.view.widget.MyListView
-            android:id="@+id/bet_lv"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/h432"
-            android:layout_below="@+id/bottom_ll"
-            android:divider="@color/listView_driver"
-            android:dividerHeight="@dimen/w12"
-            android:listSelector="@android:color/transparent" />
-    </com.zhy.android.percent.support.PercentRelativeLayout>
+    <ListView
+        android:id="@+id/bet_lv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/h432"
+        android:layout_below="@+id/bottom_ll"
+        android:layout_toEndOf="@+id/bet_left_rl"
+        android:layout_toRightOf="@+id/bet_left_rl"
+        android:divider="@color/listView_driver"
+        android:dividerHeight="@dimen/w12"
+        android:listSelector="@android:color/transparent" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -359,4 +341,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/bg_main_border"></RelativeLayout>
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/wallet_pb"
+        android:layout_width="@dimen/_h252"
+        android:layout_height="@dimen/_h252"
+        android:layout_centerInParent="true" />
 </com.zhy.android.percent.support.PercentRelativeLayout>

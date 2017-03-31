@@ -64,6 +64,7 @@ public class WalletPresenter implements WalletContract.Persenter {
 
     @Override
     public void getWalletLogs(WalletLogsBody data , final int gain) {
+        view.loadProgress();
         Observable observable ;
         if (XessConfig._VERSION == XessConfig._PERSONAL)
             observable = apiService.getWalletLogs(data);
@@ -80,11 +81,13 @@ public class WalletPresenter implements WalletContract.Persenter {
                             view.dataLogsSuccess((List<LinkedTreeMap>) walletLogEntityPageEntity.getData().getAccountings() ,gain);
                         } else
                             view.dataFailed(new Throwable(msg), WalletContract.TYPELOGS,gain);
+                        view.hideProgress();
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         view.dataFailed(throwable, WalletContract.TYPELOGS,gain);
+                        view.hideProgress();
                     }
                 });
     }

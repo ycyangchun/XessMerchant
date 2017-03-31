@@ -10,6 +10,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +32,9 @@ import com.golive.xess.merchant.view.adapter.ItemWalletAdapter;
 import com.golive.xess.merchant.view.widget.CommonDialog;
 import com.golive.xess.merchant.view.widget.DialogErr;
 import com.golive.xess.merchant.view.widget.DialogRecharge;
-import com.golive.xess.merchant.view.widget.MyListView;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +76,8 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     Button withdrawBt;
     @BindView(R.id.wallet_lv)
     ListView walletLv;
-
+    @BindView(R.id.wallet_pb)
+    ProgressBar walletPb;
 
     @Inject
     WalletPresenter presenter;
@@ -85,11 +85,12 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     List<LinkedTreeMap> mapList;
     ItemWalletAdapter walletAdapter;
     Subscription rxSubscription;
+
     private WalletEntity mWalletEntity;
     LayoutInflater mInflater;
     WalletBody body;
     WalletLogsBody logsBody;
-    private int pageSize = 10;
+    private int pageSize = 20;
     private static int pageNo = 0;
 
     @Nullable
@@ -97,6 +98,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mInflater = inflater;
         View view = inflater.inflate(R.layout.fragment_wallet, container, false);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -125,14 +127,14 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
                     @Override
                     public void call(PayEvent payEvent) {
                         String result = payEvent.getResult();
-                        if("success".equals(result)) {
+                        if ("success".equals(result)) {
                             result = "支付成功";
                             String kidneyBean = payEvent.getKidneyBean();
                             kidneyBean = getBig(kidneyBean);
                             SharedPreferencesUtils.put("kidneyBean", kidneyBean);
                             currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
                             new DialogErr(activity, result).show();
-                        } else if("withdraw".equals(result)){
+                        } else if ("withdraw".equals(result)) {
                             String kidneyBean = payEvent.getKidneyBean();
                             String commission = payEvent.getCommission();
                             kidneyBean = getBig(kidneyBean);
@@ -141,14 +143,15 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
                             currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
                             commissionKidneyTv.setText(getMessageFormatString(activity, R.string.commission_kidney_s, commission));
                             pageNo = 0;
-                            presenter.getWalletLogs(logsBody,GAINDATA);
+                            loadRefreshPageData();
                         } else {
                             result = "支付失败";
-                            new DialogErr(activity,result).show();
+                            new DialogErr(activity, result).show();
                         }
                     }
                 });
     }
+
     private void initView() {
         if (XessConfig._VERSION == XessConfig._PERSONAL) {
 
@@ -163,14 +166,12 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
         body = new WalletBody(storeUid, "", deviceNo);
         presenter.getWalletInfo(body);
         ////////////////////////
-        logsBody = new WalletLogsBody(storeUid,deviceNo, pageSize+"");
-        logsBody.setPageNo(pageNo+"");
-        presenter.getWalletLogs(logsBody,GAINDATA);
-        //////////////////////////////
         mapList = new ArrayList<>();
         walletAdapter = new ItemWalletAdapter(mInflater, mapList);
         walletLv.setAdapter(walletAdapter);
 
+        logsBody = new WalletLogsBody(storeUid, deviceNo, pageSize + "");
+        loadRefreshPageData();
         walletLv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -180,17 +181,34 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
                     if (view.getLastVisiblePosition() == view.getCount() - 1) {
                         //加载更多功能的代码
                         pageNo++;
-                        logsBody.setPageNo(pageNo+"");
-                        presenter.getWalletLogs(logsBody,GAINMORE);
+                        loadMorePageData();
+                    }
+                    // 判断滚动到顶部
+                    if (view.getFirstVisiblePosition() == 0) {
+                        pageNo = 0;
+                        loadRefreshPageData();
                     }
                 }
             }
+
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
             }
         });
+    }
+
+    private void loadMorePageData() {
+        logsBody.setPageNo(pageNo + "");
+        presenter.getWalletLogs(logsBody, GAINMORE);
+    }
+
+    private void loadRefreshPageData() {
+        mapList.clear();
+        walletAdapter.notifyDataSetChanged();
+        logsBody.setPageNo(pageNo + "");
+        presenter.getWalletLogs(logsBody, GAINDATA);
     }
 
     @OnClick(R.id.recharge_bt)
@@ -200,7 +218,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
 
     @OnClick(R.id.withdraw_bt)
     void onClickWithdraw() {
-        CommonDialog dialog = new CommonDialog(activity, DIALOG_STATUS_AFFIRM ,mWalletEntity);
+        CommonDialog dialog = new CommonDialog(activity, DIALOG_STATUS_AFFIRM, mWalletEntity);
         dialog.show();
         dialog.setCanceledOnTouchOutside(true);// show之前设置无效
     }
@@ -208,10 +226,10 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     ///////////////////WalletContract.View////////////////////////
 
     @Override
-    public void dataFailed(Throwable throwable, int type ,int gain ) {
-        new DialogErr(activity,throwable.getMessage()).show();
-        if(gain == GAINMORE){
-            pageNo --;
+    public void dataFailed(Throwable throwable, int type, int gain) {
+        new DialogErr(activity, throwable.getMessage()).show();
+        if (gain == GAINMORE) {
+            pageNo--;
         }
     }
 
@@ -235,18 +253,29 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     }
 
     @Override
-    public void dataLogsSuccess(List<LinkedTreeMap> walletLogEntity ,int gain) {
-        if(walletLogEntity != null && walletLogEntity.size() !=0) {
-            if(gain == GAINDATA) mapList.clear();
+    public void dataLogsSuccess(List<LinkedTreeMap> walletLogEntity, int gain) {
+        if (walletLogEntity != null && walletLogEntity.size() != 0) {
+            if (gain == GAINDATA) mapList.clear();
             mapList.addAll(walletLogEntity);
             walletAdapter.notifyDataSetChanged();
         } else {
-            if(gain == GAINMORE){
-                pageNo --;
-                Toast.makeText(activity,"已无更多",Toast.LENGTH_SHORT).show();
+            if (gain == GAINMORE) {
+                pageNo--;
+                Toast.makeText(activity, "已无更多", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
+    @Override
+    public void loadProgress() {
+        walletPb.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        walletPb.setVisibility(View.GONE);
+    }
+
 
     ///////////////////WalletContract.View////////////////////////
 
@@ -254,14 +283,14 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (!rxSubscription.isUnsubscribed()){
+        if (!rxSubscription.isUnsubscribed()) {
             rxSubscription.unsubscribe();
         }
     }
 
-    public String getBig(String s){
+    public String getBig(String s) {
         BigDecimal kid;
-        if(TextUtils.isEmpty(s))s = "0";
+        if (TextUtils.isEmpty(s)) s = "0";
         kid = new BigDecimal(Double.parseDouble(s));
         return kid.toString();
     }

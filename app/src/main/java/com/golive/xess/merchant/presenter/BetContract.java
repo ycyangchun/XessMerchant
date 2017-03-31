@@ -21,17 +21,21 @@ public interface BetContract {
     int TYPEDMARKET = 1;
     int TYPEPAY = 2;
     int TYPEACCOUNT = 3;
+    int GAINDATA = 4;//获取数据
+    int GAINMORE = 5;//加载更多
     interface  Presenter{
-        void query(BetBody data);
+        void query(BetBody data,int gain);
         void account(AccountBody accountBody);
         void batchPay(ReplacePayBody payBody);
         void market(ReplacePayBody payBody);
     }
     interface  View{
-        void showOnFailure(Throwable throwable, int type);
-        void successQuery(List<LinkedTreeMap> ordersEntityList , PageEntity.DataBean.OtherBean otherBean);
+        void showOnFailure(Throwable throwable, int type ,int gain);
+        void successQuery(List<LinkedTreeMap> ordersEntityList , PageEntity.DataBean.OtherBean otherBean ,int gain);
         void successPay(List<LinkedTreeMap> payEntityList);
         void successAccount(AccountEntity accountEntity);
         void successMarket(MarketEntity marketEntity);
+        void loadProgress();
+        void hideProgress();
     }
 }
