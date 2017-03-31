@@ -2,6 +2,7 @@ package com.golive.xess.merchant.view;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -66,11 +67,11 @@ public class SetFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.cut_version_bt:
                     try{
-                        Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                        ComponentName cn = new ComponentName("com.golive.lottery.user", "com.golive.xess.merchant.view.LoginActivity");
-                        intent.setComponent(cn);
-                        activity.startActivity(intent);
+                        Intent intent ;
+                        PackageManager packageManager = activity.getPackageManager();
+                        intent = packageManager.getLaunchIntentForPackage("com.golive.lottery.user");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_CLEAR_TOP) ;
+                        this.startActivity(intent);
                     }catch (Exception e){
                         ToastUtil.makeText(activity,"切换到个人版失败", ToastUtil.LENGTH_SHORT).show();
                     }
