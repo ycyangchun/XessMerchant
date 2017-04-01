@@ -102,7 +102,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     private int pageSize = 10;
     private static int pageNo = 0;
     private BetBody body;
-    private List<String> arrTitle, winState;
+    private List<String> arrTitle;
     Subscription rxSubscription;
 
     @Override
@@ -127,22 +127,18 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                 .netComponent(XessApp.get(activity).getNetComponent())
                 .betModule(new BetModule(this)).build().inject(this);
 
-        arrTitle = Arrays.asList("全部订单", "需代付", "已代付", "中奖订单", "未开奖订单");
-        winState = Arrays.asList("", "", "", "10400", "10402");
-        body = new BetBody(storeUid, pageNo + "", pageSize + "");
         initView();
         initRxBus();
     }
 
+    // 推送更新数据
     private void initRxBus() {
         rxSubscription = RxBus.getInstance().toObserverable(String.class)
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String push) {
                         if("Yes".equals(push)){
-                            if(body != null && adapter != null ) {
-                                linkedTreeMaps.clear();
-                                adapter.notifyDataSetChanged();
+                            if(linkedTreeMaps != null && adapter != null ) {
                                 getListRefreshData();
                             }
                         }
@@ -150,23 +146,24 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                 });
     }
     private void initView() {
+        ////////////左侧 list//////////////
+        arrTitle = Arrays.asList("全部订单", "需代付", "已代付", "中奖订单", "未开奖订单");
         final ItemLeftBetTvAdapter adapterLeft = new ItemLeftBetTvAdapter(mInflater, arrTitle);
         betLeftLv.setAdapter(adapterLeft);
-        body.setWinState(winState.get(0));
-        getListRefreshData();
         betLeftLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 adapterLeft.onItemSelect(position);
-                pageNo = 0;
-                linkedTreeMaps.clear();
-                body.setWinState(winState.get(position));
+                setParamToGetList(body,position);
                 getListRefreshData();
             }
         });
-
+        //////////////右侧 list//////////////
+        body = new BetBody(storeUid, pageNo + "", pageSize + "");
         linkedTreeMaps = new ArrayList<>();
         adapter = new ItemBetAdapter(mInflater, activity, linkedTreeMaps, this);
+        //获取全部数据
+        getListRefreshData();
         bet_lv.setAdapter(adapter);
         bet_lv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -174,15 +171,18 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                 // 当不滚动时
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     // 判断是否滚动到底部
-                    if (view.getLastVisiblePosition() == view.getCount() - 1) {
-                        //加载更多功能的代码
-                        pageNo++;
-                        getListMoreData();
+                    if (view.getLastVisiblePosition() == view.getCount() - 1 ) {
+                        if(linkedTreeMaps.size() % pageSize == 0) {// 取余数 是pagaSiza 的倍数时，可以加载更多
+                            //加载更多功能的代码
+                            pageNo++;
+                            getListMoreData();
+                        } else {
+                            if(linkedTreeMaps.size() > pageSize) //数据太少时，不提示
+                                Toast.makeText(activity, "已无更多", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     // 判断滚动到顶部
                     if (view.getFirstVisiblePosition() == 0) {
-                        pageNo = 0;
-                        linkedTreeMaps.clear();
                         getListRefreshData();
                     }
                 }
@@ -194,6 +194,32 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         });
     }
 
+    /*
+    需代付  invest_state : 10210  origin：1
+    已代付   invest_state ：10200  origin：1
+    中奖订单  invest_state: ：10200   order_state: 10300  win_state: 10400 origin：1
+    未开奖订单  invest_state: ：10200   order_state: 10300  win_state: 10401 origin：1
+    */
+    //获取列表数据
+    public void setParamToGetList(BetBody betBody , int position){
+        switch(position){
+            case 0:
+                betBody.setParam("","","","");
+                break;
+            case 1:
+                betBody.setParam("10210","","","1");
+                break;
+            case 2:
+                betBody.setParam("10200","","","1");
+                break;
+            case 3:
+                betBody.setParam("10200","10300","10400","1");
+                break;
+            case 4:
+                betBody.setParam("10200","10300","10401","1");
+                break;
+        }
+    }
 
     /////////////////BetContract.View////////////////
 
@@ -210,7 +236,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         for (LinkedTreeMap map : payEntityList) {
             describe += (String) map.get("describe") + "\n";
         }
-        pageNo = 0;
+
         getListRefreshData();
         Toast.makeText(activity, describe, Toast.LENGTH_LONG).show();
 
@@ -244,30 +270,6 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             }
         }
     }
-    /////////////////BetContract.View////////////////
-    //////////////ItemBetAdapter.BetItemClickListener //////////////
-
-    @Override
-    public void betItemClick(View v, int position, String orderNo, String type) {
-        System.out.println(type + " position " + position + " orderNo " + orderNo);
-        Intent intent = new Intent();
-        if ("detail".equals(type)) {
-            intent.setClass(activity, DialogBetDetailActivity.class);
-            intent.putExtra("orderNo", orderNo);
-            activity.startActivity(intent);
-        } else if ("option_10210".equals(type)) {
-            bathPay(orderNo);
-        }
-    }
-
-    // 代付
-    private void bathPay(String orderNo) {
-        ReplacePayBody payBody = new ReplacePayBody();
-        payBody.setDeviceNo(deviceNo);
-        payBody.setStoreUid(storeUid);
-        payBody.setOids(orderNo);
-        presenter.batchPay(payBody);
-    }
 
     @Override
     public void successMarket(MarketEntity marketEntity) {
@@ -287,8 +289,24 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     public void hideProgress() {
         walletPb.setVisibility(View.GONE);
     }
+    /////////////////BetContract.View////////////////
+    //////////////ItemBetAdapter.BetItemClickListener //////////////
+
+    @Override
+    public void betItemClick(View v, int position, String orderNo, String type) {
+        System.out.println(type + " position " + position + " orderNo " + orderNo);
+        Intent intent = new Intent();
+        if ("detail".equals(type)) {
+            intent.setClass(activity, DialogBetDetailActivity.class);
+            intent.putExtra("orderNo", orderNo);
+            activity.startActivity(intent);
+        } else if ("option_10210".equals(type)) {
+            bathPay(orderNo);
+        }
+    }
 
     //////////////ItemBetAdapter.BetItemClickListener //////////////
+
     @OnCheckedChanged(R.id.checkBox)
     public void checkBox(CompoundButton buttonView, boolean isChecked) {
         if (adapter == null) return;
@@ -328,6 +346,14 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         }
     }
 
+    // 代付
+    private void bathPay(String orderNo) {
+        ReplacePayBody payBody = new ReplacePayBody();
+        payBody.setDeviceNo(deviceNo);
+        payBody.setStoreUid(storeUid);
+        payBody.setOids(orderNo);
+        presenter.batchPay(payBody);
+    }
     // 输入条件查询
     private void clickQuery() {
         linkedTreeMaps.clear();
@@ -339,30 +365,30 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             Toast.makeText(activity, "手机格式不正确", Toast.LENGTH_SHORT).show();
             return;
         }
-        body.setStartTime(st);
-        body.setEndTime(et);
-        body.setMobile(mo);
-        body.setLid("");
-        pageNo = 0;
-        body.setPageNo(pageNo+"");
+        body.conditionParam(st,et,mo,"");
         presenter.query(body, GAINDATA);
+        body.clearConditionParam();
     }
 
     //获取 获更新数据
     private void getListRefreshData() {
+        pageNo = 0;
+        linkedTreeMaps.clear();
+        adapter.notifyDataSetChanged();
         if(body != null && presenter != null ) {
             body.setPageNo(pageNo + "");
             presenter.query(body, GAINDATA);
             presenter.market(new ReplacePayBody(storeUid, deviceNo));
         }
     }
-
+    //获取 更多
     private void getListMoreData() {
         body.setPageNo(pageNo+"");
         presenter.query(body,GAINMORE);
 //        presenter.market(new ReplacePayBody(storeUid, deviceNo));
     }
 
+    ////////////////////////日期控件////////////////////////////
     private Calendar calendar;
     private int year;
     private int month;
@@ -405,6 +431,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         popupWindow.showAsDropDown(mView);
 
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

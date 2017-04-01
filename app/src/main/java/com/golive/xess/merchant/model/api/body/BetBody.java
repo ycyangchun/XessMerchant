@@ -1,5 +1,7 @@
 package com.golive.xess.merchant.model.api.body;
 
+import android.widget.Switch;
+
 /**
  * Created by YangChun .
  * on 2017/3/14.
@@ -35,11 +37,45 @@ public class BetBody {
     private String pageNo;
     private String pageSize;
     private String storeUid;
+    /*
+           需代付  invest_state : 10210  origin：1
+           已代付   invest_state ：10200  origin：1
+           中奖订单  invest_state: ：10200   order_state: 10300  win_state: 10400 origin：1
+           未开奖订单  invest_state: ：10200   order_state: 10300  win_state: 10401 origin：1
+    */
+    private String invest_state;
+    private String order_state;
+    private String win_state;
+    private String origin;
 
     public BetBody(String storeUid ,String pageNo, String pageSize) {
         this.storeUid = storeUid;
         this.pageNo = pageNo;
         this.pageSize = pageSize;
+    }
+
+    //获取列表数据 参数
+    public void setParam(String invest_state, String order_state, String win_state, String origin) {
+        this.invest_state = invest_state;
+        this.order_state = order_state;
+        this.win_state = win_state;
+        this.origin = origin;
+    }
+
+    // 输入条件查询
+    public void conditionParam(String startTime, String endTime, String mobile, String lid) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.mobile = mobile;
+        this.lid = lid;
+    }
+
+    // 输入条件查询 后清空
+    public void clearConditionParam(){
+        this.startTime = "";
+        this.endTime = "";
+        this.mobile = "";
+        this.lid = "";
     }
 
     public String getStoreUid() {

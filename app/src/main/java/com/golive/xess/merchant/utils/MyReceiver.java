@@ -117,7 +117,9 @@ public class MyReceiver extends BroadcastReceiver {
                 case "pushOrder":
                     pushOrder(context, data);
                     break;
-
+                case "offline":
+                    offline(context, data);
+                    break;
             }
         } catch (Exception e) {
             Log.e(TAG, "推送消息处理异常:" + e.getMessage());
@@ -136,7 +138,8 @@ public class MyReceiver extends BroadcastReceiver {
 
     private void pushOrder(Context context, String data) {
         try {
-           /* Gson gson = new Gson();
+
+            /*Gson gson = new Gson();
             Type cla = new TypeToken<CommonEntity>() {
             }.getType();
             CommonEntity commonEntity = gson.fromJson(data,cla);
@@ -150,4 +153,8 @@ public class MyReceiver extends BroadcastReceiver {
             e.printStackTrace();
         }
     }
+    private void offline(Context context, String data) {
+
+    }
+
 }

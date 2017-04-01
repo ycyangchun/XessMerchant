@@ -20,6 +20,7 @@ import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerWalletComponent;
 import com.golive.xess.merchant.di.modules.WalletModule;
+import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.WalletBody;
 import com.golive.xess.merchant.model.api.body.WalletLogsBody;
 import com.golive.xess.merchant.model.entity.PayEvent;
@@ -142,7 +143,6 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
                             MerchantUtils.setKidneyBean(kidneyBean);
                             currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
                             commissionKidneyTv.setText(getMessageFormatString(activity, R.string.commission_kidney_s, commission));
-                            pageNo = 0;
                             loadRefreshPageData();
                         } else {
                             result = "支付失败";
@@ -179,13 +179,17 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     // 判断是否滚动到底部
                     if (view.getLastVisiblePosition() == view.getCount() - 1) {
-                        //加载更多功能的代码
-                        pageNo++;
-                        loadMorePageData();
+                        if(mapList.size() % pageSize == 0) {// 取余数 是pagaSiza 的倍数时，可以加载更多
+                            //加载更多功能的代码
+                            pageNo++;
+                            loadMorePageData();
+                        } else {
+                            if(mapList.size() > pageSize)
+                                Toast.makeText(activity, "已无更多", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     // 判断滚动到顶部
                     if (view.getFirstVisiblePosition() == 0) {
-                        pageNo = 0;
                         loadRefreshPageData();
                     }
                 }
@@ -199,12 +203,15 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
         });
     }
 
+    //更多
     private void loadMorePageData() {
         logsBody.setPageNo(pageNo + "");
         presenter.getWalletLogs(logsBody, GAINMORE);
     }
 
+    //刷新
     private void loadRefreshPageData() {
+        pageNo = 0;
         mapList.clear();
         walletAdapter.notifyDataSetChanged();
         logsBody.setPageNo(pageNo + "");

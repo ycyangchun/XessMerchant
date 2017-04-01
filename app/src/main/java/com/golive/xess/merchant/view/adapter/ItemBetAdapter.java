@@ -104,11 +104,17 @@ public class ItemBetAdapter extends BaseAdapter {
         final String orderNo = (String)order.get("orderNo");
         final String investState = (String)order.get("investState");
         final String origin= (String)order.get("origin");
-        if("10210".equals(investState)){//"investState":"10210",
+        /*
+        需代付  invest_state : 10210  origin：1
+        已代付   invest_state ：10200  origin：1
+        中奖订单  invest_state: ：10200   order_state: 10300  win_state: 10400 origin：1
+        未开奖订单  invest_state: ：10200   order_state: 10300  win_state: 10401 origin：1
+        */
+        if("10210".equals(investState) && "1".equals(origin)){
             holder.optionTv.setVisibility(View.VISIBLE);
             holder.optionTv.setText("代付");
             holder.optionTv.setBackgroundResource(R.drawable.bet_pay_selector);
-        } else if(!"10210".equals(investState) && "1".equals(origin)){
+        } else if("10200".equals(investState) && "1".equals(origin)){
             holder.optionTv.setVisibility(View.VISIBLE);
             holder.optionTv.setText("已代付");
             holder.optionTv.setBackgroundResource(R.color.transparent);
