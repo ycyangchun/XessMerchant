@@ -107,7 +107,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     Subscription rxSubscription;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bet, container, false);
         mInflater = inflater;
         return view;
@@ -265,11 +266,6 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             if (gain == GAINDATA) linkedTreeMaps.clear();
             linkedTreeMaps.addAll(ordersEntityList);
             adapter.notifyDataSetChanged();
-            if (otherBean != null) {
-                betOrdersTv.setText(getMessageFormatString(activity, R.string.bet_orders_s, otherBean.getSingular()));
-                noteTv.setText(getMessageFormatString(activity, R.string.bet_note_s, otherBean.getNum()));
-                betMoneyTv.setText(getMessageFormatString(activity, R.string.bet_money_s, (otherBean.getAmount() / 100) + ""));
-            }
         } else{
             if (gain == GAINMORE) {
                 pageNo--;
@@ -277,6 +273,16 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             } else {
                 Toast.makeText(activity, "暂无数据", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        if (otherBean != null) {
+            betOrdersTv.setText(getMessageFormatString(activity, R.string.bet_orders_s, otherBean.getSingular()));
+            noteTv.setText(getMessageFormatString(activity, R.string.bet_note_s, otherBean.getNum()));
+            betMoneyTv.setText(getMessageFormatString(activity, R.string.bet_money_s, (otherBean.getAmount() / 100) + ""));
+        } else {
+            betOrdersTv.setText(getMessageFormatString(activity, R.string.bet_orders_s, "0"));
+            noteTv.setText(getMessageFormatString(activity, R.string.bet_note_s, "0"));
+            betMoneyTv.setText(getMessageFormatString(activity, R.string.bet_money_s, "0"));
         }
     }
 
@@ -387,7 +393,6 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         if(body != null && presenter != null ) {
             body.setPageNo(pageNo + "");
             presenter.query(body, GAINDATA);
-
         }
     }
     //获取 更多
