@@ -367,7 +367,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         }
         body.conditionParam(st,et,mo,"");
         presenter.query(body, GAINDATA);
-        body.clearConditionParam();
+//        body.clearConditionParam();
     }
 
     //获取 获更新数据
