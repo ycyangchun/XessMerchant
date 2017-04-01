@@ -239,6 +239,7 @@
         android:layout_below="@+id/bet_top_rl"
         android:layout_toEndOf="@+id/bet_left_rl"
         android:layout_toRightOf="@+id/bet_left_rl"
+        android:background="@color/listView_driver"
         android:orientation="horizontal">
 
         <TextView
