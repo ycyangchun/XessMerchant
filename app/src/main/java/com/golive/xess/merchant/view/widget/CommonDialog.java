@@ -23,8 +23,8 @@ import com.golive.xess.merchant.model.entity.WalletEntity;
 import com.golive.xess.merchant.presenter.WithDrawContract;
 import com.golive.xess.merchant.presenter.WithDrawPresenter;
 import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.MerchantUtils;
 import com.golive.xess.merchant.utils.RxBus;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 
 import javax.inject.Inject;
 
@@ -241,8 +241,8 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
     private void withDraw(String type) {
         WithdrawBody data = new WithdrawBody();
         data.setType(type);//1提现到账户，2提现到银行卡
-        data.setDeviceNo(SharedPreferencesUtils.getString("deviceNo"));
-        data.setStoreUid(SharedPreferencesUtils.getString("storeUid"));
+        data.setDeviceNo(MerchantUtils.getDeviceNo());
+        data.setStoreUid(MerchantUtils.getStoreUid());
         data.setKidneyBean(kidney+"");
         presenter.withDraw(data);
     }
@@ -258,9 +258,9 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
             body.setBankInfo(bankInfo);
             body.setBankNo(bankNo);
             body.setMac(AppUtil.getMacByWifi());
-            body.setDeviceNo(SharedPreferencesUtils.getString("deviceNo"));
+            body.setDeviceNo(MerchantUtils.getDeviceNo());
             body.setOriginType(XessConfig._VERSION + "");
-            body.setStoreNo(SharedPreferencesUtils.getString("storeNo"));
+            body.setStoreNo(MerchantUtils.getStoreNo());
             presenter.bindCard(body);
         } else {
             Toast.makeText(mContext," 填写不完整！",Toast.LENGTH_SHORT).show();

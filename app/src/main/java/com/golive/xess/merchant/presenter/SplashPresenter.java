@@ -7,8 +7,7 @@ import com.golive.xess.merchant.model.api.body.SyncBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.SyncEntity;
 import com.golive.xess.merchant.utils.AppUtil;
-import com.golive.xess.merchant.utils.DeviceUtils;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
+import com.golive.xess.merchant.utils.MerchantUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +46,7 @@ public class SplashPresenter implements SplashContract.Presenter{
                             String code = object.getString("code");
                             String msg = object.getString("msg");
                             if("0".equals(code)) {
-                                SharedPreferencesUtils.put("updateDevice",code);
+                                MerchantUtils.setUpdateDevice(code);
                                 view.successLoad(code);
                             }else
                                 view.showOnFailure(new Throwable("设备信息上传-"+msg));
@@ -77,7 +76,7 @@ public class SplashPresenter implements SplashContract.Presenter{
                         String msg = syncEntityCommonEntity.getMsg();
                         if("0".equals(code)) {
                             String lhq = syncEntityCommonEntity.getData().getLhqId();
-                            SharedPreferencesUtils.put("lhqId",lhq);
+                            MerchantUtils.setLhqId(lhq);
                             view.successSync(lhq);
                         }else
                             view.showOnFailure(new Throwable(msg));

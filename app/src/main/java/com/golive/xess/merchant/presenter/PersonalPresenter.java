@@ -1,33 +1,15 @@
 package com.golive.xess.merchant.presenter;
 
-import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.api.body.StoreBody;
-import com.golive.xess.merchant.model.api.body.UserBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
-import com.golive.xess.merchant.model.entity.DeviceEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
-import com.golive.xess.merchant.model.entity.UserInfo;
-import com.golive.xess.merchant.utils.AppUtil;
-import com.golive.xess.merchant.utils.Base64Util;
-import com.golive.xess.merchant.utils.Des3Util;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
-import com.orhanobut.logger.Logger;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 
 import javax.inject.Inject;
 
-import okhttp3.RequestBody;
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**

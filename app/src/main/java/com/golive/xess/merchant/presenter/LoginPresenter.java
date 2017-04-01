@@ -4,8 +4,7 @@ import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
-import com.golive.xess.merchant.model.entity.UserInfo;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
+import com.golive.xess.merchant.utils.MerchantUtils;
 
 import javax.inject.Inject;
 
@@ -35,12 +34,15 @@ public class LoginPresenter implements LoginContract.Presenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<CommonEntity<LoginEntity>>() {
                     @Override
-                    public void call(CommonEntity<LoginEntity> loginEntity) {
-                        String code = loginEntity.getCode();
-                        String msg = loginEntity.getMsg();
+                    public void call(CommonEntity<LoginEntity> loginEntityCommonEntity) {
+                        String code = loginEntityCommonEntity.getCode();
+                        String msg = loginEntityCommonEntity.getMsg();
                         if("0".equals(code)) {
-                            SharedPreferencesUtils.put("storeNo",loginEntity.getData().getStoreNo());
-                            view.successLogin(loginEntity.getData(),body.getPassword());
+                            LoginEntity login = loginEntityCommonEntity.getData();
+                            MerchantUtils.setStoreNo(login.getStoreNo());
+                            MerchantUtils.setStoreUid(login.getStoreUid()+"");
+                            MerchantUtils.setPassword(body.getPassword());
+                            view.successLogin(login);
                         }else
                             view.showOnFailure(new Throwable(msg));
                     }

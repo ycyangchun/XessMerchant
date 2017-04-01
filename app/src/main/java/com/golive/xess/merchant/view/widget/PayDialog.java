@@ -36,8 +36,8 @@ import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.PayEntity;
 import com.golive.xess.merchant.model.entity.PayEvent;
 import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.MerchantUtils;
 import com.golive.xess.merchant.utils.RxBus;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 
 import java.text.MessageFormat;
 
@@ -106,11 +106,11 @@ public class PayDialog extends Dialog {
         body.setBean(payNum + "");
         body.setClientType("TEST-TCL");
         body.setCoin_type("0");//钱币类型 0 菜豆 1 金币
-        body.setDeviceId(SharedPreferencesUtils.getString("deviceNo"));
-        body.setLhqId(SharedPreferencesUtils.getString("lhqId"));
+        body.setDeviceId(MerchantUtils.getDeviceNo());
+        body.setLhqId(MerchantUtils.getLhqId());
         body.setMac(AppUtil.getMacByWifi());
         body.setProportion("0.01");
-        body.setUserNo(SharedPreferencesUtils.getString("storeUid"));
+        body.setUserNo(MerchantUtils.getStoreUid());
         body.setType(XessConfig._VERSION+"");
 
         netComponent.getApiService().payCenter(body)

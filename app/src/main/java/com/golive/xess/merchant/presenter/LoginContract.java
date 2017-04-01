@@ -15,6 +15,6 @@ public interface LoginContract {
     }
     interface  View{
         void showOnFailure(Throwable throwable);
-        void successLogin(LoginEntity loginEntity ,String pwd);
+        void successLogin(LoginEntity loginEntity);
     }
 }

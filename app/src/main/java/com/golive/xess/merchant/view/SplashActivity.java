@@ -4,17 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.base.BaseActivity;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerSplashComponent;
 import com.golive.xess.merchant.di.modules.SplashModule;
-import com.golive.xess.merchant.model.api.NoNetworkException;
 import com.golive.xess.merchant.presenter.SplashContract;
 import com.golive.xess.merchant.presenter.SplashPresenter;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
+import com.golive.xess.merchant.utils.MerchantUtils;
 import com.golive.xess.merchant.view.widget.DialogErr;
 
 import javax.inject.Inject;
@@ -40,14 +38,14 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .netComponent(XessApp.get(this).getNetComponent())
                 .splashModule(new SplashModule(this))
                 .build().inject(this);
-        String updateDevice = SharedPreferencesUtils.getString("updateDevice");
+        String updateDevice = MerchantUtils.getUpdateDevice();
         if(!"0".equals(updateDevice)) {
             presenter.updateDevice(this, deviceNo);
         } else {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
-        String lhqId = SharedPreferencesUtils.getString("lhqId");
+        String lhqId = MerchantUtils.getLhqId();
         if(TextUtils.isEmpty(lhqId)) {
             presenter.syncDevice(this, deviceNo);
         }

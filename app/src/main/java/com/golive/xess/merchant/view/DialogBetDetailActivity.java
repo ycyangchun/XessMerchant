@@ -1,37 +1,24 @@
 package com.golive.xess.merchant.view;
 
 import android.os.Bundle;
-import android.os.Message;
 import android.widget.TextView;
 
 import com.golive.xess.merchant.R;
-import com.golive.xess.merchant.XessConfig;
 import com.golive.xess.merchant.base.BaseActivity;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerBetDetailComponent;
 import com.golive.xess.merchant.di.modules.BetDetailModule;
-import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.body.BetDetailBody;
 import com.golive.xess.merchant.model.entity.OrdersEntity;
 import com.golive.xess.merchant.presenter.BetDetailContract;
 import com.golive.xess.merchant.presenter.BetDetailPresenter;
-import com.golive.xess.merchant.utils.Base64Util;
-import com.golive.xess.merchant.utils.Des3Util;
 import com.golive.xess.merchant.utils.EnumUtils;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.widget.DialogErr;
-import com.google.gson.Gson;
-
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 public class DialogBetDetailActivity extends BaseActivity implements BetDetailContract.View{
 

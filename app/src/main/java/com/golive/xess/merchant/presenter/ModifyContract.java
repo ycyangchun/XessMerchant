@@ -17,6 +17,6 @@ public interface ModifyContract {
     }
     interface  View{
         void showOnFailure(Throwable throwable);
-        void successModify(LoginEntity loginEntity , String pwd);
+        void successModify(LoginEntity loginEntity);
     }
 }

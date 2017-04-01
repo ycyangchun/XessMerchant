@@ -50,7 +50,6 @@ public class XessApp extends Application {
         PathUtils.getInstance(this, "xess");
     }
 
-
     //net
     private void initNet() {
         netComponent = DaggerNetComponent.builder()

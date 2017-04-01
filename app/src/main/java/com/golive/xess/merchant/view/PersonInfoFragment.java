@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,25 +22,22 @@ import com.golive.xess.merchant.base.BaseFragment;
 import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerPersonalComponent;
 import com.golive.xess.merchant.di.modules.PersonalModule;
-import com.golive.xess.merchant.model.api.NoNetworkException;
 import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.api.body.StoreBody;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.presenter.PersonalContract;
 import com.golive.xess.merchant.presenter.PersonalPresenter;
 import com.golive.xess.merchant.utils.GlideImageLoader;
+import com.golive.xess.merchant.utils.MerchantUtils;
 import com.golive.xess.merchant.utils.PictureUtils;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.widget.AddressDialog;
 import com.golive.xess.merchant.view.widget.DialogErr;
 import com.golive.xess.merchant.view.widget.GlideRoundTransform;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
-import com.zhy.android.percent.support.PercentRelativeLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -102,7 +98,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 .personalModule(new PersonalModule(this))
                 .build().inject(this);
         presenter.initViewData(new LoginBody(storeUid,
-                SharedPreferencesUtils.getString("password"), deviceNo));
+                MerchantUtils.getPassword(), deviceNo));
     }
 
     @OnClick(R.id.edit_per_bt)

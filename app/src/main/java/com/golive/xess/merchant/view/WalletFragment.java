@@ -26,8 +26,8 @@ import com.golive.xess.merchant.model.entity.PayEvent;
 import com.golive.xess.merchant.model.entity.WalletEntity;
 import com.golive.xess.merchant.presenter.WalletContract;
 import com.golive.xess.merchant.presenter.WalletPresenter;
+import com.golive.xess.merchant.utils.MerchantUtils;
 import com.golive.xess.merchant.utils.RxBus;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.adapter.ItemWalletAdapter;
 import com.golive.xess.merchant.view.widget.CommonDialog;
 import com.golive.xess.merchant.view.widget.DialogErr;
@@ -131,7 +131,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
                             result = "支付成功";
                             String kidneyBean = payEvent.getKidneyBean();
                             kidneyBean = getBig(kidneyBean);
-                            SharedPreferencesUtils.put("kidneyBean", kidneyBean);
+                            MerchantUtils.setKidneyBean(kidneyBean);
                             currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
                             new DialogErr(activity, result).show();
                         } else if ("withdraw".equals(result)) {
@@ -139,7 +139,7 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
                             String commission = payEvent.getCommission();
                             kidneyBean = getBig(kidneyBean);
                             commission = getBig(commission);
-                            SharedPreferencesUtils.put("kidneyBean", kidneyBean);
+                            MerchantUtils.setKidneyBean(kidneyBean);
                             currentlyKidneyTv.setText(getMessageFormatString(activity, R.string.currently_kidney_s, kidneyBean));
                             commissionKidneyTv.setText(getMessageFormatString(activity, R.string.commission_kidney_s, commission));
                             pageNo = 0;

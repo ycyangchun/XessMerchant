@@ -17,10 +17,7 @@ import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.presenter.LoginContract;
 import com.golive.xess.merchant.presenter.LoginPresenter;
-import com.golive.xess.merchant.utils.DeviceUtils;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.widget.DialogErr;
-import com.golive.xess.merchant.view.widget.DialogProtocol;
 
 import javax.inject.Inject;
 
@@ -118,11 +115,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void successLogin(LoginEntity loginEntity, String pwd) {
+    public void successLogin(LoginEntity loginEntity) {
         if (loginEntity != null) {
-            SharedPreferencesUtils.put("storeUid", loginEntity.getStoreUid() + "");
-            SharedPreferencesUtils.put("password", pwd);
-            SharedPreferencesUtils.put("storeNo", loginEntity.getStoreNo());
             JPushInterface.setAlias(getApplicationContext(), loginEntity.getStoreUid() + "", null);
             startActivity(new Intent(this, MainActivity.class));
             finish();

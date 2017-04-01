@@ -17,7 +17,6 @@ import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.presenter.ModifyContract;
 import com.golive.xess.merchant.presenter.ModifyPresenter;
 import com.golive.xess.merchant.utils.AppUtil;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
 import com.golive.xess.merchant.view.widget.DialogErr;
 
 import javax.inject.Inject;
@@ -114,9 +113,8 @@ public class ModifyActivity extends BaseActivity implements ModifyContract.View 
     }
 
     @Override
-    public void successModify(LoginEntity loginEntity, String pwd) {
+    public void successModify(LoginEntity loginEntity) {
         Toast.makeText(this, "修改密码成功", Toast.LENGTH_SHORT).show();
-        SharedPreferencesUtils.put("password", pwd);
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

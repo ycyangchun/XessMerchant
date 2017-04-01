@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import com.golive.xess.merchant.utils.AppUtil;
 import com.golive.xess.merchant.utils.DisplayUtils;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
+import com.golive.xess.merchant.utils.MerchantUtils;
 import com.orhanobut.logger.Logger;
 
 import java.text.MessageFormat;
@@ -22,22 +22,22 @@ import java.text.MessageFormat;
 public abstract class BaseActivity extends FragmentActivity {
     private int height;
     private int width;
-    public String deviceNo ,storeUid ,password ,storeNo , mac;
+    public String deviceNo ,storeUid ,password ,storeNo ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         height = DisplayUtils.getScreenHeight(this);
         width = DisplayUtils.getScreenWidth(this);
-        deviceNo = SharedPreferencesUtils.getString("deviceNo");
+        deviceNo = MerchantUtils.getDeviceNo();
         if(TextUtils.isEmpty(deviceNo)){
 //            deviceNo = DeviceUtils.getDeviceNo(this);
             deviceNo = AppUtil.getDeviceId(this);
-            SharedPreferencesUtils.put("deviceNo", deviceNo);
+            MerchantUtils.setDeviceNo(deviceNo);
         }
-        storeUid = SharedPreferencesUtils.getString("storeUid");
-        password = SharedPreferencesUtils.getString("password");
-        storeNo = SharedPreferencesUtils.getString("storeNo");
+        storeUid = MerchantUtils.getStoreUid();
+        password = MerchantUtils.getPassword();
+        storeNo = MerchantUtils.getStoreNo();
         Logger.d("height "+height+" width "+width +" 是否竖屏 "+DisplayUtils.isPortrait(this) );
         requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

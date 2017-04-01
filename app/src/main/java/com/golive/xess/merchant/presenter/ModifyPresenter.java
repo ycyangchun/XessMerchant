@@ -1,12 +1,10 @@
 package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.ApiService;
-import com.golive.xess.merchant.model.api.body.LoginBody;
 import com.golive.xess.merchant.model.api.body.ModifyBody;
-import com.golive.xess.merchant.model.entity.AccountEntity;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
-import com.golive.xess.merchant.utils.SharedPreferencesUtils;
+import com.golive.xess.merchant.utils.MerchantUtils;
 
 import javax.inject.Inject;
 
@@ -40,8 +38,8 @@ public class ModifyPresenter implements ModifyContract.Presenter {
                         String code = accountEntity.getCode();
                         String msg = accountEntity.getMsg();
                         if("0".equals(code)) {
-                            SharedPreferencesUtils.put("storeNo",accountEntity.getData().getStoreNo());
-                            view.successModify(accountEntity.getData(),body.getNewPwd());
+                            MerchantUtils.setPassword(body.getNewPwd());
+                            view.successModify(accountEntity.getData());
                         }else
                             view.showOnFailure(new Throwable(msg));
                     }
