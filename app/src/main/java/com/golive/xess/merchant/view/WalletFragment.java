@@ -269,6 +269,8 @@ public class WalletFragment extends BaseFragment implements WalletContract.View 
             if (gain == GAINMORE) {
                 pageNo--;
                 Toast.makeText(activity, "已无更多", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(activity, "暂无数据", Toast.LENGTH_SHORT).show();
             }
         }
     }

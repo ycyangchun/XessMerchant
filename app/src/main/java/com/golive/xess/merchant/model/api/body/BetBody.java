@@ -1,10 +1,9 @@
 package com.golive.xess.merchant.model.api.body;
 
-import android.widget.Switch;
-
 /**
  * Created by YangChun .
  * on 2017/3/14.
+ * 投注记录 列表
  */
 
 public class BetBody {
@@ -31,7 +30,6 @@ public class BetBody {
     private String storeNo;
     private String deviceNo;
     private String channelNo;
-    private String winState;
     private String startTime;
     private String endTime;
     private String pageNo;
@@ -43,9 +41,9 @@ public class BetBody {
            中奖订单  invest_state: ：10200   order_state: 10300  win_state: 10400 origin：1
            未开奖订单  invest_state: ：10200   order_state: 10300  win_state: 10401 origin：1
     */
-    private String invest_state;
-    private String order_state;
-    private String win_state;
+    private String investState;
+    private String orderState;
+    private String winState;
     private String origin;
 
     public BetBody(String storeUid ,String pageNo, String pageSize) {
@@ -56,9 +54,9 @@ public class BetBody {
 
     //获取列表数据 参数
     public void setParam(String invest_state, String order_state, String win_state, String origin) {
-        this.invest_state = invest_state;
-        this.order_state = order_state;
-        this.win_state = win_state;
+        this.investState = invest_state;
+        this.orderState = order_state;
+        this.winState = win_state;
         this.origin = origin;
     }
 
@@ -76,6 +74,30 @@ public class BetBody {
         this.endTime = "";
         this.mobile = "";
         this.lid = "";
+    }
+
+    public String getInvestState() {
+        return investState;
+    }
+
+    public void setInvestState(String investState) {
+        this.investState = investState;
+    }
+
+    public String getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(String orderState) {
+        this.orderState = orderState;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public String getStoreUid() {

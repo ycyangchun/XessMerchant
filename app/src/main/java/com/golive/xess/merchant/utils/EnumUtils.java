@@ -17,6 +17,8 @@ public class EnumUtils {
 
         FOOTBALL_OUTCOME("足彩", "20201"),
 
+        ELEVEN("11选5", "10105"),
+
         SINGLE("单式", "10011071"),
 
         SINGLE2("单式", "10021071"),

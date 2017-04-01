@@ -97,6 +97,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
 
     LayoutInflater mInflater;
     ItemBetAdapter adapter;
+    ItemLeftBetTvAdapter adapterLeft;//left  list
     List<LinkedTreeMap> linkedTreeMaps;//加分页的时候在处理
 
     private int pageSize = 10;
@@ -109,7 +110,6 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bet, container, false);
         mInflater = inflater;
-        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -138,8 +138,13 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                     @Override
                     public void call(String push) {
                         if("Yes".equals(push)){
-                            if(linkedTreeMaps != null && adapter != null ) {
+                            Toast.makeText(activity, "收到一条新的代付订单", Toast.LENGTH_SHORT).show();
+                            try {
+                                adapterLeft.onItemSelect(1);
+                                setParamToGetList(body,1);
                                 getListRefreshData();
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -148,7 +153,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     private void initView() {
         ////////////左侧 list//////////////
         arrTitle = Arrays.asList("全部订单", "需代付", "已代付", "中奖订单", "未开奖订单");
-        final ItemLeftBetTvAdapter adapterLeft = new ItemLeftBetTvAdapter(mInflater, arrTitle);
+        adapterLeft = new ItemLeftBetTvAdapter(mInflater, arrTitle);
         betLeftLv.setAdapter(adapterLeft);
         betLeftLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -164,6 +169,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         adapter = new ItemBetAdapter(mInflater, activity, linkedTreeMaps, this);
         //获取全部数据
         getListRefreshData();
+        //销售额
+        presenter.market(new ReplacePayBody(storeUid, deviceNo));
         bet_lv.setAdapter(adapter);
         bet_lv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -267,6 +274,8 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             if (gain == GAINMORE) {
                 pageNo--;
                 Toast.makeText(activity, "已无更多", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(activity, "暂无数据", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -300,7 +309,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             intent.setClass(activity, DialogBetDetailActivity.class);
             intent.putExtra("orderNo", orderNo);
             activity.startActivity(intent);
-        } else if ("option_10210".equals(type)) {
+        } else if ("option_10210".equals(type)) {// 需代付  invest_state : 10210  origin：1
             bathPay(orderNo);
         }
     }
@@ -378,14 +387,13 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         if(body != null && presenter != null ) {
             body.setPageNo(pageNo + "");
             presenter.query(body, GAINDATA);
-            presenter.market(new ReplacePayBody(storeUid, deviceNo));
+
         }
     }
     //获取 更多
     private void getListMoreData() {
         body.setPageNo(pageNo+"");
         presenter.query(body,GAINMORE);
-//        presenter.market(new ReplacePayBody(storeUid, deviceNo));
     }
 
     ////////////////////////日期控件////////////////////////////
@@ -431,6 +439,10 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
         popupWindow.showAsDropDown(mView);
 
     }
+
+    ////////////////////////////////////////////////////////
+
+
 
     @Override
     public void onDestroyView() {

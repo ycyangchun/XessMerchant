@@ -67,9 +67,8 @@ public class NetModule {
             }
         };
         OkHttpClient okhttpClient = new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20,TimeUnit.SECONDS)
+                .connectTimeout(40, TimeUnit.SECONDS)
+                .readTimeout(40,TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(networkInterceptor)
                 .build();
