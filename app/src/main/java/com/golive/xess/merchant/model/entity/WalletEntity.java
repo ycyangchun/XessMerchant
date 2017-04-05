@@ -28,25 +28,11 @@ public class WalletEntity {
     private String bankInfo;
     private String bankUserName;
     /**
-     * {
-         " storeNo":" 6AC3559BDF3C4B90AF68AA055DD4BA20",
-         "userName":"徐淼",
-         "bankNo":"621661280000447287",
-         "bankName":"中国银行·个人普卡",
-         "bankInfo":"北京通州支行",
-         "createTime":"2017-03-28 13:57:45:922"
-     }
+     *
      *  storeNo :  6AC3559BDF3C4B90AF68AA055DD4BA20
-     * userName : 徐淼
-     * bankName : 中国银行·个人普卡
+     * userName : 徐淼Name : 中国银行·个人普卡
      * createTime : 2017-03-28 13:57:45:922
      */
-
-    private String storeNo;
-    private String userName;
-    private String bankName;
-    private String createTime;
-
 
     public String getCommission() {
         return commission;

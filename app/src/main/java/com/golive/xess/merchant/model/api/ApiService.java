@@ -17,6 +17,7 @@ import com.golive.xess.merchant.model.api.body.WalletBody;
 import com.golive.xess.merchant.model.api.body.WalletLogsBody;
 import com.golive.xess.merchant.model.api.body.WithdrawBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
+import com.golive.xess.merchant.model.entity.BindOrChangerCard;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.LoginEntity;
 import com.golive.xess.merchant.model.entity.MarketEntity;
@@ -198,7 +199,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/storeAccount/bindCard")
-    Observable<CommonEntity<WalletEntity>> bindCard(@Body BindCardBody data);
+    Observable<CommonEntity<BindOrChangerCard>> bindCard(@Body BindCardBody data);
 
     /**
      *  变更银行卡
@@ -207,7 +208,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/storeAccount/changeCard")
-    Observable<CommonEntity<WalletEntity>> changeCard(@Body BindCardBody data);
+    Observable<CommonEntity<BindOrChangerCard>> changeCard(@Body BindCardBody data);
 
     /**
      *  解绑银行卡

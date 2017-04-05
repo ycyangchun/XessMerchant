@@ -2,11 +2,10 @@ package com.golive.xess.merchant.presenter;
 
 import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.api.body.BindCardBody;
-import com.golive.xess.merchant.model.api.body.UnBindCardBody;
 import com.golive.xess.merchant.model.api.body.WithdrawBody;
+import com.golive.xess.merchant.model.entity.BindOrChangerCard;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.PayEvent;
-import com.golive.xess.merchant.model.entity.WalletEntity;
 
 import javax.inject.Inject;
 
@@ -16,7 +15,6 @@ import rx.schedulers.Schedulers;
 
 import static com.golive.xess.merchant.presenter.WithDrawContract.DIALOG_STATUS_CARD;
 import static com.golive.xess.merchant.presenter.WithDrawContract.DIALOG_STATUS_CARD_AFFIRM;
-import static com.golive.xess.merchant.presenter.WithDrawContract.DIALOG_STATUS_UNBIND_CARD;
 
 /**
  * Created by YangChun .
@@ -57,17 +55,17 @@ public class WithDrawPresenter implements WithDrawContract.Presenter{
     }
 
     @Override
-    public void bindCard(BindCardBody data) {
+    public void bindCard(BindCardBody data, final String commission) {
         apiService.bindCard(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<CommonEntity<WalletEntity>>() {
+                .subscribe(new Action1<CommonEntity<BindOrChangerCard>>() {
                     @Override
-                    public void call(CommonEntity<WalletEntity> bindCardEntityCommonEntity) {
+                    public void call(CommonEntity<BindOrChangerCard> bindCardEntityCommonEntity) {
                         String code = bindCardEntityCommonEntity.getCode();
                         String msg = bindCardEntityCommonEntity.getMsg();
                         if("0".equals(code)) {
-                            view.successBindCard(bindCardEntityCommonEntity.getData());
+                            view.successBindOrChangeCard(bindCardEntityCommonEntity.getData(),commission);
                         }else
                             view.showOnFailure(new Throwable(msg), DIALOG_STATUS_CARD);
                     }
@@ -80,24 +78,24 @@ public class WithDrawPresenter implements WithDrawContract.Presenter{
     }
 
     @Override
-    public void unBindCard(UnBindCardBody data, final String commission) {
-        apiService.unBindCard(data)
+    public void changeCard(BindCardBody data, final String commission) {
+        apiService.changeCard(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<CommonEntity>() {
+                .subscribe(new Action1<CommonEntity<BindOrChangerCard>>() {
                     @Override
-                    public void call(CommonEntity bindCardEntityCommonEntity) {
+                    public void call(CommonEntity<BindOrChangerCard> bindCardEntityCommonEntity) {
                         String code = bindCardEntityCommonEntity.getCode();
                         String msg = bindCardEntityCommonEntity.getMsg();
                         if("0".equals(code)) {
-                            view.successUnBindCard(commission);
+                            view.successBindOrChangeCard(bindCardEntityCommonEntity.getData(),commission);
                         }else
-                            view.showOnFailure(new Throwable(msg), DIALOG_STATUS_UNBIND_CARD);
+                            view.showOnFailure(new Throwable(msg), DIALOG_STATUS_CARD);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        view.showOnFailure(throwable, DIALOG_STATUS_UNBIND_CARD);
+                        view.showOnFailure(throwable, DIALOG_STATUS_CARD);
                     }
                 });
     }

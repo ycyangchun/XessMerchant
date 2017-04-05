@@ -1,5 +1,6 @@
 package com.golive.xess.merchant.view.widget;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +46,7 @@ public class DialogLogin extends Dialog {
                 Intent intent = new Intent(ctx, LoginActivity.class);
                 ctx.startActivity(intent);
                 dismiss();
+                ((Activity)ctx).finish();
                 break;
         }
     }
