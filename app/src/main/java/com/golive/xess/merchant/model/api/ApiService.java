@@ -54,14 +54,6 @@ public interface ApiService {
                                    @Query("btMac") String btMac,@Query("screenInches") String screenInches,
                                    @Query("brand") String brand,@Query("model") String model,
                                    @Query("deviceNo") String deviceNo);
-
-    /**
-     *  7.25修改商户信息(POST)
-     */
-    @POST("lottery/checkOnline")
-    Observable<CommonEntity> checkOnline(@Query("onlineNo") String onlineNo);
-
-
     /**
      *  7.25修改商户信息(POST)
      */
@@ -224,7 +216,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/storeAccount/unBindCard")
-    Observable<CommonEntity<WalletEntity>> unBindCard(@Body UnBindCardBody data);
+    Observable<CommonEntity> unBindCard(@Body UnBindCardBody data);
 
     /**
      *  7.41商家佣金提现(POST)
@@ -243,4 +235,13 @@ public interface ApiService {
     @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("lottery/store/CountNumAndAmountByTime")
     Observable<CommonEntity<MarketEntity>> countNumAndAmountByTime(@Body ReplacePayBody data);
+
+    /**
+     *  退出登录
+     * @param data
+     * @return
+     */
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @POST("lottery/Logout")
+    Observable<CommonEntity> logout(@Body UnBindCardBody data);
 }

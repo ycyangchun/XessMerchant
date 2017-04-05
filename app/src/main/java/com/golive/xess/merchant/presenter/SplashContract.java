@@ -12,7 +12,6 @@ public interface SplashContract {
     interface Presenter {
         void updateDevice(Context context , String deviceNo);
         void syncDevice(Context context,String deviceNo);
-        void checkOnline(Context context,String onlineNo);
     }
     interface View {
         void showOnFailure(Throwable throwable);

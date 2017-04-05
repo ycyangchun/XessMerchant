@@ -32,23 +32,6 @@ public class SplashPresenter implements SplashContract.Presenter{
         this.apiService = apiService;
     }
 
-    @Override
-    public void checkOnline(Context cts, String onlineNo) {
-        apiService.checkOnline(onlineNo)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .subscribe(new Action1<CommonEntity>() {
-                    @Override
-                    public void call(CommonEntity commonEntity) {
-
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-
-                    }
-                });
-    }
 
     public void updateDevice(Context context , String deviceNo){
         apiService.devicesAuto(AppUtil.getPhoneProduct(),AppUtil.getBuildLevel() + "",AppUtil.getBuildVersion(),AppUtil.getDeviceId(context)

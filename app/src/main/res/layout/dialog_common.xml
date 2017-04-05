@@ -246,23 +246,26 @@
                     android:layout_below="@id/withdraw_card_num_ll"
                     android:id="@+id/withdraw_card_ll"
                     android:layout_width="match_parent"
-                    android:gravity="center_horizontal"
-                    android:layout_height="wrap_content">
+                    android:gravity="center"
+                    android:layout_height="@dimen/w48">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/h4"
+                        android:layout_width="@dimen/w100"
+                        android:layout_height="@dimen/w36"
                         android:background="@drawable/ic_left_change"/>
 
                     <TextView
+                        android:id="@+id/change_bank_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/change_bank_s"
                         android:textColor="@color/pink"
                         android:textSize="@dimen/w36"/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/h4"
+                        android:layout_width="@dimen/w100"
+                        android:layout_height="@dimen/w36"
                         android:background="@drawable/ic_right_change"/>
                 </LinearLayout>
             </RelativeLayout>

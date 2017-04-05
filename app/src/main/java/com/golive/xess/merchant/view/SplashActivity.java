@@ -55,8 +55,6 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     //跳转登录
     private void skipLogin() {
-        //是否在线
-        presenter.checkOnline(this,onlineNo);
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }

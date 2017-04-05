@@ -11,6 +11,8 @@ import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.PayEvent;
 import com.golive.xess.merchant.view.LoginActivity;
+import com.golive.xess.merchant.view.widget.DialogErr;
+import com.golive.xess.merchant.view.widget.DialogLogin;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hwangjr.rxbus.annotation.Subscribe;
@@ -156,10 +158,20 @@ public class MyReceiver extends BroadcastReceiver {
         }
     }
     private void offline(Context context, String data) {
-        Toast.makeText(context," 账号在其他设备上登录",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(context, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(intent);
+        //{"code":"0","msg":"该账户在其它客户端登录，系统强制退出!","history":"0CE13C14C920185748CF8B4BBEAADFF5","current":"4FA5B217C7CAF44059196262569E8DE3"}
+        try {
+            Gson gson = new Gson();
+            Type cla = new TypeToken<HashMap<String,String>>() {
+            }.getType();
+            HashMap map = gson.fromJson(data,cla);
+            String msg = (String)map.get("msg");
+            String current = (String)map.get("current");
+            if(!current.equals(MerchantUtils.getOnlineNo())) {
+                RxBus.getInstance().post(msg);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

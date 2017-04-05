@@ -17,6 +17,7 @@ import com.golive.xess.merchant.base.XessApp;
 import com.golive.xess.merchant.di.components.DaggerWithDrawComponent;
 import com.golive.xess.merchant.di.modules.WithDrawModule;
 import com.golive.xess.merchant.model.api.body.BindCardBody;
+import com.golive.xess.merchant.model.api.body.UnBindCardBody;
 import com.golive.xess.merchant.model.api.body.WithdrawBody;
 import com.golive.xess.merchant.model.entity.PayEvent;
 import com.golive.xess.merchant.model.entity.WalletEntity;
@@ -44,7 +45,7 @@ import static com.golive.xess.merchant.presenter.WithDrawContract.DIALOG_STATUS_
  * on 2017/3/17.
  */
 
-public class CommonDialog extends Dialog implements WithDrawContract.View{
+public class CommonDialog extends Dialog implements WithDrawContract.View {
 
     @BindView(R.id.dialog_title_tv)
     TextView dialogTitleTv;
@@ -74,18 +75,20 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
     TextView withdrawCardNumTv;
     @BindView(R.id.card_affirm_rl)
     RelativeLayout cardAffirmRl;
+    @BindView(R.id.change_bank_tv)
+    TextView changeBankTv;
 
 
     private int status = 0;
     double kidney = 0;
-    private String withdrawType , withdrawKidney;//= "钱包里";
+    private String withdrawType, withdrawKidney;//= "钱包里";
     private BaseActivity mContext;
     private WalletEntity mWalletEntity;
 
     @Inject
     WithDrawPresenter presenter;
 
-    public CommonDialog(BaseActivity context, int status,String withdrawKidney, String withdrawType) {
+    public CommonDialog(BaseActivity context, int status, String withdrawKidney, String withdrawType) {
         super(context, R.style.ShareDialog);
         this.mContext = context;
         this.status = status;
@@ -104,10 +107,11 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
             e.printStackTrace();
             this.kidney = 0;
         }
-        if(kidney < 100 && status == DIALOG_STATUS_AFFIRM){
+        if (kidney < 100 && status == DIALOG_STATUS_AFFIRM) {
             this.status = DIALOG_STATUS_REMINDER;
         }
     }
+
     public CommonDialog(BaseActivity context, int status) {
         super(context, R.style.ShareDialog);
         this.mContext = context;
@@ -143,7 +147,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
                 cardRl.setVisibility(View.GONE);
                 cardAffirmRl.setVisibility(View.GONE);
                 dialogTitleTv.setText(mContext.getResourcesString(mContext, R.string.withdraw_success_s));
-                dialogContextTv.setText(mContext.getMessageFormatString(mContext, R.string.withdraw_context_s, withdrawKidney ,withdrawType));
+                dialogContextTv.setText(mContext.getMessageFormatString(mContext, R.string.withdraw_context_s, withdrawKidney, withdrawType));
                 leftDialogBt.setVisibility(View.GONE);
                 rightDialogBt.setText(mContext.getResourcesString(mContext, R.string.affirm_s));
                 break;
@@ -165,10 +169,10 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
                 withdrawCardNameTv.setText(mWalletEntity.getBankUserName());
                 withdrawCardNumTv.setText(mWalletEntity.getBankNo());
 
-                withdrawToBankTv.setText(mContext.getMessageFormatString(mContext,R.string.withdraw_to_bank_s,mWalletEntity.getCommission()));
+                withdrawToBankTv.setText(mContext.getMessageFormatString(mContext, R.string.withdraw_to_bank_s, mWalletEntity.getCommission()));
                 break;
 
-            case DIALOG_STATUS_WITHDRAW_FAILED :
+            case DIALOG_STATUS_WITHDRAW_FAILED:
                 textRl.setVisibility(View.VISIBLE);
                 cardRl.setVisibility(View.GONE);
                 cardAffirmRl.setVisibility(View.GONE);
@@ -192,7 +196,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
         }
     }
 
-    @OnClick({R.id.dialog_close_tv, R.id.left_dialog_bt, R.id.right_dialog_bt})
+    @OnClick({R.id.dialog_close_tv, R.id.left_dialog_bt, R.id.right_dialog_bt ,R.id.change_bank_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.dialog_close_tv:
@@ -204,6 +208,10 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
             case R.id.right_dialog_bt:
                 rightClick();
                 break;
+            case R.id.change_bank_tv:// 更换银行卡 ,解绑定
+                UnBindCard(mWalletEntity);
+                break;
+
         }
     }
 
@@ -222,8 +230,8 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
             case DIALOG_STATUS_AFFIRM://提现至银行卡
                 //  是否已绑定卡
                 String bankNo = mWalletEntity.getBankNo();
-                if(!TextUtils.isEmpty(bankNo)) {//显示 银行卡确认并提现
-                    new CommonDialog(mContext, DIALOG_STATUS_CARD_AFFIRM ,mWalletEntity).show();
+                if (!TextUtils.isEmpty(bankNo)) {//显示 银行卡确认并提现
+                    new CommonDialog(mContext, DIALOG_STATUS_CARD_AFFIRM, mWalletEntity).show();
                 } else { //显示  绑定银行卡
                     new CommonDialog(mContext, DIALOG_STATUS_CARD).show();
                 }
@@ -243,7 +251,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
         data.setType(type);//1提现到账户，2提现到银行卡
         data.setDeviceNo(MerchantUtils.getDeviceNo());
         data.setStoreUid(MerchantUtils.getStoreUid());
-        data.setKidneyBean(kidney+"");
+        data.setKidneyBean(kidney + "");
         presenter.withDraw(data);
     }
 
@@ -252,7 +260,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
         String name = cardNameEt.getText().toString();
         String bankInfo = cardBankEt.getText().toString();
         String bankNo = cardNumEt.getText().toString();
-        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(bankInfo) && !TextUtils.isEmpty(bankNo)) {
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(bankInfo) && !TextUtils.isEmpty(bankNo)) {
             BindCardBody body = new BindCardBody();
             body.setUserName(name);
             body.setBankInfo(bankInfo);
@@ -263,36 +271,47 @@ public class CommonDialog extends Dialog implements WithDrawContract.View{
             body.setStoreNo(MerchantUtils.getStoreNo());
             presenter.bindCard(body);
         } else {
-            Toast.makeText(mContext," 填写不完整！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, " 填写不完整！", Toast.LENGTH_SHORT).show();
         }
-    }
 
+    }
+    //  解绑卡
+    private void UnBindCard(WalletEntity mWall) {
+        presenter.unBindCard(new UnBindCardBody(MerchantUtils.getStoreUid(),MerchantUtils.getDeviceNo())
+        ,mWall.getCommission());
+    }
 
 /////////////////WithDrawContract.View///////////////////
 
 
     @Override
     public void showOnFailure(Throwable throwable, int type) {
-        if(type == DIALOG_STATUS_CARD_AFFIRM) {
-
-            new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW_FAILED ).show();
-        } else{
-            new DialogErr(mContext,throwable.getMessage()).show();
+        if (type == DIALOG_STATUS_CARD_AFFIRM) {
+            new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW_FAILED).show();
+        } else {
+            new DialogErr(mContext, throwable.getMessage()).show();
         }
     }
 
     @Override
-    public void successWithDraw(PayEvent payEvent,String withdrawKidney, String leftOrRight) {
-        leftOrRight = !leftOrRight.equals("2") ? "钱包里":"银行卡";
-        new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW ,withdrawKidney ,leftOrRight ).show();
+    public void successWithDraw(PayEvent payEvent, String withdrawKidney, String leftOrRight) {
+        leftOrRight = !leftOrRight.equals("2") ? "钱包里" : "银行卡";
+        new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW, withdrawKidney, leftOrRight).show();
         payEvent.setResult("withdraw");
         RxBus.getInstance().post(payEvent);
     }
 
     @Override
     public void successBindCard(WalletEntity data) {
-        new CommonDialog(mContext, DIALOG_STATUS_CARD_AFFIRM ,data).show();
+        new CommonDialog(mContext, DIALOG_STATUS_CARD_AFFIRM, data).show();
     }
 
+    @Override
+    public void successUnBindCard(String commission) {
+        WalletEntity walletEntity = new WalletEntity();
+        walletEntity.setKidneyBean(commission);
+        new CommonDialog(mContext, DIALOG_STATUS_CARD, walletEntity).show();
+    }
 
+    /////////////////WithDrawContract.View///////////////////
 }

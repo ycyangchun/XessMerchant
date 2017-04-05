@@ -10,17 +10,22 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.golive.xess.merchant.R;
 import com.golive.xess.merchant.base.BaseActivity;
+import com.golive.xess.merchant.utils.RxBus;
+import com.golive.xess.merchant.view.widget.DialogLogin;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Subscription;
+import rx.functions.Action1;
 
 /**
  * Created by YangChun .
@@ -37,7 +42,7 @@ public class MainActivity extends BaseActivity {
     private Context mContext;
     private String[] mTitles;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
-
+    Subscription rxSubscription;//点单登录
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +51,20 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         mContext = this;
         initView();
+        initRxBus();
     }
+
+    // 推送点单登录
+    private void initRxBus() {
+        rxSubscription = RxBus.getInstance().toObserverable(String.class)
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String push) {
+                        new DialogLogin(mContext,push).show();
+                    }
+                });
+    }
+
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -169,6 +187,14 @@ public class MainActivity extends BaseActivity {
         @Override
         public int getTabUnselectedIcon() {
             return unSelectedIcon;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (!rxSubscription.isUnsubscribed()) {
+            rxSubscription.unsubscribe();
         }
     }
 }
