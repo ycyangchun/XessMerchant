@@ -16,14 +16,24 @@ public class LoginBody {
     private String storeUid;
     private String password;
     private String deviceNo;
+    private String  onlineNo;
 
     public LoginBody() {
     }
 
-    public LoginBody(String storeUid, String password, String deviceNo) {
+    public LoginBody(String storeUid, String password, String deviceNo, String onlineNo) {
         this.storeUid = storeUid;
         this.password = password;
         this.deviceNo = deviceNo;
+        this.onlineNo = onlineNo;
+    }
+
+    public String getOnlineNo() {
+        return onlineNo;
+    }
+
+    public void setOnlineNo(String onlineNo) {
+        this.onlineNo = onlineNo;
     }
 
     public String getStoreUid() {

@@ -55,6 +55,12 @@ public interface ApiService {
                                    @Query("brand") String brand,@Query("model") String model,
                                    @Query("deviceNo") String deviceNo);
 
+    /**
+     *  7.25修改商户信息(POST)
+     */
+    @POST("lottery/checkOnline")
+    Observable<CommonEntity> checkOnline(@Query("onlineNo") String onlineNo);
+
 
     /**
      *  7.25修改商户信息(POST)

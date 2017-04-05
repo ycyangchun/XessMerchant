@@ -38,18 +38,27 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 .netComponent(XessApp.get(this).getNetComponent())
                 .splashModule(new SplashModule(this))
                 .build().inject(this);
-        String updateDevice = MerchantUtils.getUpdateDevice();
-        if(!"0".equals(updateDevice)) {
-            presenter.updateDevice(this, deviceNo);
-        } else {
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        }
+       //同步lhq
         String lhqId = MerchantUtils.getLhqId();
         if(TextUtils.isEmpty(lhqId)) {
             presenter.syncDevice(this, deviceNo);
         }
 
+        //上传设备信息
+        String updateDevice = MerchantUtils.getUpdateDevice();
+        if(!"0".equals(updateDevice)) {
+            presenter.updateDevice(this, deviceNo);
+        } else {
+            skipLogin();
+        }
+    }
+
+    //跳转登录
+    private void skipLogin() {
+        //是否在线
+        presenter.checkOnline(this,onlineNo);
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 
 
@@ -66,8 +75,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void successLoad(String code) {
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
+        skipLogin();
     }
 
     @Override

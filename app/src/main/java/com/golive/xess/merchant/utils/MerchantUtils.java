@@ -14,7 +14,18 @@ public class MerchantUtils {
     public static String mac;
     public static String updateDevice;
     public static String lhqId;
+     public static String onlineNo;
     public static String kidneyBean;*/
+
+
+
+    public static String getOnlineNo() {
+        return SharedPreferencesUtils.getString("onlineNo");
+    }
+
+    public static void setOnlineNo(String onlineNo) {
+        SharedPreferencesUtils.put("onlineNo",onlineNo);
+    }
 
     public static String getKidneyBean() {
         return SharedPreferencesUtils.getString("kidneyBean");

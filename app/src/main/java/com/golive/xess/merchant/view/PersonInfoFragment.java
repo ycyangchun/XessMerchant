@@ -98,7 +98,7 @@ public class PersonInfoFragment extends BaseFragment implements PersonalContract
                 .personalModule(new PersonalModule(this))
                 .build().inject(this);
         presenter.initViewData(new LoginBody(storeUid,
-                MerchantUtils.getPassword(), deviceNo));
+                MerchantUtils.getPassword(), deviceNo, onlineNo));
     }
 
     @OnClick(R.id.edit_per_bt)

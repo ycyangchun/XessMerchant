@@ -17,14 +17,14 @@ import java.text.MessageFormat;
 
 public abstract class BaseFragment extends Fragment {
     public MainActivity activity;
-    public String deviceNo ,storeUid,storeNo;
+    public String deviceNo ,storeUid,storeNo,onlineNo;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         activity = (MainActivity) getActivity();
         deviceNo = MerchantUtils.getDeviceNo();
         storeUid = MerchantUtils.getStoreUid();
         storeNo = MerchantUtils.getStoreNo();
-
+        onlineNo = MerchantUtils.getOnlineNo();
         super.onActivityCreated(savedInstanceState);
     }
 

@@ -7,6 +7,7 @@ import com.golive.xess.merchant.model.api.body.SyncBody;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.SyncEntity;
 import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.DeviceUtils;
 import com.golive.xess.merchant.utils.MerchantUtils;
 
 import org.json.JSONException;
@@ -31,8 +32,25 @@ public class SplashPresenter implements SplashContract.Presenter{
         this.apiService = apiService;
     }
 
+    @Override
+    public void checkOnline(Context cts, String onlineNo) {
+        apiService.checkOnline(onlineNo)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(new Action1<CommonEntity>() {
+                    @Override
+                    public void call(CommonEntity commonEntity) {
 
-    public void updateDevice(Context context ,String deviceNo){
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                    }
+                });
+    }
+
+    public void updateDevice(Context context , String deviceNo){
         apiService.devicesAuto(AppUtil.getPhoneProduct(),AppUtil.getBuildLevel() + "",AppUtil.getBuildVersion(),AppUtil.getDeviceId(context)
                 ,AppUtil.getMacByWifi(),AppUtil.getMacByBlue(),AppUtil.getDisplay(context),AppUtil.getPhoneBrand(),AppUtil.getPhoneModel()
                 ,deviceNo)

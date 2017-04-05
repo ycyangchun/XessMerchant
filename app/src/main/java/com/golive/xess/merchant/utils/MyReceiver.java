@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.golive.xess.merchant.model.api.ApiService;
 import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.PayEvent;
+import com.golive.xess.merchant.view.LoginActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hwangjr.rxbus.annotation.Subscribe;
@@ -117,7 +119,7 @@ public class MyReceiver extends BroadcastReceiver {
                 case "pushOrder":
                     pushOrder(context, data);
                     break;
-                case "offline":
+                case "forcedOffLine":
                     offline(context, data);
                     break;
             }
@@ -154,7 +156,10 @@ public class MyReceiver extends BroadcastReceiver {
         }
     }
     private void offline(Context context, String data) {
-
+        Toast.makeText(context," 账号在其他设备上登录",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(intent);
     }
 
 }

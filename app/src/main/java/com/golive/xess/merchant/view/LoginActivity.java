@@ -60,11 +60,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         String uid = loginMobileTv.getText().toString().trim();
         String pwd = loginPasswordTv.getText().toString().trim();
         if( !TextUtils.isEmpty(uid) && !TextUtils.isEmpty(pwd)) {
-            LoginBody body = new LoginBody();
-            body.setDeviceNo(deviceNo);
-            body.setPassword(pwd);
-            body.setStoreUid(uid);
-            presenter.login(body);
+            presenter.login(new LoginBody(uid,pwd,deviceNo,onlineNo));
         } else
             Toast.makeText(this,"商家编号 或 登录密码 为空！", Toast.LENGTH_LONG).show();
 

@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.golive.xess.merchant.utils.AppUtil;
+import com.golive.xess.merchant.utils.DeviceUtils;
 import com.golive.xess.merchant.utils.DisplayUtils;
 import com.golive.xess.merchant.utils.MerchantUtils;
 import com.orhanobut.logger.Logger;
@@ -22,7 +23,7 @@ import java.text.MessageFormat;
 public abstract class BaseActivity extends FragmentActivity {
     private int height;
     private int width;
-    public String deviceNo ,storeUid ,password ,storeNo ;
+    public String deviceNo ,storeUid ,password ,storeNo ,onlineNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,13 @@ public abstract class BaseActivity extends FragmentActivity {
         width = DisplayUtils.getScreenWidth(this);
         deviceNo = MerchantUtils.getDeviceNo();
         if(TextUtils.isEmpty(deviceNo)){
-//            deviceNo = DeviceUtils.getDeviceNo(this);
             deviceNo = AppUtil.getDeviceId(this);
             MerchantUtils.setDeviceNo(deviceNo);
+        }
+        onlineNo = MerchantUtils.getOnlineNo();
+        if(TextUtils.isEmpty(onlineNo)){
+            onlineNo = DeviceUtils.getDeviceNo(this);
+            MerchantUtils.setOnlineNo(onlineNo);
         }
         storeUid = MerchantUtils.getStoreUid();
         password = MerchantUtils.getPassword();
