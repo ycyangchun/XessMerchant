@@ -70,7 +70,11 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         } else {
             Toast.makeText(this,throwable.getMessage()+" Some Other Error", Toast.LENGTH_SHORT).show();
         }*/
-        new DialogErr(this,throwable.getMessage()).show();
+        try {
+            new DialogErr(this,throwable.getMessage()).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
