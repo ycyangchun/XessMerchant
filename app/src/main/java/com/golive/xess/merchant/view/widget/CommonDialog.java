@@ -82,7 +82,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View {
 
     private int status = 0;//dialog 状态
     double commission = 0;//  提现菜豆
-    private String withdrawType, withdrawKidney;//= "钱包里";(提现成功 后显示)
+    private String withdrawType, withdrawKidney;//"钱包里" 或 "银行卡"(提现成功后显示) , 提现菜豆
     private BaseActivity mContext;
     private WalletEntity mWalletEntity;
 
@@ -136,7 +136,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View {
 
     private void initView() {
         switch (status) {
-            case DIALOG_STATUS_AFFIRM:
+            case DIALOG_STATUS_AFFIRM:// 选择提现
                 textRl.setVisibility(View.VISIBLE);
                 cardRl.setVisibility(View.GONE);
                 cardAffirmRl.setVisibility(View.GONE);
@@ -145,7 +145,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View {
                 leftDialogBt.setText(mContext.getResourcesString(mContext, R.string.withdraw_to_balance_s));
                 rightDialogBt.setText(mContext.getResourcesString(mContext, R.string.withdraw_to_card_s));
                 break;
-            case DIALOG_STATUS_WITHDRAW:
+            case DIALOG_STATUS_WITHDRAW://提现成功
                 textRl.setVisibility(View.VISIBLE);
                 cardRl.setVisibility(View.GONE);
                 cardAffirmRl.setVisibility(View.GONE);
@@ -154,8 +154,8 @@ public class CommonDialog extends Dialog implements WithDrawContract.View {
                 leftDialogBt.setVisibility(View.GONE);
                 rightDialogBt.setText(mContext.getResourcesString(mContext, R.string.affirm_s));
                 break;
-            case DIALOG_STATUS_CARD:
-            case DIALOG_STATUS_CHANGE_CARD:
+            case DIALOG_STATUS_CARD:// 绑卡
+            case DIALOG_STATUS_CHANGE_CARD:// 更换卡
                 textRl.setVisibility(View.GONE);
                 cardRl.setVisibility(View.VISIBLE);
                 cardAffirmRl.setVisibility(View.GONE);
@@ -163,7 +163,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View {
                 leftDialogBt.setVisibility(View.GONE);
                 rightDialogBt.setText(mContext.getResourcesString(mContext, R.string.binding_affirm_s));
                 break;
-            case DIALOG_STATUS_CARD_AFFIRM:
+            case DIALOG_STATUS_CARD_AFFIRM:// 银行卡提现 确认
                 textRl.setVisibility(View.GONE);
                 cardRl.setVisibility(View.GONE);
                 cardAffirmRl.setVisibility(View.VISIBLE);
@@ -214,6 +214,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View {
                 break;
             case R.id.change_bank_tv:// 更换银行卡
                 new CommonDialog(mContext, DIALOG_STATUS_CHANGE_CARD ,mWalletEntity).show();
+                dismiss();
                 break;
 
         }
@@ -300,7 +301,7 @@ public class CommonDialog extends Dialog implements WithDrawContract.View {
 
     @Override
     public void successWithDraw(PayEvent payEvent, String withdrawKidney, String leftOrRight) {
-        leftOrRight = !leftOrRight.equals("2") ? "钱包里" : "银行卡";
+        leftOrRight = !leftOrRight.equals("2") ? "钱包里" : "银行卡";//1提现到账户，2提现到银行卡
         new CommonDialog(mContext, DIALOG_STATUS_WITHDRAW, withdrawKidney, leftOrRight).show();
         payEvent.setResult("withdraw");
         RxBus.getInstance().post(payEvent);
