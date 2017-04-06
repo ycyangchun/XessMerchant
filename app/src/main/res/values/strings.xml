@@ -2,7 +2,7 @@
     <string name="app_name">和彩商家中心</string>
     <string name="id_s">id：</string>
     <string name="nickname_s">昵称：</string>
-    <string name="address_s">所在的：</string>
+    <string name="address_s">所在地：</string>
     <string name="editor_info_s">编辑资料</string>
     <string name="finish_s">完成</string>
     <string name="version_info">版本信息：</string>
