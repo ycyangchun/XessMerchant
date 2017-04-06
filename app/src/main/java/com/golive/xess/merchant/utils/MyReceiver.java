@@ -170,7 +170,7 @@ public class MyReceiver extends BroadcastReceiver {
             String msg = (String)map.get("msg");
             String current = (String)map.get("current");
             if(!current.equals(MerchantUtils.getOnlineNo())) {
-                RxBus.getInstance().post("offline_"+msg);
+                RxBus.getInstance().post(msg);
             }
         } catch (Exception e) {
             e.printStackTrace();

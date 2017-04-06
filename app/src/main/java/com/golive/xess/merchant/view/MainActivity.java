@@ -61,14 +61,7 @@ public class MainActivity extends BaseActivity {
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String push) {
-                        try {
-                            if("offline_".startsWith(push)) {
-                                    push = push.substring(push.indexOf("_")+1,push.length());
-                                    new DialogLogin(mContext, push).show();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        new DialogLogin(mContext, push).show();
                     }
                 });
     }
