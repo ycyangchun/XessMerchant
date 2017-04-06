@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity {
     private String[] mTitles;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     Subscription rxSubscription;//点单登录
+    MyPagerAdapter myPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +61,14 @@ public class MainActivity extends BaseActivity {
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String push) {
-                        new DialogLogin(mContext,push).show();
+                        try {
+                            if("offline_".startsWith(push)) {
+                                    push = push.substring(push.indexOf("_")+1,push.length());
+                                    new DialogLogin(mContext, push).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
     }
@@ -80,7 +88,8 @@ public class MainActivity extends BaseActivity {
         }
 
         tlTitle.setTabData(mTabEntities);
-        contentVp.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+        myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+        contentVp.setAdapter(myPagerAdapter);
         tlTitle.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {

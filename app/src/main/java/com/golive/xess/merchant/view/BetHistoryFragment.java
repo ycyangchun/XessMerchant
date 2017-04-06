@@ -31,6 +31,7 @@ import com.golive.xess.merchant.model.api.body.AccountBody;
 import com.golive.xess.merchant.model.api.body.BetBody;
 import com.golive.xess.merchant.model.api.body.ReplacePayBody;
 import com.golive.xess.merchant.model.entity.AccountEntity;
+import com.golive.xess.merchant.model.entity.CommonEntity;
 import com.golive.xess.merchant.model.entity.MarketEntity;
 import com.golive.xess.merchant.model.entity.PageEntity;
 import com.golive.xess.merchant.presenter.BetContract;
@@ -133,12 +134,12 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
     }
 
     // 推送更新数据
-    private void initRxBus() {
-        rxSubscription = RxBus.getInstance().toObserverable(String.class)
-                .subscribe(new Action1<String>() {
+    public void initRxBus() {
+        rxSubscription = RxBus.getInstance().toObserverable(CommonEntity.class)
+                .subscribe(new Action1<CommonEntity>() {
                     @Override
-                    public void call(String push) {
-                        if("Yes".equals(push)){
+                    public void call(CommonEntity push) {
+                        if("Yes".equals(push.getMsg())){
                             Toast.makeText(activity, "收到一条新的代付订单", Toast.LENGTH_SHORT).show();
                             try {
                                 adapterLeft.onItemSelect(1);
@@ -150,6 +151,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
                         }
                     }
                 });
+
     }
     private void initView() {
         ////////////左侧 list//////////////
@@ -165,7 +167,7 @@ public class BetHistoryFragment extends BaseFragment implements BetContract.View
             }
         });
         //////////////右侧 list//////////////
-        body = new BetBody(storeUid, pageNo + "", pageSize + "");
+        body = new BetBody(storeUid,deviceNo, pageNo + "", pageSize + "");
         linkedTreeMaps = new ArrayList<>();
         adapter = new ItemBetAdapter(mInflater, activity, linkedTreeMaps, this);
         //获取全部数据

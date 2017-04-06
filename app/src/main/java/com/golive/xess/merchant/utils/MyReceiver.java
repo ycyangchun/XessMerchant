@@ -152,7 +152,10 @@ public class MyReceiver extends BroadcastReceiver {
             if("0".equals(code) && "success".equals(msg)) {
                 RxBus.getInstance().post("Yes");
             }*/
-            RxBus.getInstance().post("Yes");
+            CommonEntity entity  = new CommonEntity();
+            entity.setCode("0");
+            entity.setMsg("Yes");
+            RxBus.getInstance().post(entity);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -167,7 +170,7 @@ public class MyReceiver extends BroadcastReceiver {
             String msg = (String)map.get("msg");
             String current = (String)map.get("current");
             if(!current.equals(MerchantUtils.getOnlineNo())) {
-                RxBus.getInstance().post(msg);
+                RxBus.getInstance().post("offline_"+msg);
             }
         } catch (Exception e) {
             e.printStackTrace();

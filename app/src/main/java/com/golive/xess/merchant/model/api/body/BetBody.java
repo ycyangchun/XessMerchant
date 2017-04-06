@@ -46,10 +46,11 @@ public class BetBody {
     private String winState;
     private String origin;
 
-    public BetBody(String storeUid ,String pageNo, String pageSize) {
+    public BetBody(String storeUid ,String deviceNo,String pageNo, String pageSize) {
         this.storeUid = storeUid;
         this.pageNo = pageNo;
         this.pageSize = pageSize;
+        this.deviceNo = deviceNo;
     }
 
     //获取列表数据 参数
