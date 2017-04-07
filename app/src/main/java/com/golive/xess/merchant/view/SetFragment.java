@@ -70,7 +70,7 @@ public class SetFragment extends BaseFragment {
                         Intent intent ;
                         PackageManager packageManager = activity.getPackageManager();
                         intent = packageManager.getLaunchIntentForPackage("com.golive.lottery.user");
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_CLEAR_TOP) ;
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_CLEAR_TOP) ;
                         this.startActivity(intent);
                     }catch (Exception e){
                         ToastUtil.makeText(activity,"切换到个人版失败", ToastUtil.LENGTH_SHORT).show();
