@@ -190,6 +190,9 @@ public class AppUtil {
                 if(wifiMac.contains("\n")){
                     wifiMac = wifiMac.substring(0,wifiMac.indexOf("\\"));
                 }
+                if(wifiMac.contains(":")){
+                    wifiMac = wifiMac.replace(":","");
+                }
                 return wifiMac;
             }
 
